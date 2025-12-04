@@ -1,12 +1,12 @@
 ---
 permalink: /
-title: "From Data to Real-World Decisions:Mapping Patterns. Modeling Systems. Solving Spatial Problems."
+title: "From Data to Real-World Decisions:Mapping Patterns. Extracting Insights from Data."
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
-
+<!--
 # About Me
 ![Background image](/images/Blay Jeffery 2.jpg)
 
@@ -17,15 +17,15 @@ and engineering techniques to extract meaningful insights from complex data to s
 Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in **Geospatial Data Science**,  
 with **years of experience** in applying machine learning techniques for spatial modeling and analytics.
 I am seeking a **Summer 2026 internship** in data science or geospatial analytics to  
-leverage my technical expertise and contribute to impactful projects.
+leverage my technical expertise and contribute to impactful projects. -->
 
-<!--
+
 <style>
 /* Put the static background on the entire page */
 body {
   background-image: url('/images/Blay Jeffery 2.jpg');
   background-attachment: fixed;
-  /*background-size: cover;
+  /*background-size: center;
   background-position: center;
   background-repeat: no-repeat;*/
 }
@@ -81,4 +81,4 @@ machine learning techniques for spatial modeling and analytics.
 I am seeking a Summer 2026 internship in data science or geospatial  
 analytics to leverage my technical expertise and contribute to impactful projects.
 
-</div> -->
+</div> 
