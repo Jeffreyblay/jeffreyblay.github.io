@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Path & Purpose"
+title: ""
 author_profile: true
 redirect_from: 
   - /about/
@@ -43,10 +43,20 @@ leverage my technical expertise and contribute to impactful projects.
     max-width: 800px;
   ">
     <h1 style="font-size: 2.5rem; margin-bottom: 20px;">
-      From Data to Real-World Decisions: Advancing Geospatial Science and Analytics
+      From Data to Real-World Decisions: Transforming data into meaningful solutions
     </h1>
     <p style="font-size: 1.2rem;">
-      Leveraging geospatial data, machine learning, and engineering techniques to extract insights and drive impact.
+      I am Jeffrey Blay, a passionate and ambitious individual who believes in turning  
+      **"IMPOSSIBLE"** into **"I’M POSSIBLE"** through dedication and perseverance.
+
+      As an aspiring **Geospatial Data Scientist/Engineer**, I leverage data science, machine learning, and engineering techniques  
+      to extract meaningful insights from complex spatial data and solve real-world challenges.
+
+      Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in **Geospatial Data Science**,  
+      with extensive experience in **remote sensing, GIS, spatial analysis, geospatial AI, urban analytics, and data pipelines**.
+
+      I am seeking a **Summer 2026 internship** in data science or geospatial analytics,  
+      where I can apply my technical expertise to deliver impactful solutions.
     </p>
   </div>
 </div>
