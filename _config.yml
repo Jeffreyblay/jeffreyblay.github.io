@@ -26,7 +26,7 @@ author:
   avatar           : "Blay Jeffrey 1.jpg"
   name             : "Jeffrey Blay"
   pronouns         : # example: "she/her"  
-  bio              : "A hardworking individual who challenges himself to change the IMPOSSIBLE to I'M POSSIBLE."
+  bio              : "I believe the IMPOSSIBLE can be changed to I'M POSSIBLE."
   location         : "United States"
   employer         : "North Carolina A&T State University"
   uri              : # URL
@@ -51,7 +51,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "https://jeffreyblay.github.io"
+  github           : "https://github.com/jeffreyblay"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
