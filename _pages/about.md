@@ -1,15 +1,12 @@
 ---
 permalink: /
-title: "From Data to Real-World Decisions:Mapping Patterns. Extracting Insights from Data."
+title: "Path & Purpose"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 <!--
-# About Me
-![Background image](/images/Blay Jeffery 2.jpg)
-
 I am Jeffrey Blay, a passionate and ambitious individual who believes in turning the  
 **"IMPOSSIBLE"** into **"I’M POSSIBLE"** through dedication and perseverance.
 I am an aspiring **Geospatial Data Scientist/Engineer**, interested in applying data science  
@@ -17,45 +14,57 @@ and engineering techniques to extract meaningful insights from complex data to s
 Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in **Geospatial Data Science**,  
 with **years of experience** in applying machine learning techniques for spatial modeling and analytics.
 I am seeking a **Summer 2026 internship** in data science or geospatial analytics to  
-leverage my technical expertise and contribute to impactful projects. -->
+leverage my technical expertise and contribute to impactful projects. 
 
+![Background image](/images/Blay Jeffery 2.jpg)-->
 
-<style>
-/* Simple static background for the whole page */
-body {
+<!-- Hero Section -->
+<div style="
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   background-image: url('/images/Blay Jeffery 2.jpg');
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-}
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+">
 
-/* Simple content box */
-.about-box {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8); /* light transparency */
-  border-radius: 6px;
-}
-</style>
+  <div style="
+    background: rgba(0,0,0,0.55);
+    padding: 40px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    max-width: 800px;
+  ">
+    <h1 style="font-size: 2.5rem; margin-bottom: 20px;">
+      From Data to Real-World Decisions: Advancing Geospatial Science and Analytics
+    </h1>
+    <p style="font-size: 1.2rem;">
+      Leveraging geospatial data, machine learning, and engineering techniques to extract insights and drive impact.
+    </p>
+  </div>
+</div>
 
-<div class="about-box">
+<!-- Spacer so hero section doesn’t overlap next content -->
+<div style="height: 50vh;"></div>
 
-# About Me
+<!-- Path & Purpose Section -->
+## Path & Purpose
 
-I am Jeffrey Blay, a passionate and ambitious individual who believes in turning the  
+I am Jeffrey Blay, a passionate and ambitious individual who believes in turning  
 **"IMPOSSIBLE"** into **"I’M POSSIBLE"** through dedication and perseverance.
 
-I am an aspiring **Geospatial Data Scientist/Engineer**, interested in applying  
-data science and engineering techniques to extract meaningful insights from  
-complex data to solve real-world problems.
+As an aspiring **Geospatial Data Scientist/Engineer**, I leverage data science, machine learning, and engineering techniques  
+to extract meaningful insights from complex spatial data and solve real-world challenges.
 
-Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in  
-**Geospatial Data Science**, with **years of experience** in applying  
-machine learning techniques for spatial modeling and analytics.
+Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in **Geospatial Data Science**,  
+with extensive experience in **remote sensing, GIS, spatial analysis, geospatial AI, urban analytics, and data pipelines**.
 
-I am seeking a **Summer 2026 internship** in data science or geospatial  
-analytics to leverage my technical expertise and contribute to impactful projects.
-
-</div>
+I am seeking a **Summer 2026 internship** in data science or geospatial analytics,  
+where I can apply my technical expertise to deliver impactful solutions.
