@@ -23,7 +23,7 @@ repository               : "jeffreyblay/jeffreyblay.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "Blay Jeffrey 1.jpg"
+  avatar           : "profile.png"
   name             : "Jeffrey Blay"
   pronouns         : # example: "she/her"  
   bio              : " hardworking individual who challenges himself to change the IMPOSSIBLE to I'M POSSIBLE."
