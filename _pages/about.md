@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Welcome to my Website!"
+title: "From Data to Real-World Decisions:My Journey through the Lens of Geospatial Data Science and Engineering"
 author_profile: true
 redirect_from: 
   - /about/
@@ -24,9 +24,9 @@ leverage my technical expertise and contribute to impactful projects.-->
 body {
   background-image: url('/images/Blay Jeffery 2.jpg');
   background-attachment: fixed;
-  background-size: cover;
+  /*background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
 
 /* Content box styling */
@@ -66,20 +66,18 @@ body {
 
 <div class="about-wrapper">
 
-# About Me
-
 I am Jeffrey Blay, a passionate and ambitious individual who believes in turning the  
-**"IMPOSSIBLE"** into **"I’M POSSIBLE"** through dedication and perseverance.
+"IMPOSSIBLE" into "I’M POSSIBLE" through dedication and perseverance.
 
-I am an aspiring **Geospatial Data Scientist/Engineer**, interested in applying  
+I am an aspiring Geospatial Data Scientist/Engineer, interested in applying  
 data science and engineering techniques to extract meaningful insights from  
 complex data to solve real-world problems.
 
-Currently, I am pursuing a **Ph.D. in Applied Science**, specializing in  
-**Geospatial Data Science**, with **years of experience** in applying  
+Currently, I am pursuing a Ph.D. in Applied Science, specializing in  
+Geospatial Data Science, with years of experience in applying  
 machine learning techniques for spatial modeling and analytics.
 
-I am seeking a **Summer 2026 internship** in data science or geospatial  
+I am seeking a Summer 2026 internship in data science or geospatial  
 analytics to leverage my technical expertise and contribute to impactful projects.
 
 </div>
