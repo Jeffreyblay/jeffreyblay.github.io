@@ -80,9 +80,11 @@ leverage my technical expertise and contribute to impactful projects.
     width: 100%;
     min-height: 200vh;
     background-image: url('/images/Blay Jeffery 2.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,28 +136,27 @@ leverage my technical expertise and contribute to impactful projects.
 
 <div class="hero-section">
   <div class="hero-content">
-    <h4>From Data to Real-World Decisions: Transforming data into meaningful solutions</h4>
+    <h2>From Data to Real-World Decisions: Transforming data into meaningful solutions</h2>
     
     <p>
-      I am Jeffrey Blay, a passionate and ambitious individual who believes in turning the 
+      I am Jeffrey Blay, a passionate and hardworking individual who believes in turning the 
       "IMPOSSIBLE" into "I'M POSSIBLE" through dedication and perseverance.
     </p>
     
     <p>
-      As an aspiring Geospatial Data Scientist/Engineer, I leverage data science, machine learning, 
-      and engineering techniques to extract meaningful insights from complex spatial data and solve 
-      real-world challenges.
+      As an aspiring Data Scientist/Engineer, I leverage machine learning, statistical analysis, 
+      and data engineering techniques to extract meaningful insights from complex datasets and build scalable solutions that solve real-world challenges.
     </p>
     
     <p>
       Currently, I am pursuing a <strong>Ph.D. in Applied Science</strong>, specializing in 
-      Geospatial Data Science, with years of experience in remote sensing, GIS, spatial analysis, 
-      geospatial AI, urban analytics, and data pipelines.
+      Data Science, with years of experience in data analytics, machine learning, predictive modeling, data pipelines, cloud computing, and spatial data analysis.
     </p>
     
     <p>
-      I am seeking a <strong>Summer 2026 internship</strong> in data science or geospatial analytics, 
-      where I can apply my technical expertise to deliver impactful solutions.
+      I am seeking a <strong>Summer 2026 internship</strong> in data science, data engineering, 
+      or geospatial analytics, where I can apply my technical expertise to deliver impactful, 
+      data-driven solutions.
     </p>
   </div>
 </div>
