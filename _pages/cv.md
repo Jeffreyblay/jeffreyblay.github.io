@@ -17,7 +17,7 @@ Education
 
 Work experience
 ======
-* North Carolina A&T State University
+* **North Carolina A&T State University**
   * **Fall 2025 - Spring 2026: Graduate Research Assistant**
     * Laboratory: Remote Sensing and Geospatial Lab.
     * Duties include: 
@@ -54,17 +54,17 @@ Work experience
       - Integrated aerial imagery and SAR data to predict flood extent and depth with deep learning models.
       - Developed and trained PyTorch U-Net architectures with ResNet-18/VGG-16 encoders for flood-image classification using curated, web-scraped data.
     * Supervisors: Dr. Leila Hashemi-Beni & Dr. Mulham Fawakherji
-
-* **Summer 2023: Community Group Manager**
-  * Institution: Urban Resources Initiative (URI)
-  * Duties included: 
-    - Oversaw seven community greenspace groups, providing guidance and organizational support.
-    - Led weekly project coordination and implementation planning to strengthen each group’s environmental initiatives.
-    - Worked directly with community teams to develop technical concepts and solutions that aligned with their summer objectives.
-  * Supervisors: Chris Ozyck & Colleen Murphy
+    
+* **Urban Resources Initiative (URI)**
+  * **Summer 2023: Community Group Manager**
+    * Duties included: 
+      - Oversaw seven community greenspace groups, providing guidance and organizational support.
+      - Led weekly project coordination and implementation planning to strengthen each group’s environmental initiatives.
+      - Worked directly with community teams to develop technical concepts and solutions that aligned with their summer objectives.
+    * Supervisors: Chris Ozyck & Colleen Murphy
 
 * **Yale School of the Environment**
-  * Fall 2022 - Spring 2023: Graduate Research Assistant
+  * **Fall 2022 - Spring 2023: Graduate Research Assistant**
     * Institution: Hixon Center for Urban Ecology.
     * Duties included: 
       - Analyzed satellite and aerial images to pinpoint communities at risk of urban heat island (UHI) effects.
@@ -87,13 +87,12 @@ Work experience
       - Executed Python-based algorithms on HPC Linux clusters for satellite image segmentation.
       - Developed R and Python workflows for geospatial data analysis and visualization.
     * Supervisor: Dr. Tzu-Hsin Karen Chen
-  
-* **September 2021 - June 2022: GIS Officer**
-    * Institution: Ghana Statistical Service.
-    * Duties included: 
-      - Conducted spatial restructuring of Supervisory Area maps and validated all digitized maps.
-      - Conducted a daily near real-time report of Spatial coverage analysis of Enumerators during the Housing Census activities.
-    * Supervisor: Mrs. Rosalind Quartey
+* **Ghana Statistical Service** 
+  * **September 2021 - June 2022: GIS Officer**
+      * Duties included: 
+        - Conducted spatial restructuring of Supervisory Area maps and validated all digitized maps.
+        - Conducted a daily near real-time report of Spatial coverage analysis of Enumerators during the Housing Census activities.
+      * Supervisor: Mrs. Rosalind Quartey
   
 Skills
 ======
