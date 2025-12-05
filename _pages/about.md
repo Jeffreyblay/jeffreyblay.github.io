@@ -78,7 +78,7 @@ leverage my technical expertise and contribute to impactful projects.
   .hero-section {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 200vh;
     background-image: url('/images/Blay Jeffery 2.jpg');
     background-size: cover;
     background-position: center;
@@ -134,7 +134,7 @@ leverage my technical expertise and contribute to impactful projects.
 
 <div class="hero-section">
   <div class="hero-content">
-    <h1>From Data to Real-World Decisions: Transforming data into meaningful solutions</h1>
+    <h4>From Data to Real-World Decisions: Transforming data into meaningful solutions</h4>
     
     <p>
       I am Jeffrey Blay, a passionate and ambitious individual who believes in turning the 

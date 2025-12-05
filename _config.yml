@@ -23,10 +23,10 @@ repository               : ""
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "Blay Jeffrey 1.jpg"
+  avatar           : "Blay Jeffery 3.jpg"
   name             : "Jeffrey Blay"
   pronouns         : # example: "she/her"  
-  bio              : "I believe the IMPOSSIBLE can be changed to I'M POSSIBLE."
+  bio              : "The IMPOSSIBLE can be changed to I'M POSSIBLE."
   location         : "United States"
   employer         : "North Carolina A&T State University"
   uri              : # URL
