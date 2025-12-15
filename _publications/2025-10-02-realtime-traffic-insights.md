@@ -3,7 +3,7 @@ title: "Real-Time Traffic Insights with Physics-Informed Neural Networks: Integr
 collection: publications
 category: manuscripts
 permalink: /publication/2025-10-02-realtime-traffic-insights
-excerpt: 'This paper is about the number 3. The number 4 is left for future work.'
+excerpt: 'This paper is about the application of AI to monitor traffic flow'
 date: 2025-10-02
 venue: 'IEEE Access'
 paperurl: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11194151'

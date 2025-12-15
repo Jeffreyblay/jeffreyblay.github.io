@@ -2,10 +2,10 @@
 title: "Flood Impact Risk Mapping in Settlement Areas from a 3D perspective: A Case Study of Hurricane Matthew"
 collection: publications
 category: conferences
-permalink: /publication/2024-07-12-flood-impact-mapping
+permalink: /publication/2024-09-05-flood-impact-mapping
 excerpt: 'This paper is estimating the impact of flooding in urban areas.'
-date: 2024-07-12
-venue: 'IGARS 2024 - 2024 IEEE'
+date: 2024-09-05
+venue: 'IEEE Xplore'
 paperurl: 'https://ieeexplore.ieee.org/document/10640634'
 
 ---
