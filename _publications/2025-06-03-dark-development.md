@@ -5,7 +5,7 @@ category: manuscripts
 permalink: /publication/2025-06-03-dark-development
 excerpt: 'This paper is about inequitable access to electricity infrastructures in built-up areas in rapid urbanizing cities.'
 date: 2025-06-03
-venue: 'ScienceDirect'
+venue: 'Elsevier'
 paperurl: 'https://doi.org/10.1016/j.rsase.2025.101619'
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Flood Impact Risk Mapping in Settlement Areas from a 3D perspective: A Case Study of Hurricane Matthew"
+title: "Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas."
 collection: publications
 category: conferences
 permalink: /publication/2025-11-25-pixels-to-insights
