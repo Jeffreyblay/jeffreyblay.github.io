@@ -1,5 +1,5 @@
 ---
-title: "Development Projects"
+title: "Built Applications"
 excerpt: "Full-stack data engineering and analytics applications that solve real-world problems."
 collection: portfolio
 ---
@@ -20,7 +20,7 @@ collection: portfolio
 [Live Dashboard](https://jeffreyblay.github.io/climate-alert-dashboard/) 
 
 [GitHub](https://github.com/Jeffreyblay/climate-alert-etl) 
- 
+
 [API Docs](https://climate-alert-etl.onrender.com/docs)
 
 
