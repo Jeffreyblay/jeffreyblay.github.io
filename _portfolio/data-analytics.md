@@ -1,6 +1,6 @@
 ---
 title: "Data Analytics"
-excerpt: "Projects that transform raw data into clear insights using statistical analysis, visualization, and business-focused interpretation.<br/><img src='/images/data_analytics/logo_data.jpg'>"
+excerpt: "Projects that transform raw data into clear insights using statistical analysis, visualization, and business-focused interpretation."
 collection: portfolio
 ---
 
