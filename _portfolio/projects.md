@@ -1,6 +1,6 @@
 ---
 title: "Development Projects"
-excerpt: "Full-stack data engineering and analytics applications that solve real-world problems.
+excerpt: "Full-stack data engineering and analytics applications that solve real-world problems.<br/><img src='/images/rs_gis/logo_rs.jpg'>"
 collection: portfolio
 ---
 
