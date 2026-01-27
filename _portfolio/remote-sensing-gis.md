@@ -1,8 +1,10 @@
 ---
 title: "Remote Sensing / Geographic Information Systems (GIS)"
-excerpt: "Geospatial projects that apply remote sensing, spatial analysis, and GIS techniques for environmental monitoring, resource management, and data-driven decision-making.<br/><img src='/images/rs_gis/logo_rs.jpg'>"
+excerpt: "Geospatial projects that apply remote sensing, spatial analysis, and GIS techniques for environmental monitoring, resource management, and data-driven decision-making."
 collection: portfolio
 ---
+<!--excerpt: "Geospatial projects that apply remote sensing, spatial analysis, and GIS techniques for environmental monitoring, resource management, and data-driven decision-making.<br/><img src='/images/rs_gis/logo_rs.jpg'>"-->
+
 <!-- ADD PROJECT SUMMARY TO ALL PROJECTS-->
 ### Flood Depth Mapping & Risk Assessment with Arcpy
 

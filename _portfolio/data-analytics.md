@@ -1,18 +1,8 @@
 ---
 title: "Data Analytics"
+excerpt: "Projects that transform raw data into clear insights using statistical analysis, visualization, and business-focused interpretation.
 collection: portfolio
 ---
-<div class="portfolio-card">
-  <img src="/images/data_analytics/logo_data.jpg" alt="Data Analytics Logo">
-  <div class="portfolio-overlay">
-    <h3>Data Analytics</h3>
-    <p>
-      Projects that transform raw data into clear insights using statistical analysis,
-      visualization, and business-focused interpretation.
-    </p>
-  </div>
-</div>
-<!--excerpt: "Projects that transform raw data into clear insights using statistical analysis, visualization, and business-focused interpretation.<br/><img src='/images/data_analytics/logo_data.jpg'>"-->
 
 ### Text Data Mining with R 
 
