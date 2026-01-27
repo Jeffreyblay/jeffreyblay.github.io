@@ -5,7 +5,7 @@ collection: portfolio
 ---
 
 <!-- ADD PROJECT SUMMARY TO ALL PROJECTS-->
-### Climate and Extreme Weather Alert Dashboard
+## Climate and Extreme Weather Alert Dashboard
 
 **Summary:** This project is a full-stack web application that provides real-time weather monitoring and risk assessment by ingesting live National Weather Service alerts, processing them through an ETL pipeline, and delivering actionable insights via an interactive analytics dashboard.
 
@@ -19,15 +19,13 @@ collection: portfolio
 
 [Live Dashboard](https://jeffreyblay.github.io/climate-alert-dashboard/) 
 
-[GitHub](https://github.com/Jeffreyblay/climate-alert-etl) 
-
-[API Docs](https://climate-alert-etl.onrender.com/docs)
-
-
 <div style="text-align:center; margin-bottom:20px;">
   <img src="/images/projects/app_interface.png" alt="penalty" style="max-width:90%;">
   <p style="font-size:0.9em; margin-top:5px;">Climate and Extreme Weather Alert Dashboard</p>
 </div>
 
+[GitHub](https://github.com/Jeffreyblay/climate-alert-etl) 
+
+[API Docs](https://climate-alert-etl.onrender.com/docs)
 
 ---
