@@ -90,15 +90,13 @@ redirect_from:
     </p>
     
     <p>
-      I specialize in leverarging statistical methods, data engineering, computer vision, and predictive modeling for building scalable pipelines 
-      and AI-driven frameworks to extract insights from large, complex spatial datasets to support real-world decision-making. I have 
-      experience developing machine learning and deep learning systems for spatial modeling, remote sensing analytics, as well as risk and vulnerability assessment.
-    </p>
+      I specialize in leverarging statistical methods, data engineering, computer vision, and predictive modeling to build scalable pipelines 
+      and frameworks to extract actionable insights from large, complex spatial datasets. My experience spans machine learning and 
+      deep learning systems for spatial modeling, remote sensing analytics, and risk and vulnerability assessment.
     
     <p>
-      Currently, I am pursuing a <strong>Ph.D. in Applied Science</strong>, specializing in Geospatial
-      Data Science, with hands-on experience in remote sensing/GIS, ETL pipelines, deep learning, cloud-based 
-      geospatial analytics, and full-stack deployment of geospatial AI systems.
+      Currently pursuing a Ph.D. in Applied Science with a focus on <strong Geospatial Data Science </strong>, 
+      I have hands-on experience in remote sensing/GIS, ETL pipelines, machine learning/deep learning, cloud computing, and full-stack deployment of geospatial AI systems.
     </p>
     
     <p>
