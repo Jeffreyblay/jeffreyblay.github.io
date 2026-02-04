@@ -86,23 +86,24 @@ redirect_from:
     
     <p>
       I am Jeffrey Blay, a passionate and hardworking individual who believes in turning the 
-      "IMPOSSIBLE" into "I'M POSSIBLE" through dedication and perseverance.
+      "IMPOSSIBLE" into "I'M POSSIBLE" through hardwork and perseverance.
     </p>
     
     <p>
-      As an aspiring Data Scientist/Engineer, I leverage machine learning, statistical analysis, 
-      and data engineering techniques to extract meaningful insights from complex datasets and build scalable solutions that solve real-world challenges.
+      I specialize in leverarging statistical methods, data engineering, computer vision, and predictive modeling for building scalable pipelines 
+      and AI-driven frameworks to extract insights from large, complex spatial datasets to support real-world decision-making. I have 
+      experience developing machine learning and deep learning systems for spatial modeling, remote sensing analytics, as well as risk and vulnerability assessment.
     </p>
     
     <p>
-      Currently, I am pursuing a <strong>Ph.D. in Applied Science</strong>, specializing in 
-      Data Science, with years of experience in data analytics, machine learning, predictive modeling, data pipelines, cloud computing, and spatial data analysis.
+      Currently, I am pursuing a <strong>Ph.D. in Applied Science</strong>, specializing in Geospatial
+      Data Science, with hands-on experience in remote sensing/GIS, ETL pipelines, deep learning, cloud-based 
+      geospatial analytics, and full-stack deployment of geospatial AI systems.
     </p>
     
     <p>
-      I am seeking a <strong>Summer 2026 internship</strong> in data science, data engineering, 
-      or geospatial analytics, where I can apply my technical expertise to deliver impactful, 
-      data-driven solutions.
+   I am actively seeking opportunities to apply my technical expertise in geospatial AI, data science, and data engineering to 
+   deliver impactful, data-driven solutions for  risk and vulnerability assessments of built assets, as well as spatial decision support.
     </p>
   </div>
 </div>
