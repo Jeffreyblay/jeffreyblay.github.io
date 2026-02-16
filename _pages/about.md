@@ -129,28 +129,6 @@ redirect_from:
 
 </style>
 
-<div class="hero-section">
-  <div class="hero-content">
-    <h1>About Me</h1>
-    
-    <p>
-      I am Jeffrey Blay, a passionate and hardworking individual who believes in turning the 
-      "IMPOSSIBLE" into "I'M POSSIBLE" through hardwork and perseverance.
-    </p>
-    
-    <p>
-      I specialize in leverarging statistical methods, data engineering, computer vision, and predictive modeling to build scalable pipelines 
-      and frameworks to extract actionable insights from large, complex spatial datasets. My experience spans machine learning and 
-      deep learning systems for spatial modeling, remote sensing analytics, and risk and vulnerability assessment.
-    
-    <p>
-      Currently pursuing a Ph.D. in Applied Science with a focus on <strong Geospatial Data Science </strong>, 
-      I have hands-on experience in remote sensing/GIS, ETL pipelines, machine learning/deep learning, cloud computing, and full-stack deployment of geospatial AI systems. I am driven to develop advanced geospatial technologies that support evidence-based decisions, address complex societal challenges, and improve quality of life through data-informed solutions.
-    </p>    
-  </div>
-
-</div>
-
 <!-- DASHBOARD SECTION -->
 
 <section class="dashboard-section">
@@ -180,3 +158,16 @@ redirect_from:
   </div>
 
 </section>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>About Me</h1>
+    
+    <p> 
+      Jeffrey Blay is a Geospatial Data Scientist specializing in machine learning, spatial analytics, and scalable data engineering. He designs and deploys end-to-end geospatial AI solutions that transform complex spatial data into actionable insights for risk assessment, environmental monitoring, and data-driven decision-making.
+    
+    <p>
+  </div>
+
+</div>
+
