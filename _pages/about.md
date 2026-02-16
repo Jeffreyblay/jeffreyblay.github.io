@@ -64,7 +64,7 @@ redirect_from:
 /* DASHBOARD SECTION */
 
 .dashboard-section {
-  background: linear-gradient(180deg, #22313da4 40%, #2e3a59d8 100%);
+  background: linear-gradient(180deg, rgba(46, 60, 71, 0.22) 40%, rgba(3, 3, 3, 0.41) 100%);
   padding: 100px 20px;
 }
 
@@ -77,13 +77,13 @@ redirect_from:
 }
 
 .metric-card {
-  background: rgba(7, 12, 17, 0.18);
+  background: rgba(7, 12, 17, 0.08);
   border: 1px solid rgba(5, 10, 13, 0.84);
   padding: 50px 20px;
   border-radius: 14px;
   text-align: center;
   transition: all 0.35s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 .metric-card:hover {
