@@ -77,7 +77,7 @@ redirect_from:
 }
 
 .metric-card {
-  background: rgba(7, 12, 17, 0.08);
+  background: rgba(7, 12, 17, 0.69);
   border: 1px solid rgba(5, 10, 13, 0.84);
   padding: 50px 20px;
   border-radius: 14px;
