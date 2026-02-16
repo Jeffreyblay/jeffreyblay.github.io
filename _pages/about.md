@@ -330,13 +330,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
-
-
-.metric-number {
-
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: #38bdf8;
-  transition: all 0.3s ease;
-
-}
