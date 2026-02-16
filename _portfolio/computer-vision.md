@@ -1,6 +1,6 @@
 ---
-title: "Applied AI (Artificial Intelligence)"
-excerpt: "Practical machine learning and AI projects that turn algorithms into real-world, industry-relevant solutions"
+title: "Computer Vision"
+excerpt: "Practical computer vision projects that turn algorithms into real-world, industry-relevant solutions"
 collection: portfolio
 ---
 
