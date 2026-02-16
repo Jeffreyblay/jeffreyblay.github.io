@@ -9,7 +9,7 @@ redirect_from:
 
 <style>
 
-/* Remove default Academic Pages spacing */
+
 .page__content {
   margin: 0 !important;
   padding: 0 !important;
@@ -64,7 +64,7 @@ redirect_from:
 /* DASHBOARD SECTION */
 
 .dashboard-section {
-  background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+  background: linear-gradient(180deg, #020617 60%, #0f172a 100%);
   padding: 100px 20px;
 }
 
@@ -77,8 +77,8 @@ redirect_from:
 }
 
 .metric-card {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(38, 52, 86, 0.7);
+  border: 1px solid rgba(140, 202, 229, 0.2);
   padding: 50px 20px;
   border-radius: 14px;
   text-align: center;
@@ -137,7 +137,7 @@ redirect_from:
     <p> 
       I’m Jeffrey Blay, a Geospatial Data Scientist specializing in scalable AI-driven solutions for spatial intelligence and predictive analytics. With a strong focus on geospatial data engineering, I design robust data pipelines and advanced machine learning systems that transform complex spatial data into actionable insights for real-world risk modeling and evidence-based decision-making.
     
-    <p>
+    </p>
 
   </div>
 
@@ -232,36 +232,3 @@ redirect_from:
 
 </section>
 
-<!-- MAP SECTION -->
-
-<section class="map-section">
-
-<h2 class="section-header">Research Locations</h2>
-
-<div id="map"></div>
-
-</section>
-
-<!-- LEAFLET -->
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<script>
-
-var map = L.map('map').setView([35.7796, -78.6382], 6);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-
-}).addTo(map);
-
-/* Example markers */
-
-L.marker([35.7796, -78.6382]).addTo(map)
-.bindPopup("North Carolina Flood Research");
-
-L.marker([29.9511, -90.0715]).addTo(map)
-.bindPopup("New Orleans Flood Modeling");
-
-</script>
