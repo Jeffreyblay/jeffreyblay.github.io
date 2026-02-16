@@ -64,7 +64,7 @@ redirect_from:
 /* DASHBOARD SECTION */
 
 .dashboard-section {
-  background: linear-gradient(180deg, #204f78 60%, #3d517f 100%);
+  background: linear-gradient(180deg, #16273671 60%, #10182d85 100%);
   padding: 100px 20px;
 }
 
@@ -77,8 +77,8 @@ redirect_from:
 }
 
 .metric-card {
-  background: rgba(73, 117, 159, 0.7);
-  border: 1px solid rgba(103, 164, 189, 0.77);
+  background: rgba(7, 12, 17, 0.17);
+  border: 1px solid rgba(5, 10, 13, 0.09);
   padding: 50px 20px;
   border-radius: 14px;
   text-align: center;
@@ -88,8 +88,8 @@ redirect_from:
 
 .metric-card:hover {
   transform: translateY(-12px);
-  border-color: rgba(77, 183, 228, 0.71);
-  box-shadow: 0 20px 40px rgba(56, 191, 248, 0.61);
+  border-color: rgba(4, 5, 5, 0.09);
+  box-shadow: 0 20px 40px rgba(34, 41, 44, 0.1);
 }
 
 .metric-number {
