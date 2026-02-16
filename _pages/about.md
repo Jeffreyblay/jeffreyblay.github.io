@@ -138,7 +138,7 @@ redirect_from:
       I’m Jeffrey Blay, a Geospatial Data Scientist specializing in scalable AI-driven solutions for spatial intelligence and predictive analytics. With a strong focus on geospatial data engineering, I design robust data pipelines and advanced machine learning systems that transform complex spatial data into actionable insights for real-world risk modeling and evidence-based decision-making.
     
     <p>
-    
+
   </div>
 
 </div>
@@ -173,3 +173,95 @@ redirect_from:
   </div>
 
 </section>
+
+<!-- LATEST PUBLICATIONS -->
+
+<section class="dashboard-section">
+
+<h2 class="section-header">Latest Publications</h2>
+
+<div class="card-grid">
+
+{% assign pubs = site.publications | sort: 'date' | reverse %}
+{% for post in pubs limit:3 %}
+
+<div class="card">
+
+<div class="card-title">{{ post.title }}</div>
+
+<div class="card-meta">
+{{ post.venue }} • {{ post.date | date: "%Y" }}
+</div>
+
+<a href="{{ post.url }}">View Publication →</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<!-- LATEST PROJECTS -->
+
+<section class="dashboard-section">
+
+<h2 class="section-header">Featured Projects</h2>
+
+<div class="card-grid">
+
+{% assign projects = site.portfolio | sort: 'date' | reverse %}
+{% for post in projects limit:3 %}
+
+<div class="card">
+
+<div class="card-title">{{ post.title }}</div>
+
+<div class="card-meta">
+{{ post.excerpt | strip_html | truncate: 80 }}
+</div>
+
+<a href="{{ post.url }}">View Project →</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<!-- MAP SECTION -->
+
+<section class="map-section">
+
+<h2 class="section-header">Research Locations</h2>
+
+<div id="map"></div>
+
+</section>
+
+<!-- LEAFLET -->
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([35.7796, -78.6382], 6);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+}).addTo(map);
+
+/* Example markers */
+
+L.marker([35.7796, -78.6382]).addTo(map)
+.bindPopup("North Carolina Flood Research");
+
+L.marker([29.9511, -90.0715]).addTo(map)
+.bindPopup("New Orleans Flood Modeling");
+
+</script>
