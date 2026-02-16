@@ -64,7 +64,7 @@ redirect_from:
 /* DASHBOARD SECTION */
 
 .dashboard-section {
-  background: linear-gradient(180deg, rgba(46, 60, 71, 0.22) 40%, rgba(3, 3, 3, 0.41) 100%);
+  background: linear-gradient(180deg, rgba(46, 60, 71, 0.08) 40%, rgba(3, 3, 3, 0.08) 60%);
   padding: 100px 20px;
 }
 
