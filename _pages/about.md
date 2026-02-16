@@ -129,7 +129,7 @@ redirect_from:
 
 </style>
 
-
+<section>
 <div class="hero-section">
   <div class="hero-content">
     <h1>About Me</h1>
@@ -140,9 +140,8 @@ redirect_from:
     </p>
 
   </div>
-
 </div>
-
+</section>
 
 <!-- DASHBOARD SECTION -->
 
@@ -173,7 +172,6 @@ redirect_from:
   </div>
 
 </section> 
-
 
 
 <!-- LATEST PUBLICATIONS -->
