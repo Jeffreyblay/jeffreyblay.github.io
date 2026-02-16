@@ -144,7 +144,7 @@ redirect_from:
 </div>
 
 
-<!-- DASHBOARD SECTION 
+<!-- DASHBOARD SECTION -->
 
 <section class="dashboard-section">
 
@@ -173,39 +173,8 @@ redirect_from:
   </div>
 
 </section> 
--->
 
-<section class="dashboard-section">
 
-  <div class="dashboard-container">
-
-    <div class="metric-card">
-      <div class="metric-number counter"
-           data-target="{{ site.publications | size }}">0</div>
-      <div class="metric-label">Publications</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-number counter"
-           data-target="{{ site.portfolio | size }}">0</div>
-      <div class="metric-label">Projects</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-number counter"
-           data-target="{{ site.talks | size }}">0</div>
-      <div class="metric-label">Talks</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-number counter"
-           data-target="6">0</div>
-      <div class="metric-label">Years Experience</div>
-    </div>
-
-  </div>
-
-</section>
 
 <!-- LATEST PUBLICATIONS -->
 
@@ -265,68 +234,3 @@ redirect_from:
 
 </section>
 
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const counters = document.querySelectorAll('.counter');
-
-  const speed = 200; // lower = faster
-
-  const animateCounters = () => {
-
-    counters.forEach(counter => {
-
-      const target = +counter.getAttribute('data-target');
-      let count = 0;
-
-      const updateCount = () => {
-
-        const increment = target / speed;
-
-        if (count < target) {
-
-          count += increment;
-
-          counter.innerText = Math.ceil(count);
-
-          requestAnimationFrame(updateCount);
-
-        } else {
-
-          counter.innerText = target;
-
-        }
-
-      };
-
-      updateCount();
-
-    });
-
-  };
-
-  /* Trigger animation when visible */
-
-  const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-
-        animateCounters();
-
-        observer.disconnect();
-
-      }
-
-    });
-
-  });
-
-  observer.observe(document.querySelector('.dashboard-section'));
-
-});
-
-</script>
