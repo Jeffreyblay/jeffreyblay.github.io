@@ -1302,18 +1302,18 @@ redirect_from:
         <div class="jb-tl-item">
           <div class="jb-tl-dot active"></div>
           <div class="jb-tl-body">
-            <div class="jb-tl-year">2022 — Present</div>
-            <div class="jb-tl-role">Geospatial Data Scientist</div>
+            <div class="jb-tl-year">2025 — Present</div>
+            <div class="jb-tl-role">Graduate Research Assistant</div>
             <div class="jb-tl-org">Current Role</div>
-            <div class="jb-tl-desc">Designing scalable AI pipelines for spatial intelligence and predictive risk analytics. Leading ML model development on satellite and aerial imagery datasets.</div>
+            <div class="jb-tl-desc">Designing scalable ETL pipelines for spatial intelligence and predictive risk analytics. Leading Physics-Informed ML model development for 3D flood risk modeling with geospatial data.</div>
           </div>
         </div>
 
         <div class="jb-tl-item">
           <div class="jb-tl-dot"></div>
           <div class="jb-tl-body">
-            <div class="jb-tl-year">2020 — 2022</div>
-            <div class="jb-tl-role">GIS Analyst / Data Engineer</div>
+            <div class="jb-tl-year">Summer 2025</div>
+            <div class="jb-tl-role">Data Science Research Assistant</div>
             <div class="jb-tl-org">Previous Position</div>
             <div class="jb-tl-desc">Built geospatial data pipelines integrating remote sensing data with enterprise databases. Developed spatial models for environmental and urban planning applications.</div>
           </div>
@@ -1398,9 +1398,9 @@ redirect_from:
     <h2>Let's build something with spatial data.</h2>
 
     <div class="jb-contact-links">
-      <a href="mailto:your@email.com" class="jb-contact-link">✉ your@email.com</a>
-      <a href="https://www.linkedin.com/in/jeffrey-blay/" class="jb-contact-link" target="_blank">in LinkedIn</a>
-      <a href="https://github.com/Jeffreyblay" class="jb-contact-link" target="_blank">⌥ GitHub</a>
+      <a href="mailto:jeffreyblay7@gmail.com" class="jb-contact-link">✉ Gmail</a>
+      <a href="https://www.linkedin.com/in/jeffrey-blay/" class="jb-contact-link" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Jeffreyblay" class="jb-contact-link" target="_blank">GitHub</a>
     </div>
 
   </div>
