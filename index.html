@@ -32,7 +32,25 @@
 }
 
 html{scroll-behavior:smooth;}
-body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow-x:hidden;}
+
+/* ── FIXED BACKGROUND WASH ── */
+#jb-bg-wash{
+  position:fixed;inset:0;z-index:-1;
+  transition:background-color 0.85s cubic-bezier(0.4,0,0.2,1);
+  background-color:#080b0f;
+}
+#jb-bg-wash::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:64px 64px;opacity:0;
+  transition:opacity 0.85s ease;pointer-events:none;
+}
+#jb-bg-wash.show-grid::before{opacity:1;}
+#jb-bg-wash.light-grid::before{
+  background-image:linear-gradient(rgba(8,11,15,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(8,11,15,0.055) 1px,transparent 1px);
+  opacity:1;
+}
 
 /* ── NAV ── */
 .nav{
@@ -68,7 +86,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 
 /* ── HERO ── */
 .hero{
-  min-height:100vh;background:var(--ink);
+  min-height:100vh;background:transparent;
   display:flex;align-items:center;
   padding:100px 40px 80px;
   position:relative;overflow:hidden;
@@ -229,7 +247,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 
 /* ── SKILLS ── */
 .skills{
-  background:var(--ink2);padding:96px 40px;
+  background:transparent;padding:96px 40px;
   position:relative;overflow:hidden;
 }
 .skills-grid-bg{
@@ -285,7 +303,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .tag:hover{background:var(--amber-dim);color:var(--amber-g);border-color:rgba(217,119,6,0.28);}
 
 /* ── ABOUT / TIMELINE ── */
-.about{background:var(--white);padding:96px 40px;}
+.about{background:rgba(255,255,255,0.97);padding:96px 40px;}
 .about-inner{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
@@ -353,7 +371,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .tl-desc{font-size:13px;line-height:1.68;color:var(--lmuted);}
 
 /* ── PUBLICATIONS ── */
-.pubs{background:var(--surf);padding:96px 40px;}
+.pubs{background:rgba(242,244,247,0.97);padding:96px 40px;}
 .pubs-inner{max-width:1100px;margin:0 auto;}
 .section-head{
   display:flex;align-items:flex-end;justify-content:space-between;
@@ -403,7 +421,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .pub-card:hover .pub-arrow{color:var(--amber);transform:translateX(4px);}
 
 /* ── TALKS STRIP ── */
-.talks{background:var(--ink3);padding:96px 40px;position:relative;overflow:hidden;}
+.talks{background:transparent;padding:96px 40px;position:relative;overflow:hidden;}
 .talks-grid{
   position:absolute;inset:0;
   background-image:
@@ -455,7 +473,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 }
 
 /* ── PROJECTS ── */
-.projects{background:var(--ink);padding:96px 40px;position:relative;overflow:hidden;}
+.projects{background:transparent;padding:96px 40px;position:relative;overflow:hidden;}
 .proj-grid-bg{
   position:absolute;inset:0;
   background-image:
@@ -535,7 +553,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 
 /* ── FOOTER ── */
 .footer{
-  background:var(--ink);
+  background:rgba(8,11,15,0.95);
   border-top:1px solid rgba(255,255,255,0.05);
   padding:28px 40px;
   display:flex;align-items:center;justify-content:space-between;
@@ -601,6 +619,9 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 </head>
 <body>
 
+<!-- FIXED BG WASH -->
+<div id="jb-bg-wash" class="show-grid"></div>
+
 <!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
@@ -611,7 +632,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <li><a href="talks.html">Talks</a></li>
     <li><a href="cv.html">CV</a></li>
   </ul>
-  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+  <a class="nav-cta" href="/cdn-cgi/l/email-protection#09636c6f6f7b6c706b6568703e496e64686065276a6664">Contact</a>
 </nav>
 
 <!-- HERO -->
@@ -1103,7 +1124,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
   <div class="contact-inner">
     <h2>Let's build something with data.</h2>
     <div class="contact-links">
-      <a class="c-link" href="mailto:jeffreyblay7@gmail.com">✉ jeffreyblay7@gmail.com</a>
+      <a class="c-link" href="/cdn-cgi/l/email-protection#056f60636377607c6769647c32456268646c692b666a68">✉ <span class="__cf_email__" data-cfemail="670d02010115021e050b061e5027000a060e0b4904080a">[email&#160;protected]</span></a>
       <a class="c-link" href="https://linkedin.com/in/jeffrey-blay" target="_blank">LinkedIn</a>
       <a class="c-link" href="https://github.com/Jeffreyblay" target="_blank">GitHub</a>
     </div>
@@ -1123,23 +1144,39 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 </footer>
 
 <script>
-// Highlight active nav link on scroll
+// ── SCROLL COLOUR WASH ──
+const bgWash = document.getElementById('jb-bg-wash');
+const sectionColors = {
+  'home':         { bg:'#080b0f', grid:'show-grid'  },
+  'skills':       { bg:'#0d1520', grid:'show-grid'  },
+  'about':        { bg:'#f2f4f7', grid:'light-grid' },
+  'publications': { bg:'#e8ecf1', grid:'light-grid' },
+  'talks':        { bg:'#071a18', grid:'show-grid'  },
+  'projects':     { bg:'#080b0f', grid:'show-grid'  },
+  'contact':      { bg:'#b45309', grid:''           },
+};
+function applyBg(id) {
+  const cfg = sectionColors[id];
+  if (!cfg) return;
+  bgWash.style.backgroundColor = cfg.bg;
+  bgWash.classList.remove('show-grid','light-grid');
+  if (cfg.grid) bgWash.classList.add(cfg.grid);
+}
+
+// Highlight active nav link + trigger bg change on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if(e.isIntersecting){
+    if (e.isIntersecting) {
       navLinks.forEach(a => a.classList.remove('active'));
       const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if(link) link.classList.add('active');
+      if (link) link.classList.add('active');
+      applyBg(e.target.id);
     }
   });
-},{threshold:0.4});
+}, {threshold: 0.35});
 sections.forEach(s => observer.observe(s));
 </script>
-
-<!-- AI Assistant Chatbot -->
-<script src="chatbot.js"></script>
-
 </body>
 </html>
