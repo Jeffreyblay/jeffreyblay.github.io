@@ -3,8 +3,8 @@
    Usage: Add before </body> on every HTML page:
    <script src="chatbot.js"></script>
 
-   IMPORTANT: Replace YOUR_NEW_GROQ_KEY_HERE with your actual
-   Groq API key from console.groq.com
+   Replace YOUR_NEW_GROQ_KEY_HERE with your Groq API key
+   from console.groq.com
    ============================================================= */
 
 (function () {
@@ -15,7 +15,7 @@
   const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay. If asked anything unrelated, politely redirect back to his work. Keep answers to 2-4 sentences unless a list is needed.
 
 ABOUT JEFFREY BLAY
-PhD candidate at NC A&T State University (expected 2026), specializing in Geospatial Data Science. 5+ years experience in ML/DL for spatial analytics. Contact: jeffreyblay7@gmail.com | GitHub: github.com/Jeffreyblay
+PhD candidate at NC A&T State University (expected 2026), specializing in Geospatial Data Science. 6+ years experience in ML/DL for spatial analytics. Contact: jeffreyblay7@gmail.com | GitHub: github.com/Jeffreyblay
 
 EDUCATION
 - PhD Applied Science & Technology — NC A&T (2023-2026). Specialization: Geospatial Data Science.
@@ -91,44 +91,104 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   const style = document.createElement("style");
   style.textContent = `
     #jb-term-wrap,#jb-term-wrap *{box-sizing:border-box;margin:0;padding:0;}
+
     #jb-term-wrap{
       position:fixed;bottom:24px;right:24px;z-index:9999;
-      width:360px;font-family:'JetBrains Mono',monospace;
+      width:420px;font-family:'JetBrains Mono',monospace;
     }
+
+    /* ── 1. TOOLTIP ── */
+    #jb-tooltip{
+      text-align:center;margin-bottom:8px;
+      animation:jbTipBob 3s ease-in-out infinite;
+    }
+    #jb-tip-inner{
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(217,119,6,0.12);
+      border:1px solid rgba(217,119,6,0.32);
+      border-radius:20px;padding:5px 16px;
+      font-size:11px;color:#f59e0b;letter-spacing:0.06em;
+    }
+    #jb-tip-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:#f59e0b;flex-shrink:0;
+      animation:jbDotPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes jbTipBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes jbDotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.7)}}
+
+    /* ── 2. LABELED BORDER ── */
+    #jb-outer{
+      border:1px solid rgba(217,119,6,0.28);
+      border-radius:6px;padding:3px;
+      position:relative;
+      background:rgba(217,119,6,0.03);
+    }
+    #jb-outer-lbl{
+      position:absolute;top:-9px;left:14px;
+      background:var(--page-bg, #080b0f);
+      padding:0 7px;
+      font-size:9px;color:rgba(217,119,6,0.8);
+      letter-spacing:0.14em;text-transform:uppercase;
+    }
+
+    /* ── 3. TRIGGER BAR ── */
     #jb-trigger{
       display:flex;align-items:center;gap:8px;
       background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;
-      padding:9px 14px;cursor:pointer;width:100%;
+      padding:10px 14px;cursor:pointer;width:100%;
       transition:border-color .2s,background .2s;
+      position:relative;
     }
     #jb-trigger:hover{border-color:#f59e0b;background:#0d0d0d;}
     .jb-tdots{display:flex;gap:5px;}
-    .jb-tdot{width:10px;height:10px;border-radius:50%;}
-    #jb-tlabel{font-size:10px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
+    .jb-tdot{width:11px;height:11px;border-radius:50%;}
+    #jb-tlabel{font-size:11px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
     #jb-tcursor{font-size:12px;color:#f59e0b;animation:jbBlink 1s step-end infinite;}
     @keyframes jbBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* ── 4. AI BADGE ── */
+    #jb-badge{
+      position:absolute;top:-10px;right:-10px;
+      width:26px;height:26px;border-radius:50%;
+      background:#d97706;border:2px solid #080b0f;
+      display:flex;align-items:center;justify-content:center;
+      font-size:9px;font-weight:500;color:#080b0f;letter-spacing:0.04em;
+    }
+    #jb-badge::after{
+      content:'';position:absolute;inset:-3px;border-radius:50%;
+      border:2px solid rgba(217,119,6,0.5);
+      animation:jbRing 1.8s ease-out infinite;
+    }
+    @keyframes jbRing{0%{transform:scale(1);opacity:0.9}100%{transform:scale(1.85);opacity:0}}
+
+    /* ── TERMINAL PANEL ── */
     #jb-panel{
       display:none;flex-direction:column;
       background:#0a0a0a;border:1px solid #2a2a2a;border-radius:6px;
-      overflow:hidden;margin-bottom:8px;
-      animation:jbUp .2s ease;
+      overflow:hidden;margin-bottom:10px;
     }
-    #jb-panel.open{display:flex;}
+    #jb-panel.open{display:flex;animation:jbUp .22s ease;}
     @keyframes jbUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* title bar */
     #jb-titlebar{
       background:#1a1a1a;padding:8px 12px;
       display:flex;align-items:center;gap:6px;
       border-bottom:1px solid #2a2a2a;flex-shrink:0;user-select:none;
     }
-    .jb-wdot{width:11px;height:11px;border-radius:50%;cursor:pointer;transition:opacity .15s;}
+    .jb-wdot{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:opacity .15s;}
     .jb-wdot:hover{opacity:.7;}
     #jb-winname{font-size:10px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
+
+    /* output */
     #jb-output{
       padding:12px;display:flex;flex-direction:column;gap:2px;
-      max-height:240px;overflow-y:auto;flex:1;
+      max-height:320px;overflow-y:auto;flex:1;
     }
     #jb-output::-webkit-scrollbar{width:3px;}
     #jb-output::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:2px;}
+
     .jbt{font-size:11px;line-height:1.72;word-break:break-word;}
     .jbt-prompt{color:#f59e0b;}
     .jbt-cmd{color:#fff;}
@@ -136,19 +196,23 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     .jbt-err{color:#f87171;padding-left:16px;display:block;}
     .jbt-comment{color:#3a3a3a;}
     .jbt-proc{color:#4ade80;opacity:.6;padding-left:16px;display:block;animation:jbFade .9s ease-in-out infinite alternate;}
-    @keyframes jbFade{from{opacity:.25}to{opacity:.75}}
+    @keyframes jbFade{from{opacity:.2}to{opacity:.75}}
+
+    /* chips */
     #jb-chips{
       padding:6px 12px 8px;display:flex;flex-wrap:wrap;gap:5px;
       border-top:1px solid #1a1a1a;
     }
     .jb-chip{
-      font-size:9px;letter-spacing:.04em;padding:3px 9px;border-radius:2px;
+      font-size:10px;letter-spacing:.04em;padding:4px 10px;border-radius:2px;
       border:1px solid #2a2a2a;background:transparent;color:#555;
       cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;
     }
-    .jb-chip:hover{border-color:#f59e0b;color:#f59e0b;background:rgba(245,158,11,.06);}
+    .jb-chip:hover{border-color:#f59e0b;color:#f59e0b;background:rgba(245,158,11,.07);}
+
+    /* input */
     #jb-inputbar{
-      padding:8px 12px;border-top:1px solid #1a1a1a;
+      padding:9px 12px;border-top:1px solid #1a1a1a;
       display:flex;align-items:center;gap:8px;
       background:#0d0d0d;flex-shrink:0;
     }
@@ -173,7 +237,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   wrap.innerHTML = `
     <div id="jb-panel">
       <div id="jb-titlebar">
-        <div class="jb-wdot" style="background:#ff5f57" onclick="jbClose()" title="Close"></div>
+        <div class="jb-wdot" style="background:#ff5f57" title="Close" onclick="jbClose()"></div>
         <div class="jb-wdot" style="background:#febc2e"></div>
         <div class="jb-wdot" style="background:#28c840"></div>
         <div id="jb-winname">jeffrey-blay — ask.sh</div>
@@ -187,19 +251,31 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
         <span class="jb-chip" data-q="Is Jeffrey open to new opportunities?">open_to_work</span>
       </div>
       <div id="jb-inputbar">
-        <span id="jb-iprompt">visitor@portfolio:~$</span>
+        <span id="jb-iprompt">visitor@jblay:~$</span>
         <input id="jb-input" type="text" placeholder='ask "your question here"' autocomplete="off">
         <button id="jb-run">run ↵</button>
       </div>
     </div>
-    <div id="jb-trigger">
-      <div class="jb-tdots">
-        <div class="jb-tdot" style="background:#ff5f57"></div>
-        <div class="jb-tdot" style="background:#febc2e"></div>
-        <div class="jb-tdot" style="background:#28c840"></div>
+
+    <div id="jb-tooltip">
+      <div id="jb-tip-inner">
+        <div id="jb-tip-dot"></div>
+        Ask AI about Jeffrey
       </div>
-      <div id="jb-tlabel">jeffrey-blay — ask.sh</div>
-      <div id="jb-tcursor">▋</div>
+    </div>
+
+    <div id="jb-outer">
+      <div id="jb-outer-lbl">AI Assistant</div>
+      <div id="jb-trigger">
+        <div class="jb-tdots">
+          <div class="jb-tdot" style="background:#ff5f57"></div>
+          <div class="jb-tdot" style="background:#febc2e"></div>
+          <div class="jb-tdot" style="background:#28c840"></div>
+        </div>
+        <div id="jb-tlabel">jeffrey-blay — ask.sh</div>
+        <div id="jb-tcursor">▋</div>
+        <div id="jb-badge">AI</div>
+      </div>
     </div>
   `;
   document.body.appendChild(wrap);
@@ -207,14 +283,17 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   /* ── REFS ── */
   const panel   = document.getElementById("jb-panel");
   const trigger = document.getElementById("jb-trigger");
+  const outer   = document.getElementById("jb-outer");
+  const tooltip = document.getElementById("jb-tooltip");
   const output  = document.getElementById("jb-output");
   const chips   = document.getElementById("jb-chips");
   const input   = document.getElementById("jb-input");
   const runBtn  = document.getElementById("jb-run");
   const history = [];
   let busy = false;
+  let booted = false;
 
-  /* ── HELPERS ── */
+  /* ── LINE HELPERS ── */
   function line(html) {
     const d = document.createElement("div");
     d.className = "jbt";
@@ -228,27 +307,39 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     if (all.length) all[all.length - 1].remove();
   }
   function idleCursor() {
-    line(`<span class="jbt-prompt">visitor@portfolio:~$ </span><span style="display:inline-block;width:7px;height:11px;background:#f59e0b;vertical-align:middle;animation:jbBlink 1s step-end infinite;"></span>`);
+    line(`<span class="jbt-prompt">visitor@jblay:~$ </span><span style="display:inline-block;width:7px;height:11px;background:#f59e0b;vertical-align:middle;animation:jbBlink 1s step-end infinite;"></span>`);
   }
   function boot() {
+    output.innerHTML = "";
     line(`<span class="jbt-comment"># Jeffrey Blay AI Assistant v1.0</span>`);
     line(`<span class="jbt-comment"># Powered by Groq · llama-3.3-70b-versatile</span>`);
-    line(`<span class="jbt-comment"># Type a question or click a prompt below</span>`);
+    line(`<span class="jbt-comment"># Ask me anything about Jeffrey below</span>`);
+    line(`&nbsp;`);
+    line(`<span class="jbt-res">→ Hi! I'm Jeffrey's AI assistant. Ask me about his research, publications, skills, or experience.</span>`);
     line(`&nbsp;`);
     idleCursor();
   }
 
   /* ── OPEN / CLOSE ── */
-  trigger.addEventListener("click", () => {
+  function jbOpen() {
     panel.classList.add("open");
-    trigger.style.display = "none";
-    if (!output.children.length) boot();
+    tooltip.style.display = "none";
+    outer.style.display = "none";
+    if (!booted) { booted = true; boot(); }
     setTimeout(() => input.focus(), 150);
-  });
+  }
   window.jbClose = function () {
     panel.classList.remove("open");
-    trigger.style.display = "flex";
+    tooltip.style.display = "block";
+    outer.style.display = "block";
   };
+
+  trigger.addEventListener("click", jbOpen);
+
+  /* ── AUTO-OPEN after 5 seconds ── */
+  setTimeout(() => {
+    if (!panel.classList.contains("open")) jbOpen();
+  }, 5000);
 
   /* ── SEND ── */
   async function send(q) {
@@ -259,7 +350,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
 
     removeLast();
     const shortQ = q.length > 44 ? q.slice(0, 41) + "..." : q;
-    line(`<span class="jbt-prompt">visitor@portfolio:~$ </span><span class="jbt-cmd">ask "${shortQ}"</span>`);
+    line(`<span class="jbt-prompt">visitor@jblay:~$ </span><span class="jbt-cmd">ask "${shortQ}"</span>`);
     const proc = line(`<span class="jbt-proc">▋ querying knowledge base...</span>`);
 
     history.push({ role: "user", content: q });
@@ -290,7 +381,6 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
       history.push({ role: "assistant", content: reply });
 
       proc.remove();
-      // Print response line by line for terminal feel
       reply.split("\n").forEach(l => {
         if (l.trim()) line(`<span class="jbt-res">→ ${l.trim()}</span>`);
       });
