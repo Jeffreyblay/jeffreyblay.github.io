@@ -3,13 +3,81 @@
    Usage: Add this ONE line before </body> on every HTML page:
    <script src="chatbot.js"></script>
    
-   After deploying your render, replace WORKER_URL
-   below with your actual Worker URL from Render.
+   After deploying your Cloudflare Worker, replace WORKER_URL
+   below with your actual Worker URL.
    ============================================================= */
 
 (function () {
 
-  const WORKER_URL = "https://jeffreyblay-chatbot-api.onrender.com/chat";
+  const GROQ_API_KEY = "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";
+  const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+  const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay — if asked anything unrelated, politely redirect back to his work. Keep answers to 2–4 sentences unless a list is needed.
+
+ABOUT JEFFREY BLAY
+PhD candidate at NC A&T State University (expected 2026), specializing in Geospatial Data Science. 5+ years experience in ML/DL for spatial analytics. Contact: jeffreyblay7@gmail.com | GitHub: github.com/Jeffreyblay
+
+EDUCATION
+- PhD Applied Science & Technology — NC A&T (2023–2026, expected). Specialization: Geospatial Data Science.
+- MS Environmental Science — Yale School of the Environment (2021–2023). Specialization: Environmental Data Science for Urban Sustainability.
+- BA Geography with Political Science — University of Ghana (2015–2019). GPA: 3.81/4.0.
+- IBM Professional Data Engineering Certificate — Coursera (In Progress, expected May 2026).
+
+RESEARCH FOCUS
+Physics-informed deep learning for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities (heat islands, building density, electricity infrastructure).
+
+EXPERIENCE
+- Graduate Research Assistant, NASA Flood Project — NC A&T (Sep 2025–Present): Implementing CNN and transformer models (UNet, Swin-UNet, SegFormer) in PyTorch for flood-depth prediction. Building physics-informed DL framework with hydrostatic constraints. Building FastAPI flood risk dashboard.
+- NASA DEAP Research Intern — NC A&T (Summer 2025): Trained U-Net models in TensorFlow. Published ezprocess Python library to PyPI/GitHub — reduces data prep time by 70%.
+- Graduate Research Assistant, NASA Data Project — NC A&T (Sep 2024–May 2025): Built geospatial ETL pipelines. Led team to publish Inundation2Depth dataset. Implemented pix2pix cGAN for flood depth.
+- Data Science Research Assistant, NSF Project — GEMS Institute NC A&T (Summer 2024): Processed 700k+ geospatial pixels. Co-developed DeepFlood dataset.
+- Graduate Research Assistant, NOAA Flood Project — NC A&T (Sep 2023–May 2024): Web-scraping pipelines, PyTorch flood classification models, GAN technical assessment.
+- Research Fellow — TRI Yale (2022–2023): UNet for building composition in Ghana, Google Earth Engine nighttime light analysis.
+- Field Geospatial Data Scientist — Ghana (Summer 2022): ArcGIS Field Maps pipeline, 300+ ground-truth records, 70% accuracy improvement.
+- GIS Data Officer — Ghana Statistical Service (2020–2021): Census geospatial QA, real-time spatial coverage analytics.
+
+PUBLICATIONS (10 total)
+1. "Geospatial and Deep Learning Approaches for Modeling Floodwater Depth" — Remote Sensing MDPI (2024). ResNet18, RMSE 0.71ft, R²~94%.
+2. "Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation" — Elsevier Data in Brief (2025). 5,925 tiles, 24,649 acres, 12 sites in the Carolinas.
+3. "Multi-Resolution Data Fusion for Resilient Flood Mapping" — IEEE Access (2025). 84.9% mean IoU.
+4. "Real-Time Traffic Insights with Physics-Informed Neural Networks" — IEEE Access (2025). 60% improvement over data-driven models.
+5. "Dark Development: Building Density and Electricity in Ghana" — Elsevier (2025). 21% of Kumasi has high density but limited electricity.
+6. "DeepFlood for Inundated Vegetation" — Nature Scientific Data (2025).
+7. "Pixels to Insights: Deep Learning for Floodwater Depth Mapping" — IEEE IGARSS 2025. RMSE 0.11.
+8. "Advanced Geo-Data Analytics and AI for 3D Flood Mapping" — ISPRS Annals (2025). 93% U-Net accuracy.
+9. "Flood Impact Risk Mapping from a 3D Perspective: Hurricane Matthew" — IEEE IGARSS 2024.
+10. "Urban Growth and Land Surface Temperature Dynamics: Lessons from Ghana" — JSTOR (2023).
+
+OPEN SOURCE PROJECTS
+- EzProcess Library: Python library for geospatial ML/DL preprocessing. PyPI + GitHub. 70% faster data prep. github.com/Jeffreyblay/ezprocess_library
+- Inundation2Depth Dataset: 5,925-tile benchmark. zenodo.org/records/17308287
+- Climate & Extreme Weather Alert Dashboard: FastAPI + JS, 1,000+ live NWS alerts, 50 states. jeffreyblay.github.io/climate-alert-dashboard
+
+CONFERENCES & TALKS (11 total, 4 continents)
+2025: IEEE IGARSS Brisbane Australia, ISPRS Geospatial Week Dubai UAE, ASPRS Denver CO
+2024: AGU Washington DC, NCAUG Wilmington NC, IEEE IGARSS Athens Greece, ASPRS Denver CO
+2023: AGU San Francisco CA, TRI Symposium Yale, YSE Research Day Yale, YSE Confluence Talk Yale
+
+AWARDS & FELLOWSHIPS
+LiDAR Leader Award — Best Poster ASPRS 2024; NASA DEAP Research Fellow (2024 & 2025); Graduate Research Fellowship NC A&T (2023–2026); Teaching Fellowship Yale (2023); TRI Endowment Fellowship Yale (2022); YSE Merit Scholarship Yale (2021–2023).
+
+SKILLS
+Programming: Python, R, SQL, JavaScript
+Geospatial: ArcGIS Suite, QGIS, Google Earth Engine, ArcPy, GDAL, ENVI, SNAP
+ML/DL: PyTorch, TensorFlow, scikit-learn, Physics-Informed NNs, U-Net variants, Transformers (Swin, SegFormer)
+Data Engineering: ETL Pipelines, Pandas, Web Scraping, Geospatial Processing
+Cloud & DevOps: AWS S3, Docker, CI/CD, Git/GitHub, HPC, GitHub Pages, Render
+Databases: PostgreSQL, MySQL, IBM DB2
+Visualization: Matplotlib, Seaborn, Power BI, Tableau, R Shiny, ArcGIS StoryMaps
+
+SERVICE & LEADERSHIP
+Secretary & Social Media Manager — ASPRS Student Chapter NC A&T (2024–2026); Lead Instructor — CoST Young Scientist Day Geospatial Workshop (2025); Student Representative — BIOMES Seminar Committee Yale (2022–2023); Co-Founder & Executive Director — Good Lead Foundation Tarkwa Ghana (2019–Present).
+
+RESPONSE RULES
+- 2–4 sentences for simple questions; bullet points for lists
+- Never invent information not listed above
+- For hiring/collaboration questions, mention jeffreyblay7@gmail.com
+- If asked something unrelated to Jeffrey, say: "I can only answer questions about Jeffrey's background and work. Is there something specific I can help with?"`;
 
   /* ── STYLES ── */
   const style = document.createElement("style");
@@ -236,7 +304,7 @@
   function togglePanel() {
     isOpen = !isOpen;
     panel.classList.toggle("open", isOpen);
-    if (isOpen && messages.children.length === 0) addBotMsg("Hi! I'm Jeffrey's AI assistant. Ask me anything about his experience, research, publications, or skills.");
+    if (isOpen && messages.children.length === 0) addBotMsg("Hi! I'm Jeffrey's AI assistant. Ask me anything about his research, publications, experience, or skills.");
     if (isOpen) setTimeout(() => input.focus(), 220);
   }
 
@@ -274,32 +342,13 @@
     if (sugg) sugg.style.display = "none";
   }
 
-  function showWakingUp() {
-    const existing = document.getElementById("jb-waking");
-    if (existing) return;
-    const div = document.createElement("div");
-    div.id = "jb-waking";
-    div.style.cssText = "font-size:10px;color:#f59e0b;padding:4px 14px 6px;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;animation:jbFade 1.5s ease-in-out infinite alternate;";
-    div.textContent = "⏳ Server waking up, this may take ~20 seconds on first message…";
-    messages.after(div);
-    const ks = document.createElement("style");
-    ks.textContent = "@keyframes jbFade{from{opacity:0.4}to{opacity:1}}";
-    document.head.appendChild(ks);
-  }
-
-  function hideWakingUp() {
-    const el = document.getElementById("jb-waking");
-    if (el) el.remove();
-  }
-
   function showError(msg) {
     errorBox.textContent = msg || "Something went wrong. Please try again.";
     errorBox.style.display = "block";
     setTimeout(() => { errorBox.style.display = "none"; }, 4000);
   }
 
-  /* ── WAKE UP SERVER on first load ── */
-  fetch(WORKER_URL.replace("/chat", "/"), { method: "GET" }).catch(() => {});
+  /* ── WAKE UP hint removed — no server needed ── */
 
   /* ── SEND MESSAGE ── */
   async function send(text) {
@@ -312,21 +361,30 @@
     history.push({ role: "user", content: text });
     input.value = "";
     showTyping();
-    showWakingUp();
 
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 55000);
+      const timeout = setTimeout(() => controller.abort(), 30000);
 
-      const res = await fetch(WORKER_URL, {
+      const res = await fetch(GROQ_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${GROQ_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "llama3-8b-8192",
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            ...history,
+          ],
+          max_tokens: 400,
+          temperature: 0.5,
+        }),
         signal: controller.signal,
       });
 
       clearTimeout(timeout);
-      hideWakingUp();
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
@@ -337,12 +395,11 @@
       history.push({ role: "assistant", content: reply });
 
     } catch (err) {
-      hideWakingUp();
       removeTyping();
       if (err.name === "AbortError") {
-        addBotMsg("The server took too long to respond. It may be waking up — please try again in a moment.");
+        addBotMsg("Request timed out. Please try again.");
       } else {
-        showError("Couldn't reach the server. Please check your connection.");
+        showError("Something went wrong. Please try again.");
       }
       history.pop();
       console.error("Chatbot error:", err);
