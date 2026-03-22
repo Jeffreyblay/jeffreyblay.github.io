@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.1);
+  --teal:#0d9488;--teal-dim:rgba(13,148,136,0.1);
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* PAGE HERO */
+.page-hero{
+  background:var(--ink);padding:110px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.page-hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.page-hero-glow{
+  position:absolute;top:-20%;right:-5%;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,119,6,0.13) 0%,transparent 65%);
+  pointer-events:none;
+}
+.page-hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.page-eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber-g);}
+.page-hero h1{
+  font-family:var(--ff-display);
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:700;color:var(--white);
+  letter-spacing:-0.02em;line-height:1.05;
+  margin-bottom:20px;
+}
+.page-hero-desc{
+  font-size:16px;line-height:1.8;
+  color:rgba(255,255,255,0.52);max-width:600px;
+}
+.page-hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+
+/* STATS ROW */
+.pub-stats{
+  display:flex;gap:0;margin-top:48px;
+  border-top:1px solid rgba(255,255,255,0.07);
+  padding-top:36px;flex-wrap:wrap;
+}
+.pstat{
+  flex:1;min-width:120px;
+  padding-right:28px;margin-right:28px;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.pstat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.pstat-num{
+  font-family:var(--ff-display);font-size:2.8rem;font-weight:700;
+  color:var(--white);line-height:1;margin-bottom:4px;
+}
+.pstat-num span{color:var(--amber-g);}
+.pstat-lbl{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+
+/* MAIN LAYOUT */
+.pub-body{max-width:1100px;margin:0 auto;padding:72px 40px 100px;display:grid;grid-template-columns:260px 1fr;gap:60px;align-items:start;}
+
+/* SIDEBAR FILTERS */
+.sidebar{position:sticky;top:76px;}
+.filter-section{margin-bottom:36px;}
+.filter-title{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--lmuted2);margin-bottom:12px;
+}
+.filter-btn{
+  display:block;width:100%;text-align:left;
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.06em;padding:9px 14px;border-radius:3px;
+  border:1px solid transparent;background:transparent;
+  color:var(--lmuted);cursor:pointer;
+  transition:all .18s;margin-bottom:4px;
+}
+.filter-btn:hover{background:var(--surf);color:var(--ink);}
+.filter-btn.active{
+  background:var(--amber-dim);
+  border-color:rgba(217,119,6,0.25);
+  color:var(--amber);
+}
+.filter-count{
+  float:right;font-size:10px;
+  color:var(--lmuted2);font-weight:400;
+}
+
+/* BIG SEARCH */
+.search-wrap{position:relative;margin-bottom:32px;}
+.search-input{
+  width:100%;font-family:var(--ff-mono);font-size:12px;
+  padding:10px 14px 10px 36px;
+  border:1px solid var(--surf2);border-radius:3px;
+  background:var(--surf);color:var(--ink);
+  outline:none;transition:border-color .2s;
+}
+.search-input:focus{border-color:var(--amber);}
+.search-icon{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;stroke:var(--lmuted2);fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* PUB LIST */
+.pub-main{}
+.pub-list-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;flex-wrap:wrap;gap:12px;
+}
+.pub-list-title{
+  font-family:var(--ff-display);font-size:1.5rem;font-weight:700;
+  color:var(--ink);letter-spacing:-0.01em;
+}
+.pub-count{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);letter-spacing:0.08em;
+}
+
+.pub-year-group{margin-bottom:52px;}
+.pub-year-label{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.pub-year-label::after{content:'';flex:1;height:1px;background:var(--surf2);}
+
+.pub-card{
+  background:var(--white);
+  border:1px solid var(--surf2);
+  padding:26px 28px;margin-bottom:2px;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:start;gap:20px;
+  text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.pub-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  transform:scaleY(0);transform-origin:bottom;transition:transform .25s;
+}
+.pub-card.journal::after{background:var(--teal);}
+.pub-card.conference::after{background:var(--amber);}
+.pub-card:hover{border-color:rgba(0,0,0,0.12);box-shadow:0 4px 24px rgba(0,0,0,0.07);}
+.pub-card:hover::after{transform:scaleY(1);}
+
+.pub-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;
+}
+.badge-j{color:var(--teal);}
+.badge-c{color:var(--amber);}
+.pub-venue-tag{
+  font-family:var(--ff-mono);font-size:10px;
+  color:var(--lmuted2);margin-left:4px;
+}
+
+.pub-title{
+  font-family:var(--ff-display);font-size:1.2rem;font-weight:700;
+  color:var(--ink);line-height:1.32;margin-bottom:10px;
+  letter-spacing:-0.01em;
+}
+.pub-abstract{
+  font-size:13px;line-height:1.7;color:var(--lmuted);
+  margin-bottom:14px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.pub-abstract.expanded{-webkit-line-clamp:unset;}
+
+.pub-footer{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.pub-link{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.06em;color:var(--amber);text-decoration:none;
+  display:inline-flex;align-items:center;gap:5px;
+  transition:gap .15s;
+}
+.pub-link::after{content:'→';}
+.pub-link:hover{gap:8px;}
+.pub-expand{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);background:none;border:none;
+  cursor:pointer;letter-spacing:0.06em;
+  transition:color .18s;padding:0;
+}
+.pub-expand:hover{color:var(--ink);}
+
+.pub-arrow-right{
+  margin-top:4px;font-size:18px;color:var(--surf2);
+  transition:color .2s,transform .2s;
+  font-weight:300;flex-shrink:0;
+}
+.pub-card:hover .pub-arrow-right{color:var(--amber);transform:translateX(3px);}
+
+/* TAGS on card */
+.pub-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.pub-tag{
+  font-family:var(--ff-mono);font-size:10px;padding:3px 8px;
+  border-radius:2px;background:var(--surf);
+  color:var(--lmuted2);border:1px solid var(--surf2);
+}
+
+/* NO RESULTS */
+.no-results{
+  text-align:center;padding:60px 20px;
+  font-family:var(--ff-mono);font-size:13px;color:var(--lmuted2);
+  letter-spacing:0.06em;
+}
+
+/* HIDDEN */
+.pub-year-group.hidden{display:none;}
+.pub-card.hidden{display:none;}
+
+/* FOOTER */
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .pub-body{grid-template-columns:1fr;gap:36px;padding:48px 24px 80px;}
+  .sidebar{position:static;}
+  .filter-section{display:flex;flex-wrap:wrap;gap:8px;}
+  .filter-title{width:100%;}
+  .filter-btn{width:auto;display:inline-block;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;}
+  .page-hero{padding:90px 20px 56px;}
+  .pub-stats{flex-wrap:wrap;gap:20px;}
+  .pstat{flex:0 0 calc(50% - 14px);border-right:none;margin-right:0;padding-right:0;}
+  .pub-card{grid-template-columns:1fr;}
+  .pub-arrow-right{display:none;}
+  .footer{padding:24px 20px;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jblay@aggies.ncat.edu">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Research Output</div>
+    <h1>Publications</h1>
+    <p class="page-hero-desc">
+      Peer-reviewed research spanning <strong>urban flood mapping</strong>, <strong>physics-informed deep learning</strong>, <strong>SAR data fusion</strong>, and <strong>urban analytics</strong> — published in IEEE, Elsevier, MDPI, Nature, and ISPRS venues.
+    </p>
+    <div class="pub-stats">
+      <div class="pstat"><div class="pstat-num">10<span>+</span></div><div class="pstat-lbl">Total Publications</div></div>
+      <div class="pstat"><div class="pstat-num">7</div><div class="pstat-lbl">Journal Articles</div></div>
+      <div class="pstat"><div class="pstat-num">3</div><div class="pstat-lbl">Conference Papers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="pub-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input class="search-input" type="text" id="search" placeholder="Search publications…" oninput="applyFilters()">
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">Type</div>
+      <button class="filter-btn active" data-type="all" onclick="setFilter('type','all',this)">All <span class="filter-count">10</span></button>
+      <button class="filter-btn" data-type="journal" onclick="setFilter('type','journal',this)">Journal Articles <span class="filter-count">7</span></button>
+      <button class="filter-btn" data-type="conference" onclick="setFilter('type','conference',this)">Conference Papers <span class="filter-count">3</span></button>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">Year</div>
+      <button class="filter-btn active" data-year="all" onclick="setFilter('year','all',this)">All Years <span class="filter-count">10</span></button>
+      <button class="filter-btn" data-year="2025" onclick="setFilter('year','2025',this)">2025 <span class="filter-count">7</span></button>
+      <button class="filter-btn" data-year="2024" onclick="setFilter('year','2024',this)">2024 <span class="filter-count">2</span></button>
+      <button class="filter-btn" data-year="2023" onclick="setFilter('year','2023',this)">2023 <span class="filter-count">1</span></button>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-title">Topic</div>
+      <button class="filter-btn active" data-topic="all" onclick="setFilter('topic','all',this)">All Topics</button>
+      <button class="filter-btn" data-topic="flood" onclick="setFilter('topic','flood',this)">Flood Mapping</button>
+      <button class="filter-btn" data-topic="urban" onclick="setFilter('topic','urban',this)">Urban Analytics</button>
+      <button class="filter-btn" data-topic="dl" onclick="setFilter('topic','dl',this)">Deep Learning</button>
+      <button class="filter-btn" data-topic="data" onclick="setFilter('topic','data',this)">Datasets</button>
+    </div>
+
+  </aside>
+
+  <!-- PUBLICATION LIST -->
+  <main class="pub-main">
+    <div class="pub-list-header">
+      <div class="pub-list-title">All Publications</div>
+      <div class="pub-count" id="pub-count">Showing 10 of 10</div>
+    </div>
+
+    <!-- 2025 GROUP -->
+    <div class="pub-year-group" data-group-year="2025">
+      <div class="pub-year-label">2025</div>
+
+      <a class="pub-card journal" href="https://doi.org/10.3390/rs18010060" target="_blank"
+         data-type="journal" data-year="2025" data-topic="flood dl"
+         data-title="Geospatial and Deep Learning Approaches for Modeling Floodwater Depth in Urbanized Areas"
+         data-abstract="Floodwater depth estimation is essential for disaster response and infrastructure planning yet remains challenging in urban areas with limited gage and hydrological data. This study presents a deep learning-based framework grounded in the hydrostatic equilibrium principle to estimate flood depth using a remote sensing approach. ResNet18 outperformed deeper models, achieving an RMSE of 0.71 ft, MAE of 0.23 ft, SSIM of approximately 99% and R-Squared of approximately 94% under the enhanced scenario.">
+        <div>
+          <div class="pub-badge badge-j">● Journal · Remote Sensing – MDPI</div>
+          <div class="pub-title">Geospatial and Deep Learning Approaches for Modeling Floodwater Depth in Urbanized Areas</div>
+          <div class="pub-tags">
+            <span class="pub-tag">ResNet18</span><span class="pub-tag">Flood Depth</span>
+            <span class="pub-tag">LiDAR</span><span class="pub-tag">Hydrostatic Principle</span>
+          </div>
+          <div class="pub-abstract" id="abs-1">Floodwater depth estimation is essential for disaster response and infrastructure planning yet remains challenging in urban areas with limited gage and hydrological data. This study presents a deep learning-based framework grounded in the hydrostatic equilibrium principle to estimate flood depth using a remote sensing approach. ResNet18 outperformed deeper models, achieving RMSE of 0.71 ft, MAE of 0.23 ft, SSIM ≈ 99% and R² ≈ 94%.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-1',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card journal" href="https://doi.org/10.1016/j.dib.2025.112347" target="_blank"
+         data-type="journal" data-year="2025" data-topic="flood data"
+         data-title="Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation in Urban Areas">
+        <div>
+          <div class="pub-badge badge-j">● Journal · Elsevier – Data in Brief</div>
+          <div class="pub-title">Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation in Urban Areas</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Benchmark Dataset</span><span class="pub-tag">5,925 Tiles</span>
+            <span class="pub-tag">Carolinas</span><span class="pub-tag">Hurricane Matthew</span>
+          </div>
+          <div class="pub-abstract" id="abs-2">Floods impose severe risks in urban areas, yet operational mapping often stops at inundation extent rather than depth. Inundation2Depth pairs inundation extent-depth labels derived from aerial imagery and LiDAR-based DTMs under hydrostatic assumptions. The dataset encompasses 12 flood-affected areas across North and South Carolina covering 24,649.88 acres with 5,925 overlapping tiles.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-2',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card journal" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11267202" target="_blank"
+         data-type="journal" data-year="2025" data-topic="flood dl">
+        <div>
+          <div class="pub-badge badge-j">● Journal · IEEE Access</div>
+          <div class="pub-title">Multi-Resolution Data Fusion for Resilient Flood Mapping</div>
+          <div class="pub-tags">
+            <span class="pub-tag">SAR Fusion</span><span class="pub-tag">U-Net</span>
+            <span class="pub-tag">UAVSAR</span><span class="pub-tag">Sentinel-1</span>
+          </div>
+          <div class="pub-abstract" id="abs-3">This study presents a comparative analysis of flood mapping using multimodal sensor fusion and semantic segmentation. Integrating high-resolution UAV RGB imagery with SAR data from Sentinel-1 and UAVSAR, a modified U-Net architecture handles multimodal stacked inputs. The combination of RGB UAV with UAVSAR VV polarization at 5 m resolution achieves the highest performance (mean IoU: 84.9%), outperforming RGB UAV alone (77.8%).</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-3',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card journal" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11194151" target="_blank"
+         data-type="journal" data-year="2025" data-topic="dl urban">
+        <div>
+          <div class="pub-badge badge-j">● Journal · IEEE Access</div>
+          <div class="pub-title">Real-Time Traffic Insights with Physics-Informed Neural Networks: Integrating the Aw-Rascle Model and LLMs</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Physics-Informed NN</span><span class="pub-tag">Traffic Flow</span>
+            <span class="pub-tag">LLM</span><span class="pub-tag">Aw-Rascle Model</span>
+          </div>
+          <div class="pub-abstract" id="abs-4">This paper introduces PINN-TSE, a Physics-Informed Neural Network-Based Traffic State Estimator integrating the Aw-Rascle traffic flow model with machine learning and NLP. Validated on real-world US-101 highway data, PINN-TSE achieved MAE of 2.4 vpm for density and 3.98 mph for velocity — improvements of 60% and 73% respectively over purely data-driven models.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-4',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card journal" href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank"
+         data-type="journal" data-year="2025" data-topic="urban dl">
+        <div>
+          <div class="pub-badge badge-j">● Journal · Elsevier – Remote Sensing Applications</div>
+          <div class="pub-title">Dark Development: Satellite Analysis of Building Density and Electricity Provision in Ghana's Urban Areas</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Urban Analytics</span><span class="pub-tag">Nighttime Light</span>
+            <span class="pub-tag">Ghana</span><span class="pub-tag">U-Net Regression</span>
+          </div>
+          <div class="pub-abstract" id="abs-5">This study explores the spatial distribution of building density and its co-occurrence with electricity infrastructure in metropolitan cities across Ghana. Using Landsat and nighttime light satellite imagery with a UNet regression algorithm, 21% of Kumasi's urban area, 9.6% in Tamale, 0.9% in Accra, and 0.5% in Sekondi-Takoradi exhibit high building density but limited electricity provision.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-5',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card journal" href="https://www.nature.com/articles/s41597-025-04554-3" target="_blank"
+         data-type="journal" data-year="2025" data-topic="flood data dl">
+        <div>
+          <div class="pub-badge badge-j">● Journal · Nature – Scientific Data</div>
+          <div class="pub-title">DeepFlood for Inundated Vegetation: High-Resolution Dataset for Accurate Flood Mapping and Segmentation</div>
+          <div class="pub-tags">
+            <span class="pub-tag">DeepFlood</span><span class="pub-tag">SAR</span>
+            <span class="pub-tag">Inundated Vegetation</span><span class="pub-tag">CNN</span>
+          </div>
+          <div class="pub-abstract" id="abs-6">DeepFlood is introduced to address the requirement for high-quality training datasets. This novel dataset comprises high-resolution manned and unmanned aerial imagery and Synthetic Aperture Radar (SAR) imagery, enriched with detailed labels including inundated vegetation — one of the most challenging areas for flood mapping. DeepFlood enables multi-modal flood mapping and mitigates limitations in existing datasets.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-6',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card conference" href="https://ieeexplore.ieee.org/document/11242913" target="_blank"
+         data-type="conference" data-year="2025" data-topic="flood dl">
+        <div>
+          <div class="pub-badge badge-c">◆ Conference · IEEE Xplore — IGARSS 2025</div>
+          <div class="pub-title">Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas</div>
+          <div class="pub-tags">
+            <span class="pub-tag">U-Net</span><span class="pub-tag">ResNet-18</span>
+            <span class="pub-tag">Hurricane Matthew</span><span class="pub-tag">RMSE 0.11</span>
+          </div>
+          <div class="pub-abstract" id="abs-7">This study maps maximum floodwater depth in Kinston, North Carolina using high-resolution aerial imagery and LiDAR for Hurricane Matthew. A UNET regression model with ResNet-18 backbone was employed to predict floodwater depth by integrating floodwater extent boundaries and terrain data based on physical principles. The model achieved RMSE ≈ 0.11, predicting max depths of 4.8 ft and 4.7 ft for two test areas.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-7',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+    </div>
+
+    <!-- 2024 GROUP -->
+    <div class="pub-year-group" data-group-year="2024">
+      <div class="pub-year-label">2024</div>
+
+      <a class="pub-card conference" href="https://isprs-annals.copernicus.org/articles/X-G-2025/159/2025/isprs-annals-X-G-2025-159-2025.html" target="_blank"
+         data-type="conference" data-year="2024" data-topic="flood dl urban">
+        <div>
+          <div class="pub-badge badge-c">◆ Conference · ISPRS Annals 2025</div>
+          <div class="pub-title">Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets</div>
+          <div class="pub-tags">
+            <span class="pub-tag">3D Flood Mapping</span><span class="pub-tag">U-Net 93% Accuracy</span>
+            <span class="pub-tag">LiDAR</span><span class="pub-tag">Infrastructure Risk</span>
+          </div>
+          <div class="pub-abstract" id="abs-8">This study investigates the impact of Hurricane Matthew on built assets in Greenville, North Carolina using integrated floodwater extent mapping, depth estimation, and impact assessment. The pretrained U-Net model achieved 93% accuracy in mapping flood extent while depth estimates yielded RMSE of 0.75. Results revealed approximately 32% of developed land, 26% of buildings, and 66% of roads were affected.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-8',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+      <a class="pub-card conference" href="https://ieeexplore.ieee.org/document/10640634" target="_blank"
+         data-type="conference" data-year="2024" data-topic="flood dl">
+        <div>
+          <div class="pub-badge badge-c">◆ Conference · IEEE Xplore — IGARSS 2024</div>
+          <div class="pub-title">Flood Impact Risk Mapping in Settlement Areas from a 3D Perspective: A Case Study of Hurricane Matthew</div>
+          <div class="pub-tags">
+            <span class="pub-tag">3D Flood Map</span><span class="pub-tag">UAV Imagery</span>
+            <span class="pub-tag">LiDAR DEM</span><span class="pub-tag">Hurricane Matthew</span>
+          </div>
+          <div class="pub-abstract" id="abs-9">This study investigates an approach to map 3D flood extent and depth using UAV high resolution imagery and LiDAR for Hurricane Matthew. A deep learning approach maps flooded areas from post-event UAV images, then spatial statistics estimate water depth leveraging the DEM. Settlement areas in Grifton exhibit different risk levels from a 3D flood depth perspective, significantly enhancing near real-time emergency response strategies.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-9',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+    </div>
+
+    <!-- 2023 GROUP -->
+    <div class="pub-year-group" data-group-year="2023">
+      <div class="pub-year-label">2023</div>
+
+      <a class="pub-card journal" href="https://www.jstor.org/stable/27232314" target="_blank"
+         data-type="journal" data-year="2023" data-topic="urban">
+        <div>
+          <div class="pub-badge badge-j">● Journal · JSTOR</div>
+          <div class="pub-title">Urban Growth and Land Surface Temperature Dynamics: Lessons from Ghana</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Urban Heat Island</span><span class="pub-tag">LST</span>
+            <span class="pub-tag">Landsat</span><span class="pub-tag">Ghana</span>
+          </div>
+          <div class="pub-abstract" id="abs-10">This study assessed the spatial and temporal extent of urban expansion and resultant land surface temperature (LST) changes in the Awutu Senya East Municipal, Ghana. Landsat 7 satellite images between 1991 and 2018 were classified into four categories. Results showed significant increase in Built-Up areas and a positive correlation between expansion of constructed areas and increases in LST and NDBI values.</div>
+          <div class="pub-footer">
+            <span class="pub-link">Read paper</span>
+            <button class="pub-expand" onclick="toggleAbstract(event,'abs-10',this)">Show more</button>
+          </div>
+        </div>
+        <div class="pub-arrow-right">→</div>
+      </a>
+
+    </div>
+
+    <div class="no-results" id="no-results" style="display:none;">
+      No publications match your current filters.
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="talks.html">Talks</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script>
+const state = { type: 'all', year: 'all', topic: 'all' };
+
+function setFilter(dim, val, btn) {
+  state[dim] = val;
+  // deactivate siblings
+  btn.closest('.filter-section').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const cards = document.querySelectorAll('.pub-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const type  = card.dataset.type  || '';
+    const year  = card.dataset.year  || '';
+    const topic = card.dataset.topic || '';
+    const title = card.querySelector('.pub-title').textContent.toLowerCase();
+    const abs   = card.querySelector('.pub-abstract') ? card.querySelector('.pub-abstract').textContent.toLowerCase() : '';
+    const venue = card.querySelector('.pub-badge') ? card.querySelector('.pub-badge').textContent.toLowerCase() : '';
+
+    const typeOk  = state.type  === 'all' || type  === state.type;
+    const yearOk  = state.year  === 'all' || year  === state.year;
+    const topicOk = state.topic === 'all' || topic.includes(state.topic);
+    const searchOk = !q || title.includes(q) || abs.includes(q) || venue.includes(q);
+
+    const show = typeOk && yearOk && topicOk && searchOk;
+    card.classList.toggle('hidden', !show);
+    if(show) visible++;
+  });
+
+  // hide empty year groups
+  document.querySelectorAll('.pub-year-group').forEach(group => {
+    const anyVisible = [...group.querySelectorAll('.pub-card')].some(c => !c.classList.contains('hidden'));
+    group.classList.toggle('hidden', !anyVisible);
+  });
+
+  document.getElementById('pub-count').textContent = `Showing ${visible} of 10`;
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function toggleAbstract(e, id, btn) {
+  e.preventDefault(); e.stopPropagation();
+  const el = document.getElementById(id);
+  const expanded = el.classList.toggle('expanded');
+  btn.textContent = expanded ? 'Show less' : 'Show more';
+}
+</script>
+</body>
+</html>
