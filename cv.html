@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.10);
+  --teal:#0d9488;--teal-dim:rgba(13,148,136,0.09);
+  --blue:#1d4ed8;--blue-dim:rgba(29,78,216,0.09);
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--ink);padding:110px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-5%;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,119,6,0.13) 0%,transparent 65%);pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:1;max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;
+}
+.eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber-g);}
+.page-hero h1{
+  font-family:var(--ff-display);font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;
+  line-height:1.05;margin-bottom:20px;
+}
+.hero-desc{font-size:15px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:560px;}
+.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+.hero-actions{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.btn-dl{
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.08em;padding:13px 26px;border-radius:3px;
+  background:var(--amber);color:var(--ink);
+  text-decoration:none;border:none;cursor:pointer;
+  transition:background .2s,transform .2s;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.btn-dl:hover{background:var(--amber-g);transform:translateY(-2px);}
+.btn-dl-ghost{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.08em;padding:10px 22px;border-radius:3px;
+  background:transparent;color:rgba(255,255,255,0.6);
+  border:1px solid rgba(255,255,255,0.16);
+  text-decoration:none;
+  transition:border-color .2s,color .2s;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.btn-dl-ghost:hover{border-color:rgba(255,255,255,0.4);color:var(--white);}
+
+/* ── LAYOUT ── */
+.cv-body{
+  max-width:1100px;margin:0 auto;
+  padding:72px 40px 100px;
+  display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start;
+}
+
+/* ── STICKY SIDEBAR NAV ── */
+.cv-sidebar{position:sticky;top:76px;}
+.cv-nav-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--lmuted2);margin-bottom:14px;
+}
+.cv-nav{display:flex;flex-direction:column;gap:2px;}
+.cv-nav-link{
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.06em;padding:9px 14px;border-radius:3px;
+  border:1px solid transparent;background:transparent;
+  color:var(--lmuted);cursor:pointer;text-decoration:none;
+  transition:all .18s;display:block;
+}
+.cv-nav-link:hover{background:var(--surf);color:var(--ink);}
+.cv-nav-link.active{
+  background:var(--amber-dim);
+  border-color:rgba(217,119,6,0.22);
+  color:var(--amber);
+}
+.cv-sidebar-contact{
+  margin-top:32px;padding-top:24px;
+  border-top:1px solid var(--surf2);
+}
+.cv-contact-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--lmuted2);margin-bottom:12px;
+}
+.cv-contact-item{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted);margin-bottom:8px;
+  display:flex;align-items:center;gap:7px;
+  text-decoration:none;transition:color .18s;
+}
+.cv-contact-item:hover{color:var(--amber);}
+.cv-contact-dot{width:4px;height:4px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+
+/* ── MAIN CONTENT ── */
+.cv-main{}
+
+/* section */
+.cv-section{margin-bottom:72px;scroll-margin-top:80px;}
+.cv-section-head{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:32px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--surf2);
+}
+.cv-section-icon{
+  width:36px;height:36px;border-radius:3px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.icon-edu{background:var(--amber-dim);}
+.icon-exp{background:var(--teal-dim);}
+.icon-pub{background:var(--blue-dim);}
+.icon-skills{background:rgba(129,140,248,0.09);}
+.icon-talks{background:rgba(251,113,133,0.09);}
+.icon-service{background:rgba(52,211,153,0.09);}
+.cv-section-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.cv-section-title{
+  font-family:var(--ff-display);font-size:1.7rem;font-weight:700;
+  color:var(--ink);letter-spacing:-0.01em;
+}
+.cv-section-count{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);margin-left:auto;letter-spacing:0.06em;
+}
+
+/* ── EDUCATION ── */
+.edu-grid{display:flex;flex-direction:column;gap:16px;}
+.edu-card{
+  border:1px solid var(--surf2);padding:24px 24px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s;
+}
+.edu-card::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+  background:var(--amber);
+}
+.edu-card:hover{border-color:rgba(217,119,6,0.22);}
+.edu-deg{
+  font-family:var(--ff-display);font-size:1.15rem;font-weight:700;
+  color:var(--ink);margin-bottom:4px;
+}
+.edu-inst{
+  font-size:14px;color:var(--ink3);font-weight:500;margin-bottom:4px;
+}
+.edu-meta{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);letter-spacing:0.05em;
+}
+.edu-badge{
+  float:right;font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:2px;
+  background:var(--amber-dim);color:var(--amber);
+  margin-top:2px;
+}
+.edu-badge.completed{background:var(--teal-dim);color:var(--teal);}
+
+/* ── EXPERIENCE TIMELINE ── */
+.exp-timeline{display:flex;flex-direction:column;position:relative;}
+.exp-timeline::before{
+  content:'';position:absolute;left:11px;top:14px;bottom:0;
+  width:1px;background:var(--surf2);
+}
+.exp-item{display:flex;gap:24px;padding-bottom:36px;position:relative;}
+.exp-dot{
+  flex-shrink:0;width:23px;height:23px;border-radius:50%;
+  background:var(--white);border:2px solid var(--surf2);
+  margin-top:1px;z-index:1;transition:border-color .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.exp-dot.current{background:var(--amber);border-color:var(--amber);}
+.exp-dot.nasa{background:var(--teal);border-color:var(--teal);}
+.exp-item:hover .exp-dot{border-color:var(--amber);}
+.exp-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--white);}
+
+.exp-body{}
+.exp-period{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:var(--amber);letter-spacing:0.1em;margin-bottom:4px;
+}
+.exp-period.teal{color:var(--teal);}
+.exp-role{
+  font-family:var(--ff-display);font-size:1.1rem;font-weight:700;
+  color:var(--ink);margin-bottom:2px;letter-spacing:-0.01em;
+}
+.exp-org{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);margin-bottom:12px;letter-spacing:0.04em;
+}
+.exp-duties{
+  list-style:none;display:flex;flex-direction:column;gap:7px;
+}
+.exp-duties li{
+  font-size:13.5px;line-height:1.7;color:var(--lmuted);
+  padding-left:16px;position:relative;
+}
+.exp-duties li::before{
+  content:'';position:absolute;left:0;top:10px;
+  width:5px;height:1px;background:var(--lmuted2);
+}
+.exp-duties li strong{color:var(--ink3);font-weight:500;}
+
+/* ── PUBLICATIONS (compact) ── */
+.pub-compact-list{display:flex;flex-direction:column;gap:2px;}
+.pub-compact{
+  border:1px solid var(--surf2);padding:18px 20px;
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:14px;align-items:start;
+  text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.pub-compact::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  transform:scaleY(0);transform-origin:bottom;transition:transform .22s;
+}
+.pub-compact.journal::after{background:var(--teal);}
+.pub-compact.conference::after{background:var(--amber);}
+.pub-compact:hover{border-color:rgba(0,0,0,0.1);box-shadow:0 3px 16px rgba(0,0,0,0.06);}
+.pub-compact:hover::after{transform:scaleY(1);}
+.pub-year-tag{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  color:var(--lmuted2);letter-spacing:0.06em;
+  padding-top:2px;min-width:36px;
+}
+.pub-compact-body{}
+.pub-type-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  margin-right:6px;vertical-align:middle;margin-top:-1px;
+}
+.dot-journal{background:var(--teal);}
+.dot-conf{background:var(--amber);}
+.pub-compact-venue{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--lmuted2);margin-bottom:5px;
+}
+.pub-compact-title{
+  font-family:var(--ff-display);font-size:1rem;font-weight:700;
+  color:var(--ink);line-height:1.3;
+}
+.pub-compact-arrow{
+  font-size:16px;color:var(--surf2);
+  transition:color .2s,transform .2s;padding-top:4px;
+}
+.pub-compact:hover .pub-compact-arrow{color:var(--amber);transform:translateX(3px);}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.skill-block{
+  border:1px solid var(--surf2);padding:20px 20px;
+  position:relative;overflow:hidden;transition:border-color .2s;
+}
+.skill-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.skill-block-amber::before{background:var(--amber);}
+.skill-block-teal::before{background:var(--teal);}
+.skill-block-blue::before{background:var(--blue);}
+.skill-block-purple::before{background:#7c3aed;}
+.skill-block:hover::before{transform:scaleX(1);}
+.skill-block:hover{border-color:rgba(0,0,0,0.1);}
+.skill-block-title{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.skill-block-amber .skill-block-title{color:var(--amber);}
+.skill-block-teal .skill-block-title{color:var(--teal);}
+.skill-block-blue .skill-block-title{color:var(--blue);}
+.skill-block-purple .skill-block-title{color:#7c3aed;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.skill-tag{
+  font-family:var(--ff-mono);font-size:10px;padding:4px 9px;
+  border-radius:2px;background:var(--surf);
+  color:var(--lmuted2);border:1px solid var(--surf2);
+}
+
+/* ── TALKS (compact) ── */
+.talks-compact{display:flex;flex-direction:column;gap:2px;}
+.talk-compact{
+  border:1px solid var(--surf2);padding:16px 20px;
+  display:grid;grid-template-columns:80px 1fr auto;gap:12px;align-items:start;
+  transition:border-color .2s;
+}
+.talk-compact:hover{border-color:rgba(217,119,6,0.18);}
+.talk-compact-date{
+  font-family:var(--ff-mono);font-size:10px;
+  color:var(--lmuted2);letter-spacing:0.06em;
+  padding-top:2px;line-height:1.4;
+}
+.talk-compact-body{}
+.talk-compact-name{
+  font-family:var(--ff-display);font-size:1rem;font-weight:700;
+  color:var(--ink);margin-bottom:3px;
+}
+.talk-compact-topic{font-size:12.5px;color:var(--lmuted);line-height:1.55;margin-bottom:4px;font-style:italic;}
+.talk-compact-loc{font-family:var(--ff-mono);font-size:10px;color:var(--lmuted2);letter-spacing:0.04em;}
+.talk-type-pill{
+  font-family:var(--ff-mono);font-size:9px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0;
+}
+.pill-conf{background:var(--amber-dim);color:var(--amber);}
+.pill-symp{background:var(--teal-dim);color:var(--teal);}
+.pill-talk{background:rgba(129,140,248,0.1);color:#818cf8;}
+
+/* ── SERVICE ── */
+.service-list{display:flex;flex-direction:column;gap:16px;}
+.service-item{
+  border:1px solid var(--surf2);padding:22px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s;
+}
+.service-item::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+  background:var(--teal);
+}
+.service-item:hover{border-color:rgba(13,148,136,0.22);}
+.service-role{
+  font-family:var(--ff-display);font-size:1.05rem;font-weight:700;
+  color:var(--ink);margin-bottom:3px;
+}
+.service-org{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);margin-bottom:10px;letter-spacing:0.04em;
+}
+.service-desc{font-size:13px;line-height:1.7;color:var(--lmuted);}
+.service-desc ul{padding-left:16px;display:flex;flex-direction:column;gap:5px;}
+.service-desc li{padding-left:4px;}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .cv-body{grid-template-columns:1fr;gap:40px;padding:48px 24px 80px;}
+  .cv-sidebar{position:static;}
+  .cv-nav{flex-direction:row;flex-wrap:wrap;}
+  .cv-nav-link{padding:7px 12px;}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}
+  .skills-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .page-hero{padding:90px 20px 56px;}
+  .pub-compact{grid-template-columns:auto 1fr;}
+  .pub-compact-arrow{display:none;}
+  .talk-compact{grid-template-columns:1fr;}
+  .talk-compact-date{display:none;}
+  .footer{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html" class="active">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Curriculum Vitae</div>
+      <h1>Jeffrey Blay</h1>
+      <p class="hero-desc">
+        <strong>PhD Candidate in Applied Science &amp; Technology</strong> · NC A&T State University (exp. 2026)<br><br>
+        Applied Geospatial Data Scientist with 5+ years of experience in machine and deep learning for spatial analytics — developing advanced geospatial technologies for evidence-based decisions and societal impact.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-dl" href="files/CV.pdf" target="_blank">↓ Download PDF CV</a>
+      <a class="btn-dl" href="files/resume.pdf" target="_blank">↓ Download PDF Resume</a>
+    </div>
+  </div>
+</section>
+
+<!-- CV BODY -->
+<div class="cv-body">
+
+  <!-- SIDEBAR NAV -->
+  <aside class="cv-sidebar">
+    <div class="cv-nav-label">Jump to</div>
+    <nav class="cv-nav">
+      <a class="cv-nav-link active" href="#education" onclick="setActive(this)">Education</a>
+      <a class="cv-nav-link" href="#experience" onclick="setActive(this)">Experience</a>
+      <a class="cv-nav-link" href="#publications" onclick="setActive(this)">Publications</a>
+      <a class="cv-nav-link" href="#skills" onclick="setActive(this)">Skills</a>
+      <a class="cv-nav-link" href="#awards" onclick="setActive(this)">Awards &amp; Grants</a>
+      <a class="cv-nav-link" href="#talks" onclick="setActive(this)">Talks</a>
+      <a class="cv-nav-link" href="#service" onclick="setActive(this)">Service &amp; Leadership</a>
+    </nav>
+
+    <div class="cv-sidebar-contact">
+      <div class="cv-contact-label">Contact</div>
+      <a class="cv-contact-item" href="mailto:jeffreyblay7@gmail.com">
+        <div class="cv-contact-dot"></div>jeffreyblay7@gmail.com
+      </a>
+      <a class="cv-contact-item" href="tel:2407561706">
+        <div class="cv-contact-dot"></div>(240) 756-1706
+      </a>
+      <a class="cv-contact-item" href="https://github.com/Jeffreyblay" target="_blank">
+        <div class="cv-contact-dot"></div>github.com/Jeffreyblay
+      </a>
+      <a class="cv-contact-item" href="https://linkedin.com/in/jeffrey-blay" target="_blank">
+        <div class="cv-contact-dot"></div>LinkedIn
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="cv-main">
+
+    <!-- EDUCATION -->
+    <section class="cv-section" id="education">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-edu">
+          <svg viewBox="0 0 24 24" stroke="var(--amber)"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="cv-section-title">Education</div>
+        <div class="cv-section-count">3 degrees</div>
+      </div>
+      <div class="edu-grid">
+
+        <div class="edu-card">
+          <span class="edu-badge">Expected 2026</span>
+          <div class="edu-deg">PhD in Applied Science &amp; Technology</div>
+          <div class="edu-inst">North Carolina A&amp;T State University · Greensboro, NC</div>
+          <div class="edu-meta">Specialization: Geospatial Data Science · Aug 2023 – Present</div>
+          <div class="edu-meta" style="margin-top:6px;font-size:12px;">Courses: Machine Learning &amp; Data Mining, Big Data Analytics, Advanced Geospatial Analysis, Neural Networks, Statistical Methods, Multivariate Statistics for Engineers</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge completed">2023</span>
+          <div class="edu-deg">Master of Environmental Science</div>
+          <div class="edu-inst">Yale School of the Environment · New Haven, CT</div>
+          <div class="edu-meta">Specialization: Environmental Data Science for Urban Sustainability &amp; Resilience · Aug 2021 – May 2023</div>
+          <div class="edu-meta" style="margin-top:6px;font-size:12px;">Courses: Advanced Remote Sensing, Statistics for Environmental Sciences, Data Exploration &amp; Analysis, Environmental Data Science, Introductory Machine Learning</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge completed">2019</span>
+          <div class="edu-deg">BA Geography with Political Science</div>
+          <div class="edu-inst">University of Ghana · Accra, Ghana</div>
+          <div class="edu-meta">Concentration: Geography with Political Science Minor · 2015 – 2019 · GPA: 3.81 / 4.0</div>
+        </div>
+
+      </div>
+
+      <!-- Certification -->
+      <div style="margin-top:16px;border:1px solid var(--surf2);padding:18px 22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue);"></div>
+        <div style="font-family:var(--ff-mono);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Certification · In Progress</div>
+        <div style="font-family:var(--ff-display);font-size:1.05rem;font-weight:700;color:var(--ink);">IBM Professional Data Engineering Certificate</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--lmuted2);margin-top:3px;">Coursera · Expected May 2026</div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="cv-section" id="experience">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-exp">
+          <svg viewBox="0 0 24 24" stroke="var(--teal)"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <div class="cv-section-title">Experience</div>
+        <div class="cv-section-count">13 positions</div>
+      </div>
+      <div class="exp-timeline">
+
+        <div class="exp-item">
+          <div class="exp-dot current"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2025 – Present · Current</div>
+            <div class="exp-role">Graduate Research Assistant — NASA Flood Project</div>
+            <div class="exp-org">Remote Sensing &amp; GIS Lab · NC A&T State University · Part-Time</div>
+            <ul class="exp-duties">
+              <li>Implementing <strong>CNN (UNet, Attention-UNet) and transformer (Swin-UNet, SegFormer)</strong> models for urban flood-depth prediction in PyTorch.</li>
+              <li>Designing a <strong>physics-informed deep learning framework</strong> integrating hydrostatic constraints; benchmarking PI vs. standard DL models.</li>
+              <li>Building end-to-end <strong>full-stack interactive dashboard</strong> with FastAPI for stakeholder flood risk and vulnerability assessment.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot nasa"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period teal">Summer 2025 · NASA DEAP Fellow</div>
+            <div class="exp-role">Data Science Research Intern — NASA Data Project</div>
+            <div class="exp-org">NASA DEAP Institute · NC A&T State University · Part-Time</div>
+            <ul class="exp-duties">
+              <li>Trained and evaluated deep learning models (U-Net, Attention U-Net, U-Net++) using TensorFlow for urban flood-depth prediction; produced ArcGIS Online visualizations.</li>
+              <li>Developed and published <strong>ezprocess</strong>, an open-source Python library for geospatial data preprocessing (PyPI/GitHub) — reduced data preparation time by <strong>70%</strong> across ML/DL workflows.</li>
+              <li>Managed code, experiments, and library version control using Git/GitHub, enabling collaborative development across research teams.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2024 – May 2025</div>
+            <div class="exp-role">Graduate Research Assistant — NASA Data Project</div>
+            <div class="exp-org">Remote Sensing &amp; GIS Lab · NC A&T State University · Part-Time</div>
+            <ul class="exp-duties">
+              <li>Engineered geospatial <strong>ETL pipelines</strong> in ArcGIS and Python (rasterio, ArcPy) to ingest, preprocess, and integrate multi-source geospatial datasets for ML training.</li>
+              <li>Led 3-person team to design, build, and publish a <strong>public benchmark dataset</strong>, managing data schema, QA, and documentation end-to-end.</li>
+              <li>Implemented <strong>U-Net and pix2pix cGAN</strong> workflows to infer flood depth from UAV imagery and LiDAR point clouds.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot nasa"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period teal">Jun – Aug 2024 · NSF Project</div>
+            <div class="exp-role">Data Science Research Assistant — NSF Multi-Modal Data Fusion Project</div>
+            <div class="exp-org">GEMS Institute · NC A&T State University · Full-Time</div>
+            <ul class="exp-duties">
+              <li>Processed <strong>700k+ 1-m resolution geospatial pixels</strong> via NumPy and scikit-learn pipelines for large-scale flood prediction using Random Forest &amp; XGBoost.</li>
+              <li>Collaborated with 5-member team to develop and publish a multi-source geospatial dataset for flood inundation modeling; designed automated pipelines with ArcPy in ArcGIS Pro.</li>
+              <li>Completed training workshop in <strong>cloud-based data storage management</strong> using Amazon S3.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2023 – May 2024</div>
+            <div class="exp-role">Graduate Research Assistant — NOAA Flood Project</div>
+            <div class="exp-org">Remote Sensing &amp; GIS Lab · NC A&T State University · Part-Time</div>
+            <ul class="exp-duties">
+              <li>Engineered <strong>web-scraping workflows</strong> with Python (Beautiful Soup) to curate a custom image classification training dataset.</li>
+              <li>Built a PyTorch framework to train and evaluate image classification models (GoogleNet, ResNet18) for automated flood classification of crowdsourced images.</li>
+              <li>Led a <strong>technical assessment of GAN-based approaches</strong> for flood mapping using remote sensing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Summer 2023 · Full-Time</div>
+            <div class="exp-role">Community Group Manager — Summer Greenspace Community Initiative</div>
+            <div class="exp-org">Urban Resources Initiative (URI) · New Haven, CT</div>
+            <ul class="exp-duties">
+              <li>Supervised and managed <strong>7 community greenspace groups</strong>, coordinating weekly project initiatives.</li>
+              <li>Engaged with community groups to design and visualize technical ideas using ArcGIS Pro and QGIS.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Jan – May 2023 · Part-Time</div>
+            <div class="exp-role">Teaching Fellow — Real-World Environmental Data Science Course</div>
+            <div class="exp-org">Yale School of the Environment · New Haven, CT</div>
+            <ul class="exp-duties">
+              <li>Held office hours assisting <strong>12 students</strong> with Python programming assignments and projects.</li>
+              <li>Assisted the class in using Google Colaboratory, GitHub, and GitHub Classroom for teaching.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2022 – May 2023 · Part-Time</div>
+            <div class="exp-role">Research Assistant — NASA Environmental Justice Project</div>
+            <div class="exp-org">Hixon Center for Urban Ecology · Yale University · New Haven, CT</div>
+            <ul class="exp-duties">
+              <li>Used multi-spectral satellite imagery and geostatistical techniques for <strong>census block-level UHI vulnerability analysis</strong>.</li>
+              <li>Conducted block-level surface temperature analysis using ArcPy and ArcGIS Pro SQL query builder.</li>
+              <li>Applied R (sp, dplyr, ggplot2) for time-series statistical analysis and mapping of urban heat and tree cover gaps.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Aug 2022 – May 2023 · Part-Time</div>
+            <div class="exp-role">Research Fellow — TRI Research Fellowship</div>
+            <div class="exp-org">Tropical Research Institute · Yale University · New Haven, CT</div>
+            <ul class="exp-duties">
+              <li>Developed deep learning datasets and trained a <strong>UNet regression model</strong> for predicting building composition in metropolitan Ghana using satellite imagery.</li>
+              <li>Leveraged Google Earth Engine to process VIIRS nighttime light data for analyzing electricity distribution.</li>
+              <li>Applied geostatistics to identify and map electricity infrastructure gaps in built-up areas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Summer 2022 · Full-Time · Ghana</div>
+            <div class="exp-role">Field Geospatial Data Scientist — Summer Research</div>
+            <div class="exp-org">Tropical Research Institute · Yale University</div>
+            <ul class="exp-duties">
+              <li>Designed and deployed a <strong>real-time ArcGIS Field Maps + Dashboards pipeline</strong> collecting 300+ ground-truth building records.</li>
+              <li>Enabled real-time data visualization improving data accuracy by <strong>70%</strong> for geospatial modeling.</li>
+              <li>Applied geo-statistics to identify and map electricity infrastructure gaps in built-up areas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2021 – May 2022 · Part-Time</div>
+            <div class="exp-role">Geospatial Research Assistant — Urban Africa Project</div>
+            <div class="exp-org">Seto Lab / Urban Research Lab · Yale University · New Haven, CT</div>
+            <ul class="exp-duties">
+              <li>Developed and optimized <strong>Google Earth Engine workflows</strong> for large-scale satellite data acquisition and preprocessing.</li>
+              <li>Trained satellite image segmentation models in Python on an HPC Linux cluster with scalable batch processing pipelines.</li>
+              <li>Built custom R and Python scripts for geospatial data processing, analysis, and visualization.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2020 – Jun 2021 · Full-Time</div>
+            <div class="exp-role">GIS Data Officer — National Census Secretariat</div>
+            <div class="exp-org">Ghana Statistical Service · Accra, Ghana</div>
+            <ul class="exp-duties">
+              <li>Performed spatial restructuring and QA of Supervisory Area boundary maps, validating and correcting digitized census geospatial datasets.</li>
+              <li>Collaborated with 15-member team to produce <strong>daily near real-time spatial coverage analytics</strong> monitoring enumerator field operations during the national Housing and Population Census.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-body">
+            <div class="exp-period">Sep 2019 – Aug 2020 · Full-Time</div>
+            <div class="exp-role">Teaching &amp; Research Assistant</div>
+            <div class="exp-org">Remote Sensing/GIS Lab · Department of Geography · University of Ghana · Accra</div>
+            <ul class="exp-duties">
+              <li>Held Remote Sensing and GIS tutorial sessions for <strong>150 undergraduate students</strong>.</li>
+              <li>Administered and graded assignments and GIS group projects; assisted with lab projects.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="cv-section" id="publications">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-pub">
+          <svg viewBox="0 0 24 24" stroke="var(--blue)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="cv-section-title">Publications</div>
+        <div class="cv-section-count">
+          <a href="publications.html" style="color:var(--amber);text-decoration:none;font-family:var(--ff-mono);font-size:11px;letter-spacing:0.08em;">View all →</a>
+        </div>
+      </div>
+      <div class="pub-compact-list">
+
+        <a class="pub-compact journal" href="https://doi.org/10.3390/rs18010060" target="_blank">
+          <div class="pub-year-tag">2024</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>Remote Sensing – MDPI</div>
+            <div class="pub-compact-title">Geospatial and Deep Learning Approaches for Modeling Floodwater Depth in Urbanized Areas</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://doi.org/10.1016/j.dib.2025.112347" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>Elsevier – Data in Brief</div>
+            <div class="pub-compact-title">Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation in Urban Areas</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11267202" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>IEEE Access</div>
+            <div class="pub-compact-title">Multi-Resolution Data Fusion for Resilient Flood Mapping</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11194151" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>IEEE Access</div>
+            <div class="pub-compact-title">Real-Time Traffic Insights with Physics-Informed Neural Networks: Integrating the Aw-Rascle Model and LLMs</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>Elsevier – Remote Sensing Applications</div>
+            <div class="pub-compact-title">Dark Development: Satellite Analysis of Building Density and Electricity Provision in Ghana's Urban Areas</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://www.nature.com/articles/s41597-025-04554-3" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>Nature – Scientific Data</div>
+            <div class="pub-compact-title">DeepFlood for Inundated Vegetation: High-Resolution Dataset for Flood Mapping and Segmentation</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact conference" href="https://ieeexplore.ieee.org/document/11242913" target="_blank">
+          <div class="pub-year-tag">2025</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-conf"></span>IEEE Xplore — IGARSS 2025</div>
+            <div class="pub-compact-title">Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact conference" href="https://isprs-annals.copernicus.org/articles/X-G-2025/159/2025/" target="_blank">
+          <div class="pub-year-tag">2024</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-conf"></span>ISPRS Annals 2025</div>
+            <div class="pub-compact-title">Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact conference" href="https://ieeexplore.ieee.org/document/10640634" target="_blank">
+          <div class="pub-year-tag">2024</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-conf"></span>IEEE Xplore — IGARSS 2024</div>
+            <div class="pub-compact-title">Flood Impact Risk Mapping in Settlement Areas from a 3D Perspective: Hurricane Matthew</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+        <a class="pub-compact journal" href="https://www.jstor.org/stable/27232314" target="_blank">
+          <div class="pub-year-tag">2023</div>
+          <div class="pub-compact-body">
+            <div class="pub-compact-venue"><span class="pub-type-dot dot-journal"></span>JSTOR</div>
+            <div class="pub-compact-title">Urban Growth and Land Surface Temperature Dynamics: Lessons from Ghana</div>
+          </div>
+          <div class="pub-compact-arrow">→</div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="cv-section" id="skills">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-skills">
+          <svg viewBox="0 0 24 24" stroke="#7c3aed"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="cv-section-title">Technical Skills</div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-block skill-block-amber">
+          <div class="skill-block-title">Programming Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">R</span>
+            <span class="skill-tag">SQL</span><span class="skill-tag">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-teal">
+          <div class="skill-block-title">Geospatial &amp; Remote Sensing</div>
+          <div class="skill-tags">
+            <span class="skill-tag">ArcGIS ecosystem</span><span class="skill-tag">QGIS</span>
+            <span class="skill-tag">Google Earth Engine</span>
+            <span class="skill-tag">GDAL</span><span class="skill-tag">ENVI</span><span class="skill-tag">SNAP</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-blue">
+          <div class="skill-block-title">ML / DL Frameworks</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">Scikit-Learn</span><span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">Physics-Informed NNs</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-purple">
+          <div class="skill-block-title">Data Engineering &amp; Processing</div>
+          <div class="skill-tags">
+            <span class="skill-tag">ETL Pipelines</span><span class="skill-tag">Pandas</span>
+            <span class="skill-tag">RDBMS</span><span class="skill-tag">Web Scraping</span>
+            <span class="skill-tag">Geospatial Data Processing</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-amber">
+          <div class="skill-block-title">Visualization &amp; Decision Support</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
+            <span class="skill-tag">Dashboards</span><span class="skill-tag">ArcGIS StoryMaps</span>
+            <span class="skill-tag">Power BI</span><span class="skill-tag">R Shiny</span><span class="skill-tag">Tableau</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-teal">
+          <div class="skill-block-title">Web, APIs &amp; Cloud / DevOps</div>
+          <div class="skill-tags">
+            <span class="skill-tag">FastAPI</span><span class="skill-tag">RESTful APIs</span>
+            <span class="skill-tag">HTML/CSS</span><span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">AWS S3</span><span class="skill-tag">Docker</span>
+            <span class="skill-tag">CI/CD</span><span class="skill-tag">Git/GitHub</span>
+            <span class="skill-tag">HPC</span><span class="skill-tag">Render</span>
+          </div>
+        </div>
+
+        <div class="skill-block skill-block-blue">
+          <div class="skill-block-title">Databases</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span>
+            <span class="skill-tag">IBM DB2</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AWARDS & GRANTS -->
+    <section class="cv-section" id="awards">
+      <div class="cv-section-head">
+        <div class="cv-section-icon" style="background:rgba(251,191,36,0.1);">
+          <svg viewBox="0 0 24 24" stroke="#d97706" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cv-section-title">Awards &amp; Grants</div>
+      </div>
+      <div class="edu-grid">
+
+        <div class="edu-card" style="border-left-color:var(--amber-g);">
+          <span class="edu-badge">2024</span>
+          <div class="edu-deg">LiDAR Leader Award</div>
+          <div class="edu-inst">2024 ASPRS &amp; Geo Week · Denver, CO</div>
+          <div class="edu-meta" style="margin-top:4px;color:var(--amber);font-family:var(--ff-mono);font-size:11px;">🏆 Best Poster Presentation — International Conference</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge" style="background:var(--teal-dim);color:var(--teal);">2023–2026</span>
+          <div class="edu-deg">Graduate Research Assistant Fellowship</div>
+          <div class="edu-inst">North Carolina A&amp;T State University</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge" style="background:var(--teal-dim);color:var(--teal);">2023</span>
+          <div class="edu-deg">Teaching Fellowship</div>
+          <div class="edu-inst">Yale School of the Environment (YSE)</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge" style="background:var(--teal-dim);color:var(--teal);">2022</span>
+          <div class="edu-deg">TRI Research Endowment Fellowship</div>
+          <div class="edu-inst">Tropical Resource Institute · Yale University</div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-badge" style="background:var(--teal-dim);color:var(--teal);">2021–2023</span>
+          <div class="edu-deg">Need-Based &amp; Merit Scholarship (Master's Study)</div>
+          <div class="edu-inst">Yale School of the Environment (YSE)</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TALKS -->
+    <section class="cv-section" id="talks">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-talks">
+          <svg viewBox="0 0 24 24" stroke="#f43f5e"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="cv-section-title">Talks &amp; Conferences</div>
+        <div class="cv-section-count">
+          <a href="talks.html" style="color:var(--amber);text-decoration:none;font-family:var(--ff-mono);font-size:11px;letter-spacing:0.08em;">View map →</a>
+        </div>
+      </div>
+      <div class="talks-compact">
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Aug 2025</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2025 IEEE IGARSS</div>
+            <div class="talk-compact-topic">"Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas"</div>
+            <div class="talk-compact-loc">Brisbane Convention Centre · Brisbane, Australia</div>
+          </div>
+          <span class="talk-type-pill pill-symp">Symposium</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Apr 2025</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2025 ISPRS Geospatial Week</div>
+            <div class="talk-compact-topic">"Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets"</div>
+            <div class="talk-compact-loc">Dubai World Trade Center · Dubai, UAE</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Feb 2025</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2025 ASPRS &amp; GeoWeek Conference</div>
+            <div class="talk-compact-topic">"3D Floodwater Depth Analytics with Big Geo-Data and cGAN"</div>
+            <div class="talk-compact-loc">Colorado Convention Center · Denver, CO, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Dec 2024</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2024 AGU Annual Meeting</div>
+            <div class="talk-compact-topic">"Urban Flood Depth Analytics: Generative Algorithms &amp; Remote Sensing"</div>
+            <div class="talk-compact-loc">Walter E. Washington Convention Center · Washington DC, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Sep 2024</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2024 NC ArcGIS User Conference (NCAUG)</div>
+            <div class="talk-compact-topic">"AI and Big Geo-Data for 3D Flood Depth Mapping to Safeguard Built Assets"</div>
+            <div class="talk-compact-loc">Hotel Ballast by Hilton · Wilmington, NC, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Jul 2024</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2024 IEEE IGARSS</div>
+            <div class="talk-compact-topic">"Flood Impact Risk Mapping: 3D Perspective of Hurricane Matthew"</div>
+            <div class="talk-compact-loc">Megaron Athens Conference Center · Athens, Greece</div>
+          </div>
+          <span class="talk-type-pill pill-symp">Symposium</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Feb 2024</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2024 ASPRS &amp; Geo Week Conference</div>
+            <div class="talk-compact-topic">"3D Analysis of Hurricane Matthew Impact in Small Communities: Grifton, NC"</div>
+            <div class="talk-compact-loc">Colorado Convention Center · Denver, CO, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Dec 2023</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">2023 AGU Annual Meeting</div>
+            <div class="talk-compact-topic">"Multi-Channel Deep Learning for Flood Detection and Mapping"</div>
+            <div class="talk-compact-loc">Moscone Center · San Francisco, CA, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Apr 2023</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">39th Yale YSE Research Day</div>
+            <div class="talk-compact-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+            <div class="talk-compact-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Conference</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Mar 2023</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">Yale YSE Confluence Talk Series</div>
+            <div class="talk-compact-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+            <div class="talk-compact-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
+          </div>
+          <span class="talk-type-pill pill-talk">Talk</span>
+        </div>
+
+        <div class="talk-compact">
+          <div class="talk-compact-date">Mar 2023</div>
+          <div class="talk-compact-body">
+            <div class="talk-compact-name">TRI Symposium, Yale School of the Environment</div>
+            <div class="talk-compact-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+            <div class="talk-compact-loc">Sage Hall, Yale School of the Environment · New Haven, CT, USA</div>
+          </div>
+          <span class="talk-type-pill pill-conf">Symposium</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICE -->
+    <section class="cv-section" id="service">
+      <div class="cv-section-head">
+        <div class="cv-section-icon icon-service">
+          <svg viewBox="0 0 24 24" stroke="#34d399"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="cv-section-title">Service &amp; Leadership</div>
+      </div>
+      <div class="service-list">
+
+        <div class="service-item">
+          <div class="service-role">Secretary &amp; Social Media Manager — ASPRS Student Chapter</div>
+          <div class="service-org">North Carolina A&amp;T State University · 2024 – 2026</div>
+          <div class="service-desc">
+            <ul>
+              <li>Managed the chapter's LinkedIn presence, creating and scheduling posts to increase engagement and visibility.</li>
+              <li>Recorded meeting minutes and coordinated chapter activities, supporting event planning and organizational operations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-role">Lead Instructor — Workshop on Geospatial Sciences</div>
+          <div class="service-org">CoST Young Scientist Day · NC A&T State University · 2025</div>
+          <div class="service-desc">
+            <ul>
+              <li>Led a Geospatial Sciences workshop mentoring high school students on career pathways in geospatial technology.</li>
+              <li>Demonstrated drones, GIS software, and 3D DTM technologies in hands-on sessions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-role">Student Representative — BIOMES Seminar Committee</div>
+          <div class="service-org">Yale School of the Environment · 2022 – 2023</div>
+          <div class="service-desc">
+            <ul>
+              <li>Coordinated and invited guest speakers for weekly BIOMES (Bridging Issues &amp; Optimizing Methods in Environmental Studies) seminars, overseeing logistics and scheduling.</li>
+              <li>Facilitated interactions between speakers and seminar participants to support student engagement.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-role">Co-Founder &amp; Executive Director — Good Lead Foundation</div>
+          <div class="service-org">Nsuaem-Tarkwa, Ghana · 2019 – Present</div>
+          <div class="service-desc">
+            <ul>
+              <li>Leads the organization to initiate and implement educational outreach projects in the Tarkwa community.</li>
+              <li>Drives fundraising efforts to support local education programs.</li>
+              <li>Organizes seasonal internal capacity-building workshops for Foundation members.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="talks.html">Talks</a>
+  </div>
+</footer>
+
+<script>
+function setActive(link){
+  document.querySelectorAll('.cv-nav-link').forEach(l => l.classList.remove('active'));
+  link.classList.add('active');
+}
+
+// highlight sidebar nav on scroll
+const sections = document.querySelectorAll('.cv-section');
+const navLinks = document.querySelectorAll('.cv-nav-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.cv-nav-link[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{threshold:0.25, rootMargin:'-56px 0px -40% 0px'});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

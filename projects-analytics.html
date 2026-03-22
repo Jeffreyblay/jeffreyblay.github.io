@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Analytics Projects — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.10);
+  --blue:#1d4ed8;--blue-dim:rgba(29,78,216,0.09);--blue-light:rgba(29,78,216,0.06);
+  --teal:#0d9488;--teal-dim:rgba(13,148,136,0.09);
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--ink);padding:110px 40px 72px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;}
+.hero-glow{position:absolute;top:-20%;right:-5%;width:580px;height:580px;background:radial-gradient(circle,rgba(29,78,216,0.14) 0%,transparent 65%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-10%;left:5%;width:400px;height:400px;background:radial-gradient(circle,rgba(217,119,6,0.07) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:20px;}
+.breadcrumb a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--amber-g);}
+.breadcrumb span{color:#60a5fa;}
+.eyebrow{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#60a5fa;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:#60a5fa;}
+.page-hero h1{font-family:var(--ff-display);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:700;color:var(--white);letter-spacing:-0.02em;line-height:1.05;margin-bottom:20px;}
+.hero-desc{font-size:16px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:620px;}
+.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+.hero-jumps{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.07);}
+.jump-btn{font-family:var(--ff-mono);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:7px 14px;border-radius:2px;border:1px solid rgba(29,78,216,0.35);background:rgba(29,78,216,0.08);color:#60a5fa;text-decoration:none;transition:all .18s;}
+.jump-btn:hover{background:rgba(29,78,216,0.18);border-color:rgba(29,78,216,0.6);}
+
+/* ── LAYOUT ── */
+.page-body{max-width:1100px;margin:0 auto;padding:72px 40px 100px;display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start;}
+.toc{position:sticky;top:76px;}
+.toc-label{font-family:var(--ff-mono);font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--lmuted2);margin-bottom:14px;}
+.toc-links{display:flex;flex-direction:column;gap:2px;}
+.toc-link{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.05em;padding:8px 12px;border-radius:3px;border:1px solid transparent;background:transparent;color:var(--lmuted);text-decoration:none;transition:all .18s;display:flex;align-items:center;gap:8px;}
+.toc-link::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--surf2);flex-shrink:0;transition:background .18s;}
+.toc-link:hover{background:var(--surf);color:var(--ink);}
+.toc-link:hover::before{background:var(--blue);}
+.toc-link.active{background:var(--blue-light);border-color:rgba(29,78,216,0.2);color:var(--blue);}
+.toc-link.active::before{background:var(--blue);}
+.toc-back{margin-top:28px;padding-top:20px;border-top:1px solid var(--surf2);font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--amber);text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap .15s;}
+.toc-back:hover{gap:10px;}
+
+/* ── ENTRIES ── */
+.proj-entries{display:flex;flex-direction:column;gap:80px;}
+.proj-entry{scroll-margin-top:80px;}
+.entry-header{margin-bottom:32px;}
+.entry-num{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.16em;color:var(--lmuted2);margin-bottom:10px;}
+.entry-title{font-family:var(--ff-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;}
+.entry-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.entry-tag{font-family:var(--ff-mono);font-size:10px;padding:4px 10px;border-radius:2px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(29,78,216,0.2);}
+
+/* summary strip */
+.summary-strip{background:var(--ink2);border-left:3px solid var(--blue);padding:16px 20px;margin-bottom:28px;font-size:14px;line-height:1.75;color:rgba(255,255,255,0.65);}
+.summary-strip strong{color:rgba(255,255,255,0.9);font-weight:500;}
+
+/* OMB grid */
+.omb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:36px;}
+.omb-card{padding:20px 18px;border:1px solid var(--surf2);position:relative;overflow:hidden;}
+.omb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.omb-obj::before{background:var(--teal);}
+.omb-meth::before{background:var(--blue);}
+.omb-out::before{background:#7c3aed;}
+.omb-label{font-family:var(--ff-mono);font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:8px;}
+.omb-obj .omb-label{color:var(--teal);}
+.omb-meth .omb-label{color:var(--blue);}
+.omb-out .omb-label{color:#7c3aed;}
+.omb-text{font-size:13px;line-height:1.72;color:var(--lmuted);}
+.omb-text strong{color:var(--ink3);font-weight:500;}
+
+/* key findings strip */
+.findings-strip{
+  background:var(--surf);border:1px solid var(--surf2);
+  padding:20px 22px;margin-bottom:28px;
+}
+.findings-label{font-family:var(--ff-mono);font-size:9px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.findings-list{display:flex;flex-direction:column;gap:8px;}
+.findings-list li{font-size:13.5px;line-height:1.65;color:var(--lmuted);list-style:none;padding-left:16px;position:relative;}
+.findings-list li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--blue);}
+.findings-list li strong{color:var(--ink3);font-weight:500;}
+
+/* images */
+.img-gallery{display:grid;gap:16px;margin-bottom:12px;}
+.img-gallery.two-col{grid-template-columns:1fr 1fr;}
+.img-gallery.three-col{grid-template-columns:1fr 1fr 1fr;}
+.img-gallery.one-col{grid-template-columns:1fr;max-width:720px;}
+.img-figure{border:1px solid var(--surf2);overflow:hidden;background:var(--surf);}
+.img-figure img{width:100%;height:auto;display:block;transition:transform .4s ease;}
+.img-figure:hover img{transform:scale(1.02);}
+.img-caption{padding:10px 14px;font-family:var(--ff-mono);font-size:10px;letter-spacing:0.06em;color:var(--lmuted2);border-top:1px solid var(--surf2);background:var(--white);}
+.img-placeholder{width:100%;aspect-ratio:4/3;background:var(--surf);border:1px dashed var(--surf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--lmuted2);}
+.img-placeholder svg{width:32px;height:32px;stroke:var(--surf2);fill:none;stroke-width:1.5;}
+.img-placeholder span{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;}
+
+.entry-divider{border:none;border-top:1px solid var(--surf2);}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .page-body{grid-template-columns:1fr;gap:40px;padding:48px 24px 80px;}
+  .toc{position:static;}
+  .toc-links{flex-direction:row;flex-wrap:wrap;}
+  .omb-grid{grid-template-columns:1fr;}
+  .img-gallery.two-col,.img-gallery.three-col{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .page-hero{padding:90px 20px 56px;}
+  .footer{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="projects.html">Projects</a>
+      <span>›</span>
+      <span>Data Analytics</span>
+    </div>
+    <div class="eyebrow">Data Analytics</div>
+    <h1>From Raw Data<br>to Clear Insight</h1>
+    <p class="hero-desc">
+      Statistical analysis, text mining, and visualization projects that transform raw datasets into <strong>decision-relevant insights</strong> — using R, multivariate modeling, and domain-specific analytical techniques.
+    </p>
+    <div class="hero-jumps">
+      <a class="jump-btn" href="#text-mining">Text Data Mining</a>
+      <a class="jump-btn" href="#environmental-index">Environmental Index</a>
+      <a class="jump-btn" href="#movie-roi">Movie Genre ROI</a>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-label">Projects</div>
+    <nav class="toc-links">
+      <a class="toc-link active" href="#text-mining">Text Data Mining</a>
+      <a class="toc-link" href="#environmental-index">Environmental Index</a>
+      <a class="toc-link" href="#movie-roi">Movie Genre ROI</a>
+    </nav>
+    <a class="toc-back" href="projects.html">← Back to Projects</a>
+  </aside>
+
+  <!-- ENTRIES -->
+  <main class="proj-entries">
+
+    <!-- 01 TEXT MINING -->
+    <article class="proj-entry" id="text-mining">
+      <div class="entry-header">
+        <div class="entry-num">DA — 01</div>
+        <div class="entry-title">Text Data Mining of Flood Depth Research Literature with R</div>
+        <div class="entry-tags">
+          <span class="entry-tag">R</span>
+          <span class="entry-tag">wordcloud2</span>
+          <span class="entry-tag">tidyverse</span>
+          <span class="entry-tag">tidygraph</span>
+          <span class="entry-tag">FactoMineR</span>
+          <span class="entry-tag">dplyr</span>
+          <span class="entry-tag">ggplot2</span>
+          <span class="entry-tag">Network Analysis</span>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        Applied <strong>R text analytics</strong> to a corpus of flood depth estimation research papers — extracting dominant methods, evaluation metrics, and structural relationships between flood types and data variables. Insights directly informed model selection and literature positioning in subsequent deep learning research.
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To analyze research on <strong>floodwater depth estimation</strong> to identify key methods, evaluation metrics, and relationships between flood types and data variables — synthesizing a fragmented literature systematically.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Applied R text analytics libraries — <strong>wordcloud2, tidyverse, tidygraph, FactoMineR, dplyr, ggplot2</strong> — to extract, process, and visualize text data from peer-reviewed research papers on flood depth estimation.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Network graphs revealing <strong>flood type × data variable interactions</strong>. Word clouds of dominant depth estimation methods and evaluation metrics. Insights useful for environmental modeling and flood-risk assessment strategy.</div>
+        </div>
+      </div>
+
+      <div class="findings-strip">
+        <div class="findings-label">Key Findings</div>
+        <ul class="findings-list">
+          <li><strong>Network analysis</strong> revealed clustering between SAR-based methods and pluvial flood types, with optical imagery more associated with fluvial events.</li>
+          <li><strong>RMSE and MAE</strong> emerged as the dominant evaluation metrics across flood depth literature, followed by R² and Bias.</li>
+          <li><strong>Deep learning methods</strong> (U-Net, CNN variants) showed increasing dominance over traditional hydraulic models in recent publications.</li>
+        </ul>
+      </div>
+
+      <div class="img-gallery three-col">
+        <figure class="img-figure">
+          <img src="images/data_analytics/ng_fldtypes.png" alt="Network graph" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>ng_fldtypes.png</span></div><div class=\'img-caption\'>Network graph</div>'">
+          <figcaption class="img-caption">Network graph — flood types &amp; data variable interactions</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/data_analytics/depthMethods.png" alt="Word Cloud methods" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>depthMethods.png</span></div><div class=\'img-caption\'>Depth methods word cloud</div>'">
+          <figcaption class="img-caption">Word Cloud — dominant flood depth estimation methods</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/data_analytics/metrics.png" alt="Word Cloud metrics" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>metrics.png</span></div><div class=\'img-caption\'>Evaluation metrics word cloud</div>'">
+          <figcaption class="img-caption">Word Cloud — dominant flood depth evaluation metrics</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 02 ENVIRONMENTAL INDEX -->
+    <article class="proj-entry" id="environmental-index">
+      <div class="entry-header">
+        <div class="entry-num">DA — 02</div>
+        <div class="entry-title">Multivariate Environmental Index Prediction — 38-Country Survey Analysis</div>
+        <div class="entry-tags">
+          <span class="entry-tag">R</span>
+          <span class="entry-tag">GLM</span>
+          <span class="entry-tag">Two-Way ANOVA</span>
+          <span class="entry-tag">car library</span>
+          <span class="entry-tag">ggplot2</span>
+          <span class="entry-tag">Multivariate Analysis</span>
+          <span class="entry-tag">Policy Insights</span>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        Analyzed a <strong>global environmental survey dataset</strong> (31,000 responses across 38 countries) using General Linear Models and two-way ANOVA to identify key predictors of environmental index — generating insights applicable to policy, sustainability strategy, and environmental planning.
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To identify <strong>key predictors of environmental index</strong> from 31,000 global survey responses across 38 countries, providing insights applicable to policy, sustainability, and environmental strategy.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Applied R for multivariate analysis using the <strong>car library</strong> to perform GLM modeling and two-way ANOVA. Generated interaction plots and residual diagnostic plots for model assessment and validation.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Identified <strong>Education, Age, Gender, and Country</strong> as the most impactful predictors of environmental index — providing actionable insights for environmental planning and policy assessment across global contexts.</div>
+        </div>
+      </div>
+
+      <div class="findings-strip">
+        <div class="findings-label">Key Findings</div>
+        <ul class="findings-list">
+          <li><strong>Education level</strong> was the strongest single predictor of environmental index, with higher education consistently correlated with more pro-environmental attitudes.</li>
+          <li><strong>Country-level effects</strong> explained significant variance, confirming that national context (policy, culture, infrastructure) shapes environmental attitudes beyond individual factors.</li>
+          <li>Significant <strong>interaction effects</strong> between Age and Gender were detected, suggesting generational and gender dynamics vary meaningfully across regions.</li>
+          <li>Model residuals were well-behaved, validating GLM fit for this multivariate survey dataset.</li>
+        </ul>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/data_analytics/interaction plot.png" alt="Interaction Plot" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>interaction plot.png</span></div><div class=\'img-caption\'>Interaction plot</div>'">
+          <figcaption class="img-caption">Interaction plot showing relationships between key predictors and environmental index</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/data_analytics/residual plot.png" alt="Residual Plot" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>residual plot.png</span></div><div class=\'img-caption\'>Residual plot for best fit model</div>'">
+          <figcaption class="img-caption">Residual plot for the best-fit GLM model — validating model assumptions</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 03 MOVIE ROI -->
+    <article class="proj-entry" id="movie-roi">
+      <div class="entry-header">
+        <div class="entry-num">DA — 03</div>
+        <div class="entry-title">Movie Genre ROI Analytics</div>
+        <div class="entry-tags">
+          <span class="entry-tag">R</span>
+          <span class="entry-tag">lattice</span>
+          <span class="entry-tag">plotrix</span>
+          <span class="entry-tag">car</span>
+          <span class="entry-tag">One-Way ANOVA</span>
+          <span class="entry-tag">ROI Analysis</span>
+          <span class="entry-tag">Statistical Inference</span>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        Analyzed the profitability of the <strong>six most prevalent movie genres</strong> by comparing percentage returns (revenue ÷ budget × 100) — using one-way ANOVA to statistically test whether genre meaningfully predicts return on investment, and visualizing distributions to communicate investment strategy insights.
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To analyze the <strong>profitability of six movie genres</strong> by comparing percentage returns (revenue/budget × 100) and uncover statistical patterns to inform production and investment decisions.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Used R libraries — <strong>lattice, plotrix, car</strong> — to clean, process, and visualize the dataset. Applied <strong>one-way ANOVA</strong> to statistically compare profit returns across genres and generate confidence interval plots.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Revealed <strong>significant ROI differences between genres</strong> (p &lt; 0.05). Strip plots and mean/CI visualizations communicated actionable insights for strategic decision-making in film investment and production planning.</div>
+        </div>
+      </div>
+
+      <div class="findings-strip">
+        <div class="findings-label">Key Findings</div>
+        <ul class="findings-list">
+          <li>One-way ANOVA confirmed <strong>statistically significant differences</strong> in ROI across the six genre groups (p &lt; 0.05).</li>
+          <li>Horror and thriller genres showed the <strong>highest median ROI</strong> relative to production budget — low-budget films in these categories yielded disproportionately high returns.</li>
+          <li>Action and sci-fi genres showed <strong>high variance</strong> in returns — high-budget productions are either very profitable or significant losses, indicating higher investment risk.</li>
+          <li>Drama showed the most <strong>consistent, mid-range ROI</strong> — a lower-risk genre for investors seeking predictable returns.</li>
+        </ul>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/data_analytics/strip plot.png" alt="Strip Plot" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>strip plot.png</span></div><div class=\'img-caption\'>Strip plot</div>'">
+          <figcaption class="img-caption">Strip plot — percentage return distribution across movie genres</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/data_analytics/ci plot.png" alt="Mean and CI Plot" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>ci plot.png</span></div><div class=\'img-caption\'>Mean and confidence interval plot</div>'">
+          <figcaption class="img-caption">Mean and 95% confidence interval plot — genre ROI comparison</figcaption>
+        </figure>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script>
+const entries = document.querySelectorAll('.proj-entry');
+const tocLinks = document.querySelectorAll('.toc-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{threshold:0.3, rootMargin:'-56px 0px -50% 0px'});
+entries.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

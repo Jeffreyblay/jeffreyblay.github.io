@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.1);
+  --teal:#0d9488;--teal-dim:rgba(13,148,136,0.1);
+  --blue:#1d4ed8;--blue-dim:rgba(29,78,216,0.1);
+  --rose:#be123c;--rose-dim:rgba(190,18,60,0.08);
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--ink);padding:110px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-5%;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,119,6,0.13) 0%,transparent 65%);pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-20%;left:10%;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(13,148,136,0.07) 0%,transparent 65%);pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber-g);}
+.page-hero h1{
+  font-family:var(--ff-display);font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;
+  line-height:1.05;margin-bottom:20px;
+}
+.hero-desc{font-size:16px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:600px;}
+.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+
+/* stat strip */
+.hero-stats{display:flex;gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,0.07);padding-top:36px;flex-wrap:wrap;}
+.hstat{flex:1;min-width:110px;padding-right:24px;margin-right:24px;border-right:1px solid rgba(255,255,255,0.07);}
+.hstat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.hstat-num{font-family:var(--ff-display);font-size:2.6rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px;}
+.hstat-num span{color:var(--amber-g);}
+.hstat-lbl{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+
+/* ── CAT TABS ── */
+.cat-tabs-wrap{
+  background:var(--ink2);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;top:56px;z-index:90;
+}
+.cat-tabs{
+  max-width:1100px;margin:0 auto;
+  display:flex;gap:0;padding:0 40px;
+  overflow-x:auto;scrollbar-width:none;
+}
+.cat-tabs::-webkit-scrollbar{display:none;}
+.cat-tab{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:16px 24px;border:none;background:transparent;
+  color:rgba(255,255,255,0.38);cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s;white-space:nowrap;
+}
+.cat-tab:hover{color:rgba(255,255,255,0.7);}
+.cat-tab.active{color:var(--amber-g);border-bottom-color:var(--amber-g);}
+
+/* cat color accents */
+.cat-tab[data-cat="cv"].active{color:#f59e0b;border-bottom-color:#f59e0b;}
+.cat-tab[data-cat="gis"].active{color:#2dd4bf;border-bottom-color:#2dd4bf;}
+.cat-tab[data-cat="analytics"].active{color:#60a5fa;border-bottom-color:#60a5fa;}
+.cat-tab[data-cat="apps"].active{color:#f472b6;border-bottom-color:#f472b6;}
+
+/* ── MAIN BODY ── */
+.proj-body{max-width:1100px;margin:0 auto;padding:64px 40px 100px;}
+
+/* category section */
+.cat-section{display:none;}
+.cat-section.active{display:block;}
+
+.cat-header{margin-bottom:48px;}
+.cat-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.cat-label::before{content:'';display:inline-block;width:16px;height:1px;}
+.label-cv{color:var(--amber);} .label-cv::before{background:var(--amber);}
+.label-gis{color:var(--teal);} .label-gis::before{background:var(--teal);}
+.label-analytics{color:var(--blue);} .label-analytics::before{background:var(--blue);}
+.label-apps{color:var(--rose);} .label-apps::before{background:var(--rose);}
+
+.cat-title{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:700;color:var(--ink);
+  letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:14px;margin-top:6px;
+}
+.cat-desc{font-size:15px;line-height:1.8;color:var(--lmuted);max-width:680px;}
+
+/* project cards */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.proj-grid.single{grid-template-columns:1fr;}
+.proj-grid.triple{grid-template-columns:repeat(3,1fr);}
+
+.proj-card{
+  border:1px solid var(--surf2);
+  background:var(--white);
+  padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.proj-card-cv::before{background:var(--amber);}
+.proj-card-gis::before{background:var(--teal);}
+.proj-card-analytics::before{background:var(--blue);}
+.proj-card-apps::before{background:var(--rose);}
+
+.proj-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.09);transform:translateY(-3px);}
+.proj-card:hover::before{transform:scaleX(1);}
+
+/* featured card */
+.proj-card.featured{
+  grid-column:1/-1;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;
+}
+
+.proj-num{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;
+  color:var(--lmuted2);margin-bottom:16px;
+}
+.proj-cat-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:12px;padding:4px 10px;border-radius:2px;
+}
+.badge-cv{background:var(--amber-dim);color:var(--amber);}
+.badge-gis{background:var(--teal-dim);color:var(--teal);}
+.badge-analytics{background:var(--blue-dim);color:var(--blue);}
+.badge-apps{background:var(--rose-dim);color:var(--rose);}
+
+.proj-title{
+  font-family:var(--ff-display);font-size:1.35rem;font-weight:700;
+  color:var(--ink);line-height:1.28;margin-bottom:12px;
+  letter-spacing:-0.01em;
+}
+.proj-summary{
+  font-size:13.5px;line-height:1.75;color:var(--lmuted);margin-bottom:18px;
+}
+.proj-meta-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-bottom:20px;
+}
+.proj-meta-item{}
+.proj-meta-label{
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--lmuted2);margin-bottom:3px;
+}
+.proj-meta-val{font-size:12.5px;color:var(--ink3);font-weight:400;}
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
+.proj-tag{
+  font-family:var(--ff-mono);font-size:10px;padding:3px 9px;
+  border-radius:2px;background:var(--surf);color:var(--lmuted2);
+  border:1px solid var(--surf2);
+}
+
+.proj-links{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.proj-link{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.06em;text-decoration:none;
+  display:inline-flex;align-items:center;gap:5px;
+  transition:gap .15s;padding:8px 14px;border-radius:2px;border:1px solid;
+}
+.proj-link-primary-cv{color:var(--amber);border-color:rgba(217,119,6,0.3);background:var(--amber-dim);}
+.proj-link-primary-cv:hover{background:rgba(217,119,6,0.18);}
+.proj-link-primary-gis{color:var(--teal);border-color:rgba(13,148,136,0.28);background:var(--teal-dim);}
+.proj-link-primary-gis:hover{background:rgba(13,148,136,0.16);}
+.proj-link-primary-analytics{color:var(--blue);border-color:rgba(29,78,216,0.28);background:var(--blue-dim);}
+.proj-link-primary-analytics:hover{background:rgba(29,78,216,0.16);}
+.proj-link-primary-apps{color:var(--rose);border-color:rgba(190,18,60,0.28);background:var(--rose-dim);}
+.proj-link-primary-apps:hover{background:rgba(190,18,60,0.14);}
+.proj-link-ghost{color:var(--lmuted);border-color:var(--surf2);background:transparent;}
+.proj-link-ghost:hover{color:var(--ink);border-color:var(--surf);}
+.proj-link::after{content:'→';}
+.proj-link:hover{gap:8px;}
+
+/* outcome highlight */
+.outcome-box{
+  background:var(--surf);border-left:3px solid;
+  padding:14px 16px;border-radius:0 3px 3px 0;
+  margin-bottom:20px;
+}
+.outcome-box-cv{border-color:var(--amber);}
+.outcome-box-gis{border-color:var(--teal);}
+.outcome-box-analytics{border-color:var(--blue);}
+.outcome-box-apps{border-color:var(--rose);}
+.outcome-label{
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--lmuted2);margin-bottom:4px;
+}
+.outcome-val{font-size:13px;line-height:1.6;color:var(--ink3);}
+
+/* divider between cat sections shown in "all" */
+.cat-divider{
+  border:none;border-top:1px solid var(--surf2);
+  margin:72px 0;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .proj-grid{grid-template-columns:1fr;}
+  .proj-grid.triple{grid-template-columns:1fr;}
+  .proj-card.featured{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;} .nav-links{display:none;}
+  .page-hero{padding:90px 20px 56px;}
+  .proj-body{padding:48px 20px 80px;}
+  .cat-tabs{padding:0 20px;}
+  .hero-stats{flex-wrap:wrap;}
+  .hstat{flex:0 0 calc(50% - 12px);border-right:none;margin-right:0;padding-right:0;}
+  .footer{padding:24px 20px;}
+  .proj-meta-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Portfolio</div>
+    <h1>Projects &amp;<br>Applications</h1>
+    <p class="hero-desc">
+      From <strong>physics-informed deep learning frameworks</strong> for flood prediction to <strong>full-stack geospatial applications</strong> — a collection of research prototypes, open-source tools, and production systems built at the intersection of spatial data and AI.
+    </p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">14<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
+      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Categories</div></div>
+      <div class="hstat"><div class="hstat-num">2</div><div class="hstat-lbl">Open-Source Tools</div></div>
+      <div class="hstat"><div class="hstat-num">1</div><div class="hstat-lbl">Live Application</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<div class="cat-tabs-wrap">
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="all" onclick="switchCat('all',this)">All Projects</button>
+    <button class="cat-tab" data-cat="cv" onclick="switchCat('cv',this)">Computer Vision</button>
+    <button class="cat-tab" data-cat="gis" onclick="switchCat('gis',this)">Remote Sensing / GIS</button>
+    <button class="cat-tab" data-cat="analytics" onclick="switchCat('analytics',this)">Data Analytics</button>
+    <button class="cat-tab" data-cat="apps" onclick="switchCat('apps',this)">Built Applications</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="proj-body">
+
+  <!-- ══ COMPUTER VISION ══ -->
+  <div class="cat-section active" id="sec-cv">
+    <div class="cat-header">
+      <div class="cat-label label-cv">Computer Vision &amp; Deep Learning</div>
+      <div class="cat-title">AI for Flood Intelligence</div>
+      <p class="cat-desc">Deep learning architectures trained on multi-source remote sensing data to predict floodwater depth, map inundation extent, and build benchmark datasets for the GeoAI community.</p>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- FEATURED: Physics-Informed -->
+      <div class="proj-card proj-card-cv featured" id="cv">
+        <div>
+          <div class="proj-num">CV — 01</div>
+          <div class="proj-cat-badge badge-cv">Featured · Active Research</div>
+          <div class="proj-title">Physics-Informed Deep Learning for Urban Flood Depth Prediction</div>
+          <p class="proj-summary">A physics-informed framework for CNNs and transformer-based models, that encodes hydrostatic terrain constraints directly into the loss function — ensuring predictions respect the physical principle that water flows downhill and depth correlates with terrain elevation.</p>
+          <div class="outcome-box outcome-box-cv">
+            <div class="outcome-label">Outcome</div>
+            <div class="outcome-val">Preliminary expirements show 0.67 ft RMSE · 0.23 ft MAE on held-out test set. Custom terrain penalty weights enforce physically consistent predictions under hydrostatic conditions.</div>
+          </div>
+        </div>
+        <div>
+          <div class="proj-meta-grid">
+            <div class="proj-meta-item"><div class="proj-meta-label">Method</div><div class="proj-meta-val">Physics-Informed loss function framework with terrain penalty loss </div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Data</div><div class="proj-meta-val">Aerial imagery + LiDAR DTM</div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Framework</div><div class="proj-meta-val">PyTorch</div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Status</div><div class="proj-meta-val">Active — PhD research</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">PyTorch</span><span class="proj-tag">U-Net</span><span class="proj-tag">Attention U-Net</span>
+            <span class="proj-tag">Swin U-Net</span><span class="proj-tag">SegFormer</span>
+            <span class="proj-tag">Aerial Imagery</span><span class="proj-tag">LiDAR</span>
+            <span class="proj-tag">Hydrostatic Principle</span><span class="proj-tag">Flood Depth</span>
+          </div>
+          <div class="proj-links">
+            <a class="proj-link proj-link-primary-cv" href="publications.html">Publication Under Review</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transformer Models -->
+      <div class="proj-card proj-card-cv">
+        <div class="proj-num">CV — 02</div>
+        <div class="proj-cat-badge badge-cv">Research</div>
+        <div class="proj-title">Transformer Models for Urban Flood Depth Prediction</div>
+        <p class="proj-summary">Applied Swin Transformer and SegFormer architectures to predict floodwater depth from remote sensing and terrain data, leveraging attention mechanisms for fine-scale spatial pattern capture in complex urban environments.</p>
+        <div class="outcome-box outcome-box-cv">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Both models achieve strong predictive performance, with RMSE (root mean squared error) below 0.55 ft on spatially heterogeneous test areas.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Swin Transformer</span><span class="proj-tag">SegFormer</span>
+          <span class="proj-tag">PyTorch</span><span class="proj-tag">Flood Depth</span><span class="proj-tag">Geospatial data</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-cv" href="publications.html">Publication Under Review</a>
+        </div>
+      </div>
+
+      <!-- EzProcess -->
+      <div class="proj-card proj-card-cv">
+        <div class="proj-num">CV — 03</div>
+        <div class="proj-cat-badge badge-cv">Open Source · Published</div>
+        <div class="proj-title">EzProcess: Geospatial Data Prep Library for ML/DL</div>
+        <p class="proj-summary">A Python library that streamlines raster/mask handling, normalization, stacking, and pipeline automation for geospatial AI workflows — created and deployed during the NASA DEAP fellowship to accelerate team productivity.</p>
+        <div class="outcome-box outcome-box-cv">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Published open-source library on GitHub. Accelerates geospatial ML/DL data prep with modular, reusable functions. Covered in a published Medium article.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span><span class="proj-tag">Rasterio</span><span class="proj-tag">Python Packaging</span>
+          <span class="proj-tag">NumPy</span><span class="proj-tag">Open Source</span><span class="proj-tag">PyPI</span>
+          <span class="proj-tag">Unit Testing</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-cv" href="https://github.com/Jeffreyblay/ezprocess_library" target="_blank">GitHub</a>
+          <a class="proj-link proj-link-ghost" href="https://medium.com/@jeffreyblay7/ezprocess-a-lightweight-python-library-for-geospatial-data-engineering-bb0f90e2b0c3" target="_blank">Read Article</a>
+        </div>
+      </div>
+
+      <!-- Inundation2Depth -->
+      <div class="proj-card proj-card-cv">
+        <div class="proj-num">CV — 04</div>
+        <div class="proj-cat-badge badge-cv">Dataset · Benchmark</div>
+        <div class="proj-title">Inundation2Depth: Geospatial Benchmark Dataset</div>
+        <p class="proj-summary">Curated and built the Inundation2Depth dataset — high-resolution geospatial tiles linking flood inundation extent to measured floodwater depth across 12 hurricane-affected areas in the Carolinas, validated with HEC-RAS hydrodynamic modeling.</p>
+        <div class="outcome-box outcome-box-cv">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">5,925 tiles · 24,649 acres · 256×256 px patches available in raw and normalized versions. Published in Elsevier Data in Brief and available on Zenodo.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ArcPy</span><span class="proj-tag">NumPy</span><span class="proj-tag">Aerial Imagery</span>
+          <span class="proj-tag">HEC-RAS</span><span class="proj-tag">LiDAR</span><span class="proj-tag">ETL pipelines</span>
+          <span class="proj-tag">LiDAR processing</span><span class="proj-tag">Model Training &amp; Evaluation</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-cv" href="https://zenodo.org/records/17308287" target="_blank">Download Data</a>
+          <a class="proj-link proj-link-ghost" href="https://doi.org/10.1016/j.dib.2025.112347" target="_blank">Read Paper</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="cat-divider" id="div-gis">
+
+  <!-- ══ REMOTE SENSING / GIS ══ -->
+  <div class="cat-section active" id="sec-gis">
+    <div class="cat-header">
+      <div class="cat-label label-gis">Remote Sensing &amp; GIS</div>
+      <div class="cat-title">Spatial Analysis at Scale</div>
+      <p class="cat-desc">Geospatial projects applying remote sensing, LiDAR, SAR, and GIS techniques for environmental monitoring, flood risk mapping, urban heat analysis, and infrastructure planning.</p>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- 3D Flood Mapping -->
+      <div class="proj-card proj-card-gis featured" id="rs-gis">
+        <div>
+          <div class="proj-num">GIS — 01</div>
+          <div class="proj-cat-badge badge-gis">Featured · Published</div>
+          <div class="proj-title">3D Flood Depth Mapping &amp; Risk Assessment with ArcPy</div>
+          <p class="proj-summary">Developed a 3D flood map of Hurricane Matthew's impact in settlement areas using UAV high-resolution imagery and LiDAR data. Applied ArcPy spatial statistics and geoprocessing to estimate flood depth from DEMs and delineate flood extent.</p>
+          <div class="outcome-box outcome-box-gis">
+            <div class="outcome-label">Outcome</div>
+            <div class="outcome-val">Mapped flood-risk levels across affected communities. ~32% of developed land, 26% of buildings, and 66% of roads in Greenville, NC found to be flood-affected. Informs emergency response and long-term adaptation planning.</div>
+          </div>
+        </div>
+        <div>
+          <div class="proj-meta-grid">
+            <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-val">ArcGIS Pro, ArcPy</div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Data</div><div class="proj-meta-val">LiDAR-DEM, UAV Imagery, Building footprints, Roads</div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Study Area</div><div class="proj-meta-val">Greenville &amp; Grifton, NC</div></div>
+            <div class="proj-meta-item"><div class="proj-meta-label">Event</div><div class="proj-meta-val">Hurricane Matthew (2016)</div></div>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">ArcPy</span><span class="proj-tag">LiDAR</span>
+            <span class="proj-tag">UAV Imagery</span><span class="proj-tag">DEM</span>
+            <span class="proj-tag">Infrastructure Risk Mapping</span><span class="proj-tag">3D Mapping</span>
+          </div>
+          <div class="proj-links">
+            <a class="proj-link proj-link-primary-gis" href="https://ieeexplore.ieee.org/document/10640634" target="_blank">Published Paper</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Urban Heat -->
+      <div class="proj-card proj-card-gis">
+        <div class="proj-num">GIS — 02</div>
+        <div class="proj-cat-badge badge-gis">Research · Yale</div>
+        <div class="proj-title">Urban Heat Vulnerability Analysis — New Haven, CT</div>
+        <p class="proj-summary">Block-level geospatial analysis comparing street-tree data, land surface temperature, and NDVI with built-environment characteristics in New Haven, CT to support equitable urban planning and climate resilience efforts.</p>
+        <div class="outcome-box outcome-box-gis">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Actionable insights on urban heat exposure and tree canopy gaps. Data-driven recommendations for tree-planting strategies and environmental justice initiatives in Connecticut.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ArcGIS Pro</span><span class="proj-tag">ArcPy</span>
+          <span class="proj-tag">NDVI</span><span class="proj-tag">LST</span><span class="proj-tag">R (sp, dplyr)</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="projects-gis.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- LiDAR Point Cloud -->
+      <div class="proj-card proj-card-gis">
+        <div class="proj-num">GIS — 03</div>
+        <div class="proj-cat-badge badge-gis">Spatial Analysis</div>
+        <div class="proj-title">LiDAR Point Cloud Analysis for Building Height Estimation</div>
+        <p class="proj-summary">Processed and analyzed 3D LiDAR point cloud datasets in ArcGIS Pro to derive surface elevations and extract accurate building height metrics for campus structures — supporting spatial modeling and infrastructure assessment.</p>
+        <div class="outcome-box outcome-box-gis">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Accurate building height estimates enabling improved urban planning, 3D visualization, and geospatial analysis. DSM maps produced from raw point cloud data.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ArcGIS Pro</span><span class="proj-tag">LiDAR-Point Cloud</span>
+          <span class="proj-tag">DSM</span><span class="proj-tag">3D Analysis</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="projects-gis.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Urban Building Density -->
+      <div class="proj-card proj-card-gis">
+        <div class="proj-num">GIS — 04</div>
+        <div class="proj-cat-badge badge-gis">Data Engineering · AI-Ready</div>
+        <div class="proj-title">Urban Building Density Mapping — AI Infrastructure Data for Africa</div>
+        <p class="proj-summary">Processed over 60,000 OSM building footprints into 30 m² raster training masks using QGIS, ArcPy, and R — generating high-quality building density datasets to enable deep learning-based urban infrastructure mapping across African cities.</p>
+        <div class="outcome-box outcome-box-gis">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">60,000+ OSM footprints → gridded raster masks ready for DL training. Supports AI-based urban infrastructure mapping and density modeling across Sub-Saharan Africa.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">QGIS</span><span class="proj-tag">ArcPy</span>
+          <span class="proj-tag">OSM</span><span class="proj-tag">R</span><span class="proj-tag">Raster Masks</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-gis" href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank">Related Paper</a>
+        </div>
+      </div>
+
+      <!-- Field Mapping -->
+      <div class="proj-card proj-card-gis">
+        <div class="proj-num">GIS — 05</div>
+        <div class="proj-cat-badge badge-gis">Field Data · Ghana</div>
+        <div class="proj-title">Integrated Field Mapping &amp; Real-Time Monitoring System — Ghana</div>
+        <p class="proj-summary">Built and deployed an integrated ArcGIS Field Maps + Dashboards workflow to capture ground-truth data for 600+ buildings in Ghana in real time, enabling quality control and preliminary spatial analysis during active field surveys.</p>
+        <div class="outcome-box outcome-box-gis">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">300+ ground-truth records collected. 70% improvement in data collection efficiency and accuracy. Real-time monitoring dashboard enabled immediate quality control during field operations.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ArcGIS Field Maps</span><span class="proj-tag">ArcGIS Online</span>
+          <span class="proj-tag">Dashboards</span><span class="proj-tag">Ghana</span><span class="proj-tag">Data Synchronization</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="projects-gis.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Fire Emergency -->
+      <div class="proj-card proj-card-gis">
+        <div class="proj-num">GIS — 06</div>
+        <div class="proj-cat-badge badge-gis">Urban Safety</div>
+        <div class="proj-title">Fire Emergency Response Optimization — Accra, Ghana</div>
+        <p class="proj-summary">Analyzed fire truck accessibility and optimized emergency response coverage in Accra's Central Business District using ArcGIS Pro network analysis, evaluated against NFPA distance standards to identify critical coverage gaps.</p>
+        <div class="outcome-box outcome-box-gis">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Identified areas where fire stations exceed recommended coverage distances. Spatial gap analysis informing strategic placement recommendations for improved emergency response.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ArcGIS Pro</span><span class="proj-tag">Network Analysis</span>
+          <span class="proj-tag">NFPA Standards</span><span class="proj-tag">Accra</span>
+          <span class="proj-tag">Fire Emergency Response</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="projects-gis.html">View Details</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="cat-divider" id="div-analytics">
+
+  <!-- ══ DATA ANALYTICS ══ -->
+  <div class="cat-section active" id="sec-analytics">
+    <div class="cat-header">
+      <div class="cat-label label-analytics">Data Analytics</div>
+      <div class="cat-title">From Raw Data to Clear Insight</div>
+      <p class="cat-desc">Statistical analysis, text mining, and visualization projects that transform raw datasets into decision-relevant insights — using R, Python, and multivariate modeling techniques.</p>
+    </div>
+
+    <div class="proj-grid triple" id="analytics">
+
+      <!-- Text Mining -->
+      <div class="proj-card proj-card-analytics">
+        <div class="proj-num">DA — 01</div>
+        <div class="proj-cat-badge badge-analytics">Text Mining · R</div>
+        <div class="proj-title">Text Data Mining of Flood Depth Research Literature</div>
+        <p class="proj-summary">Applied R text analytics to a corpus of flood depth estimation research papers — extracting dominant methods, evaluation metrics, and relationships between flood types and data variables using network graphs and word clouds.</p>
+        <div class="outcome-box outcome-box-analytics">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Network graphs revealing flood type × data variable interactions. Word clouds of dominant depth methods and evaluation metrics. Insights directly informing own ML model selection.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">R</span><span class="proj-tag">wordcloud2</span>
+          <span class="proj-tag">tidygraph</span><span class="proj-tag">FactoMineR</span><span class="proj-tag">ggplot2</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="project-analytics.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Multivariate Environmental -->
+      <div class="proj-card proj-card-analytics">
+        <div class="proj-num">DA — 02</div>
+        <div class="proj-cat-badge badge-analytics">Multivariate Analysis · R</div>
+        <div class="proj-title">Multivariate Environmental Index Prediction — 38-Country Survey</div>
+        <p class="proj-summary">Analyzed global environmental survey data (31,000 responses across 38 countries) using GLM and two-way ANOVA to identify key predictors of environmental index — providing insights for policy, sustainability, and environmental strategy.</p>
+        <div class="outcome-box outcome-box-analytics">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Education, Age, Gender, and Country identified as most impactful predictors. Interaction plots and residual diagnostics validated model fit for environmental policy assessment.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">R</span><span class="proj-tag">GLM</span>
+          <span class="proj-tag">ANOVA</span><span class="proj-tag">car library</span><span class="proj-tag">ggplot2</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="projects-analytics.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Movie ROI -->
+      <div class="proj-card proj-card-analytics">
+        <div class="proj-num">DA — 03</div>
+        <div class="proj-cat-badge badge-analytics">Statistical Analysis · R</div>
+        <div class="proj-title">Movie Genre ROI Analytics</div>
+        <p class="proj-summary">Analyzed profitability of the six most prevalent movie genres by comparing percentage returns (revenue/budget × 100) using one-way ANOVA to statistically compare profit returns and uncover patterns for production and investment decisions.</p>
+        <div class="outcome-box outcome-box-analytics">
+          <div class="outcome-label">Outcome</div>
+          <div class="outcome-val">Significant ROI differences identified between genres via one-way ANOVA. Strip plots and mean/CI visualizations communicated actionable insights for strategic film investment decisions.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">R</span><span class="proj-tag">lattice</span>
+          <span class="proj-tag">ANOVA</span><span class="proj-tag">plotrix</span><span class="proj-tag">car</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-ghost" href="project-analytics.html">View Details</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="cat-divider" id="div-apps">
+
+  <!-- ══ BUILT APPLICATIONS ══ -->
+  <div class="cat-section active" id="sec-apps">
+    <div class="cat-header">
+      <div class="cat-label label-apps">Built Applications</div>
+      <div class="cat-title">Production Systems</div>
+      <p class="cat-desc">Full-stack data engineering and analytics applications deployed in production — combining robust backends, ETL pipelines, and interactive frontends to solve real-world problems at scale.</p>
+    </div>
+
+    <div class="proj-grid single">
+
+      <!-- Climate Dashboard -->
+      <div class="proj-card proj-card-apps" id="apps">
+        <div class="proj-num">APP — 01</div>
+        <div class="proj-cat-badge badge-apps">Live · Production</div>
+        <div class="proj-title">Climate &amp; Extreme Weather Alert Dashboard</div>
+        <p class="proj-summary">A full-stack web application providing real-time weather monitoring and risk assessment by ingesting live National Weather Service alerts, processing them through a custom ETL pipeline, and delivering actionable insights via an interactive analytics dashboard. Built with FastAPI backend, custom risk-scoring algorithms, and CI/CD deployment via Docker and GitHub Actions.</p>
+
+        <div class="proj-meta-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
+          <div class="proj-meta-item"><div class="proj-meta-label">Alerts Processed</div><div class="proj-meta-val">1,000+ active</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Coverage</div><div class="proj-meta-val">50 U.S. states</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">API Response</div><div class="proj-meta-val">&lt;500ms</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Uptime</div><div class="proj-meta-val">99%</div></div>
+        </div>
+
+        <div class="outcome-box outcome-box-apps" style="margin-top:20px;">
+          <div class="outcome-label">Key Features</div>
+          <div class="outcome-val">RESTful API with multi-parameter filtering · Custom severity risk-scoring algorithm · Real-time analytics dashboard with 6+ computed metrics · Docker deployment with automated CI/CD on Render &amp; GitHub Pages</div>
+        </div>
+
+        <div class="proj-tags" style="margin-top:0;">
+          <span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span>
+          <span class="proj-tag">JavaScript</span><span class="proj-tag">HTML/CSS</span>
+          <span class="proj-tag">Docker</span><span class="proj-tag">CI/CD</span>
+          <span class="proj-tag">RESTful API</span><span class="proj-tag">GitHub Actions</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-apps" href="https://jeffreyblay.github.io/climate-alert-dashboard/" target="_blank">Live Dashboard</a>
+          <a class="proj-link proj-link-ghost" href="https://github.com/Jeffreyblay/climate-alert-etl" target="_blank">GitHub</a>
+          <a class="proj-link proj-link-ghost" href="https://climate-alert-etl.onrender.com/docs" target="_blank">API Docs</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /proj-body -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="talks.html">Talks</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script>
+function switchCat(cat, btn) {
+  // update tab styles
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const sections = ['cv','gis','analytics','apps'];
+
+  if(cat === 'all'){
+    sections.forEach(s => {
+      document.getElementById('sec-'+s).classList.add('active');
+      const div = document.getElementById('div-'+s);
+      if(div) div.style.display = '';
+    });
+  } else {
+    sections.forEach(s => {
+      const sec = document.getElementById('sec-'+s);
+      const div = document.getElementById('div-'+s);
+      if(s === cat){
+        sec.classList.add('active');
+      } else {
+        sec.classList.remove('active');
+      }
+      if(div) div.style.display = 'none';
+    });
+  }
+
+  // scroll to top of content
+  document.querySelector('.proj-body').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// handle anchor links from homepage (e.g. projects.html#cv)
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#','');
+  const catMap = {cv:'cv', 'rs-gis':'gis', analytics:'analytics', apps:'apps'};
+  if(hash && catMap[hash]){
+    const cat = catMap[hash];
+    const btn = document.querySelector(`.cat-tab[data-cat="${cat}"]`);
+    if(btn) switchCat(cat, btn);
+    setTimeout(() => {
+      const el = document.getElementById(hash);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+});
+</script>
+</body>
+</html>

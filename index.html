@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeffrey Blay — Geospatial Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;
+  --ink2:#12181f;
+  --ink3:#1c2530;
+  --white:#ffffff;
+  --amber:#d97706;
+  --amber-g:#f59e0b;
+  --amber-dim:rgba(217,119,6,0.12);
+  --teal:#0d9488;
+  --muted:rgba(255,255,255,0.55);
+  --muted2:rgba(255,255,255,0.75);
+  --lmuted:#5a6478;
+  --lmuted2:#8892a4;
+  --surf:#f2f4f7;
+  --surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --grid-l:rgba(8,11,15,0.05);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{
+  font-family:var(--ff-display);font-size:16px;font-weight:800;
+  color:var(--white);letter-spacing:-0.01em;text-decoration:none;
+}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--amber-g);}
+.nav-links a.active{color:var(--amber-g);}
+.nav-cta{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.1em;padding:8px 18px;border-radius:3px;
+  background:var(--amber);color:var(--ink);text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;background:var(--ink);
+  display:flex;align-items:center;
+  padding:100px 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--grid-d) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-5%;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(217,119,6,0.15) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-20%;left:-5%;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(13,148,136,0.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:1;
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;
+}
+.hero-left{}
+.hero-eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
+  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';display:inline-block;width:28px;height:1px;background:var(--amber-g);}
+.hero h1{
+  font-family:var(--ff-display);
+  font-size:clamp(4rem,7vw,6.5rem);
+  font-weight:800;line-height:1.02;
+  color:var(--white);letter-spacing:-0.03em;
+  margin-bottom:8px;
+}
+.hero h1 .acc{color:var(--amber-g);}
+.hero-tagline{
+  font-family:var(--ff-mono);font-size:13px;
+  color:var(--amber);letter-spacing:0.08em;
+  margin-bottom:28px;margin-top:14px;
+}
+.hero-bio{
+  font-size:16px;line-height:1.82;
+  color:rgba(255,255,255,0.58);
+  margin-bottom:40px;max-width:560px;
+}
+.hero-bio strong{color:rgba(255,255,255,0.88);font-weight:700;}
+.hero-btns{display:flex;gap:12px;margin-bottom:60px;flex-wrap:wrap;}
+.btn-primary{
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.06em;padding:12px 24px;border-radius:3px;
+  background:var(--amber);color:var(--ink);
+  text-decoration:none;border:none;cursor:pointer;
+  transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--amber-g);transform:translateY(-2px);}
+.btn-ghost{
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.06em;padding:12px 24px;border-radius:3px;
+  background:transparent;color:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.18);
+  text-decoration:none;cursor:pointer;
+  transition:border-color .2s,color .2s,transform .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:var(--white);transform:translateY(-2px);}
+
+/* stat strip */
+.hero-stats{
+  display:flex;gap:0;
+  border-top:1px solid rgba(255,255,255,0.07);
+  padding-top:36px;
+}
+.hstat{
+  flex:1;padding-right:24px;margin-right:24px;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.hstat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.hstat-num{
+  font-family:var(--ff-display);font-size:2.4rem;font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:4px;
+}
+.hstat-num span{color:var(--amber-g);}
+.hstat-lbl{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+
+/* hero right — research focus card */
+.hero-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:4px;padding:32px;
+}
+.hero-card-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-card-label::before{content:'';width:5px;height:5px;background:var(--amber);border-radius:50%;}
+.focus-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.focus-item:last-child{border-bottom:none;padding-bottom:0;}
+.focus-icon{
+  width:32px;height:32px;border-radius:3px;flex-shrink:0;
+  background:var(--amber-dim);border:1px solid rgba(217,119,6,0.2);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.focus-icon svg{width:14px;height:14px;stroke:var(--amber-g);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.focus-text{}
+.focus-title{
+  font-family:var(--ff-display);font-size:13px;font-weight:700;
+  color:var(--white);margin-bottom:3px;
+}
+.focus-sub{font-size:12px;line-height:1.55;color:rgba(255,255,255,0.38);}
+
+/* scroll cue */
+.scroll-cue{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;color:rgba(255,255,255,0.2);
+  animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-cue::after{content:'';width:1px;height:28px;background:linear-gradient(to bottom,rgba(255,255,255,0.2),transparent);}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+
+/* ── SECTION SHARED ── */
+.section-label{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--amber);}
+.section-label.dark-amber{color:var(--amber);}
+
+.view-all{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--amber);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:gap .2s;
+}
+.view-all::after{content:'→';}
+.view-all:hover{gap:10px;}
+
+/* ── SKILLS ── */
+.skills{
+  background:var(--ink2);padding:96px 40px;
+  position:relative;overflow:hidden;
+}
+.skills-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.022) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;
+}
+.skills-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.skills-head{margin-bottom:48px;}
+.skills-title{
+  font-family:var(--ff-display);
+  font-size:clamp(2.2rem,4vw,3.4rem);
+  font-weight:700;color:var(--white);
+  letter-spacing:-0.02em;margin-top:8px;
+}
+.skills-title em{color:var(--amber-g);font-style:normal;}
+.skill-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.skill-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px 24px;position:relative;
+  transition:background .22s;cursor:default;
+}
+.skill-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.skill-card:hover::before{transform:scaleX(1);}
+.skill-card:hover{background:rgba(255,255,255,0.05);}
+.skill-cat{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:var(--amber);letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+.skill-cat::before{content:'';width:5px;height:5px;background:var(--amber);border-radius:50%;}
+.skill-card h3{
+  font-family:var(--ff-display);font-size:1rem;font-weight:700;
+  color:var(--white);margin-bottom:16px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{
+  font-family:var(--ff-mono);font-size:10px;padding:4px 9px;
+  border-radius:2px;background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.07);
+  transition:all .18s;
+}
+.tag:hover{background:var(--amber-dim);color:var(--amber-g);border-color:rgba(217,119,6,0.28);}
+
+/* ── ABOUT / TIMELINE ── */
+.about{background:var(--white);padding:96px 40px;}
+.about-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+}
+.about-left h2{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,3.5vw,2.8rem);
+  font-weight:700;color:var(--ink);
+  line-height:1.15;letter-spacing:-0.02em;
+  margin-bottom:24px;margin-top:8px;
+}
+.about-left h2 em{color:var(--amber);font-style:normal;display:block;}
+.about-left p{
+  font-size:15px;line-height:1.82;color:var(--lmuted);margin-bottom:14px;
+}
+.about-left p strong{color:var(--ink3);font-weight:700;}
+.edu-block{
+  margin-top:28px;padding-top:24px;
+  border-top:1px solid var(--surf2);
+}
+.edu-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:14px;
+}
+.edu-item{
+  display:flex;gap:14px;padding:10px 0;
+  border-bottom:1px solid var(--surf2);
+}
+.edu-item:last-child{border-bottom:none;}
+.edu-year{
+  font-family:var(--ff-mono);font-size:10px;color:var(--lmuted2);
+  min-width:38px;padding-top:2px;letter-spacing:0.04em;
+}
+.edu-details{}
+.edu-deg{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:1px;}
+.edu-inst{font-family:var(--ff-mono);font-size:11px;color:var(--lmuted2);letter-spacing:0.04em;}
+
+/* timeline */
+.tl{display:flex;flex-direction:column;position:relative;}
+.tl::before{
+  content:'';position:absolute;left:8px;top:14px;bottom:0;
+  width:1px;background:var(--surf2);
+}
+.tl-item{display:flex;gap:22px;padding-bottom:32px;position:relative;}
+.tl-dot{
+  flex-shrink:0;width:17px;height:17px;border-radius:50%;
+  background:var(--white);border:2px solid var(--surf2);
+  margin-top:2px;z-index:1;transition:border-color .2s;
+}
+.tl-item:hover .tl-dot{border-color:var(--amber);}
+.tl-dot.active{background:var(--amber);border-color:var(--amber);}
+.tl-year{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:var(--amber);letter-spacing:0.1em;margin-bottom:4px;
+}
+.tl-role{
+  font-family:var(--ff-display);font-size:.97rem;font-weight:700;
+  color:var(--ink);margin-bottom:2px;
+}
+.tl-org{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--lmuted2);margin-bottom:8px;letter-spacing:0.04em;
+}
+.tl-desc{font-size:13px;line-height:1.68;color:var(--lmuted);}
+
+/* ── PUBLICATIONS ── */
+.pubs{background:var(--surf);padding:96px 40px;}
+.pubs-inner{max-width:1100px;margin:0 auto;}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:40px;flex-wrap:wrap;gap:16px;
+}
+.section-head h2{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,3vw,2.8rem);
+  font-weight:700;color:var(--ink);letter-spacing:-0.02em;
+  margin-top:8px;
+}
+.pub-list{display:flex;flex-direction:column;gap:2px;}
+.pub-card{
+  background:var(--white);border:1px solid var(--surf2);
+  padding:24px 28px;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;gap:20px;
+  text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.pub-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--amber);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;
+}
+.pub-card:hover{border-color:rgba(217,119,6,0.22);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.pub-card:hover::after{transform:scaleY(1);}
+.pub-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.badge-journal{color:var(--teal);}
+.badge-conf{color:var(--amber);}
+.pub-year{color:var(--lmuted2);margin-left:6px;}
+.pub-venue-name{color:inherit;}
+.pub-title{
+  font-family:var(--ff-display);font-size:1rem;font-weight:700;
+  color:var(--ink);line-height:1.35;margin-bottom:6px;
+}
+.pub-excerpt{font-size:12.5px;line-height:1.6;color:var(--lmuted2);}
+.pub-arrow{
+  font-size:18px;color:var(--surf2);
+  transition:color .2s,transform .2s;font-weight:300;
+}
+.pub-card:hover .pub-arrow{color:var(--amber);transform:translateX(4px);}
+
+/* ── TALKS STRIP ── */
+.talks{background:var(--ink3);padding:96px 40px;position:relative;overflow:hidden;}
+.talks-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:56px 56px;pointer-events:none;
+}
+.talks-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.talks-head h2{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,3vw,2.8rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;margin-top:8px;
+}
+.talks-grid-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-top:40px;
+}
+.talk-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:26px 22px;
+  transition:background .2s,border-color .2s;
+  cursor:default;
+}
+.talk-card:hover{background:rgba(255,255,255,0.055);border-color:rgba(217,119,6,0.22);}
+.talk-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.talk-year{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  color:var(--amber);letter-spacing:0.1em;
+}
+.talk-type{
+  font-family:var(--ff-mono);font-size:10px;
+  color:rgba(255,255,255,0.25);letter-spacing:0.08em;text-transform:uppercase;
+}
+.talk-title{
+  font-family:var(--ff-display);font-size:.97rem;font-weight:700;
+  color:var(--white);line-height:1.35;margin-bottom:8px;
+}
+.talk-venue{
+  font-size:12px;color:rgba(255,255,255,0.36);
+  margin-bottom:6px;
+}
+.talk-loc{
+  font-family:var(--ff-mono);font-size:10px;
+  color:rgba(255,255,255,0.22);letter-spacing:0.06em;
+}
+
+/* ── PROJECTS ── */
+.projects{background:var(--ink);padding:96px 40px;position:relative;overflow:hidden;}
+.proj-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.projects-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.proj-head h2{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,3vw,2.8rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;margin-top:8px;
+}
+.proj-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-top:40px;
+}
+.proj-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  padding:28px 24px;border-radius:2px;
+  transition:all .25s;text-decoration:none;display:block;
+}
+.proj-card:hover{
+  background:rgba(255,255,255,0.07);
+  border-color:rgba(217,119,6,0.28);
+  transform:translateY(-4px);
+}
+.proj-num{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:0.12em;color:rgba(255,255,255,0.16);margin-bottom:18px;
+}
+.proj-cat{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:10px;
+}
+.proj-title{
+  font-family:var(--ff-display);font-size:1.02rem;font-weight:700;
+  color:var(--white);line-height:1.3;margin-bottom:10px;
+}
+.proj-excerpt{
+  font-size:12.5px;line-height:1.68;
+  color:rgba(255,255,255,0.38);margin-bottom:22px;
+}
+.proj-cta{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.08em;color:var(--amber);
+  display:inline-flex;align-items:center;gap:5px;transition:gap .18s;
+}
+.proj-cta::after{content:'→';}
+.proj-card:hover .proj-cta{gap:9px;}
+
+/* ── CONTACT ── */
+.contact{background:var(--amber);padding:72px 40px;}
+.contact-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:40px;
+}
+.contact h2{
+  font-family:var(--ff-display);
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;color:var(--ink);
+  letter-spacing:-0.02em;line-height:1.12;max-width:460px;
+}
+.contact-links{display:flex;flex-direction:column;gap:10px;}
+.c-link{
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;
+  letter-spacing:0.06em;color:var(--ink);text-decoration:none;
+  display:flex;align-items:center;gap:10px;
+  padding:11px 20px;background:rgba(0,0,0,0.08);
+  border:1px solid rgba(0,0,0,0.1);border-radius:3px;
+  transition:background .2s,transform .2s;
+}
+.c-link:hover{background:rgba(0,0,0,0.14);transform:translateX(4px);}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{
+  font-family:var(--ff-display);font-size:14px;font-weight:800;
+  color:var(--white);
+}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:0.08em;color:rgba(255,255,255,0.22);
+}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(255,255,255,0.3);
+  text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── ENTRANCE ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-left>*{animation:fadeUp .65s ease both;}
+.hero-eyebrow{animation-delay:.05s;}
+.hero h1{animation-delay:.15s;}
+.hero-tagline{animation-delay:.22s;}
+.hero-bio{animation-delay:.3s;}
+.hero-btns{animation-delay:.38s;}
+.hero-stats{animation-delay:.46s;}
+.hero-card{animation:fadeUp .65s .28s ease both;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:48px;}
+  .hero-card{display:none;}
+  .about-inner{grid-template-columns:1fr;gap:48px;}
+  .skill-grid{grid-template-columns:repeat(2,1fr);}
+  .talks-grid-cards{grid-template-columns:repeat(2,1fr);}
+  .proj-cards{grid-template-columns:repeat(2,1fr);}
+  .nav-links{display:none;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;}
+  .hero{padding:90px 20px 60px;}
+  .hero-stats{flex-wrap:wrap;gap:20px;}
+  .hstat{flex:0 0 calc(50% - 10px);border-right:none;margin-right:0;padding-right:0;}
+  .skill-grid{grid-template-columns:1fr;}
+  .talks-grid-cards{grid-template-columns:1fr;}
+  .proj-cards{grid-template-columns:1fr;}
+  .about{padding:72px 20px;}
+  .pubs{padding:72px 20px;}
+  .talks{padding:72px 20px;}
+  .projects{padding:72px 20px;}
+  .skills{padding:72px 20px;}
+  .contact{padding:56px 20px;}
+  .footer{padding:24px 20px;}
+  .pub-card{grid-template-columns:1fr;}
+  .pub-arrow{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">PhD Candidate, NC A&T · Ms, Yale School of the Environment </div>
+      <h1>Jeffrey<br><span class="acc">Blay.</span></h1>
+      <div class="hero-tagline">// Geospatial Data Scientist &amp; Engineer</div>
+      <p class="hero-bio">
+        I build <strong> scalable AI-driven frameworks</strong> that transform raw spatial and non-spatial data into actionable intelligence — from satellite imagery to predictive risk models. My work sits at the intersection of geospatial engineering, machine/deep learning, spatial statistics and analytics, and evidence-based decision-making</strong>.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="publications.html">View Publications</a>
+        <a class="btn-ghost" href="projects.html">Explore Projects</a>
+        <a class="btn-ghost" href="cv.html">Download CV</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-num">10<span>+</span></div>
+          <div class="hstat-lbl">Publications</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">11</div>
+          <div class="hstat-lbl">Talks &amp; Conferences</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">6<span>+</span></div>
+          <div class="hstat-lbl">Years of Experience</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">3</div>
+          <div class="hstat-lbl">NASA Fellowships</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-label">Research Focus</div>
+
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="focus-text">
+          <div class="focus-title">AI-based Depth Modeling</div>
+          <div class="focus-sub">Physics-informed CNNs &amp; transformers for urban floodwater depth mapping from aerial + LiDAR data</div>
+        </div>
+      </div>
+
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <div class="focus-text">
+          <div class="focus-title">Multi-modal Data Fusion</div>
+          <div class="focus-sub">Multi-resolution SAR + optical data fusion with deep learning architectures for flood segmentation</div>
+        </div>
+      </div>
+
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="focus-text">
+          <div class="focus-title">Geospatial Data Engineering</div>
+          <div class="focus-sub">Python ETL pipelines, benchmark dataset creation, and cloud-based geospatial ML workflows</div>
+        </div>
+      </div>
+
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </div>
+        <div class="focus-text">
+          <div class="focus-title">Infrastructure Risk &amp; Vulnerability Assessment</div>
+          <div class="focus-sub">Building density mapping, urban heat, and electricity infrastructure analysis across African cities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">scroll</div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="skills-grid-bg"></div>
+  <div class="skills-inner">
+    <div class="skills-head">
+      <div class="section-label" style="color:var(--amber-g)">Technical Stack</div>
+      <div class="skills-title">Built for <em>data science, engineering,</em> &amp; <em>spatial analytics</em></div>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="skill-cat">Geospatial &amp; GIS</div>
+        <h3>Spatial Analysis</h3>
+        <div class="tags">
+          <span class="tag">ArcGIS ecosystem</span><span class="tag">QGIS</span>
+          <span class="tag">MapInfo</span><span class="tag">PostGIS</span>
+          <span class="tag">GeoPandas</span><span class="tag">GDAL/OGR</span>
+          <span class="tag">Shapely</span><span class="tag">Leaflet</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Remote Sensing</div>
+        <h3>Earth Observation</h3>
+        <div class="tags">
+          <span class="tag">Google Earth Engine</span><span class="tag">SNAP</span>
+          <span class="tag">ENVI</span><span class="tag">Multispectral</span>
+          <span class="tag">Hyperspectral</span><span class="tag">LIDAR</span>
+          <span class="tag">Satellite Altimetry</span><span class="tag">UAVSAR/SAR Analysis</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Deep Learning</div>
+        <h3>Computer Vision &amp; AI</h3>
+        <div class="tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
+          <span class="tag">scikit-learn</span><span class="tag">CNNs</span>
+          <span class="tag">Transformer</span><span class="tag">RNNs</span>
+          <span class="tag">cGAN</span><span class="tag">Physics-Informed NN</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Data Engineering</div>
+        <h3>Pipelines &amp; Cloud</h3>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">SQL</span>
+          <span class="tag">Apache Spark </span><span class="tag">AWS S3</span>
+          <span class="tag">IBM DB2 </span><span class="tag">RDBMS</span>
+          <span class="tag">MySQL</span><span class="tag">postgreSQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Analytics &amp; Viz</div>
+        <h3>Data Storytelling</h3>
+        <div class="tags">
+          <span class="tag">R </span><span class="tag">Power BI</span>
+          <span class="tag">Tableau</span><span class="tag">Seaborn</span>
+          <span class="tag">Folium</span><span class="tag">ArcGIS Dashboards &amp; StoryMaps</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Research</div>
+        <h3>Academic &amp; Applied</h3>
+        <div class="tags">
+          <span class="tag">Flood Risk Modeling</span><span class="tag">Predictive Analytics</span>
+          <span class="tag">Spatial Statistics</span><span class="tag">ETL pipelines</span>
+          <span class="tag">Benchmark Datasets</span><span class="tag">Field Data Collection</span>
+          <span class="tag">Infrastructure Vulnerability Assessment</span><span class="tag">Web Scraping</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / TIMELINE -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="section-label dark-amber">About Me</div>
+      <h2>Turning pixels into <em>operational intelligence.</em></h2>
+      <p>
+        I'm a <strong>PhD candidate at NC A&T State University</strong>,in Applied Science and Technology (expected December 2026). I hold an MS in Environmental Data Science from <strong>Yale School of the Environment</strong> and a BS in Geography from the <strong>University of Ghana</strong>.
+      </p>
+      <p>
+        I build geospatial AI systems that turn raw Earth data into real-world decisions. Over the past 6+ years, I have developed scalable machine learning frameworks using satellite/UAV imagery and other spatial data. My PhD research work focuses on urban flood prediction, where I design physics-informed deep learning frameworks to improve how flood depth risk is quantified and acted on.  
+      </p>
+      <p>
+        I am comfortable across the full stack- data engineering, modeling, and deployment, and have experience translating research into production-ready pipelines and scalable analytics platforms.
+      </p>
+      <p>
+        My broader goal is to advance reliable, scalable methods that bridge geospatial AI research and real-world applications.
+      </p>
+
+      <div class="edu-block">
+        <div class="edu-label">Education</div>
+        <div class="edu-item">
+          <div class="edu-year">2026</div>
+          <div class="edu-details">
+            <div class="edu-deg">PhD in Applied Science &amp; Technology</div>
+            <div class="edu-inst">North Carolina A&T State University</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2023</div>
+          <div class="edu-details">
+            <div class="edu-deg">MS in Environmental Data Science</div>
+            <div class="edu-inst">Yale School of the Environment</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2019</div>
+          <div class="edu-details">
+            <div class="edu-deg">BS in Geography</div>
+            <div class="edu-inst">University of Ghana</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label dark-amber">Experience</div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-dot active"></div>
+          <div>
+            <div class="tl-year">Fall 2025 – Spring 2026</div>
+            <div class="tl-role">Graduate Research Assistant</div>
+            <div class="tl-org">NC A&T — Remote Sensing &amp; Geospatial Lab</div>
+            <div class="tl-desc">Implementing physics-informed CNN and transformer models for urban floodwater depth prediction. PI: Dr. Leila Hashemi-Beni.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot active"></div>
+          <div>
+            <div class="tl-year">Summer 2025</div>
+            <div class="tl-role">NASA DEAP Data Science Fellow</div>
+            <div class="tl-org">NASA DEAP Institute · NC A&T</div>
+            <div class="tl-desc">Led 3-person team creating the Inundation2Depth benchmark dataset. Created and deployed <em>ezprocess</em>, a Python library for geospatial ML/DL preprocessing.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div>
+            <div class="tl-year">Fall 2024 – Spring 2025</div>
+            <div class="tl-role">Graduate Research Assistant</div>
+            <div class="tl-org">NC A&T — Remote Sensing &amp; Geospatial Lab</div>
+            <div class="tl-desc">Developed Python ETL pipelines with NumPy, Rasterio &amp; ArcPy. Trained U-Net variants and pix2pix cGAN for flood depth prediction from 2D imagery and LiDAR.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div>
+            <div class="tl-year">Summer 2024</div>
+            <div class="tl-role">NASA DEAP Data Science Fellow</div>
+            <div class="tl-org">NASA DEAP Institute · NC A&T</div>
+            <div class="tl-desc">Developed the DeepFlood multi-source dataset for inundated vegetation ML modeling. Processed 700k+ flood data points with NumPy &amp; scikit-learn for Random Forest flood-depth models.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div>
+            <div class="tl-year">Fall 2022 – Spring 2023</div>
+            <div class="tl-role">Graduate Research Assistant</div>
+            <div class="tl-org">Yale — Hixon Center for Urban Ecology</div>
+            <div class="tl-desc">Block-level surface temperature analysis with ArcPy. Time-series UHI &amp; tree cover analysis with R (sp, dplyr, ggplot2) in Connecticut. PI: Dr. Karen Seto.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div>
+            <div class="tl-year">Summer 2022</div>
+            <div class="tl-role">TRI Fellow</div>
+            <div class="tl-org">Yale Tropical Resources Institute</div>
+            <div class="tl-desc">Deployed ArcGIS Field Maps pipeline collecting 300+ ground-truth building records in Ghana. Improved data accuracy by 70%. PI: Dr. Karen Seto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="pubs" id="publications">
+  <div class="pubs-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-label dark-amber">Research</div>
+        <h2>Selected Publications</h2>
+      </div>
+      <a class="view-all" href="publications.html">All 10 publications</a>
+    </div>
+    <div class="pub-list">
+
+      <a class="pub-card" href="https://doi.org/10.3390/rs18010060" target="_blank">
+        <div>
+          <div class="pub-badge badge-journal">
+            <span>● Journal</span><span class="pub-year">2024</span>
+            <span>·</span><span class="pub-venue-name">Remote Sensing – MDPI</span>
+          </div>
+          <div class="pub-title">Geospatial and Deep Learning Approaches for Modeling Floodwater Depth in Urbanized Areas</div>
+          <div class="pub-excerpt">ResNet18 framework achieving 94% R² for flood depth prediction; terrain features improved RMSE by 13%.</div>
+        </div>
+        <div class="pub-arrow">→</div>
+      </a>
+
+      <a class="pub-card" href="https://doi.org/10.1016/j.dib.2025.112347" target="_blank">
+        <div>
+          <div class="pub-badge badge-journal">
+            <span>● Journal</span><span class="pub-year">2025</span>
+            <span>·</span><span class="pub-venue-name">Elsevier – Data in Brief</span>
+          </div>
+          <div class="pub-title">Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation in Urban Areas</div>
+          <div class="pub-excerpt">5,925-tile benchmark dataset covering 24,649 acres across 12 flood-affected areas in the Carolinas.</div>
+        </div>
+        <div class="pub-arrow">→</div>
+      </a>
+
+      <a class="pub-card" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11267202" target="_blank">
+        <div>
+          <div class="pub-badge badge-journal">
+            <span>● Journal</span><span class="pub-year">2025</span>
+            <span>·</span><span class="pub-venue-name">IEEE Access</span>
+          </div>
+          <div class="pub-title">Multi-Resolution Data Fusion for Resilient Flood Mapping</div>
+          <div class="pub-excerpt">UAV RGB + UAVSAR VV fusion achieves 84.9% mean IoU, outperforming single-sensor approaches.</div>
+        </div>
+        <div class="pub-arrow">→</div>
+      </a>
+
+      <a class="pub-card" href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank">
+        <div>
+          <div class="pub-badge badge-journal">
+            <span>● Journal</span><span class="pub-year">2025</span>
+            <span>·</span><span class="pub-venue-name">Elsevier – Remote Sensing Applications</span>
+          </div>
+          <div class="pub-title">Dark Development: Satellite Analysis of Building Density and Electricity Provision in Ghana's Urban Areas</div>
+          <div class="pub-excerpt">21% of Kumasi's urban area shows high building density but limited electricity — U-Net regression on nighttime light imagery.</div>
+        </div>
+        <div class="pub-arrow">→</div>
+      </a>
+
+      <a class="pub-card" href="https://ieeexplore.ieee.org/document/11242913" target="_blank">
+        <div>
+          <div class="pub-badge badge-conf">
+            <span>◆ Conference</span><span class="pub-year">2025</span>
+            <span>·</span><span class="pub-venue-name">IEEE Xplore (IGARSS 2025)</span>
+          </div>
+          <div class="pub-title">Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas</div>
+          <div class="pub-excerpt">U-Net + ResNet-18 achieving RMSE ≈ 0.11, predicting max depths of 4.8 ft in Hurricane Matthew study areas.</div>
+        </div>
+        <div class="pub-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- TALKS -->
+<section class="talks" id="talks">
+  <div class="talks-grid"></div>
+  <div class="talks-inner">
+    <div class="section-head talks-head" style="margin-bottom:0">
+      <div>
+        <div class="section-label" style="color:var(--amber-g)">Conferences &amp; Talks</div>
+        <h2>International Presentations</h2>
+      </div>
+      <a class="view-all" href="talks.html">All 11 talks</a>
+    </div>
+    <div class="talks-grid-cards">
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Aug 2025</span>
+          <span class="talk-type">Symposium</span>
+        </div>
+        <div class="talk-title">2025 IEEE IGARSS</div>
+        <div class="talk-venue">Pixels to Insights: Deep Learning for Floodwater Depth Mapping</div>
+        <div class="talk-loc">Brisbane Convention Centre · Brisbane, Australia</div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Apr 2025</span>
+          <span class="talk-type">Conference</span>
+        </div>
+        <div class="talk-title">2025 ISPRS Geospatial Week</div>
+        <div class="talk-venue">Advanced Geo-Data Analytics &amp; AI for 3D Flood Mapping</div>
+        <div class="talk-loc">Dubai World Trade Center · Dubai, UAE</div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Feb 2025</span>
+          <span class="talk-type">Conference</span>
+        </div>
+        <div class="talk-title">2025 ASPRS &amp; GeoWeek</div>
+        <div class="talk-venue">3D Floodwater Depth Analytics with Big Geo-Data and cGAN</div>
+        <div class="talk-loc">Colorado Convention Center · Denver, CO</div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Dec 2024</span>
+          <span class="talk-type">Conference</span>
+        </div>
+        <div class="talk-title">2024 AGU Annual Meeting</div>
+        <div class="talk-venue">Urban Flood Depth Analytics: Generative Algorithms &amp; Remote Sensing</div>
+        <div class="talk-loc">Walter E. Washington Convention Center · Washington DC</div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Jul 2024</span>
+          <span class="talk-type">Symposium</span>
+        </div>
+        <div class="talk-title">2024 IEEE IGARSS</div>
+        <div class="talk-venue">Flood Impact Risk Mapping from a 3D Perspective: Hurricane Matthew</div>
+        <div class="talk-loc">Megaron Athens International Conference · Athens, Greece</div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-meta">
+          <span class="talk-year">Dec 2023</span>
+          <span class="talk-type">Conference</span>
+        </div>
+        <div class="talk-title">2023 AGU Annual Meeting</div>
+        <div class="talk-venue">Multi-Channel Deep Learning for Flood Detection and Mapping</div>
+        <div class="talk-loc">Moscone Center · San Francisco, CA</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="proj-grid-bg"></div>
+  <div class="projects-inner">
+    <div class="section-head proj-head" style="margin-bottom:0">
+      <div>
+        <div class="section-label" style="color:var(--amber-g)">Portfolio</div>
+        <h2>Featured Projects</h2>
+      </div>
+      <a class="view-all" href="projects.html">All projects</a>
+    </div>
+    <div class="proj-cards">
+
+      <a class="proj-card" href="projects.html#cv">
+        <div class="proj-num">01</div>
+        <div class="proj-cat">Computer Vision</div>
+        <div class="proj-title">Physics-Informed Deep Learning for Urban Flood Depth</div>
+        <div class="proj-excerpt">PI U-Net with hydrostatic terrain penalty achieving 0.67 ft RMSE. Custom total loss functions encoding hydrological constraints.</div>
+        <div class="proj-cta">View project</div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/Jeffreyblay/ezprocess_library" target="_blank">
+        <div class="proj-num">02</div>
+        <div class="proj-cat">Data Engineering</div>
+        <div class="proj-title">EzProcess: Geospatial Data Prep Library for ML/DL</div>
+        <div class="proj-excerpt">Open-source Python library for raster/mask handling, normalization, stacking and pipeline automation for geospatial AI workflows.</div>
+        <div class="proj-cta">View on GitHub</div>
+      </a>
+
+      <a class="proj-card" href="https://jeffreyblay.github.io/climate-alert-dashboard/" target="_blank">
+        <div class="proj-num">03</div>
+        <div class="proj-cat">Full-Stack Application</div>
+        <div class="proj-title">Climate &amp; Extreme Weather Alert Dashboard</div>
+        <div class="proj-excerpt">FastAPI + Docker ETL processing 1,000+ live NWS alerts across 50 states. Sub-500ms API, real-time risk scoring, CI/CD on Render.</div>
+        <div class="proj-cta">View live app</div>
+      </a>
+
+      <a class="proj-card" href="projects.html#rs-gis">
+        <div class="proj-num">04</div>
+        <div class="proj-cat">Remote Sensing / GIS</div>
+        <div class="proj-title">3D Flood Depth Mapping with ArcPy &amp; LiDAR</div>
+        <div class="proj-excerpt">Hurricane Matthew impact mapping using UAV imagery + LiDAR DEMs. Mapped flood risk levels across Greenville, NC communities.</div>
+        <div class="proj-cta">View project</div>
+      </a>
+
+      <a class="proj-card" href="https://zenodo.org/records/17308287" target="_blank">
+        <div class="proj-num">05</div>
+        <div class="proj-cat">Dataset / Benchmark</div>
+        <div class="proj-title">Inundation2Depth Dataset</div>
+        <div class="proj-excerpt">5,925-tile geospatial benchmark linking inundation extent to floodwater depth across 12 hurricane-affected areas in the Carolinas.</div>
+        <div class="proj-cta">Download data</div>
+      </a>
+
+      <a class="proj-card" href="projects.html#analytics">
+        <div class="proj-num">06</div>
+        <div class="proj-cat">Data Analytics</div>
+        <div class="proj-title">Text Mining &amp; Flood Research Analytics with R</div>
+        <div class="proj-excerpt">R-based text analytics (tidyverse, tidygraph, FactoMineR) mapping relationships between flood types, depth methods, and evaluation metrics.</div>
+        <div class="proj-cta">View project</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2>Let's build something with data.</h2>
+    <div class="contact-links">
+      <a class="c-link" href="mailto:jeffreyblay7@gmail.com">✉ jeffreyblay7@gmail.com</a>
+      <a class="c-link" href="https://linkedin.com/in/jeffrey-blay" target="_blank">LinkedIn</a>
+      <a class="c-link" href="https://github.com/Jeffreyblay" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="talks.html">Talks</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{threshold:0.4});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

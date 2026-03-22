@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remote Sensing & GIS Projects — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.10);
+  --teal:#0d9488;--teal-dim:rgba(13,148,136,0.09);
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--ink);padding:110px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-5%;width:580px;height:580px;
+  background:radial-gradient(circle,rgba(13,148,136,0.14) 0%,transparent 65%);pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-20%;left:5%;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(217,119,6,0.07) 0%,transparent 65%);pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--ff-mono);font-size:11px;
+  color:rgba(255,255,255,0.3);margin-bottom:20px;
+}
+.breadcrumb a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--amber-g);}
+.breadcrumb span{color:var(--teal);}
+.eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--teal);}
+.page-hero h1{
+  font-family:var(--ff-display);font-size:clamp(2.8rem,5.5vw,5rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;
+  line-height:1.05;margin-bottom:20px;
+}
+.hero-desc{font-size:16px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:620px;}
+.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+
+/* hero quick-jump */
+.hero-jumps{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:36px;
+  padding-top:36px;border-top:1px solid rgba(255,255,255,0.07);
+}
+.jump-btn{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:7px 14px;border-radius:2px;
+  border:1px solid rgba(13,148,136,0.3);
+  background:rgba(13,148,136,0.07);color:var(--teal);
+  text-decoration:none;transition:all .18s;
+}
+.jump-btn:hover{background:rgba(13,148,136,0.16);border-color:rgba(13,148,136,0.55);}
+
+/* ── STICKY TOC ── */
+.page-body{max-width:1100px;margin:0 auto;padding:72px 40px 100px;display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start;}
+.toc{position:sticky;top:76px;}
+.toc-label{font-family:var(--ff-mono);font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--lmuted2);margin-bottom:14px;}
+.toc-links{display:flex;flex-direction:column;gap:2px;}
+.toc-link{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.05em;padding:8px 12px;border-radius:3px;
+  border:1px solid transparent;background:transparent;
+  color:var(--lmuted);text-decoration:none;
+  transition:all .18s;display:flex;align-items:center;gap:8px;
+}
+.toc-link::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--surf2);flex-shrink:0;transition:background .18s;}
+.toc-link:hover{background:var(--surf);color:var(--ink);}
+.toc-link:hover::before{background:var(--teal);}
+.toc-link.active{background:var(--teal-dim);border-color:rgba(13,148,136,0.22);color:var(--teal);}
+.toc-link.active::before{background:var(--teal);}
+
+.toc-back{
+  margin-top:28px;padding-top:20px;border-top:1px solid var(--surf2);
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.08em;color:var(--amber);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:gap .15s;
+}
+.toc-back:hover{gap:10px;}
+
+/* ── PROJECT ENTRIES ── */
+.proj-entries{display:flex;flex-direction:column;gap:80px;}
+
+.proj-entry{scroll-margin-top:80px;}
+
+/* entry header */
+.entry-header{margin-bottom:32px;}
+.entry-num{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:0.16em;
+  color:var(--lmuted2);margin-bottom:10px;
+}
+.entry-title{
+  font-family:var(--ff-display);
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700;color:var(--ink);
+  letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:14px;
+}
+.entry-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.entry-tag{
+  font-family:var(--ff-mono);font-size:10px;padding:4px 10px;
+  border-radius:2px;background:var(--teal-dim);
+  color:var(--teal);border:1px solid rgba(13,148,136,0.2);
+}
+
+/* OMB grid: objective / method / outcome */
+.omb-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-bottom:36px;
+}
+.omb-card{
+  padding:20px 18px;border:1px solid var(--surf2);
+  position:relative;overflow:hidden;
+}
+.omb-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.omb-obj::before{background:var(--teal);}
+.omb-meth::before{background:var(--amber);}
+.omb-out::before{background:#7c3aed;}
+.omb-label{
+  font-family:var(--ff-mono);font-size:9px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.omb-obj .omb-label{color:var(--teal);}
+.omb-meth .omb-label{color:var(--amber);}
+.omb-out .omb-label{color:#7c3aed;}
+.omb-text{font-size:13px;line-height:1.72;color:var(--lmuted);}
+.omb-text strong{color:var(--ink3);font-weight:500;}
+
+/* image gallery */
+.img-gallery{display:grid;gap:16px;margin-bottom:12px;}
+.img-gallery.two-col{grid-template-columns:1fr 1fr;}
+.img-gallery.one-col{grid-template-columns:1fr;max-width:720px;}
+.img-figure{
+  border:1px solid var(--surf2);overflow:hidden;
+  background:var(--surf);
+}
+.img-figure img{
+  width:100%;height:auto;display:block;
+  transition:transform .4s ease;
+}
+.img-figure:hover img{transform:scale(1.02);}
+.img-caption{
+  padding:10px 14px;
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:0.06em;color:var(--lmuted2);
+  border-top:1px solid var(--surf2);
+  background:var(--white);
+}
+
+/* image placeholder (for when images aren't present yet) */
+.img-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:var(--surf);
+  border:1px dashed var(--surf2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;color:var(--lmuted2);
+}
+.img-placeholder svg{width:32px;height:32px;stroke:var(--surf2);fill:none;stroke-width:1.5;}
+.img-placeholder span{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;}
+
+/* divider between entries */
+.entry-divider{border:none;border-top:1px solid var(--surf2);}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .page-body{grid-template-columns:1fr;gap:40px;padding:48px 24px 80px;}
+  .toc{position:static;}
+  .toc-links{flex-direction:row;flex-wrap:wrap;}
+  .toc-link{padding:6px 10px;}
+  .omb-grid{grid-template-columns:1fr;}
+  .img-gallery.two-col{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .page-hero{padding:90px 20px 56px;}
+  .footer{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="projects.html">Projects</a>
+      <span>›</span>
+      <span>Remote Sensing / GIS</span>
+    </div>
+    <div class="eyebrow">Remote Sensing &amp; GIS</div>
+    <h1>Spatial Analysis<br>at Scale</h1>
+    <p class="hero-desc">
+      Geospatial projects applying <strong>remote sensing, LiDAR, SAR, and GIS techniques</strong> for environmental monitoring, flood risk mapping, urban heat analysis, infrastructure planning, and community-driven spatial documentation.
+    </p>
+    <div class="hero-jumps">
+      <a class="jump-btn" href="#flood-depth">Flood Depth Mapping</a>
+      <a class="jump-btn" href="#lidar">LiDAR Point Cloud</a>
+      <a class="jump-btn" href="#urban-heat">Urban Heat</a>
+      <a class="jump-btn" href="#green-infra">Green Infrastructure</a>
+      <a class="jump-btn" href="#field-mapping">Field Mapping</a>
+      <a class="jump-btn" href="#building-density">Building Density</a>
+      <a class="jump-btn" href="#fire-response">Fire Response</a>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc">
+    <div class="toc-label">Projects</div>
+    <nav class="toc-links">
+      <a class="toc-link active" href="#flood-depth">Flood Depth Mapping</a>
+      <a class="toc-link" href="#lidar">LiDAR Point Cloud</a>
+      <a class="toc-link" href="#urban-heat">Urban Heat</a>
+      <a class="toc-link" href="#green-infra">Green Infrastructure</a>
+      <a class="toc-link" href="#field-mapping">Field Mapping</a>
+      <a class="toc-link" href="#building-density">Building Density</a>
+      <a class="toc-link" href="#fire-response">Fire Response</a>
+    </nav>
+    <a class="toc-back" href="projects.html">← Back to Projects</a>
+  </aside>
+
+  <!-- MAIN ENTRIES -->
+  <main class="proj-entries">
+
+    <!-- 01 FLOOD DEPTH -->
+    <article class="proj-entry" id="flood-depth">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 01</div>
+        <div class="entry-title">Flood Depth Mapping &amp; Risk Assessment with ArcPy</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcPy</span>
+          <span class="entry-tag">LiDAR</span>
+          <span class="entry-tag">UAV Imagery</span>
+          <span class="entry-tag">DEM</span>
+          <span class="entry-tag">Flood Risk</span>
+          <span class="entry-tag">3D Mapping</span>
+          <span class="entry-tag">Hurricane Matthew</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To develop a 3D flood map of Hurricane Matthew's impact in settlement areas using <strong>UAV imagery and LiDAR data</strong>, providing depth estimates for affected communities.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Applied <strong>spatial statistics and geoprocessing tools in ArcPy</strong> to estimate flood depth from DEMs and delineate flood extent across study areas in Greenville and Grifton, NC.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Mapped flood-risk levels across affected communities. ~<strong>32% of developed land, 26% of buildings, and 66% of roads</strong> found to be flood-affected. Actionable insights for emergency response and adaptation planning.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/workflow_depth.png" alt="3D Flood risk mapping workflow" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>workflow_depth.png</span></div><div class=\'img-caption\'>3D Flood risk mapping workflow</div>'">
+          <figcaption class="img-caption">3D Flood risk mapping workflow</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/depth final.png" alt="3D flood risk map" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>depth final.png</span></div><div class=\'img-caption\'>3D flood risk map — Greenville, NC</div>'">
+          <figcaption class="img-caption">3D flood risk map with building footprints and roads — Greenville, NC</figcaption>
+        </figure>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+        <a href="https://isprs-annals.copernicus.org/articles/X-G-2025/159/2025/" target="_blank" style="font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.06em;color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid rgba(13,148,136,0.28);border-radius:2px;background:var(--teal-dim);transition:background .18s;">Published Paper →</a>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 02 LIDAR -->
+    <article class="proj-entry" id="lidar">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 02</div>
+        <div class="entry-title">LiDAR Point Cloud Analysis with ArcGIS Pro</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcGIS Pro</span>
+          <span class="entry-tag">LiDAR</span>
+          <span class="entry-tag">DSM</span>
+          <span class="entry-tag">Point Cloud</span>
+          <span class="entry-tag">3D Analysis</span>
+          <span class="entry-tag">Building Heights</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To estimate <strong>building heights</strong> using 3D LiDAR point cloud data to support spatial modeling and infrastructure assessment for campus structures.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Processed and analyzed LiDAR point cloud datasets in <strong>ArcGIS Pro</strong> to derive surface elevations and extract building height metrics from the raw point cloud.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Produced <strong>accurate building height estimates</strong> and Digital Surface Models (DSM), enabling improved urban planning, 3D visualization, and geospatial analysis.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/surface points.jpg" alt="LiDAR built-up points cloud" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>surface points.jpg</span></div><div class=\'img-caption\'>LiDAR built-up points cloud</div>'">
+          <figcaption class="img-caption">LiDAR built-up points cloud</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/DSM.jpg" alt="Digital Surface Model" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>DSM.jpg</span></div><div class=\'img-caption\'>Digital Surface Model (DSM)</div>'">
+          <figcaption class="img-caption">Digital Surface Model (DSM) map derived from point cloud</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 03 URBAN HEAT -->
+    <article class="proj-entry" id="urban-heat">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 03</div>
+        <div class="entry-title">Urban Heat Vulnerability Analysis — New Haven, CT</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcGIS Pro</span>
+          <span class="entry-tag">ArcPy</span>
+          <span class="entry-tag">NDVI</span>
+          <span class="entry-tag">LST</span>
+          <span class="entry-tag">R (sp, dplyr)</span>
+          <span class="entry-tag">Urban Heat Island</span>
+          <span class="entry-tag">Environmental Justice</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To assess <strong>urban heat patterns and tree canopy coverage</strong> in New Haven, CT to support equitable urban planning and climate resilience efforts.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Conducted <strong>block-level geospatial analysis</strong> comparing street-tree data, land surface temperature (LST), and NDVI with built-environment characteristics using ArcGIS tools and R (sp, dplyr, ggplot2).</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Actionable insights on <strong>urban heat exposure and tree canopy gaps</strong>. Data-driven recommendations for tree-planting strategies and environmental justice initiatives in Connecticut — informing city planning decisions.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/bldn_temp.png" alt="Building and temperature analysis" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>bldn_temp.png</span></div><div class=\'img-caption\'>Building counts and mean temperature</div>'">
+          <figcaption class="img-caption">Building counts and mean temperature (avg. per census block — New Haven)</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/tree-building.png" alt="Tree-building analysis" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>tree-building.png</span></div><div class=\'img-caption\'>Street trees vs building counts</div>'">
+          <figcaption class="img-caption">Comparative analysis of street trees and building counts per census block</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 04 GREEN INFRASTRUCTURE -->
+    <article class="proj-entry" id="green-infra">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 04</div>
+        <div class="entry-title">Community Green Infrastructure Spatial Documentation</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcGIS Pro</span>
+          <span class="entry-tag">ArcGIS Field Maps</span>
+          <span class="entry-tag">ArcScene</span>
+          <span class="entry-tag">Community Mapping</span>
+          <span class="entry-tag">New Haven, CT</span>
+          <span class="entry-tag">Urban Ecology</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To support <strong>community-led green initiatives</strong> by mapping and documenting urban environmental improvements — tree planting and park enhancement activities — in New Haven, CT.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Led community groups in tree planting and park enhancement activities. Mapped project locations and progress using <strong>ArcGIS Pro, ArcGIS Field Maps, and ArcScene</strong> for spatial documentation and visualization.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Enhanced local green spaces and produced a <strong>geospatial record of community initiatives</strong> to guide future planning and long-term environmental stewardship in New Haven neighborhoods.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/Mill River.png" alt="Mill River tree planting" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Mill River.png</span></div><div class=\'img-caption\'>Tree planting initiative — Watson &amp; Bassett St</div>'">
+          <figcaption class="img-caption">Tree planting initiative — Watson &amp; Bassett Street, New Haven, CT</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/Kensington.png" alt="Kensington Park" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Kensington.png</span></div><div class=\'img-caption\'>Kensington Park restoration</div>'">
+          <figcaption class="img-caption">Park management and restoration — Kensington Park, New Haven, CT</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 05 FIELD MAPPING -->
+    <article class="proj-entry" id="field-mapping">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 05</div>
+        <div class="entry-title">Integrated Field Mapping &amp; Real-Time Monitoring System — Ghana</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcGIS Field Maps</span>
+          <span class="entry-tag">ArcGIS Online</span>
+          <span class="entry-tag">Dashboards</span>
+          <span class="entry-tag">Real-Time Monitoring</span>
+          <span class="entry-tag">Ground Truth</span>
+          <span class="entry-tag">Ghana</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To develop a scalable <strong>field data collection system</strong> to capture ground-truth information for 600+ buildings in Ghana, enabling real-time monitoring and quality control.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Built and deployed an integrated workflow using <strong>ArcGIS Pro, ArcGIS Online, Field Maps, and Dashboards</strong> to enable real-time data collection, monitoring, and spatial analysis during active field surveys.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text"><strong>300+ ground-truth records</strong> collected with 70% improvement in data accuracy. Real-time dashboard enabled immediate QA during field operations and preliminary spatial analysis for informed decision-making.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/dashboard.png" alt="Information Dashboard" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>dashboard.png</span></div><div class=\'img-caption\'>Real-time monitoring dashboard</div>'">
+          <figcaption class="img-caption">ArcGIS Information Dashboard for real-time monitoring and preliminary analysis</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/field app.png" alt="ArcGIS Field Maps" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>field app.png</span></div><div class=\'img-caption\'>ArcGIS Field Maps app</div>'">
+          <figcaption class="img-caption">ArcGIS Field Maps app used for ground-truth data collection in Ghana</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 06 BUILDING DENSITY -->
+    <article class="proj-entry" id="building-density">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 06</div>
+        <div class="entry-title">Urban Building Density Mapping — AI Infrastructure Data for Africa</div>
+        <div class="entry-tags">
+          <span class="entry-tag">QGIS</span>
+          <span class="entry-tag">ArcPy</span>
+          <span class="entry-tag">OSM</span>
+          <span class="entry-tag">R</span>
+          <span class="entry-tag">Raster Masks</span>
+          <span class="entry-tag">Deep Learning</span>
+          <span class="entry-tag">African Cities</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To analyze and model <strong>urban building infrastructure across African cities</strong> using AI-driven geospatial methods, generating training data for deep learning models.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Processed <strong>60,000+ OSM building footprints</strong> into 30 m² gridded raster training masks using QGIS, ArcPy, and R to support deep learning model development for urban mapping.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">High-quality <strong>building density datasets</strong> enabling accurate AI-based urban infrastructure mapping across Sub-Saharan Africa. Directly supported the "Dark Development" publication in Elsevier.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/footprint.png" alt="OSM building footprints" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>footprint.png</span></div><div class=\'img-caption\'>30 sq.m gridded OSM building footprints</div>'">
+          <figcaption class="img-caption">30 sq.m gridded OSM building footprints across study area</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/mask.png" alt="Raster mask" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>mask.png</span></div><div class=\'img-caption\'>Raster mask of building area coverage</div>'">
+          <figcaption class="img-caption">Created raster mask of building area coverage per 30 sq.m grid cell</figcaption>
+        </figure>
+      </div>
+
+      <div style="margin-top:8px;">
+        <a href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank" style="font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.06em;color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid rgba(13,148,136,0.28);border-radius:2px;background:var(--teal-dim);">Dark Development Paper →</a>
+      </div>
+    </article>
+
+    <hr class="entry-divider">
+
+    <!-- 07 FIRE RESPONSE -->
+    <article class="proj-entry" id="fire-response">
+      <div class="entry-header">
+        <div class="entry-num">GIS — 07</div>
+        <div class="entry-title">Fire Emergency Response Optimization — Accra, Ghana</div>
+        <div class="entry-tags">
+          <span class="entry-tag">ArcGIS Pro</span>
+          <span class="entry-tag">Network Analysis</span>
+          <span class="entry-tag">NFPA Standards</span>
+          <span class="entry-tag">Emergency Response</span>
+          <span class="entry-tag">Accra</span>
+          <span class="entry-tag">Urban Safety</span>
+        </div>
+      </div>
+
+      <div class="omb-grid">
+        <div class="omb-card omb-obj">
+          <div class="omb-label">Objective</div>
+          <div class="omb-text">To analyze <strong>fire truck accessibility and optimize emergency response coverage</strong> in Accra's Central Business District, Ghana, evaluated against NFPA distance standards.</div>
+        </div>
+        <div class="omb-card omb-meth">
+          <div class="omb-label">Method</div>
+          <div class="omb-text">Mapped optimal fire truck routes and analyzed station coverage using <strong>ArcGIS Pro network analysis and Google Earth</strong>, comparing against National Fire Protection Association (NFPA) response standards.</div>
+        </div>
+        <div class="omb-card omb-out">
+          <div class="omb-label">Outcome</div>
+          <div class="omb-text">Identified <strong>critical coverage gaps</strong> where fire stations exceed recommended distances. Spatial gap analysis informing strategic station placement recommendations to improve emergency response times in Accra.</div>
+        </div>
+      </div>
+
+      <div class="img-gallery two-col">
+        <figure class="img-figure">
+          <img src="images/rs_gis/fire stations.jpg" alt="Fire truck routes analysis" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>fire stations.jpg</span></div><div class=\'img-caption\'>Fire truck routes analysis</div>'">
+          <figcaption class="img-caption">Fire truck routes analysis — Accra Central Business District</figcaption>
+        </figure>
+        <figure class="img-figure">
+          <img src="images/rs_gis/response time.jpg" alt="Response time analysis" onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><svg viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>response time.jpg</span></div><div class=\'img-caption\'>Response time analysis</div>'">
+          <figcaption class="img-caption">Response time analysis highlighting coverage gaps across the study area</figcaption>
+        </figure>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script>
+// Highlight active TOC link on scroll
+const entries = document.querySelectorAll('.proj-entry');
+const tocLinks = document.querySelectorAll('.toc-link');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{threshold:0.3, rootMargin:'-56px 0px -50% 0px'});
+
+entries.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

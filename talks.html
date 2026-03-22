@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talks & Conferences — Jeffrey Blay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
+  --white:#fff;
+  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.12);
+  --teal:#0d9488;
+  --lmuted:#5a6478;--lmuted2:#8892a4;
+  --surf:#f2f4f7;--surf2:#e5e9f0;
+  --grid-d:rgba(255,255,255,0.03);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
+.nav-logo span{color:var(--amber-g);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--amber-g);}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--ink);padding:110px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-5%;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,119,6,0.13) 0%,transparent 65%);pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.eyebrow{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber-g);}
+.page-hero h1{
+  font-family:var(--ff-display);font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;
+  line-height:1.05;margin-bottom:20px;
+}
+.hero-desc{font-size:16px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:600px;}
+.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+
+.hero-stats{display:flex;gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,0.07);padding-top:36px;flex-wrap:wrap;}
+.hstat{flex:1;min-width:110px;padding-right:24px;margin-right:24px;border-right:1px solid rgba(255,255,255,0.07);}
+.hstat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.hstat-num{font-family:var(--ff-display);font-size:2.6rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px;}
+.hstat-num span{color:var(--amber-g);}
+.hstat-lbl{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+
+/* ── MAP SECTION ── */
+.map-section{background:var(--ink2);padding:0;}
+.map-header{
+  max-width:1100px;margin:0 auto;
+  padding:48px 40px 24px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.map-title-block{}
+.map-label{
+  font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.map-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--amber);}
+.map-title{
+  font-family:var(--ff-display);font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:700;color:var(--white);letter-spacing:-0.02em;
+}
+.map-legend{display:flex;gap:20px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.45);}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
+.dot-conf{background:#f59e0b;}
+.dot-symp{background:#2dd4bf;}
+.dot-talk{background:#818cf8;}
+
+#map{
+  width:100%;height:480px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* Leaflet overrides */
+.leaflet-container{background:#0d1420 !important;font-family:var(--ff-mono);}
+.leaflet-tile{filter:brightness(0.72) saturate(0.5) hue-rotate(180deg);}
+.leaflet-control-zoom a{
+  background:rgba(18,24,31,0.95) !important;
+  color:rgba(255,255,255,0.7) !important;
+  border-color:rgba(255,255,255,0.08) !important;
+}
+.leaflet-control-zoom a:hover{background:rgba(30,40,52,0.95) !important;color:var(--amber-g) !important;}
+.leaflet-control-attribution{
+  background:rgba(8,11,15,0.8) !important;
+  color:rgba(255,255,255,0.2) !important;font-size:9px !important;
+}
+.leaflet-control-attribution a{color:rgba(255,255,255,0.3) !important;}
+
+/* Custom popup */
+.talk-popup{min-width:220px;}
+.talk-popup-type{
+  font-family:var(--ff-mono);font-size:9px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.talk-popup-title{
+  font-family:var(--ff-display);font-size:1rem;font-weight:700;
+  color:var(--ink);line-height:1.3;margin-bottom:4px;
+}
+.talk-popup-topic{font-size:11px;color:var(--lmuted);line-height:1.5;margin-bottom:6px;}
+.talk-popup-loc{
+  font-family:var(--ff-mono);font-size:10px;
+  color:var(--lmuted2);letter-spacing:0.04em;
+}
+.leaflet-popup-content-wrapper{
+  border-radius:4px !important;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2) !important;
+  border:1px solid var(--surf2);
+  padding:0 !important;
+}
+.leaflet-popup-content{margin:18px 20px !important;}
+.leaflet-popup-tip{background:var(--white) !important;}
+.leaflet-popup-close-button{color:var(--lmuted2) !important;font-size:18px !important;top:8px !important;right:10px !important;}
+
+/* ── TALKS BODY ── */
+.talks-body{max-width:1100px;margin:0 auto;padding:72px 40px 100px;}
+
+/* filter bar */
+.filter-bar{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:48px;flex-wrap:wrap;
+}
+.filter-btn{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.08em;padding:8px 16px;border-radius:2px;
+  border:1px solid var(--surf2);background:transparent;
+  color:var(--lmuted);cursor:pointer;transition:all .18s;
+}
+.filter-btn:hover{background:var(--surf);color:var(--ink);}
+.filter-btn.active{background:var(--amber-dim);border-color:rgba(217,119,6,0.28);color:var(--amber);}
+.filter-sep{width:1px;height:20px;background:var(--surf2);margin:0 4px;}
+
+/* year groups */
+.year-group{margin-bottom:56px;}
+.year-label{
+  font-family:var(--ff-mono);font-size:11px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.year-label::after{content:'';flex:1;height:1px;background:var(--surf2);}
+
+.talk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+
+.talk-card{
+  border:1px solid var(--surf2);background:var(--white);
+  padding:26px 24px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+  cursor:pointer;
+}
+.talk-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  transform:scaleY(0);transform-origin:bottom;transition:transform .25s;
+}
+.talk-card.type-conference::after{background:var(--amber);}
+.talk-card.type-symposium::after{background:var(--teal);}
+.talk-card.type-talk::after{background:#818cf8;}
+
+.talk-card:hover{border-color:rgba(0,0,0,0.1);box-shadow:0 6px 28px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.talk-card:hover::after{transform:scaleY(1);}
+.talk-card.highlighted{border-color:rgba(217,119,6,0.35);box-shadow:0 0 0 2px rgba(217,119,6,0.12);}
+
+.talk-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;}
+.talk-type-badge{
+  font-family:var(--ff-mono);font-size:9px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;flex-shrink:0;
+}
+.badge-conference{background:var(--amber-dim);color:var(--amber);}
+.badge-symposium{background:rgba(13,148,136,0.1);color:var(--teal);}
+.badge-talk{background:rgba(129,140,248,0.1);color:#818cf8;}
+.talk-date{font-family:var(--ff-mono);font-size:10px;color:var(--lmuted2);letter-spacing:0.06em;white-space:nowrap;}
+
+.talk-conf-name{
+  font-family:var(--ff-display);font-size:1.1rem;font-weight:700;
+  color:var(--ink);line-height:1.28;margin-bottom:8px;
+}
+.talk-topic{
+  font-size:13px;line-height:1.68;color:var(--lmuted);
+  margin-bottom:14px;font-style:italic;
+}
+.talk-venue-loc{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--ff-mono);font-size:10px;
+  color:var(--lmuted2);letter-spacing:0.05em;
+}
+.talk-venue-loc::before{
+  content:'';display:inline-block;width:5px;height:5px;
+  border-radius:50%;background:var(--surf2);flex-shrink:0;
+}
+.talk-card.type-conference .talk-venue-loc::before{background:var(--amber);}
+.talk-card.type-symposium .talk-venue-loc::before{background:var(--teal);}
+.talk-card.type-talk .talk-venue-loc::before{background:#818cf8;}
+
+.talk-link{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:14px;font-family:var(--ff-mono);font-size:10px;font-weight:500;
+  letter-spacing:0.08em;color:var(--amber);text-decoration:none;
+  transition:gap .15s;
+}
+.talk-link::after{content:'→';}
+.talk-link:hover{gap:8px;}
+
+/* hidden */
+.talk-card.hidden{display:none;}
+.year-group.empty{display:none;}
+
+/* no results */
+.no-results{text-align:center;padding:60px 20px;font-family:var(--ff-mono);font-size:13px;color:var(--lmuted2);letter-spacing:0.06em;}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:var(--amber-g);}
+.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--amber-g);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .talk-grid{grid-template-columns:1fr;}
+  #map{height:320px;}
+  .map-header{padding:36px 20px 20px;}
+}
+@media(max-width:600px){
+  .nav{padding:0 20px;} .nav-links{display:none;}
+  .page-hero{padding:90px 20px 56px;}
+  .talks-body{padding:48px 20px 80px;}
+  .hero-stats{flex-wrap:wrap;}
+  .hstat{flex:0 0 calc(50% - 12px);border-right:none;margin-right:0;padding-right:0;}
+  .footer{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="talks.html" class="active">Talks</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jblay@aggies.ncat.edu">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Conferences &amp; Talks</div>
+    <h1>Presentations</h1>
+    <p class="hero-desc">
+      Presenting various geospatial AI research at leading venues across <strong>4 continents</strong> — from AGU and IEEE IGARSS to ISPRS and ASPRS, engaging both local and international research communities on the frontiers of spatial deep learning.
+    </p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">11</div><div class="hstat-lbl">Total Talks</div></div>
+      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Countries</div></div>
+      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Continents</div></div>
+      <div class="hstat"><div class="hstat-num">2023<span>–25</span></div><div class="hstat-lbl">Active Since</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <div class="map-header">
+    <div class="map-title-block">
+      <div class="map-label">Global Footprint</div>
+      <div class="map-title">Where the research has travelled</div>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot dot-conf"></div>Conference</div>
+      <div class="legend-item"><div class="legend-dot dot-symp"></div>Symposium</div>
+      <div class="legend-item"><div class="legend-dot dot-talk"></div>Talk / Seminar</div>
+    </div>
+  </div>
+  <div id="map"></div>
+</section>
+
+<!-- TALKS BODY -->
+<div class="talks-body">
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="applyFilter('all',this)">All (11)</button>
+    <div class="filter-sep"></div>
+    <button class="filter-btn" data-filter="conference" onclick="applyFilter('conference',this)">Conference (8)</button>
+    <button class="filter-btn" data-filter="symposium" onclick="applyFilter('symposium',this)">Symposium (2)</button>
+    <button class="filter-btn" data-filter="talk" onclick="applyFilter('talk',this)">Talk / Seminar (1)</button>
+    <div class="filter-sep"></div>
+    <button class="filter-btn" data-filter="intl" onclick="applyFilter('intl',this)">International</button>
+    <button class="filter-btn" data-filter="usa" onclick="applyFilter('usa',this)">USA</button>
+  </div>
+
+  <!-- 2025 -->
+  <div class="year-group" id="grp-2025">
+    <div class="year-label">2025</div>
+    <div class="talk-grid">
+
+      <div class="talk-card type-symposium" data-type="symposium" data-region="intl" data-id="igars25">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-symposium">Symposium</span>
+          <span class="talk-date">Aug 2025</span>
+        </div>
+        <div class="talk-conf-name">2025 IEEE IGARSS</div>
+        <div class="talk-topic">"Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas"</div>
+        <div class="talk-venue-loc">Brisbane Convention &amp; Exhibition Centre · Brisbane, Australia</div>
+        <a class="talk-link" href="https://www.2025.ieeeigarss.org/" target="_blank">Conference website</a>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="intl" data-id="isprs25">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Apr 2025</span>
+        </div>
+        <div class="talk-conf-name">2025 ISPRS Geospatial Week</div>
+        <div class="talk-topic">"Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets"</div>
+        <div class="talk-venue-loc">Dubai World Trade Center · Dubai, UAE</div>
+        <a class="talk-link" href="https://gsw2025.ae/" target="_blank">Conference website</a>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="asprs25">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Feb 2025</span>
+        </div>
+        <div class="talk-conf-name">2025 ASPRS &amp; GeoWeek Conference</div>
+        <div class="talk-topic">"3D Floodwater Depth Analytics with Big Geo-Data and cGAN"</div>
+        <div class="talk-venue-loc">Colorado Convention Center · Denver, CO, USA</div>
+        <a class="talk-link" href="https://my.asprs.org/2025Conference/2025Conference/Home.aspx" target="_blank">Conference website</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="year-group" id="grp-2024">
+    <div class="year-label">2024</div>
+    <div class="talk-grid">
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="agu24">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Dec 2024</span>
+        </div>
+        <div class="talk-conf-name">2024 AGU Annual Meeting</div>
+        <div class="talk-topic">"Urban Flood Depth Analytics: Leveraging Generative Algorithms and Remote Sensing for 3D Flood Depth Simulation"</div>
+        <div class="talk-venue-loc">Walter E. Washington Convention Center · Washington DC, USA</div>
+        <a class="talk-link" href="https://www.agu.org/annual-meeting-2024" target="_blank">Conference website</a>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="ncaug24">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Sep 2024</span>
+        </div>
+        <div class="talk-conf-name">2024 NC ArcGIS User Conference (NCAUG)</div>
+        <div class="talk-topic">"Leveraging AI and Big Geo-Data for 3D Flood Depth Mapping to Safeguard Built Assets"</div>
+        <div class="talk-venue-loc">Hotel Ballast by Hilton · Wilmington, NC, USA</div>
+      </div>
+
+      <div class="talk-card type-symposium" data-type="symposium" data-region="intl" data-id="igars24">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-symposium">Symposium</span>
+          <span class="talk-date">Jul 2024</span>
+        </div>
+        <div class="talk-conf-name">2024 IEEE IGARSS</div>
+        <div class="talk-topic">"Flood Impact Risk Mapping in Settlement Areas from a 3D Perspective: A Case Study of Hurricane Matthew"</div>
+        <div class="talk-venue-loc">Megaron Athens International Conference · Athens, Greece</div>
+        <a class="talk-link" href="https://www.2024.ieeeigarss.org/" target="_blank">Conference website</a>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="asprs24">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Feb 2024</span>
+        </div>
+        <div class="talk-conf-name">2024 ASPRS Annual &amp; Geo Week Conference</div>
+        <div class="talk-topic">"A 3D Perspective of Analysing the Effect of Hurricane Matthew in Small Communities: Grifton, NC"</div>
+        <div class="talk-venue-loc">Colorado Convention Center · Denver, CO, USA</div>
+        <a class="talk-link" href="https://my.asprs.org/2024Conference/2024Conference/Home.aspx" target="_blank">Conference website</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="year-group" id="grp-2023">
+    <div class="year-label">2023</div>
+    <div class="talk-grid">
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="agu23">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Dec 2023</span>
+        </div>
+        <div class="talk-conf-name">2023 AGU Annual Meeting</div>
+        <div class="talk-topic">"Multi-Channel Deep Learning-Based Architecture for Flood Detection and Mapping"</div>
+        <div class="talk-venue-loc">Moscone Center · San Francisco, CA, USA</div>
+        <a class="talk-link" href="https://www.agu.org/fall-meeting-2023" target="_blank">Conference website</a>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="researchday23">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Apr 2023</span>
+        </div>
+        <div class="talk-conf-name">39th Yale School of the Environment Research Day</div>
+        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+        <div class="talk-venue-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
+        <a class="talk-link" href="https://environmentalhumanities.yale.edu/event/yse-research-day-yale-school-environment" target="_blank">Event page</a>
+      </div>
+
+      <div class="talk-card type-talk" data-type="talk" data-region="usa" data-id="yseconfluence23">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-talk">Talk</span>
+          <span class="talk-date">Mar 2023</span>
+        </div>
+        <div class="talk-conf-name">Yale School of the Environment Confluence Talk Series</div>
+        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+        <div class="talk-venue-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
+      </div>
+
+      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="tri23">
+        <div class="talk-card-head">
+          <span class="talk-type-badge badge-conference">Conference</span>
+          <span class="talk-date">Mar 2023</span>
+        </div>
+        <div class="talk-conf-name">Tropical Resources Institute (TRI) Symposium</div>
+        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
+        <div class="talk-venue-loc">Sage Hall, Yale School of the Environment · New Haven, CT, USA</div>
+        <a class="talk-link" href="https://tri.yale.edu/" target="_blank">TRI website</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results" style="display:none;">No talks match the selected filter.</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Jeffrey <span>Blay</span></div>
+  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── TALK DATA ──
+const talks = [
+  {
+    id:'igars25', lat:-27.4698, lng:153.0251,
+    conf:'2025 IEEE IGARSS', date:'Aug 2025', type:'Symposium',
+    topic:'Pixels to Insights: Deep Learning for Floodwater Depth Mapping',
+    venue:'Brisbane Convention Centre', loc:'Brisbane, Australia'
+  },
+  {
+    id:'isprs25', lat:25.2048, lng:55.2708,
+    conf:'2025 ISPRS Geospatial Week', date:'Apr 2025', type:'Conference',
+    topic:'Advanced Geo-Data Analytics and AI for 3D Flood Mapping',
+    venue:'Dubai World Trade Center', loc:'Dubai, UAE'
+  },
+  {
+    id:'asprs25', lat:39.7392, lng:-104.9903,
+    conf:'2025 ASPRS & GeoWeek', date:'Feb 2025', type:'Conference',
+    topic:'3D Floodwater Depth Analytics with Big Geo-Data and cGAN',
+    venue:'Colorado Convention Center', loc:'Denver, CO, USA'
+  },
+  {
+    id:'agu24', lat:38.9072, lng:-77.0369,
+    conf:'2024 AGU Annual Meeting', date:'Dec 2024', type:'Conference',
+    topic:'Urban Flood Depth Analytics: Generative Algorithms & Remote Sensing',
+    venue:'Walter E. Washington Convention Center', loc:'Washington DC, USA'
+  },
+  {
+    id:'ncaug24', lat:34.2257, lng:-77.9447,
+    conf:'2024 NCAUG Conference', date:'Sep 2024', type:'Conference',
+    topic:'AI and Big Geo-Data for 3D Flood Depth Mapping',
+    venue:'Hotel Ballast by Hilton', loc:'Wilmington, NC, USA'
+  },
+  {
+    id:'igars24', lat:37.9838, lng:23.7275,
+    conf:'2024 IEEE IGARSS', date:'Jul 2024', type:'Symposium',
+    topic:'Flood Impact Risk Mapping: 3D Perspective of Hurricane Matthew',
+    venue:'Megaron Athens Conference Center', loc:'Athens, Greece'
+  },
+  {
+    id:'asprs24', lat:39.7392, lng:-104.9903,
+    conf:'2024 ASPRS & Geo Week', date:'Feb 2024', type:'Conference',
+    topic:'3D Analysis of Hurricane Matthew Impact in Grifton, NC',
+    venue:'Colorado Convention Center', loc:'Denver, CO, USA'
+  },
+  {
+    id:'agu23', lat:37.7749, lng:-122.4194,
+    conf:'2023 AGU Annual Meeting', date:'Dec 2023', type:'Conference',
+    topic:'Multi-Channel Deep Learning for Flood Detection and Mapping',
+    venue:'Moscone Center', loc:'San Francisco, CA, USA'
+  },
+  {
+    id:'researchday23', lat:41.3163, lng:-72.9223,
+    conf:'39th Yale YSE Research Day', date:'Apr 2023', type:'Conference',
+    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
+    venue:'Kroon Hall, Yale', loc:'New Haven, CT, USA'
+  },
+  {
+    id:'yseconfluence23', lat:41.3163, lng:-72.9223,
+    conf:'Yale YSE Confluence Talk Series', date:'Mar 2023', type:'Talk',
+    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
+    venue:'Kroon Hall, Yale', loc:'New Haven, CT, USA'
+  },
+  {
+    id:'tri23', lat:41.3163, lng:-72.9223,
+    conf:'TRI Symposium, Yale', date:'Mar 2023', type:'Conference',
+    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
+    venue:'Sage Hall, Yale', loc:'New Haven, CT, USA'
+  },
+];
+
+const typeColor = {Conference:'#f59e0b', Symposium:'#2dd4bf', Talk:'#818cf8'};
+
+// ── INIT MAP ──
+const map = L.map('map', {
+  center:[30, 10], zoom:2,
+  zoomControl:true,
+  scrollWheelZoom:false,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'© OpenStreetMap contributors',
+  maxZoom:18,
+}).addTo(map);
+
+// custom marker icon
+function makeIcon(color){
+  return L.divIcon({
+    className:'',
+    html:`<div style="
+      width:14px;height:14px;border-radius:50%;
+      background:${color};border:2px solid rgba(255,255,255,0.9);
+      box-shadow:0 0 0 3px ${color}44,0 2px 8px rgba(0,0,0,0.4);
+      cursor:pointer;
+    "></div>`,
+    iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10],
+  });
+}
+
+// group markers by location (some overlap at Yale)
+const locationGroups = {};
+talks.forEach(t => {
+  const key = `${t.lat.toFixed(3)},${t.lng.toFixed(3)}`;
+  if(!locationGroups[key]) locationGroups[key] = [];
+  locationGroups[key].push(t);
+});
+
+const markers = {};
+Object.entries(locationGroups).forEach(([key, group]) => {
+  const {lat, lng} = group[0];
+  const color = group.length > 1 ? '#f59e0b' : typeColor[group[0].type];
+
+  // build popup content
+  let popupHtml = `<div class="talk-popup">`;
+  group.forEach((t,i) => {
+    if(i > 0) popupHtml += `<hr style="border:none;border-top:1px solid #e5e9f0;margin:10px 0;">`;
+    popupHtml += `
+      <div class="talk-popup-type" style="color:${typeColor[t.type]}">${t.type} · ${t.date}</div>
+      <div class="talk-popup-title">${t.conf}</div>
+      <div class="talk-popup-topic">${t.topic}</div>
+      <div class="talk-popup-loc">${t.venue} · ${t.loc}</div>
+    `;
+  });
+  popupHtml += `</div>`;
+
+  // offset overlapping markers slightly
+  const offsetLat = group.length > 1 ? lat : lat;
+  const marker = L.marker([offsetLat, lng], {icon: makeIcon(color)})
+    .addTo(map)
+    .bindPopup(popupHtml, {maxWidth:280, closeButton:true});
+
+  group.forEach(t => { markers[t.id] = marker; });
+
+  // pulse animation on hover for multi-location
+  marker.on('mouseover', function(){ this.openPopup(); });
+});
+
+// clicking a card highlights and flies to marker
+function flyToTalk(id){
+  const marker = markers[id];
+  if(!marker) return;
+  map.flyTo(marker.getLatLng(), 5, {duration:1.2});
+  setTimeout(() => marker.openPopup(), 1300);
+  document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+// add click listeners to cards
+document.querySelectorAll('.talk-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if(e.target.closest('a')) return; // don't intercept link clicks
+    const id = card.dataset.id;
+    flyToTalk(id);
+    document.querySelectorAll('.talk-card').forEach(c => c.classList.remove('highlighted'));
+    card.classList.add('highlighted');
+  });
+});
+
+// ── FILTERING ──
+function applyFilter(filter, btn){
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.talk-card').forEach(card => {
+    const type = card.dataset.type;
+    const region = card.dataset.region;
+    let show = true;
+    if(filter === 'conference') show = type === 'conference';
+    else if(filter === 'symposium') show = type === 'symposium';
+    else if(filter === 'talk') show = type === 'talk';
+    else if(filter === 'intl') show = region === 'intl';
+    else if(filter === 'usa') show = region === 'usa';
+    card.classList.toggle('hidden', !show);
+  });
+
+  // hide empty year groups
+  document.querySelectorAll('.year-group').forEach(grp => {
+    const visible = [...grp.querySelectorAll('.talk-card')].some(c => !c.classList.contains('hidden'));
+    grp.classList.toggle('empty', !visible);
+  });
+
+  const totalVisible = [...document.querySelectorAll('.talk-card:not(.hidden)')].length;
+  document.getElementById('no-results').style.display = totalVisible === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
