@@ -1,10 +1,10 @@
 /* =============================================================
-   Jeffrey Blay Portfolio — AI Chatbot Widget
-   Usage: Add this ONE line before </body> on every HTML page:
+   Jeffrey Blay Portfolio — Terminal AI Chatbot
+   Usage: Add before </body> on every HTML page:
    <script src="chatbot.js"></script>
-   
-   After deploying your Cloudflare Worker, replace WORKER_URL
-   below with your actual Worker URL.
+
+   IMPORTANT: Replace YOUR_NEW_GROQ_KEY_HERE with your actual
+   Groq API key from console.groq.com
    ============================================================= */
 
 (function () {
@@ -12,359 +12,261 @@
   const GROQ_API_KEY = "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";
   const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
-  const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay — if asked anything unrelated, politely redirect back to his work. Keep answers to 2–4 sentences unless a list is needed.
+  const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay. If asked anything unrelated, politely redirect back to his work. Keep answers to 2-4 sentences unless a list is needed.
 
 ABOUT JEFFREY BLAY
 PhD candidate at NC A&T State University (expected 2026), specializing in Geospatial Data Science. 5+ years experience in ML/DL for spatial analytics. Contact: jeffreyblay7@gmail.com | GitHub: github.com/Jeffreyblay
 
 EDUCATION
-- PhD Applied Science & Technology — NC A&T (2023–2026, expected). Specialization: Geospatial Data Science.
-- MS Environmental Science — Yale School of the Environment (2021–2023). Specialization: Environmental Data Science for Urban Sustainability.
-- BA Geography with Political Science — University of Ghana (2015–2019). GPA: 3.81/4.0.
+- PhD Applied Science & Technology — NC A&T (2023-2026). Specialization: Geospatial Data Science.
+- MS Environmental Science — Yale School of the Environment (2021-2023). Specialization: Environmental Data Science for Urban Sustainability.
+- BA Geography with Political Science — University of Ghana (2015-2019). GPA: 3.81/4.0.
 - IBM Professional Data Engineering Certificate — Coursera (In Progress, expected May 2026).
 
 RESEARCH FOCUS
-Physics-informed deep learning for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities (heat islands, building density, electricity infrastructure).
+Physics-informed deep learning for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities.
 
 EXPERIENCE
-- Graduate Research Assistant, NASA Flood Project — NC A&T (Sep 2025–Present): Implementing CNN and transformer models (UNet, Swin-UNet, SegFormer) in PyTorch for flood-depth prediction. Building physics-informed DL framework with hydrostatic constraints. Building FastAPI flood risk dashboard.
-- NASA DEAP Research Intern — NC A&T (Summer 2025): Trained U-Net models in TensorFlow. Published ezprocess Python library to PyPI/GitHub — reduces data prep time by 70%.
-- Graduate Research Assistant, NASA Data Project — NC A&T (Sep 2024–May 2025): Built geospatial ETL pipelines. Led team to publish Inundation2Depth dataset. Implemented pix2pix cGAN for flood depth.
+- Graduate Research Assistant, NASA Flood Project — NC A&T (Sep 2025-Present): Implementing CNN and transformer models (UNet, Swin-UNet, SegFormer) in PyTorch. Building physics-informed DL framework with hydrostatic constraints. Building FastAPI flood risk dashboard.
+- NASA DEAP Research Intern — NC A&T (Summer 2025): Published ezprocess Python library (PyPI/GitHub) - reduces data prep time by 70%.
+- Graduate Research Assistant, NASA Data Project — NC A&T (Sep 2024-May 2025): Built geospatial ETL pipelines. Published Inundation2Depth dataset. Implemented pix2pix cGAN.
 - Data Science Research Assistant, NSF Project — GEMS Institute NC A&T (Summer 2024): Processed 700k+ geospatial pixels. Co-developed DeepFlood dataset.
-- Graduate Research Assistant, NOAA Flood Project — NC A&T (Sep 2023–May 2024): Web-scraping pipelines, PyTorch flood classification models, GAN technical assessment.
-- Research Fellow — TRI Yale (2022–2023): UNet for building composition in Ghana, Google Earth Engine nighttime light analysis.
+- Graduate Research Assistant, NOAA Flood Project — NC A&T (Sep 2023-May 2024): Web-scraping pipelines, PyTorch flood classification models, GAN technical assessment.
+- Research Fellow — TRI Yale (2022-2023): UNet for building composition in Ghana, GEE nighttime light analysis.
 - Field Geospatial Data Scientist — Ghana (Summer 2022): ArcGIS Field Maps pipeline, 300+ ground-truth records, 70% accuracy improvement.
-- GIS Data Officer — Ghana Statistical Service (2020–2021): Census geospatial QA, real-time spatial coverage analytics.
+- GIS Data Officer — Ghana Statistical Service (2020-2021): Census geospatial QA, real-time spatial coverage analytics.
 
 PUBLICATIONS (10 total)
-1. "Geospatial and Deep Learning Approaches for Modeling Floodwater Depth" — Remote Sensing MDPI (2024). ResNet18, RMSE 0.71ft, R²~94%.
-2. "Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation" — Elsevier Data in Brief (2025). 5,925 tiles, 24,649 acres, 12 sites in the Carolinas.
-3. "Multi-Resolution Data Fusion for Resilient Flood Mapping" — IEEE Access (2025). 84.9% mean IoU.
-4. "Real-Time Traffic Insights with Physics-Informed Neural Networks" — IEEE Access (2025). 60% improvement over data-driven models.
-5. "Dark Development: Building Density and Electricity in Ghana" — Elsevier (2025). 21% of Kumasi has high density but limited electricity.
-6. "DeepFlood for Inundated Vegetation" — Nature Scientific Data (2025).
-7. "Pixels to Insights: Deep Learning for Floodwater Depth Mapping" — IEEE IGARSS 2025. RMSE 0.11.
-8. "Advanced Geo-Data Analytics and AI for 3D Flood Mapping" — ISPRS Annals (2025). 93% U-Net accuracy.
-9. "Flood Impact Risk Mapping from a 3D Perspective: Hurricane Matthew" — IEEE IGARSS 2024.
-10. "Urban Growth and Land Surface Temperature Dynamics: Lessons from Ghana" — JSTOR (2023).
+1. Geospatial and Deep Learning for Floodwater Depth — Remote Sensing MDPI (2024). ResNet18, RMSE 0.71ft, R2~94%.
+2. Inundation2Depth Dataset — Elsevier Data in Brief (2025). 5,925 tiles, 24,649 acres, 12 sites in the Carolinas.
+3. Multi-Resolution Data Fusion for Flood Mapping — IEEE Access (2025). 84.9% mean IoU.
+4. Real-Time Traffic Insights with Physics-Informed NNs — IEEE Access (2025). 60% improvement over data-driven models.
+5. Dark Development: Building Density and Electricity in Ghana — Elsevier (2025). 21% of Kumasi has high density but limited electricity.
+6. DeepFlood for Inundated Vegetation — Nature Scientific Data (2025).
+7. Pixels to Insights: Deep Learning for Flood Depth Mapping — IEEE IGARSS 2025. RMSE 0.11.
+8. Advanced Geo-Data Analytics and AI for 3D Flood Mapping — ISPRS Annals (2025). 93% U-Net accuracy.
+9. Flood Impact Risk Mapping: Hurricane Matthew — IEEE IGARSS 2024.
+10. Urban Growth and Land Surface Temperature: Ghana — JSTOR (2023).
 
-OPEN SOURCE PROJECTS
-- EzProcess Library: Python library for geospatial ML/DL preprocessing. PyPI + GitHub. 70% faster data prep. github.com/Jeffreyblay/ezprocess_library
-- Inundation2Depth Dataset: 5,925-tile benchmark. zenodo.org/records/17308287
-- Climate & Extreme Weather Alert Dashboard: FastAPI + JS, 1,000+ live NWS alerts, 50 states. jeffreyblay.github.io/climate-alert-dashboard
+OPEN SOURCE
+- EzProcess Library: github.com/Jeffreyblay/ezprocess_library — 70% faster geospatial ML data prep.
+- Inundation2Depth Dataset: zenodo.org/records/17308287
+- Climate Alert Dashboard: jeffreyblay.github.io/climate-alert-dashboard — FastAPI, 1000+ live NWS alerts.
 
-CONFERENCES & TALKS (11 total, 4 continents)
-2025: IEEE IGARSS Brisbane Australia, ISPRS Geospatial Week Dubai UAE, ASPRS Denver CO
+CONFERENCES (11 talks, 4 continents)
+2025: IEEE IGARSS Brisbane Australia, ISPRS Dubai UAE, ASPRS Denver CO
 2024: AGU Washington DC, NCAUG Wilmington NC, IEEE IGARSS Athens Greece, ASPRS Denver CO
-2023: AGU San Francisco CA, TRI Symposium Yale, YSE Research Day Yale, YSE Confluence Talk Yale
+2023: AGU San Francisco, TRI Symposium Yale, YSE Research Day Yale, YSE Confluence Talk Yale
 
-AWARDS & FELLOWSHIPS
-LiDAR Leader Award — Best Poster ASPRS 2024; NASA DEAP Research Fellow (2024 & 2025); Graduate Research Fellowship NC A&T (2023–2026); Teaching Fellowship Yale (2023); TRI Endowment Fellowship Yale (2022); YSE Merit Scholarship Yale (2021–2023).
+AWARDS
+LiDAR Leader Award — Best Poster ASPRS 2024; NASA DEAP Fellow x2 (2024 & 2025); Graduate Research Fellowship NC A&T (2023-2026); Teaching Fellowship Yale (2023); TRI Endowment Fellowship Yale (2022); YSE Merit Scholarship (2021-2023).
 
 SKILLS
 Programming: Python, R, SQL, JavaScript
 Geospatial: ArcGIS Suite, QGIS, Google Earth Engine, ArcPy, GDAL, ENVI, SNAP
-ML/DL: PyTorch, TensorFlow, scikit-learn, Physics-Informed NNs, U-Net variants, Transformers (Swin, SegFormer)
+ML/DL: PyTorch, TensorFlow, scikit-learn, Physics-Informed NNs, U-Net variants, Swin Transformer, SegFormer
 Data Engineering: ETL Pipelines, Pandas, Web Scraping, Geospatial Processing
-Cloud & DevOps: AWS S3, Docker, CI/CD, Git/GitHub, HPC, GitHub Pages, Render
+Cloud/DevOps: AWS S3, Docker, CI/CD, Git/GitHub, HPC, GitHub Pages, Render
 Databases: PostgreSQL, MySQL, IBM DB2
 Visualization: Matplotlib, Seaborn, Power BI, Tableau, R Shiny, ArcGIS StoryMaps
 
-SERVICE & LEADERSHIP
-Secretary & Social Media Manager — ASPRS Student Chapter NC A&T (2024–2026); Lead Instructor — CoST Young Scientist Day Geospatial Workshop (2025); Student Representative — BIOMES Seminar Committee Yale (2022–2023); Co-Founder & Executive Director — Good Lead Foundation Tarkwa Ghana (2019–Present).
+SERVICE
+- Secretary & Social Media Manager — ASPRS Student Chapter NC A&T (2024-2026)
+- Lead Instructor — CoST Young Scientist Day Geospatial Workshop (2025)
+- Student Representative — BIOMES Seminar Committee Yale (2022-2023)
+- Co-Founder & Executive Director — Good Lead Foundation Tarkwa Ghana (2019-Present)
 
-RESPONSE RULES
-- 2–4 sentences for simple questions; bullet points for lists
-- Never invent information not listed above
-- For hiring/collaboration questions, mention jeffreyblay7@gmail.com
-- If asked something unrelated to Jeffrey, say: "I can only answer questions about Jeffrey's background and work. Is there something specific I can help with?"`;
+RULES: Only use info above. Never invent details. For hiring questions mention jeffreyblay7@gmail.com. Keep answers concise.`;
+
+  /* ── FONTS ── */
+  if (!document.getElementById("jb-mono-font")) {
+    const l = document.createElement("link");
+    l.id = "jb-mono-font";
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap";
+    document.head.appendChild(l);
+  }
 
   /* ── STYLES ── */
   const style = document.createElement("style");
   style.textContent = `
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-
-    #jb-chat-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    #jb-chat-wrap {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 9999;
-      font-family: 'JetBrains Mono', monospace;
+    #jb-term-wrap,#jb-term-wrap *{box-sizing:border-box;margin:0;padding:0;}
+    #jb-term-wrap{
+      position:fixed;bottom:24px;right:24px;z-index:9999;
+      width:360px;font-family:'JetBrains Mono',monospace;
     }
-
-    /* Bubble button */
-    #jb-bubble {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: #d97706;
-      border: none;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s;
-      position: relative;
+    #jb-trigger{
+      display:flex;align-items:center;gap:8px;
+      background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;
+      padding:9px 14px;cursor:pointer;width:100%;
+      transition:border-color .2s,background .2s;
     }
-    #jb-bubble:hover { background: #f59e0b; transform: scale(1.06); }
-    #jb-bubble svg { width: 24px; height: 24px; stroke: #080b0f; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* Pulse dot */
-    #jb-pulse {
-      position: absolute; top: -2px; right: -2px;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: #f59e0b;
-      border: 2px solid #080b0f;
-      animation: jbPulse 2s ease-in-out infinite;
+    #jb-trigger:hover{border-color:#f59e0b;background:#0d0d0d;}
+    .jb-tdots{display:flex;gap:5px;}
+    .jb-tdot{width:10px;height:10px;border-radius:50%;}
+    #jb-tlabel{font-size:10px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
+    #jb-tcursor{font-size:12px;color:#f59e0b;animation:jbBlink 1s step-end infinite;}
+    @keyframes jbBlink{0%,100%{opacity:1}50%{opacity:0}}
+    #jb-panel{
+      display:none;flex-direction:column;
+      background:#0a0a0a;border:1px solid #2a2a2a;border-radius:6px;
+      overflow:hidden;margin-bottom:8px;
+      animation:jbUp .2s ease;
     }
-    @keyframes jbPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.35); opacity: 0.6; }
+    #jb-panel.open{display:flex;}
+    @keyframes jbUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    #jb-titlebar{
+      background:#1a1a1a;padding:8px 12px;
+      display:flex;align-items:center;gap:6px;
+      border-bottom:1px solid #2a2a2a;flex-shrink:0;user-select:none;
     }
-
-    /* Panel */
-    #jb-panel {
-      position: absolute;
-      bottom: 68px; right: 0;
-      width: 340px;
-      background: #0d1117;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      display: none;
-      flex-direction: column;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      animation: jbSlideUp 0.22s ease;
+    .jb-wdot{width:11px;height:11px;border-radius:50%;cursor:pointer;transition:opacity .15s;}
+    .jb-wdot:hover{opacity:.7;}
+    #jb-winname{font-size:10px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
+    #jb-output{
+      padding:12px;display:flex;flex-direction:column;gap:2px;
+      max-height:240px;overflow-y:auto;flex:1;
     }
-    #jb-panel.open { display: flex; }
-    @keyframes jbSlideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    #jb-output::-webkit-scrollbar{width:3px;}
+    #jb-output::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:2px;}
+    .jbt{font-size:11px;line-height:1.72;word-break:break-word;}
+    .jbt-prompt{color:#f59e0b;}
+    .jbt-cmd{color:#fff;}
+    .jbt-res{color:#4ade80;padding-left:16px;display:block;margin-top:1px;}
+    .jbt-err{color:#f87171;padding-left:16px;display:block;}
+    .jbt-comment{color:#3a3a3a;}
+    .jbt-proc{color:#4ade80;opacity:.6;padding-left:16px;display:block;animation:jbFade .9s ease-in-out infinite alternate;}
+    @keyframes jbFade{from{opacity:.25}to{opacity:.75}}
+    #jb-chips{
+      padding:6px 12px 8px;display:flex;flex-wrap:wrap;gap:5px;
+      border-top:1px solid #1a1a1a;
     }
-
-    /* Header */
-    #jb-header {
-      background: #12181f;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex; align-items: center; gap: 10px;
+    .jb-chip{
+      font-size:9px;letter-spacing:.04em;padding:3px 9px;border-radius:2px;
+      border:1px solid #2a2a2a;background:transparent;color:#555;
+      cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;
     }
-    #jb-avatar {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: #d97706;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px; font-weight: 700; color: #080b0f;
-      flex-shrink: 0;
+    .jb-chip:hover{border-color:#f59e0b;color:#f59e0b;background:rgba(245,158,11,.06);}
+    #jb-inputbar{
+      padding:8px 12px;border-top:1px solid #1a1a1a;
+      display:flex;align-items:center;gap:8px;
+      background:#0d0d0d;flex-shrink:0;
     }
-    #jb-header-info { flex: 1; }
-    #jb-header-name { font-size: 12px; font-weight: 500; color: #fff; letter-spacing: 0.04em; }
-    #jb-header-status { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
-    #jb-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
-    #jb-close { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.3); font-size: 18px; line-height: 1; padding: 2px; transition: color 0.15s; }
-    #jb-close:hover { color: rgba(255,255,255,0.7); }
-
-    /* Messages */
-    #jb-messages {
-      padding: 14px 14px 8px;
-      display: flex; flex-direction: column; gap: 12px;
-      max-height: 260px; overflow-y: auto;
-      scroll-behavior: smooth;
+    #jb-iprompt{font-size:11px;color:#f59e0b;flex-shrink:0;white-space:nowrap;}
+    #jb-input{
+      flex:1;background:transparent;border:none;outline:none;
+      font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;min-width:0;
     }
-    #jb-messages::-webkit-scrollbar { width: 3px; }
-    #jb-messages::-webkit-scrollbar-track { background: transparent; }
-    #jb-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-    .jb-msg { display: flex; gap: 8px; align-items: flex-start; }
-    .jb-msg.user { flex-direction: row-reverse; }
-    .jb-msg-av {
-      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 500; margin-top: 2px;
+    #jb-input::placeholder{color:#333;}
+    #jb-run{
+      font-size:10px;color:#f59e0b;background:none;border:none;
+      cursor:pointer;font-family:'JetBrains Mono',monospace;
+      letter-spacing:.06em;flex-shrink:0;padding:0;transition:color .15s;
     }
-    .jb-msg-av.bot { background: #1c2530; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.07); }
-    .jb-msg-av.usr { background: #d97706; color: #080b0f; }
-    .jb-msg-bub {
-      max-width: 220px; padding: 9px 12px; border-radius: 6px;
-      font-size: 12px; line-height: 1.65;
-    }
-    .jb-msg-bub.bot { background: #1c2530; color: rgba(255,255,255,0.78); border: 1px solid rgba(255,255,255,0.06); }
-    .jb-msg-bub.usr { background: #d97706; color: #080b0f; }
-
-    /* Typing */
-    .jb-typing-dots { display: flex; gap: 4px; align-items: center; padding: 6px 2px; }
-    .jb-typing-dots span {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      animation: jbDot 1.2s ease-in-out infinite;
-    }
-    .jb-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .jb-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes jbDot {
-      0%,60%,100% { transform: translateY(0); }
-      30% { transform: translateY(-5px); }
-    }
-
-    /* Suggestions */
-    #jb-suggestions {
-      padding: 4px 12px 10px;
-      display: flex; flex-wrap: wrap; gap: 5px;
-    }
-    .jb-chip {
-      font-size: 10px; letter-spacing: 0.04em;
-      padding: 4px 10px; border-radius: 20px;
-      border: 1px solid rgba(217,119,6,0.3);
-      background: rgba(217,119,6,0.07); color: #d97706;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .jb-chip:hover { background: rgba(217,119,6,0.18); border-color: rgba(217,119,6,0.6); }
-
-    /* Input row */
-    #jb-input-row {
-      padding: 10px 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex; gap: 8px; align-items: center;
-      background: #0a0e14;
-    }
-    #jb-input {
-      flex: 1;
-      background: #1c2530;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px; padding: 8px 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: rgba(255,255,255,0.8);
-      outline: none; transition: border-color 0.2s;
-    }
-    #jb-input::placeholder { color: rgba(255,255,255,0.2); }
-    #jb-input:focus { border-color: rgba(217,119,6,0.45); }
-    #jb-send {
-      width: 32px; height: 32px; border-radius: 4px;
-      background: #d97706; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: background 0.2s;
-    }
-    #jb-send:hover { background: #f59e0b; }
-    #jb-send svg { width: 14px; height: 14px; stroke: #080b0f; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-    #jb-error { font-size: 10px; color: #f87171; padding: 4px 14px 8px; letter-spacing: 0.04em; display: none; }
+    #jb-run:hover{color:#fff;}
   `;
   document.head.appendChild(style);
 
   /* ── HTML ── */
   const wrap = document.createElement("div");
-  wrap.id = "jb-chat-wrap";
+  wrap.id = "jb-term-wrap";
   wrap.innerHTML = `
     <div id="jb-panel">
-      <div id="jb-header">
-        <div id="jb-avatar">JB</div>
-        <div id="jb-header-info">
-          <div id="jb-header-name">Ask about Jeffrey</div>
-          <div id="jb-header-status"><span id="jb-status-dot"></span>AI assistant · Powered by Groq</div>
-        </div>
-        <button id="jb-close" title="Close">✕</button>
+      <div id="jb-titlebar">
+        <div class="jb-wdot" style="background:#ff5f57" onclick="jbClose()" title="Close"></div>
+        <div class="jb-wdot" style="background:#febc2e"></div>
+        <div class="jb-wdot" style="background:#28c840"></div>
+        <div id="jb-winname">jeffrey-blay — ask.sh</div>
       </div>
-      <div id="jb-messages"></div>
-      <div id="jb-suggestions">
-        <span class="jb-chip" data-q="What is Jeffrey's PhD research about?">PhD research?</span>
-        <span class="jb-chip" data-q="What are Jeffrey's top publications?">Top publications?</span>
-        <span class="jb-chip" data-q="What tools and skills does Jeffrey have?">Skills & tools?</span>
-        <span class="jb-chip" data-q="What is the EzProcess library?">EzProcess?</span>
-        <span class="jb-chip" data-q="Is Jeffrey open to new opportunities?">Open to work?</span>
+      <div id="jb-output"></div>
+      <div id="jb-chips">
+        <span class="jb-chip" data-q="What is Jeffrey's PhD research about?">phd_research</span>
+        <span class="jb-chip" data-q="What are Jeffrey's top publications?">publications</span>
+        <span class="jb-chip" data-q="What tools and skills does Jeffrey have?">skills_stack</span>
+        <span class="jb-chip" data-q="What awards and fellowships has Jeffrey received?">awards</span>
+        <span class="jb-chip" data-q="Is Jeffrey open to new opportunities?">open_to_work</span>
       </div>
-      <div id="jb-error">Something went wrong. Please try again.</div>
-      <div id="jb-input-row">
-        <input id="jb-input" type="text" placeholder="Ask anything about Jeffrey…" autocomplete="off">
-        <button id="jb-send">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
+      <div id="jb-inputbar">
+        <span id="jb-iprompt">visitor@portfolio:~$</span>
+        <input id="jb-input" type="text" placeholder='ask "your question here"' autocomplete="off">
+        <button id="jb-run">run ↵</button>
       </div>
     </div>
-    <button id="jb-bubble" title="Ask about Jeffrey">
-      <div id="jb-pulse"></div>
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    </button>
+    <div id="jb-trigger">
+      <div class="jb-tdots">
+        <div class="jb-tdot" style="background:#ff5f57"></div>
+        <div class="jb-tdot" style="background:#febc2e"></div>
+        <div class="jb-tdot" style="background:#28c840"></div>
+      </div>
+      <div id="jb-tlabel">jeffrey-blay — ask.sh</div>
+      <div id="jb-tcursor">▋</div>
+    </div>
   `;
   document.body.appendChild(wrap);
 
-  /* ── STATE ── */
+  /* ── REFS ── */
+  const panel   = document.getElementById("jb-panel");
+  const trigger = document.getElementById("jb-trigger");
+  const output  = document.getElementById("jb-output");
+  const chips   = document.getElementById("jb-chips");
+  const input   = document.getElementById("jb-input");
+  const runBtn  = document.getElementById("jb-run");
   const history = [];
-  let isOpen = false;
-  let isLoading = false;
-
-  const panel     = document.getElementById("jb-panel");
-  const bubble    = document.getElementById("jb-bubble");
-  const closeBtn  = document.getElementById("jb-close");
-  const messages  = document.getElementById("jb-messages");
-  const input     = document.getElementById("jb-input");
-  const sendBtn   = document.getElementById("jb-send");
-  const sugg      = document.getElementById("jb-suggestions");
-  const errorBox  = document.getElementById("jb-error");
+  let busy = false;
 
   /* ── HELPERS ── */
-  function togglePanel() {
-    isOpen = !isOpen;
-    panel.classList.toggle("open", isOpen);
-    if (isOpen && messages.children.length === 0) addBotMsg("Hi! I'm Jeffrey's AI assistant. Ask me anything about his research, publications, experience, or skills.");
-    if (isOpen) setTimeout(() => input.focus(), 220);
+  function line(html) {
+    const d = document.createElement("div");
+    d.className = "jbt";
+    d.innerHTML = html;
+    output.appendChild(d);
+    output.scrollTop = output.scrollHeight;
+    return d;
+  }
+  function removeLast() {
+    const all = output.querySelectorAll(".jbt");
+    if (all.length) all[all.length - 1].remove();
+  }
+  function idleCursor() {
+    line(`<span class="jbt-prompt">visitor@portfolio:~$ </span><span style="display:inline-block;width:7px;height:11px;background:#f59e0b;vertical-align:middle;animation:jbBlink 1s step-end infinite;"></span>`);
+  }
+  function boot() {
+    line(`<span class="jbt-comment"># Jeffrey Blay AI Assistant v1.0</span>`);
+    line(`<span class="jbt-comment"># Powered by Groq · llama-3.3-70b-versatile</span>`);
+    line(`<span class="jbt-comment"># Type a question or click a prompt below</span>`);
+    line(`&nbsp;`);
+    idleCursor();
   }
 
-  function addBotMsg(text) {
-    const div = document.createElement("div");
-    div.className = "jb-msg";
-    div.innerHTML = `<div class="jb-msg-av bot">JB</div><div class="jb-msg-bub bot">${text}</div>`;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
+  /* ── OPEN / CLOSE ── */
+  trigger.addEventListener("click", () => {
+    panel.classList.add("open");
+    trigger.style.display = "none";
+    if (!output.children.length) boot();
+    setTimeout(() => input.focus(), 150);
+  });
+  window.jbClose = function () {
+    panel.classList.remove("open");
+    trigger.style.display = "flex";
+  };
 
-  function addUserMsg(text) {
-    const div = document.createElement("div");
-    div.className = "jb-msg user";
-    div.innerHTML = `<div class="jb-msg-av usr">You</div><div class="jb-msg-bub usr">${text}</div>`;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function showTyping() {
-    const div = document.createElement("div");
-    div.className = "jb-msg";
-    div.id = "jb-typing";
-    div.innerHTML = `<div class="jb-msg-av bot">JB</div><div class="jb-msg-bub bot"><div class="jb-typing-dots"><span></span><span></span><span></span></div></div>`;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function removeTyping() {
-    const t = document.getElementById("jb-typing");
-    if (t) t.remove();
-  }
-
-  function hideSuggestions() {
-    if (sugg) sugg.style.display = "none";
-  }
-
-  function showError(msg) {
-    errorBox.textContent = msg || "Something went wrong. Please try again.";
-    errorBox.style.display = "block";
-    setTimeout(() => { errorBox.style.display = "none"; }, 4000);
-  }
-
-  /* ── WAKE UP hint removed — no server needed ── */
-
-  /* ── SEND MESSAGE ── */
-  async function send(text) {
-    if (!text.trim() || isLoading) return;
-    isLoading = true;
-    hideSuggestions();
-    errorBox.style.display = "none";
-
-    addUserMsg(text);
-    history.push({ role: "user", content: text });
+  /* ── SEND ── */
+  async function send(q) {
+    if (!q.trim() || busy) return;
+    busy = true;
     input.value = "";
-    showTyping();
+    chips.style.display = "none";
+
+    removeLast();
+    const shortQ = q.length > 44 ? q.slice(0, 41) + "..." : q;
+    line(`<span class="jbt-prompt">visitor@portfolio:~$ </span><span class="jbt-cmd">ask "${shortQ}"</span>`);
+    const proc = line(`<span class="jbt-proc">▋ querying knowledge base...</span>`);
+
+    history.push({ role: "user", content: q });
 
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 30000);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 30000);
 
       const res = await fetch(GROQ_URL, {
         method: "POST",
@@ -374,48 +276,46 @@ RESPONSE RULES
         },
         body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            ...history,
-          ],
+          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
           max_tokens: 400,
           temperature: 0.5,
         }),
-        signal: controller.signal,
+        signal: ctrl.signal,
       });
 
-      clearTimeout(timeout);
-
+      clearTimeout(t);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't get a response. Please try again.";
-
-      removeTyping();
-      addBotMsg(reply);
+      const reply = data.choices?.[0]?.message?.content || "No response. Please try again.";
       history.push({ role: "assistant", content: reply });
 
+      proc.remove();
+      // Print response line by line for terminal feel
+      reply.split("\n").forEach(l => {
+        if (l.trim()) line(`<span class="jbt-res">→ ${l.trim()}</span>`);
+      });
+
     } catch (err) {
-      removeTyping();
-      if (err.name === "AbortError") {
-        addBotMsg("Request timed out. Please try again.");
-      } else {
-        showError("Something went wrong. Please try again.");
-      }
+      proc.remove();
       history.pop();
-      console.error("Chatbot error:", err);
+      if (err.name === "AbortError") {
+        line(`<span class="jbt-err">✗ request timed out. please try again.</span>`);
+      } else {
+        line(`<span class="jbt-err">✗ ${err.message}</span>`);
+      }
     } finally {
-      isLoading = false;
+      busy = false;
+      line(`&nbsp;`);
+      idleCursor();
+      output.scrollTop = output.scrollHeight;
     }
   }
 
   /* ── EVENTS ── */
-  bubble.addEventListener("click", togglePanel);
-  closeBtn.addEventListener("click", togglePanel);
-  sendBtn.addEventListener("click", () => send(input.value));
+  runBtn.addEventListener("click", () => send(input.value));
   input.addEventListener("keydown", e => { if (e.key === "Enter") send(input.value); });
-
-  document.querySelectorAll(".jb-chip").forEach(chip => {
-    chip.addEventListener("click", () => send(chip.dataset.q));
+  document.querySelectorAll(".jb-chip").forEach(c => {
+    c.addEventListener("click", () => send(c.dataset.q));
   });
 
 })();
