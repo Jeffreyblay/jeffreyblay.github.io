@@ -3,8 +3,8 @@
    Usage: Add this ONE line before </body> on every HTML page:
    <script src="chatbot.js"></script>
    
-   After deploying your Cloudflare Worker, replace WORKER_URL
-   below with your actual Worker URL.
+   After deploying your render, replace WORKER_URL
+   below with your actual Worker URL from Render.
    ============================================================= */
 
 (function () {
@@ -274,11 +274,32 @@
     if (sugg) sugg.style.display = "none";
   }
 
+  function showWakingUp() {
+    const existing = document.getElementById("jb-waking");
+    if (existing) return;
+    const div = document.createElement("div");
+    div.id = "jb-waking";
+    div.style.cssText = "font-size:10px;color:#f59e0b;padding:4px 14px 6px;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;animation:jbFade 1.5s ease-in-out infinite alternate;";
+    div.textContent = "⏳ Server waking up, this may take ~20 seconds on first message…";
+    messages.after(div);
+    const ks = document.createElement("style");
+    ks.textContent = "@keyframes jbFade{from{opacity:0.4}to{opacity:1}}";
+    document.head.appendChild(ks);
+  }
+
+  function hideWakingUp() {
+    const el = document.getElementById("jb-waking");
+    if (el) el.remove();
+  }
+
   function showError(msg) {
     errorBox.textContent = msg || "Something went wrong. Please try again.";
     errorBox.style.display = "block";
     setTimeout(() => { errorBox.style.display = "none"; }, 4000);
   }
+
+  /* ── WAKE UP SERVER on first load ── */
+  fetch(WORKER_URL.replace("/chat", "/"), { method: "GET" }).catch(() => {});
 
   /* ── SEND MESSAGE ── */
   async function send(text) {
@@ -291,13 +312,21 @@
     history.push({ role: "user", content: text });
     input.value = "";
     showTyping();
+    showWakingUp();
 
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 55000);
+
       const res = await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: history }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeout);
+      hideWakingUp();
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
@@ -308,8 +337,14 @@
       history.push({ role: "assistant", content: reply });
 
     } catch (err) {
+      hideWakingUp();
       removeTyping();
-      showError("Couldn't reach the server. Please check your connection.");
+      if (err.name === "AbortError") {
+        addBotMsg("The server took too long to respond. It may be waking up — please try again in a moment.");
+      } else {
+        showError("Couldn't reach the server. Please check your connection.");
+      }
+      history.pop();
       console.error("Chatbot error:", err);
     } finally {
       isLoading = false;
