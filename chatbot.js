@@ -93,8 +93,8 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     #jb-term-wrap,#jb-term-wrap *{box-sizing:border-box;margin:0;padding:0;}
 
     #jb-term-wrap{
-      position:fixed;bottom:24px;right:24px;z-index:9999;
-      width:420px;font-family:'JetBrains Mono',monospace;
+      position:fixed;bottom:16px;right:16px;z-index:9999;
+      width:min(420px, calc(100vw - 32px));font-family:'JetBrains Mono',monospace;
     }
 
     /* ── 1. TOOLTIP ── */
@@ -335,11 +335,6 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   };
 
   trigger.addEventListener("click", jbOpen);
-
-  /* ── AUTO-OPEN after 5 seconds ── */
-  setTimeout(() => {
-    if (!panel.classList.contains("open")) jbOpen();
-  }, 5000);
 
   /* ── SEND ── */
   async function send(q) {
