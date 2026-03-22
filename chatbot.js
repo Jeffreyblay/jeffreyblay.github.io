@@ -9,7 +9,7 @@
 
 (function () {
 
-  const GROQ_API_KEY = "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";
+  const GROQ_API_KEY = "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";
   const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
   const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay — if asked anything unrelated, politely redirect back to his work. Keep answers to 2–4 sentences unless a list is needed.
