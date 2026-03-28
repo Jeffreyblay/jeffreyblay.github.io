@@ -9,22 +9,22 @@
 
 (function () {
 
-  const GROQ_API_KEY = "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";
+  const GROQ_API_KEY = "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";
   const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
-  const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay. If asked anything unrelated, politely redirect back to his work. Keep answers to 2-4 sentences unless a list is needed.
+  const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay. If asked anything unrelated, politely redirect back to his work. Keep answers to 1-3 sentences unless a list is needed.
 
 ABOUT JEFFREY BLAY
 PhD candidate at NC A&T State University (expected 2026), specializing in Geospatial Data Science. 6+ years experience in ML/DL for spatial analytics. Contact: jeffreyblay7@gmail.com | GitHub: github.com/Jeffreyblay
 
 EDUCATION
-- PhD Applied Science & Technology — NC A&T (2023-2026). Specialization: Geospatial Data Science.
+- PhD Applied Science & Technology — NC A&T (2023-2026). Specialization: Geospatial Data Science/Engineer.
 - MS Environmental Science — Yale School of the Environment (2021-2023). Specialization: Environmental Data Science for Urban Sustainability.
 - BA Geography with Political Science — University of Ghana (2015-2019). GPA: 3.81/4.0.
 - IBM Professional Data Engineering Certificate — Coursera (In Progress, expected May 2026).
 
 RESEARCH FOCUS
-Physics-informed deep learning for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities.
+Physics-informed deep learning framework for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities.
 
 EXPERIENCE
 - Graduate Research Assistant, NASA Flood Project — NC A&T (Sep 2025-Present): Implementing CNN and transformer models (UNet, Swin-UNet, SegFormer) in PyTorch. Building physics-informed DL framework with hydrostatic constraints. Building FastAPI flood risk dashboard.
@@ -52,6 +52,7 @@ OPEN SOURCE
 - EzProcess Library: github.com/Jeffreyblay/ezprocess_library — 70% faster geospatial ML data prep.
 - Inundation2Depth Dataset: zenodo.org/records/17308287
 - Climate Alert Dashboard: jeffreyblay.github.io/climate-alert-dashboard — FastAPI, 1000+ live NWS alerts.
+- Compliance Log Management System: https://github.com/Jeffreyblay/compliance_log_management
 
 CONFERENCES (11 talks, 4 continents)
 2025: IEEE IGARSS Brisbane Australia, ISPRS Dubai UAE, ASPRS Denver CO
@@ -265,7 +266,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     </div>
 
     <div id="jb-outer">
-      <div id="jb-outer-lbl">AI Assistant</div>
+      <div id="jb-outer-lbl">JBlay AI Assistant</div>
       <div id="jb-trigger">
         <div class="jb-tdots">
           <div class="jb-tdot" style="background:#ff5f57"></div>
@@ -311,7 +312,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   }
   function boot() {
     output.innerHTML = "";
-    line(`<span class="jbt-comment"># Jeffrey Blay AI Assistant v1.0</span>`);
+    line(`<span class="jbt-comment"># JBlay's AI Assistant v1.0</span>`);
     line(`<span class="jbt-comment"># Powered by Groq · llama-3.3-70b-versatile</span>`);
     line(`<span class="jbt-comment"># Ask me anything about Jeffrey below</span>`);
     line(`&nbsp;`);
