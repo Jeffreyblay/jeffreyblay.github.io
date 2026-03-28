@@ -296,7 +296,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <li><a href="talks.html">Talks</a></li>
     <li><a href="cv.html">CV</a></li>
   </ul>
-  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+  <a class="nav-cta" href="/cdn-cgi/l/email-protection#422827242430273b202e233b7502252f232b2e6c212d2f">Contact</a>
 </nav>
 
 <!-- PAGE HERO -->
@@ -311,10 +311,10 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
       From <strong>physics-informed deep learning frameworks</strong> for flood prediction to <strong>full-stack geospatial applications</strong> — a collection of research prototypes, open-source tools, and production systems built at the intersection of spatial data and AI.
     </p>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">14<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
+      <div class="hstat"><div class="hstat-num">15<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
       <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Categories</div></div>
-      <div class="hstat"><div class="hstat-num">2</div><div class="hstat-lbl">Open-Source Tools</div></div>
-      <div class="hstat"><div class="hstat-num">1</div><div class="hstat-lbl">Live Application</div></div>
+      <div class="hstat"><div class="hstat-num">3</div><div class="hstat-lbl">Open-Source Tools</div></div>
+      <div class="hstat"><div class="hstat-num">2</div><div class="hstat-lbl">Live Application</div></div>
     </div>
   </div>
 </section>
@@ -326,7 +326,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <button class="cat-tab" data-cat="cv" onclick="switchCat('cv',this)">Computer Vision</button>
     <button class="cat-tab" data-cat="gis" onclick="switchCat('gis',this)">Remote Sensing / GIS</button>
     <button class="cat-tab" data-cat="analytics" onclick="switchCat('analytics',this)">Data Analytics</button>
-    <button class="cat-tab" data-cat="apps" onclick="switchCat('apps',this)">Built Applications</button>
+    <button class="cat-tab" data-cat="apps" onclick="switchCat('apps',this)">Applications</button>
   </div>
 </div>
 
@@ -653,15 +653,15 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 
   <hr class="cat-divider" id="div-apps">
 
-  <!-- ══ BUILT APPLICATIONS ══ -->
+  <!-- ══ APPLICATIONS ══ -->
   <div class="cat-section active" id="sec-apps">
     <div class="cat-header">
-      <div class="cat-label label-apps">Built Applications</div>
+      <div class="cat-label label-apps">Applications</div>
       <div class="cat-title">Production Systems</div>
       <p class="cat-desc">Full-stack data engineering and analytics applications deployed in production — combining robust backends, ETL pipelines, and interactive frontends to solve real-world problems at scale.</p>
     </div>
 
-    <div class="proj-grid single">
+    <div class="proj-grid">
 
       <!-- Climate Dashboard -->
       <div class="proj-card proj-card-apps" id="apps">
@@ -695,6 +695,47 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
         </div>
       </div>
 
+    
+      <!-- ComplianceLog -->
+      <div class="proj-card proj-card-apps">
+        <div class="proj-num">APP — 02</div>
+        <div class="proj-cat-badge badge-apps">Open Source · Free</div>
+        <div class="proj-title">ComplianceLog — Retain Log Book Management System</div>
+        <p class="proj-summary">A free, open-source compliance and retain log book management system built with Python, Flask, and SQLite. Engineered a full-stack local web application — complete with a relational database schema, automated background scheduling, CSV ETL pipeline with intelligent column mapping, and a multi-page Jinja2 frontend — deployable on any office network with a single double-click and zero cloud infrastructure.</p>
+
+        <div class="proj-meta-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
+          <div class="proj-meta-item"><div class="proj-meta-label">Records Supported</div><div class="proj-meta-val">Unlimited</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Setup Time</div><div class="proj-meta-val">~10 minutes</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">License</div><div class="proj-meta-val">MIT · Open Source</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Infrastructure</div><div class="proj-meta-val">Zero — fully offline</div></div>
+        </div>
+
+        <div class="outcome-box outcome-box-apps" style="margin-top:20px;">
+          <div class="outcome-label">Engineering Highlights</div>
+          <div class="outcome-val">SQLAlchemy ORM with relational schema design · APScheduler background job for automated daily email alerts · CSV ETL pipeline with intelligent header auto-mapping &amp; upsert logic · Flask routing with Jinja2 templating · Dynamic status engine (Active / Due Soon / Overdue) · Runs on LAN — whole team accesses via browser, no login required</div>
+        </div>
+
+        <div class="proj-tags" style="margin-top:0;">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Flask</span>
+          <span class="proj-tag">SQLite</span>
+          <span class="proj-tag">SQLAlchemy ORM</span>
+          <span class="proj-tag">APScheduler</span>
+          <span class="proj-tag">Jinja2</span>
+          <span class="proj-tag">HTML/CSS</span>
+          <span class="proj-tag">ETL Pipeline</span>
+          <span class="proj-tag">SMTP / Email Automation</span>
+          <span class="proj-tag">REST Routes</span>
+          <span class="proj-tag">LAN Deployment</span>
+          <span class="proj-tag">Windows</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-apps" href="compliance_log_management_system.html">View Project Page</a>
+          <a class="proj-link proj-link-ghost" href="https://github.com/YOUR-USERNAME/compliancelog/releases/latest/download/compliance_log.zip">↓ Download</a>
+          <a class="proj-link proj-link-ghost" href="https://github.com/YOUR-USERNAME/compliancelog" target="_blank">GitHub</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -712,7 +753,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function switchCat(cat, btn) {
   // update tab styles
   document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -753,14 +794,4 @@ window.addEventListener('DOMContentLoaded', () => {
     if(btn) switchCat(cat, btn);
     setTimeout(() => {
       const el = document.getElementById(hash);
-      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 100);
-  }
-});
-</script>
-
-<!-- AI Assistant Chatbot -->
-<script src="chatbot.js"></script>
-
-</body>
-</html>
+      if(el) el.scrollIntoVie
