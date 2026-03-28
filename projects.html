@@ -753,7 +753,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function switchCat(cat, btn) {
   // update tab styles
   document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -794,4 +794,14 @@ window.addEventListener('DOMContentLoaded', () => {
     if(btn) switchCat(cat, btn);
     setTimeout(() => {
       const el = document.getElementById(hash);
-      if(el) el.scrollIntoVie
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+});
+</script>
+
+<!-- AI Assistant Chatbot -->
+<script src="chatbot.js"></script>
+
+</body>
+</html>
