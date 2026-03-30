@@ -252,11 +252,11 @@ footer { background: var(--ink); border-top: 1px solid #1a2332; padding: 28px 40
           <div class="mock-stat"><div class="mock-stat-lbl">Overdue</div><div class="mock-stat-val">6</div></div>
         </div>
         <div class="mock-table">
-          <div class="mock-row head"><span>File #</span><span>Sample #</span><span>Shore Tank</span><span>Status</span></div>
-          <div class="mock-row"><span>1212</span><span style="color:#e2e8f0">3</span><span style="color:#e2e8f0">43</span><span><div class="mock-badge mb-active">Active</div></span></div>
-          <div class="mock-row"><span>1455</span><span style="color:#e2e8f0">7</span><span style="color:#e2e8f0">66</span><span><div class="mock-badge mb-warn">Due Soon</div></span></div>
-          <div class="mock-row"><span>2089</span><span style="color:#e2e8f0">12</span><span style="color:#e2e8f0">31</span><span><div class="mock-badge mb-danger">Overdue</div></span></div>
-          <div class="mock-row"><span>2201</span><span style="color:#e2e8f0">4</span><span style="color:#e2e8f0">55</span><span><div class="mock-badge mb-active">Active</div></span></div>
+          <div class="mock-row head"><span>Product #</span><span>Version</span><span>Visibility</span><span>Status</span></div>
+          <div class="mock-row"><span>PROD-001</span><span style="color:#e2e8f0">v1.0</span><span style="color:#e2e8f0">active</span><span><div class="mock-badge mb-active">Active</div></span></div>
+          <div class="mock-row"><span>PROD-002</span><span style="color:#e2e8f0">v2.1</span><span style="color:#e2e8f0">active</span><span><div class="mock-badge mb-warn">Due Soon</div></span></div>
+          <div class="mock-row"><span>PROD-003</span><span style="color:#e2e8f0">v1.3</span><span style="color:#e2e8f0">archived</span><span><div class="mock-badge mb-danger">Overdue</div></span></div>
+          <div class="mock-row"><span>PROD-004</span><span style="color:#e2e8f0">v3.0</span><span style="color:#e2e8f0">active</span><span><div class="mock-badge mb-active">Active</div></span></div>
         </div>
       </div>
     </div>
@@ -270,11 +270,11 @@ footer { background: var(--ink); border-top: 1px solid #1a2332; padding: 28px 40
     <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
     <p class="section-sub">Built specifically for retain log book management — no bloat, no complexity.</p>
     <div class="features-grid">
-      <div class="feature"><div class="feature-icon">📋</div><div class="feature-title">Full record management</div><div class="feature-desc">Add, edit, view and delete log records. Every field from your existing CSV is supported out of the box.</div></div>
-      <div class="feature"><div class="feature-icon">🔍</div><div class="feature-title">Search & filter</div><div class="feature-desc">Instantly search by file number, sample number, shore tank, tech initials or cabinet. Filter by status or condition.</div></div>
-      <div class="feature"><div class="feature-icon">⚠️</div><div class="feature-title">Due date tracking</div><div class="feature-desc">Records are automatically flagged as Active, Due Soon or Overdue. The dashboard surfaces anything needing attention.</div></div>
+      <div class="feature"><div class="feature-icon">📋</div><div class="feature-title">Full record management</div><div class="feature-desc">Add, edit, view and delete product log records. Every field from your existing CSV or Excel file is supported out of the box.</div></div>
+      <div class="feature"><div class="feature-icon">🔍</div><div class="feature-title">Search & filter</div><div class="feature-desc">Instantly search by product number, version, initials, cabinet or shelf label. Filter by status or visibility.</div></div>
+      <div class="feature"><div class="feature-icon">⚠️</div><div class="feature-title">Due date tracking</div><div class="feature-desc">Records are automatically flagged as Active, Due Soon or Overdue based on expiry date. The dashboard surfaces anything needing attention.</div></div>
       <div class="feature"><div class="feature-icon">📧</div><div class="feature-title">Email notifications</div><div class="feature-desc">Automated daily alerts at 08:00 for any records that are due soon or overdue. Configure once, runs automatically.</div></div>
-      <div class="feature"><div class="feature-icon">⇪</div><div class="feature-title">CSV import</div><div class="feature-desc">Upload your existing spreadsheet and the system auto-maps your column headers. Matching records are updated, new ones are added.</div></div>
+      <div class="feature"><div class="feature-icon">⇪</div><div class="feature-title">CSV import</div><div class="feature-desc">Upload your existing CSV or Excel (.xlsx) file — the system auto-maps your column headers. Matching records are updated, new ones are added.</div></div>
       <div class="feature"><div class="feature-icon">🏢</div><div class="feature-title">Office network ready</div><div class="feature-desc">Runs on one PC, accessible by your whole team from any browser on the same WiFi. No internet or cloud accounts needed.</div></div>
     </div>
   </div>
@@ -290,7 +290,7 @@ footer { background: var(--ink); border-top: 1px solid #1a2332; padding: 28px 40
       <div class="step-item"><div class="step-num">01</div><div class="step-title">Download & unzip</div><div class="step-desc">Download the zip and extract it to C:\ComplianceLog\ on the PC that will host it.</div></div>
       <div class="step-item"><div class="step-num">02</div><div class="step-title">Install Python</div><div class="step-desc">Download Python from python.org and install it — tick "Add Python to PATH" on the first screen.</div></div>
       <div class="step-item"><div class="step-num">03</div><div class="step-title">Double-click start.bat</div><div class="step-desc">Run start.bat to launch the app. The first run installs dependencies automatically — takes about a minute.</div></div>
-      <div class="step-item"><div class="step-num">04</div><div class="step-title">Import your CSV</div><div class="step-desc">Open your browser, go to localhost:5000, click Import CSV and upload your existing log file. Done.</div></div>
+      <div class="step-item"><div class="step-num">04</div><div class="step-title">Import your file</div><div class="step-desc">Open your browser, go to localhost:5000, click Import CSV / Excel and upload your existing log file (.csv or .xlsx). Done.</div></div>
     </div>
   </div>
 </section>
@@ -300,18 +300,16 @@ footer { background: var(--ink); border-top: 1px solid #1a2332; padding: 28px 40
   <div class="container">
     <div class="section-tag">Data structure</div>
     <h2 class="section-title">Matched to your<br>existing log format.</h2>
-    <p class="section-sub">Every field from your CSV is supported. Import your existing data without changing anything.</p>
+    <p class="section-sub">Every field from your Excel or CSV log is supported. Import your existing data without changing anything.</p>
     <div class="fields-grid">
-      <div class="field-card"><div class="field-num">01</div><div><div class="field-name">Sample Date</div><div class="field-desc">The date the sample was taken or logged.</div></div></div>
-      <div class="field-card"><div class="field-num">02</div><div><div class="field-name">File Number</div><div class="field-desc">Unique file identifier for each log entry.</div></div></div>
-      <div class="field-card"><div class="field-num">03</div><div><div class="field-name">Sample Number</div><div class="field-desc">Sample reference number within the file.</div></div></div>
-      <div class="field-card"><div class="field-num">04</div><div><div class="field-name">Shore Tank</div><div class="field-desc">The shore tank associated with this sample.</div></div></div>
-      <div class="field-card"><div class="field-num">05</div><div><div class="field-name">Level</div><div class="field-desc">Recorded level measurement for the sample.</div></div></div>
-      <div class="field-card"><div class="field-num">06</div><div><div class="field-name">Movement</div><div class="field-desc">Movement description or classification.</div></div></div>
-      <div class="field-card"><div class="field-num">07</div><div><div class="field-name">Condition</div><div class="field-desc">Current condition or state of the record (e.g. active, dgr).</div></div></div>
-      <div class="field-card"><div class="field-num">08</div><div><div class="field-name">Cabinet & Shelf Number</div><div class="field-desc">Physical storage location for the physical file.</div></div></div>
-      <div class="field-card"><div class="field-num">09</div><div><div class="field-name">Due Date</div><div class="field-desc">The date this record is due for review or action. Drives the status system.</div></div></div>
-      <div class="field-card"><div class="field-num">10</div><div><div class="field-name">Tech Initials</div><div class="field-desc">Initials of the technician responsible for this record.</div></div></div>
+      <div class="field-card"><div class="field-num">01</div><div><div class="field-name">Input Date</div><div class="field-desc">Date the product was logged into the system.</div></div></div>
+      <div class="field-card"><div class="field-num">02</div><div><div class="field-name">Product Number</div><div class="field-desc">Unique number for each product label entry.</div></div></div>
+      <div class="field-card"><div class="field-num">03</div><div><div class="field-name">Version</div><div class="field-desc">Reference number within the product number.</div></div></div>
+      <div class="field-card"><div class="field-num">04</div><div><div class="field-name">Visibility</div><div class="field-desc">Current state of the record (e.g. active, archived).</div></div></div>
+      <div class="field-card"><div class="field-num">05</div><div><div class="field-name">Cabinet Label</div><div class="field-desc">Physical cabinet location where the product is stored.</div></div></div>
+      <div class="field-card"><div class="field-num">06</div><div><div class="field-name">Shelf Label</div><div class="field-desc">Shelf label within the cabinet for precise location.</div></div></div>
+      <div class="field-card"><div class="field-num">07</div><div><div class="field-name">Expiry Date</div><div class="field-desc">Date to trash old products. Drives the Active / Due Soon / Overdue status system.</div></div></div>
+      <div class="field-card"><div class="field-num">08</div><div><div class="field-name">Initials</div><div class="field-desc">Initials of the worker responsible for this record.</div></div></div>
     </div>
   </div>
 </section>
@@ -324,8 +322,8 @@ footer { background: var(--ink); border-top: 1px solid #1a2332; padding: 28px 40
       <h2 class="section-title">Free. Open source.<br>Yours to keep.</h2>
       <p class="section-sub">No accounts, no subscriptions, no cloud. Download once and run it on your office network forever.</p>
       <div class="dl-btns">
-        <a href="https://github.com/YOUR-USERNAME/compliancelog/releases/latest/download/compliance_log.zip" class="btn-dl-big" id="dl-btn2">↓ Download compliance_log.zip</a>
-        <a href="https://github.com/YOUR-USERNAME/compliancelog" class="btn-gh-big" target="_blank">
+        <a href="https://github.com/Jeffreyblay/compliance_log_management/releases/latest/download/compliance_log.zip" class="btn-dl-big" id="dl-btn2">↓ Download compliance_log.zip</a>
+        <a href="https://github.com/Jeffreyblay/compliance_log_management" class="btn-gh-big" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           View on GitHub
         </a>
