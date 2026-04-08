@@ -668,7 +668,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
         <div class="proj-num">APP — 01</div>
         <div class="proj-cat-badge badge-apps">Live · Production</div>
         <div class="proj-title">Climate &amp; Extreme Weather Alert Dashboard</div>
-        <p class="proj-summary">A full-stack web application providing real-time weather monitoring and risk assessment by ingesting live National Weather Service alerts, processing them through a custom ETL pipeline, and delivering actionable insights via an interactive analytics dashboard. Built with FastAPI backend, custom risk-scoring algorithms, and CI/CD deployment via Docker and GitHub Actions.</p>
+        <p class="proj-summary">A full-stack web application providing real-time weather monitoring and risk assessment by ingesting live National Weather Service alerts, processing them through a custom ETL pipeline, and delivering actionable insights via an interactive analytics dashboard. Built with FastAPI backend, custom risk-scoring algorithms, and CI/CD deployment via Render and GitHub Actions.</p>
 
         <div class="proj-meta-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
           <div class="proj-meta-item"><div class="proj-meta-label">Alerts Processed</div><div class="proj-meta-val">1,000+ active</div></div>
@@ -711,7 +711,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
         </div>
 
         <div class="outcome-box outcome-box-apps" style="margin-top:20px;">
-          <div class="outcome-label">Engineering Highlights</div>
+          <div class="outcome-label">Key Features</div>
           <div class="outcome-val">SQLAlchemy ORM with relational schema design · APScheduler background job for automated daily email alerts · CSV ETL pipeline with intelligent header auto-mapping &amp; upsert logic · Flask routing with Jinja2 templating · Dynamic status engine (Active / Due Soon / Overdue) · Runs on LAN — whole team accesses via browser, no login required</div>
         </div>
 
@@ -733,6 +733,46 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
           <a class="proj-link proj-link-primary-apps" href="compliance_log_management_system.html">View Project Page</a>
           <a class="proj-link proj-link-ghost" href="https://github.com/YOUR-USERNAME/compliancelog/releases/latest/download/compliance_log.zip">↓ Download</a>
           <a class="proj-link proj-link-ghost" href="https://github.com/YOUR-USERNAME/compliancelog" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    
+      <!-- Quickview Geodata Portal -->
+      <div class="proj-card proj-card-apps">
+        <div class="proj-num">APP — 03</div>
+        <div class="proj-cat-badge badge-apps">Live · Free</div>
+        <div class="proj-title">Quickview Geodata Portal</div>
+        <p class="proj-summary">An open-source full-stack geospatial data platform for uploading, extracting, analyzing and visualizing spatial data interactively. Built with a Python FastAPI backend, serving a Leaflet.js frontend UI. Supports multiple spatial file formats, 5 spatial analysis tools, and a fully interactive attribute table. Deployed end-to-end with automated CI/CD via GitHub Actions and Railway cloud service.</p>
+
+        <div class="proj-meta-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
+          <div class="proj-meta-item"><div class="proj-meta-label">File Formats</div><div class="proj-meta-val">5 supported</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Analysis</div><div class="proj-meta-val">5 spatial tools</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Map Layers</div><div class="proj-meta-val">4 basemaps</div></div>
+          <div class="proj-meta-item"><div class="proj-meta-label">Export Formats</div><div class="proj-meta-val">3 formats</div></div>
+        </div>
+
+        <div class="outcome-box outcome-box-apps" style="margin-top:20px;">
+          <div class="outcome-label">Key Features</div>
+          <div class="outcome-val">Spatial ETL pipeline supporting CSV, GeoJSON, JSON, XML & ZIP Shapefiles · 5 spatial analyses: Buffer, KDE Hotspot, DBSCAN Clustering, Nearest Neighbor & Attribute Stats · Interactive Leaflet map with basemap switcher & analysis layer legend · Attribute table with search, sort & row-to-map zoom · URL-based remote data fetching · Multi-format export (GeoJSON, CSV, JSON)</div>
+        </div>
+
+        <div class="proj-tags" style="margin-top:0;">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">FastAPI</span>
+          <span class="proj-tag">GeoPandas</span>
+          <span class="proj-tag">Scikit-learn</span>
+          <span class="proj-tag">JavaScript</span>
+          <span class="proj-tag">Leaflet.js</span>
+          <span class="proj-tag">HTML/CSS</span>
+          <span class="proj-tag">CI/CD</span>
+          <span class="proj-tag">GitHub Actions</span>
+          <span class="proj-tag">REST API</span>
+          <span class="proj-tag">Railway Cloud</span>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link proj-link-primary-apps" href="https://jeffreyblay.github.io/quickview-geodata-portal">Live Portal</a>
+          <a class="proj-link proj-link-ghost" href="https://github.com/Jeffreyblay/quickview-geodata-portal">GitHub</a>
+          <a class="proj-link proj-link-ghost" href="https://quickview-geodata-portal-production.up.railway.app/docs">API Docs</a>
         </div>
       </div>
 
