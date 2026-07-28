@@ -1,694 +1,998 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talks & Conferences — Jeffrey Blay</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Presentations — Jeffrey Blay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --ink:#080b0f;--ink2:#12181f;--ink3:#1c2530;
-  --white:#fff;
-  --amber:#d97706;--amber-g:#f59e0b;--amber-dim:rgba(217,119,6,0.12);
-  --teal:#0d9488;
-  --lmuted:#5a6478;--lmuted2:#8892a4;
-  --surf:#f2f4f7;--surf2:#e5e9f0;
-  --grid-d:rgba(255,255,255,0.03);
-  --ff-display:'Cormorant Garamond',serif;
-  --ff-mono:'JetBrains Mono',monospace;
-  --ff-body:'Lora',serif;
-}
-html{scroll-behavior:smooth;}
-body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+  :root{
+    --bg-0:#060f18;
+    --bg-1:#0a1826;
+    --bg-2:#0f2436;
+    --line:#1b3245;
+    --text:#eaf2f7;
+    --muted:#88a1b2;
+    --faint:#5d7688;
+    --gold:#ffc24b;    /* Conference + primary accent */
+    --cyan:#4fd1e0;    /* Symposium */
+    --coral:#ff8a6b;   /* Talk */
+    --atmos:#2e7bb0;
+    --display:"Space Grotesk", system-ui, sans-serif;
+    --body:"IBM Plex Sans", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 700px at 72% -10%, #10314c 0%, rgba(16,49,76,0) 60%),
+      var(--bg-0);
+    color:var(--text);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
 
-/* ── NAV ── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  height:56px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;
-}
-.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--white);letter-spacing:-0.01em;text-decoration:none;}
-.nav-logo span{color:var(--amber-g);}
-.nav-links{display:flex;gap:32px;list-style:none;}
-.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--amber-g);}
-.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:var(--amber);color:var(--ink);text-decoration:none;transition:background .2s;}
-.nav-cta:hover{background:var(--amber-g);}
+  /* ---------- header ---------- */
+  header.site{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,4vw,56px);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:40;
+    background:rgba(6,15,24,0.82);
+    backdrop-filter:blur(10px);
+  }
+  .brand{display:flex;flex-direction:column;line-height:1.05;text-decoration:none;}
+  .brand b{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.2px;}
+  .brand span{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase;margin-top:3px;}
+  nav.site{display:flex;gap:26px;align-items:center;}
+  nav.site a{
+    text-decoration:none;color:var(--muted);font-size:14px;
+    padding:4px 0;position:relative;transition:color .18s;
+  }
+  nav.site a:hover{color:var(--text);}
+  nav.site a.active{color:var(--gold);}
+  nav.site a.active::after{
+    content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--gold);border-radius:2px;
+  }
+  nav.site .contact{
+    color:var(--bg-0);background:var(--gold);padding:8px 15px;border-radius:999px;font-weight:600;
+  }
+  nav.site .contact:hover{color:var(--bg-0);filter:brightness(1.06);}
+  .navtoggle{display:none;}
 
-/* ── PAGE HERO ── */
-.page-hero{
-  background:var(--ink);padding:110px 40px 72px;
-  position:relative;overflow:hidden;
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(var(--grid-d) 1px,transparent 1px),linear-gradient(90deg,var(--grid-d) 1px,transparent 1px);
-  background-size:64px 64px;pointer-events:none;
-}
-.hero-glow{
-  position:absolute;top:-20%;right:-5%;width:600px;height:600px;
-  background:radial-gradient(circle,rgba(217,119,6,0.13) 0%,transparent 65%);pointer-events:none;
-}
-.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
-.eyebrow{
-  font-family:var(--ff-mono);font-size:11px;font-weight:500;
-  letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-g);
-  margin-bottom:20px;display:flex;align-items:center;gap:10px;
-}
-.eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--amber-g);}
-.page-hero h1{
-  font-family:var(--ff-display);font-size:clamp(3rem,6vw,5.5rem);
-  font-weight:700;color:var(--white);letter-spacing:-0.02em;
-  line-height:1.05;margin-bottom:20px;
-}
-.hero-desc{font-size:16px;line-height:1.82;color:rgba(255,255,255,0.52);max-width:600px;}
-.hero-desc strong{color:rgba(255,255,255,0.82);font-weight:500;}
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(30px,5vw,60px) clamp(20px,4vw,56px) clamp(18px,2vw,26px);}
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--cyan);margin:0 0 14px;
+  }
+  .hero h1{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(38px,7vw,72px);line-height:.98;margin:0;letter-spacing:-.02em;
+  }
+  .hero p.lede{
+    max-width:60ch;margin:20px 0 0;color:var(--muted);font-size:clamp(15px,1.6vw,17px);
+  }
+  .hero p.lede b{color:var(--text);font-weight:600;}
 
-.hero-stats{display:flex;gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,0.07);padding-top:36px;flex-wrap:wrap;}
-.hstat{flex:1;min-width:110px;padding-right:24px;margin-right:24px;border-right:1px solid rgba(255,255,255,0.07);}
-.hstat:last-child{border-right:none;padding-right:0;margin-right:0;}
-.hstat-num{font-family:var(--ff-display);font-size:2.6rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px;}
-.hstat-num span{color:var(--amber-g);}
-.hstat-lbl{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+  .stats{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;width:fit-content;max-width:100%;
+  }
+  .stat{padding:16px 26px;border-right:1px solid var(--line);min-width:120px;}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:var(--display);font-weight:600;font-size:30px;line-height:1;}
+  .stat .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:8px;}
 
-/* ── MAP SECTION ── */
-.map-section{background:var(--ink2);padding:0;}
-.map-header{
-  max-width:1100px;margin:0 auto;
-  padding:48px 40px 24px;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
-.map-title-block{}
-.map-label{
-  font-family:var(--ff-mono);font-size:10px;font-weight:500;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--amber);margin-bottom:8px;
-  display:flex;align-items:center;gap:8px;
-}
-.map-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--amber);}
-.map-title{
-  font-family:var(--ff-display);font-size:clamp(1.6rem,3vw,2.4rem);
-  font-weight:700;color:var(--white);letter-spacing:-0.02em;
-}
-.map-legend{display:flex;gap:20px;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.45);}
-.legend-dot{width:10px;height:10px;border-radius:50%;}
-.dot-conf{background:#f59e0b;}
-.dot-symp{background:#2dd4bf;}
-.dot-talk{background:#818cf8;}
+  /* ---------- stage: globe + list ---------- */
+  .stage{
+    display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,0.88fr);
+    gap:clamp(18px,2.4vw,34px);
+    padding:clamp(20px,3vw,40px) clamp(20px,4vw,56px) 60px;
+    align-items:start;
+  }
 
-#map{
-  width:100%;height:480px;
-  border-top:1px solid rgba(255,255,255,0.05);
-  border-bottom:1px solid rgba(255,255,255,0.05);
-}
+  /* globe panel */
+  .globe-wrap{position:sticky;top:88px;}
+  .globe-card{
+    position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:radial-gradient(120% 120% at 70% 15%, #0c2439 0%, #071320 70%);
+    height:min(74vh,720px);
+  }
+  #globe{width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
+  #globe:active{cursor:grabbing;}
 
-/* Leaflet overrides */
-.leaflet-container{background:#0d1420 !important;font-family:var(--ff-mono);}
-.leaflet-tile{filter:brightness(0.72) saturate(0.5) hue-rotate(180deg);}
-.leaflet-control-zoom a{
-  background:rgba(18,24,31,0.95) !important;
-  color:rgba(255,255,255,0.7) !important;
-  border-color:rgba(255,255,255,0.08) !important;
-}
-.leaflet-control-zoom a:hover{background:rgba(30,40,52,0.95) !important;color:var(--amber-g) !important;}
-.leaflet-control-attribution{
-  background:rgba(8,11,15,0.8) !important;
-  color:rgba(255,255,255,0.2) !important;font-size:9px !important;
-}
-.leaflet-control-attribution a{color:rgba(255,255,255,0.3) !important;}
+  .g-overlay{position:absolute;inset:0;pointer-events:none;}
+  .g-top{
+    position:absolute;top:14px;left:14px;right:14px;display:flex;gap:8px;flex-wrap:wrap;
+    align-items:center;pointer-events:auto;
+  }
+  .chip{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
+    border:1px solid var(--line);background:rgba(8,20,32,.72);color:var(--muted);
+    padding:6px 11px;border-radius:999px;cursor:pointer;transition:all .16s;backdrop-filter:blur(6px);
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .chip:hover{color:var(--text);border-color:#2c4b62;}
+  .chip .dot{width:8px;height:8px;border-radius:50%;background:currentColor;}
+  .chip[data-t="all"].on{color:var(--text);border-color:var(--text);background:rgba(234,242,247,.08);}
+  .chip[data-t="Conference"]{color:var(--gold);}
+  .chip[data-t="Symposium"]{color:var(--cyan);}
+  .chip[data-t="Talk"]{color:var(--coral);}
+  .chip.on{border-color:currentColor;background:rgba(255,255,255,.06);}
+  .chip.off{opacity:.4;}
+  .g-count{font-family:var(--mono);font-size:11px;opacity:.7;}
 
-/* Custom popup */
-.talk-popup{min-width:220px;}
-.talk-popup-type{
-  font-family:var(--ff-mono);font-size:9px;font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;
-  margin-bottom:6px;
-}
-.talk-popup-title{
-  font-family:var(--ff-display);font-size:1rem;font-weight:700;
-  color:var(--ink);line-height:1.3;margin-bottom:4px;
-}
-.talk-popup-topic{font-size:11px;color:var(--lmuted);line-height:1.5;margin-bottom:6px;}
-.talk-popup-loc{
-  font-family:var(--ff-mono);font-size:10px;
-  color:var(--lmuted2);letter-spacing:0.04em;
-}
-.leaflet-popup-content-wrapper{
-  border-radius:4px !important;
-  box-shadow:0 8px 32px rgba(0,0,0,0.2) !important;
-  border:1px solid var(--surf2);
-  padding:0 !important;
-}
-.leaflet-popup-content{margin:18px 20px !important;}
-.leaflet-popup-tip{background:var(--white) !important;}
-.leaflet-popup-close-button{color:var(--lmuted2) !important;font-size:18px !important;top:8px !important;right:10px !important;}
+  .g-journey{margin-left:auto;}
+  .toggle{
+    font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--muted);
+    border:1px solid var(--line);background:rgba(8,20,32,.72);padding:6px 11px;border-radius:999px;
+    cursor:pointer;display:inline-flex;align-items:center;gap:8px;backdrop-filter:blur(6px);
+  }
+  .toggle .sw{width:26px;height:14px;border-radius:999px;background:#22384a;position:relative;transition:background .18s;}
+  .toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--faint);transition:transform .18s,background .18s;}
+  .toggle.on .sw{background:rgba(255,194,75,.35);}
+  .toggle.on .sw::after{transform:translateX(12px);background:var(--gold);}
 
-/* ── TALKS BODY ── */
-.talks-body{max-width:1100px;margin:0 auto;padding:72px 40px 100px;}
+  .g-readout{
+    position:absolute;left:14px;bottom:14px;right:14px;pointer-events:none;
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    display:flex;align-items:center;gap:10px;
+  }
+  .g-readout .k{color:var(--faint);}
+  .g-readout .v{color:var(--gold);}
+  .g-readout .sep{color:#2c4b62;}
+  .g-hint{position:absolute;right:14px;bottom:14px;font-family:var(--mono);font-size:10.5px;color:var(--faint);pointer-events:none;letter-spacing:.04em;}
 
-/* filter bar */
-.filter-bar{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:48px;flex-wrap:wrap;
-}
-.filter-btn{
-  font-family:var(--ff-mono);font-size:11px;font-weight:500;
-  letter-spacing:0.08em;padding:8px 16px;border-radius:2px;
-  border:1px solid var(--surf2);background:transparent;
-  color:var(--lmuted);cursor:pointer;transition:all .18s;
-}
-.filter-btn:hover{background:var(--surf);color:var(--ink);}
-.filter-btn.active{background:var(--amber-dim);border-color:rgba(217,119,6,0.28);color:var(--amber);}
-.filter-sep{width:1px;height:20px;background:var(--surf2);margin:0 4px;}
+  #tooltip{
+    position:absolute;pointer-events:none;z-index:10;transform:translate(-50%,-115%);
+    background:rgba(8,20,32,.95);border:1px solid #2c4b62;border-radius:10px;padding:9px 12px;
+    max-width:240px;opacity:0;transition:opacity .12s;
+  }
+  #tooltip .tt-type{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;}
+  #tooltip .tt-title{font-size:13px;font-weight:600;margin:4px 0 3px;line-height:1.3;}
+  #tooltip .tt-place{font-family:var(--mono);font-size:11px;color:var(--muted);}
 
-/* year groups */
-.year-group{margin-bottom:56px;}
-.year-label{
-  font-family:var(--ff-mono);font-size:11px;font-weight:500;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--amber);margin-bottom:20px;
-  display:flex;align-items:center;gap:12px;
-}
-.year-label::after{content:'';flex:1;height:1px;background:var(--surf2);}
+  /* list panel */
+  .list-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;}
+  .list-head h2{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.02em;margin:0;color:var(--muted);text-transform:uppercase;}
+  .list-head .showing{font-family:var(--mono);font-size:11px;color:var(--faint);}
 
-.talk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .yeargroup{margin-top:22px;}
+  .yeargroup:first-child{margin-top:6px;}
+  .year-label{
+    font-family:var(--display);font-weight:700;font-size:13px;color:var(--faint);
+    letter-spacing:.16em;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:2px;
+  }
 
-.talk-card{
-  border:1px solid var(--surf2);background:var(--white);
-  padding:26px 24px;
-  position:relative;overflow:hidden;
-  transition:border-color .2s,box-shadow .2s,transform .2s;
-  cursor:pointer;
-}
-.talk-card::after{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  transform:scaleY(0);transform-origin:bottom;transition:transform .25s;
-}
-.talk-card.type-conference::after{background:var(--amber);}
-.talk-card.type-symposium::after{background:var(--teal);}
-.talk-card.type-talk::after{background:#818cf8;}
+  .talk{
+    border-bottom:1px solid var(--line);padding:16px 14px 16px 16px;cursor:pointer;
+    position:relative;transition:background .16s;border-left:2px solid transparent;
+  }
+  .talk:hover{background:rgba(255,255,255,.02);}
+  .talk.active{background:linear-gradient(90deg, rgba(255,194,75,.09), rgba(255,194,75,0));border-left-color:var(--gold);}
+  .talk .meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 8px;border-radius:5px;border:1px solid currentColor;
+  }
+  .tag.Conference{color:var(--gold);}
+  .tag.Symposium{color:var(--cyan);}
+  .tag.Talk{color:var(--coral);}
+  .talk .date{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em;}
+  .talk .org{font-size:12.5px;color:var(--muted);margin-bottom:3px;}
+  .talk .title{font-family:var(--display);font-weight:500;font-size:16px;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em;}
+  .talk .venue{font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;}
+  .talk .venue .pin{color:var(--faint);flex:none;margin-top:1px;}
+  .talk .link{
+    display:inline-flex;align-items:center;gap:5px;margin-top:10px;
+    font-family:var(--mono);font-size:11px;color:var(--cyan);text-decoration:none;letter-spacing:.03em;
+  }
+  .talk .link:hover{text-decoration:underline;}
+  .talk.hidden{display:none;}
 
-.talk-card:hover{border-color:rgba(0,0,0,0.1);box-shadow:0 6px 28px rgba(0,0,0,0.08);transform:translateY(-2px);}
-.talk-card:hover::after{transform:scaleY(1);}
-.talk-card.highlighted{border-color:rgba(217,119,6,0.35);box-shadow:0 0 0 2px rgba(217,119,6,0.12);}
+  footer.site{
+    border-top:1px solid var(--line);padding:34px clamp(20px,4vw,56px);
+    display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+    color:var(--faint);font-size:13px;
+  }
+  footer.site .fl{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;}
+  footer.site nav{display:flex;gap:20px;}
+  footer.site nav a{color:var(--muted);text-decoration:none;font-size:13px;}
+  footer.site nav a:hover{color:var(--text);}
 
-.talk-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;}
-.talk-type-badge{
-  font-family:var(--ff-mono);font-size:9px;font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;
-  padding:3px 8px;border-radius:2px;flex-shrink:0;
-}
-.badge-conference{background:var(--amber-dim);color:var(--amber);}
-.badge-symposium{background:rgba(13,148,136,0.1);color:var(--teal);}
-.badge-talk{background:rgba(129,140,248,0.1);color:#818cf8;}
-.talk-date{font-family:var(--ff-mono);font-size:10px;color:var(--lmuted2);letter-spacing:0.06em;white-space:nowrap;}
-
-.talk-conf-name{
-  font-family:var(--ff-display);font-size:1.1rem;font-weight:700;
-  color:var(--ink);line-height:1.28;margin-bottom:8px;
-}
-.talk-topic{
-  font-size:13px;line-height:1.68;color:var(--lmuted);
-  margin-bottom:14px;font-style:italic;
-}
-.talk-venue-loc{
-  display:flex;align-items:center;gap:6px;
-  font-family:var(--ff-mono);font-size:10px;
-  color:var(--lmuted2);letter-spacing:0.05em;
-}
-.talk-venue-loc::before{
-  content:'';display:inline-block;width:5px;height:5px;
-  border-radius:50%;background:var(--surf2);flex-shrink:0;
-}
-.talk-card.type-conference .talk-venue-loc::before{background:var(--amber);}
-.talk-card.type-symposium .talk-venue-loc::before{background:var(--teal);}
-.talk-card.type-talk .talk-venue-loc::before{background:#818cf8;}
-
-.talk-link{
-  display:inline-flex;align-items:center;gap:5px;
-  margin-top:14px;font-family:var(--ff-mono);font-size:10px;font-weight:500;
-  letter-spacing:0.08em;color:var(--amber);text-decoration:none;
-  transition:gap .15s;
-}
-.talk-link::after{content:'→';}
-.talk-link:hover{gap:8px;}
-
-/* hidden */
-.talk-card.hidden{display:none;}
-.year-group.empty{display:none;}
-
-/* no results */
-.no-results{text-align:center;padding:60px 20px;font-family:var(--ff-mono);font-size:13px;color:var(--lmuted2);letter-spacing:0.06em;}
-
-/* ── FOOTER ── */
-.footer{
-  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
-  padding:28px 40px;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
-}
-.footer-logo{font-family:var(--ff-display);font-size:16px;font-weight:700;color:var(--white);}
-.footer-logo span{color:var(--amber-g);}
-.footer-copy{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.22);}
-.footer-links{display:flex;gap:20px;}
-.footer-links a{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:var(--amber-g);}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .talk-grid{grid-template-columns:1fr;}
-  #map{height:320px;}
-  .map-header{padding:36px 20px 20px;}
-}
-@media(max-width:600px){
-  .nav{padding:0 20px;} .nav-links{display:none;}
-  .page-hero{padding:90px 20px 56px;}
-  .talks-body{padding:48px 20px 80px;}
-  .hero-stats{flex-wrap:wrap;}
-  .hstat{flex:0 0 calc(50% - 12px);border-right:none;margin-right:0;padding-right:0;}
-  .footer{padding:24px 20px;}
-}
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    nav.site{display:none;}
+    .navtoggle{display:block;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;font-size:13px;font-family:var(--mono);}
+    .stage{grid-template-columns:1fr;}
+    .globe-wrap{position:static;}
+    .globe-card{height:54vh;}
+    .g-top{gap:6px;}
+    .hero h1{font-size:44px;}
+  }
+  @media (max-width:520px){
+    .stat{padding:13px 18px;min-width:96px;}
+    .stat .num{font-size:24px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto;}
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="publications.html">Publications</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="talks.html" class="active">Talks</a></li>
-    <li><a href="cv.html">CV</a></li>
-  </ul>
-  <a class="nav-cta" href="mailto:jblay@aggies.ncat.edu">Contact</a>
-</nav>
+<header class="site">
+  <a class="brand" href="https://jeffreyblay.github.io/index.html">
+    <b>Jeffrey Blay</b>
+    <span>Geospatial AI · Remote Sensing</span>
+  </a>
+  <nav class="site">
+    <a href="https://jeffreyblay.github.io/index.html#about">About</a>
+    <a href="https://jeffreyblay.github.io/publications.html">Publications</a>
+    <a href="https://jeffreyblay.github.io/projects.html">Projects</a>
+    <a href="https://jeffreyblay.github.io/talks.html" class="active">Talks</a>
+    <a href="https://jeffreyblay.github.io/cv.html">CV</a>
+    <a class="contact" href="mailto:jblay@aggies.ncat.edu">Contact</a>
+  </nav>
+  <button class="navtoggle" onclick="location.href='https://jeffreyblay.github.io/talks.html'">Menu</button>
+</header>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="eyebrow">Conferences &amp; Talks</div>
-    <h1>Presentations</h1>
-    <p class="hero-desc">
-      Presenting various geospatial AI research at leading venues across <strong>4 continents</strong> — from AGU and IEEE IGARSS to ISPRS and ASPRS, engaging both local and international research communities on the frontiers of spatial deep learning.
-    </p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">11</div><div class="hstat-lbl">Total Talks</div></div>
-      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Countries</div></div>
-      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Continents</div></div>
-      <div class="hstat"><div class="hstat-num">2023<span>–25</span></div><div class="hstat-lbl">Active Since</div></div>
-    </div>
+<section class="hero">
+  <p class="eyebrow">Conferences &amp; Talks</p>
+  <h1>Presentations</h1>
+  <p class="lede">Geospatial-AI research presented at leading venues across <b>4 continents</b> — from AGU and IEEE&nbsp;IGARSS to ISPRS and ASPRS — on the frontiers of spatial deep learning and 3D flood mapping.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">11</div><div class="lbl">Total Talks</div></div>
+    <div class="stat"><div class="num">4</div><div class="lbl">Countries</div></div>
+    <div class="stat"><div class="num">4</div><div class="lbl">Continents</div></div>
+    <div class="stat"><div class="num">2023–25</div><div class="lbl">Active Since</div></div>
   </div>
 </section>
 
-<!-- MAP SECTION -->
-<section class="map-section">
-  <div class="map-header">
-    <div class="map-title-block">
-      <div class="map-label">Global Footprint</div>
-      <div class="map-title">Where the research has travelled</div>
-    </div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot dot-conf"></div>Conference</div>
-      <div class="legend-item"><div class="legend-dot dot-symp"></div>Symposium</div>
-      <div class="legend-item"><div class="legend-dot dot-talk"></div>Talk / Seminar</div>
-    </div>
-  </div>
-  <div id="map"></div>
-</section>
-
-<!-- TALKS BODY -->
-<div class="talks-body">
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all" onclick="applyFilter('all',this)">All (11)</button>
-    <div class="filter-sep"></div>
-    <button class="filter-btn" data-filter="conference" onclick="applyFilter('conference',this)">Conference (8)</button>
-    <button class="filter-btn" data-filter="symposium" onclick="applyFilter('symposium',this)">Symposium (2)</button>
-    <button class="filter-btn" data-filter="talk" onclick="applyFilter('talk',this)">Talk / Seminar (1)</button>
-    <div class="filter-sep"></div>
-    <button class="filter-btn" data-filter="intl" onclick="applyFilter('intl',this)">International</button>
-    <button class="filter-btn" data-filter="usa" onclick="applyFilter('usa',this)">USA</button>
-  </div>
-
-  <!-- 2025 -->
-  <div class="year-group" id="grp-2025">
-    <div class="year-label">2025</div>
-    <div class="talk-grid">
-
-      <div class="talk-card type-symposium" data-type="symposium" data-region="intl" data-id="igars25">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-symposium">Symposium</span>
-          <span class="talk-date">Aug 2025</span>
+<div class="stage">
+  <!-- GLOBE -->
+  <div class="globe-wrap">
+    <div class="globe-card">
+      <canvas id="globe"></canvas>
+      <div class="g-overlay">
+        <div class="g-top">
+          <button class="chip on" data-t="all">All <span class="g-count">11</span></button>
+          <button class="chip on" data-t="Conference"><span class="dot"></span>Conference <span class="g-count">8</span></button>
+          <button class="chip on" data-t="Symposium"><span class="dot"></span>Symposium <span class="g-count">2</span></button>
+          <button class="chip on" data-t="Talk"><span class="dot"></span>Talk <span class="g-count">1</span></button>
+          <button class="toggle on g-journey" id="journeyToggle"><span class="sw"></span>Journey</button>
         </div>
-        <div class="talk-conf-name">2025 IEEE IGARSS</div>
-        <div class="talk-topic">"Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas"</div>
-        <div class="talk-venue-loc">Brisbane Convention &amp; Exhibition Centre · Brisbane, Australia</div>
-        <a class="talk-link" href="https://www.2025.ieeeigarss.org/" target="_blank">Conference website</a>
-      </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="intl" data-id="isprs25">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Apr 2025</span>
+        <div class="g-readout" id="readout">
+          <span class="k">LOCATION</span>
+          <span class="sep">·</span>
+          <span class="v" id="ro-val">select a talk to trace its coordinates</span>
         </div>
-        <div class="talk-conf-name">2025 ISPRS Geospatial Week</div>
-        <div class="talk-topic">"Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets"</div>
-        <div class="talk-venue-loc">Dubai World Trade Center · Dubai, UAE</div>
-        <a class="talk-link" href="https://gsw2025.ae/" target="_blank">Conference website</a>
+        <div class="g-hint">drag to rotate · scroll to zoom</div>
       </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="asprs25">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Feb 2025</span>
-        </div>
-        <div class="talk-conf-name">2025 ASPRS &amp; GeoWeek Conference</div>
-        <div class="talk-topic">"3D Floodwater Depth Analytics with Big Geo-Data and cGAN"</div>
-        <div class="talk-venue-loc">Colorado Convention Center · Denver, CO, USA</div>
-        <a class="talk-link" href="https://my.asprs.org/2025Conference/2025Conference/Home.aspx" target="_blank">Conference website</a>
-      </div>
-
+      <div id="tooltip"></div>
     </div>
   </div>
 
-  <!-- 2024 -->
-  <div class="year-group" id="grp-2024">
-    <div class="year-label">2024</div>
-    <div class="talk-grid">
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="agu24">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Dec 2024</span>
-        </div>
-        <div class="talk-conf-name">2024 AGU Annual Meeting</div>
-        <div class="talk-topic">"Urban Flood Depth Analytics: Leveraging Generative Algorithms and Remote Sensing for 3D Flood Depth Simulation"</div>
-        <div class="talk-venue-loc">Walter E. Washington Convention Center · Washington DC, USA</div>
-        <a class="talk-link" href="https://www.agu.org/annual-meeting-2024" target="_blank">Conference website</a>
-      </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="ncaug24">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Sep 2024</span>
-        </div>
-        <div class="talk-conf-name">2024 NC ArcGIS User Conference (NCAUG)</div>
-        <div class="talk-topic">"Leveraging AI and Big Geo-Data for 3D Flood Depth Mapping to Safeguard Built Assets"</div>
-        <div class="talk-venue-loc">Hotel Ballast by Hilton · Wilmington, NC, USA</div>
-      </div>
-
-      <div class="talk-card type-symposium" data-type="symposium" data-region="intl" data-id="igars24">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-symposium">Symposium</span>
-          <span class="talk-date">Jul 2024</span>
-        </div>
-        <div class="talk-conf-name">2024 IEEE IGARSS</div>
-        <div class="talk-topic">"Flood Impact Risk Mapping in Settlement Areas from a 3D Perspective: A Case Study of Hurricane Matthew"</div>
-        <div class="talk-venue-loc">Megaron Athens International Conference · Athens, Greece</div>
-        <a class="talk-link" href="https://www.2024.ieeeigarss.org/" target="_blank">Conference website</a>
-      </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="asprs24">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Feb 2024</span>
-        </div>
-        <div class="talk-conf-name">2024 ASPRS Annual &amp; Geo Week Conference</div>
-        <div class="talk-topic">"A 3D Perspective of Analysing the Effect of Hurricane Matthew in Small Communities: Grifton, NC"</div>
-        <div class="talk-venue-loc">Colorado Convention Center · Denver, CO, USA</div>
-        <a class="talk-link" href="https://my.asprs.org/2024Conference/2024Conference/Home.aspx" target="_blank">Conference website</a>
-      </div>
-
+  <!-- LIST -->
+  <div class="list-col">
+    <div class="list-head">
+      <h2>Global Footprint</h2>
+      <span class="showing" id="showing">showing all 11</span>
     </div>
+    <div id="list"></div>
   </div>
-
-  <!-- 2023 -->
-  <div class="year-group" id="grp-2023">
-    <div class="year-label">2023</div>
-    <div class="talk-grid">
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="agu23">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Dec 2023</span>
-        </div>
-        <div class="talk-conf-name">2023 AGU Annual Meeting</div>
-        <div class="talk-topic">"Multi-Channel Deep Learning-Based Architecture for Flood Detection and Mapping"</div>
-        <div class="talk-venue-loc">Moscone Center · San Francisco, CA, USA</div>
-        <a class="talk-link" href="https://www.agu.org/fall-meeting-2023" target="_blank">Conference website</a>
-      </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="researchday23">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Apr 2023</span>
-        </div>
-        <div class="talk-conf-name">39th Yale School of the Environment Research Day</div>
-        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
-        <div class="talk-venue-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
-        <a class="talk-link" href="https://environmentalhumanities.yale.edu/event/yse-research-day-yale-school-environment" target="_blank">Event page</a>
-      </div>
-
-      <div class="talk-card type-talk" data-type="talk" data-region="usa" data-id="yseconfluence23">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-talk">Talk</span>
-          <span class="talk-date">Mar 2023</span>
-        </div>
-        <div class="talk-conf-name">Yale School of the Environment Confluence Talk Series</div>
-        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
-        <div class="talk-venue-loc">Kroon Hall, Yale School of the Environment · New Haven, CT, USA</div>
-      </div>
-
-      <div class="talk-card type-conference" data-type="conference" data-region="usa" data-id="tri23">
-        <div class="talk-card-head">
-          <span class="talk-type-badge badge-conference">Conference</span>
-          <span class="talk-date">Mar 2023</span>
-        </div>
-        <div class="talk-conf-name">Tropical Resources Institute (TRI) Symposium</div>
-        <div class="talk-topic">"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana"</div>
-        <div class="talk-venue-loc">Sage Hall, Yale School of the Environment · New Haven, CT, USA</div>
-        <a class="talk-link" href="https://tri.yale.edu/" target="_blank">TRI website</a>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="no-results" id="no-results" style="display:none;">No talks match the selected filter.</div>
-
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-logo">Jeffrey <span>Blay</span></div>
-  <div class="footer-copy">© 2026 Jeffrey Blay · PhD Candidate, NC A&T State University · Ms, Yale School of the Environment</div>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="publications.html">Publications</a>
-    <a href="projects.html">Projects</a>
-    <a href="cv.html">CV</a>
-  </div>
+<footer class="site">
+  <span class="fl">© 2026 Jeffrey Blay · PhD Candidate, NC A&amp;T State University · MS, Yale School of the Environment</span>
+  <nav>
+    <a href="https://jeffreyblay.github.io/index.html">Home</a>
+    <a href="https://jeffreyblay.github.io/publications.html">Publications</a>
+    <a href="https://jeffreyblay.github.io/projects.html">Projects</a>
+    <a href="https://jeffreyblay.github.io/cv.html">CV</a>
+  </nav>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Post-processing (bloom). UMD builds matched to r128; falls back gracefully if blocked. -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson-client/3.1.0/topojson-client.min.js"></script>
 <script>
-// ── TALK DATA ──
-const talks = [
-  {
-    id:'igars25', lat:-27.4698, lng:153.0251,
-    conf:'2025 IEEE IGARSS', date:'Aug 2025', type:'Symposium',
-    topic:'Pixels to Insights: Deep Learning for Floodwater Depth Mapping',
-    venue:'Brisbane Convention Centre', loc:'Brisbane, Australia'
-  },
-  {
-    id:'isprs25', lat:25.2048, lng:55.2708,
-    conf:'2025 ISPRS Geospatial Week', date:'Apr 2025', type:'Conference',
-    topic:'Advanced Geo-Data Analytics and AI for 3D Flood Mapping',
-    venue:'Dubai World Trade Center', loc:'Dubai, UAE'
-  },
-  {
-    id:'asprs25', lat:39.7392, lng:-104.9903,
-    conf:'2025 ASPRS & GeoWeek', date:'Feb 2025', type:'Conference',
-    topic:'3D Floodwater Depth Analytics with Big Geo-Data and cGAN',
-    venue:'Colorado Convention Center', loc:'Denver, CO, USA'
-  },
-  {
-    id:'agu24', lat:38.9072, lng:-77.0369,
-    conf:'2024 AGU Annual Meeting', date:'Dec 2024', type:'Conference',
-    topic:'Urban Flood Depth Analytics: Generative Algorithms & Remote Sensing',
-    venue:'Walter E. Washington Convention Center', loc:'Washington DC, USA'
-  },
-  {
-    id:'ncaug24', lat:34.2257, lng:-77.9447,
-    conf:'2024 NCAUG Conference', date:'Sep 2024', type:'Conference',
-    topic:'AI and Big Geo-Data for 3D Flood Depth Mapping',
-    venue:'Hotel Ballast by Hilton', loc:'Wilmington, NC, USA'
-  },
-  {
-    id:'igars24', lat:37.9838, lng:23.7275,
-    conf:'2024 IEEE IGARSS', date:'Jul 2024', type:'Symposium',
-    topic:'Flood Impact Risk Mapping: 3D Perspective of Hurricane Matthew',
-    venue:'Megaron Athens Conference Center', loc:'Athens, Greece'
-  },
-  {
-    id:'asprs24', lat:39.7392, lng:-104.9903,
-    conf:'2024 ASPRS & Geo Week', date:'Feb 2024', type:'Conference',
-    topic:'3D Analysis of Hurricane Matthew Impact in Grifton, NC',
-    venue:'Colorado Convention Center', loc:'Denver, CO, USA'
-  },
-  {
-    id:'agu23', lat:37.7749, lng:-122.4194,
-    conf:'2023 AGU Annual Meeting', date:'Dec 2023', type:'Conference',
-    topic:'Multi-Channel Deep Learning for Flood Detection and Mapping',
-    venue:'Moscone Center', loc:'San Francisco, CA, USA'
-  },
-  {
-    id:'researchday23', lat:41.3163, lng:-72.9223,
-    conf:'39th Yale YSE Research Day', date:'Apr 2023', type:'Conference',
-    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
-    venue:'Kroon Hall, Yale', loc:'New Haven, CT, USA'
-  },
-  {
-    id:'yseconfluence23', lat:41.3163, lng:-72.9223,
-    conf:'Yale YSE Confluence Talk Series', date:'Mar 2023', type:'Talk',
-    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
-    venue:'Kroon Hall, Yale', loc:'New Haven, CT, USA'
-  },
-  {
-    id:'tri23', lat:41.3163, lng:-72.9223,
-    conf:'TRI Symposium, Yale', date:'Mar 2023', type:'Conference',
-    topic:'Urban Intensity and Electricity Infrastructures in Ghana',
-    venue:'Sage Hall, Yale', loc:'New Haven, CT, USA'
-  },
+/* ============================================================
+   DATA  — single source of truth for globe + list
+   ============================================================ */
+const TALKS = [
+  {id:1,  date:"Aug 2025", ym:202508, year:2025, type:"Symposium",
+   org:"2025 IEEE IGARSS",
+   title:"Pixels to Insights: Deep Learning for Floodwater Depth Mapping in Settlement Areas",
+   venue:"Brisbane Convention & Exhibition Centre", place:"Brisbane, Australia",
+   lat:-27.4698, lng:153.0251, link:"https://www.2025.ieeeigarss.org/"},
+  {id:2,  date:"Apr 2025", ym:202504, year:2025, type:"Conference",
+   org:"2025 ISPRS Geospatial Week",
+   title:"Advanced Geo-Data Analytics and AI for 3D Flood Mapping to Protect Built Assets",
+   venue:"Dubai World Trade Center", place:"Dubai, UAE",
+   lat:25.2048, lng:55.2708, link:"https://gsw2025.ae/"},
+  {id:3,  date:"Feb 2025", ym:202502, year:2025, type:"Conference",
+   org:"2025 ASPRS & GeoWeek Conference",
+   title:"3D Floodwater Depth Analytics with Big Geo-Data and cGAN",
+   venue:"Colorado Convention Center", place:"Denver, CO, USA",
+   lat:39.7392, lng:-104.9903, link:"https://my.asprs.org/2025Conference/2025Conference/Home.aspx"},
+  {id:4,  date:"Dec 2024", ym:202412, year:2024, type:"Conference",
+   org:"2024 AGU Annual Meeting",
+   title:"Urban Flood Depth Analytics: Leveraging Generative Algorithms and Remote Sensing for 3D Flood Depth Simulation",
+   venue:"Walter E. Washington Convention Center", place:"Washington DC, USA",
+   lat:38.9072, lng:-77.0369, link:"https://www.agu.org/annual-meeting-2024"},
+  {id:5,  date:"Sep 2024", ym:202409, year:2024, type:"Conference",
+   org:"2024 NC ArcGIS User Conference (NCAUG)",
+   title:"Leveraging AI and Big Geo-Data for 3D Flood Depth Mapping to Safeguard Built Assets",
+   venue:"Hotel Ballast by Hilton", place:"Wilmington, NC, USA",
+   lat:34.2257, lng:-77.9447, link:null},
+  {id:6,  date:"Jul 2024", ym:202407, year:2024, type:"Symposium",
+   org:"2024 IEEE IGARSS",
+   title:"Flood Impact Risk Mapping in Settlement Areas from a 3D Perspective: A Case Study of Hurricane Matthew",
+   venue:"Megaron Athens International Conference", place:"Athens, Greece",
+   lat:37.9838, lng:23.7275, link:"https://www.2024.ieeeigarss.org/"},
+  {id:7,  date:"Feb 2024", ym:202402, year:2024, type:"Conference",
+   org:"2024 ASPRS Annual & Geo Week Conference",
+   title:"A 3D Perspective of Analysing the Effect of Hurricane Matthew in Small Communities: Grifton, NC",
+   venue:"Colorado Convention Center", place:"Denver, CO, USA",
+   lat:39.7392, lng:-104.9903, link:"https://my.asprs.org/2024Conference/2024Conference/Home.aspx"},
+  {id:8,  date:"Dec 2023", ym:202312, year:2023, type:"Conference",
+   org:"2023 AGU Annual Meeting",
+   title:"Multi-Channel Deep Learning-Based Architecture for Flood Detection and Mapping",
+   venue:"Moscone Center", place:"San Francisco, CA, USA",
+   lat:37.7749, lng:-122.4194, link:"https://www.agu.org/fall-meeting-2023"},
+  {id:9,  date:"Apr 2023", ym:202304, year:2023, type:"Conference",
+   org:"39th Yale School of the Environment Research Day",
+   title:"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana",
+   venue:"Kroon Hall, Yale School of the Environment", place:"New Haven, CT, USA",
+   lat:41.3083, lng:-72.9279, link:"https://environmentalhumanities.yale.edu/event/yse-research-day-yale-school-environment"},
+  {id:10, date:"Mar 2023", ym:202303, year:2023, type:"Talk",
+   org:"Yale School of the Environment Confluence Talk Series",
+   title:"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana",
+   venue:"Kroon Hall, Yale School of the Environment", place:"New Haven, CT, USA",
+   lat:41.3083, lng:-72.9279, link:null},
+  {id:11, date:"Mar 2023", ym:202303, year:2023, type:"Conference",
+   org:"Tropical Resources Institute (TRI) Symposium",
+   title:"Local Scale Analysis of Urban Intensity and Electricity Infrastructures in Ghana",
+   venue:"Sage Hall, Yale School of the Environment", place:"New Haven, CT, USA",
+   lat:41.3083, lng:-72.9279, link:"https://tri.yale.edu/"}
 ];
+const COLORS = {Conference:0xffc24b, Symposium:0x4fd1e0, Talk:0xff8a6b};
+const CSSCOL = {Conference:"var(--gold)", Symposium:"var(--cyan)", Talk:"var(--coral)"};
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const typeColor = {Conference:'#f59e0b', Symposium:'#2dd4bf', Talk:'#818cf8'};
-
-// ── INIT MAP ──
-const map = L.map('map', {
-  center:[30, 10], zoom:2,
-  zoomControl:true,
-  scrollWheelZoom:false,
-});
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'© OpenStreetMap contributors',
-  maxZoom:18,
-}).addTo(map);
-
-// custom marker icon
-function makeIcon(color){
-  return L.divIcon({
-    className:'',
-    html:`<div style="
-      width:14px;height:14px;border-radius:50%;
-      background:${color};border:2px solid rgba(255,255,255,0.9);
-      box-shadow:0 0 0 3px ${color}44,0 2px 8px rgba(0,0,0,0.4);
-      cursor:pointer;
-    "></div>`,
-    iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10],
-  });
-}
-
-// group markers by location (some overlap at Yale)
-const locationGroups = {};
-talks.forEach(t => {
-  const key = `${t.lat.toFixed(3)},${t.lng.toFixed(3)}`;
-  if(!locationGroups[key]) locationGroups[key] = [];
-  locationGroups[key].push(t);
-});
-
-const markers = {};
-Object.entries(locationGroups).forEach(([key, group]) => {
-  const {lat, lng} = group[0];
-  const color = group.length > 1 ? '#f59e0b' : typeColor[group[0].type];
-
-  // build popup content
-  let popupHtml = `<div class="talk-popup">`;
-  group.forEach((t,i) => {
-    if(i > 0) popupHtml += `<hr style="border:none;border-top:1px solid #e5e9f0;margin:10px 0;">`;
-    popupHtml += `
-      <div class="talk-popup-type" style="color:${typeColor[t.type]}">${t.type} · ${t.date}</div>
-      <div class="talk-popup-title">${t.conf}</div>
-      <div class="talk-popup-topic">${t.topic}</div>
-      <div class="talk-popup-loc">${t.venue} · ${t.loc}</div>
+/* ============================================================
+   BUILD LIST
+   ============================================================ */
+const listEl = document.getElementById("list");
+const byYear = {};
+TALKS.forEach(t=>{(byYear[t.year]=byYear[t.year]||[]).push(t);});
+Object.keys(byYear).sort((a,b)=>b-a).forEach(y=>{
+  const g=document.createElement("div"); g.className="yeargroup";
+  g.innerHTML=`<div class="year-label">${y}</div>`;
+  byYear[y].forEach(t=>{
+    const card=document.createElement("div");
+    card.className="talk"; card.dataset.id=t.id; card.dataset.type=t.type;
+    card.innerHTML=`
+      <div class="meta">
+        <span class="tag ${t.type}">${t.type}</span>
+        <span class="date">${t.date}</span>
+      </div>
+      <div class="org">${t.org}</div>
+      <h3 class="title">${t.title}</h3>
+      <div class="venue"><span class="pin">◈</span><span>${t.venue} · ${t.place}</span></div>
+      ${t.link?`<a class="link" href="${t.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conference website ↗</a>`:""}
     `;
+    card.addEventListener("click",()=>focusTalk(t.id,true));
+    g.appendChild(card);
   });
-  popupHtml += `</div>`;
-
-  // offset overlapping markers slightly
-  const offsetLat = group.length > 1 ? lat : lat;
-  const marker = L.marker([offsetLat, lng], {icon: makeIcon(color)})
-    .addTo(map)
-    .bindPopup(popupHtml, {maxWidth:280, closeButton:true});
-
-  group.forEach(t => { markers[t.id] = marker; });
-
-  // pulse animation on hover for multi-location
-  marker.on('mouseover', function(){ this.openPopup(); });
+  listEl.appendChild(g);
 });
+const cardEls = [...document.querySelectorAll(".talk")];
 
-// clicking a card highlights and flies to marker
-function flyToTalk(id){
-  const marker = markers[id];
-  if(!marker) return;
-  map.flyTo(marker.getLatLng(), 5, {duration:1.2});
-  setTimeout(() => marker.openPopup(), 1300);
-  document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'});
+/* ============================================================
+   THREE.JS GLOBE
+   ============================================================ */
+const canvas = document.getElementById("globe");
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+let camZ = 3.0; camera.position.set(0,0,camZ);
+
+const globe = new THREE.Group();       // spins
+scene.add(globe);
+
+const R = 1;
+
+/* --- space backdrop (kept in-scene so bloom composites correctly) --- */
+(function(){
+  const c=document.createElement("canvas");c.width=16;c.height=256;
+  const x=c.getContext("2d");const g=x.createLinearGradient(0,0,0,256);
+  g.addColorStop(0,"#0c2138");g.addColorStop(.5,"#070f19");g.addColorStop(1,"#03070d");
+  x.fillStyle=g;x.fillRect(0,0,16,256);
+  scene.background=new THREE.CanvasTexture(c);
+})();
+
+/* --- day/night ocean (real terminator) --- */
+const SUN=new THREE.Vector3(0.6,0.3,0.7).normalize();
+const ocean = new THREE.Mesh(
+  new THREE.SphereGeometry(R,96,96),
+  new THREE.ShaderMaterial({
+    uniforms:{
+      sun:{value:SUN},
+      dayCol:{value:new THREE.Color(0x14415f)},
+      nightCol:{value:new THREE.Color(0x05101b)},
+      termCol:{value:new THREE.Color(0xb5764a)}
+    },
+    vertexShader:`
+      varying vec3 vN; varying vec3 vW;
+      void main(){
+        vN=normalize(mat3(modelMatrix)*normal);
+        vW=(modelMatrix*vec4(position,1.0)).xyz;
+        gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);
+      }`,
+    fragmentShader:`
+      uniform vec3 sun,dayCol,nightCol,termCol; varying vec3 vN; varying vec3 vW;
+      void main(){
+        vec3 N=normalize(vN); vec3 S=normalize(sun);
+        float d=dot(N,S);
+        float lit=smoothstep(-0.12,0.34,d);
+        vec3 col=mix(nightCol,dayCol,lit);
+        float term=smoothstep(-0.06,0.05,d)*(1.0-smoothstep(0.05,0.30,d));
+        col+=termCol*term*0.5;
+        vec3 V=normalize(cameraPosition-vW);
+        float spec=pow(max(dot(reflect(-S,N),V),0.0),24.0)*lit;
+        col+=vec3(0.5,0.66,0.82)*spec*0.55;
+        gl_FragColor=vec4(col,1.0);
+      }`
+  })
+);
+globe.add(ocean);
+
+/* --- atmosphere (fresnel rim) --- */
+const atmos = new THREE.Mesh(
+  new THREE.SphereGeometry(R*1.16,64,64),
+  new THREE.ShaderMaterial({
+    transparent:true, side:THREE.BackSide, depthWrite:false, blending:THREE.AdditiveBlending,
+    uniforms:{c:{value:new THREE.Color(0x2e7bb0)}},
+    vertexShader:`varying vec3 vN; void main(){vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`uniform vec3 c; varying vec3 vN; void main(){ float i=pow(0.62-dot(vN,vec3(0.0,0.0,1.0)),2.6); gl_FragColor=vec4(c,1.0)*clamp(i,0.0,1.0);}`
+  })
+);
+scene.add(atmos);
+
+/* --- round dot texture --- */
+function dotTex(){
+  const c=document.createElement("canvas");c.width=c.height=64;
+  const x=c.getContext("2d");const g=x.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(.55,"rgba(255,255,255,.9)");g.addColorStop(1,"rgba(255,255,255,0)");
+  x.fillStyle=g;x.beginPath();x.arc(32,32,32,0,7);x.fill();
+  const t=new THREE.CanvasTexture(c);return t;
+}
+const DOT=dotTex();
+
+/* --- lat/lng -> vec3 --- */
+function toVec3(lat,lng,r){
+  const phi=(90-lat)*Math.PI/180, theta=(lng+180)*Math.PI/180;
+  return new THREE.Vector3(
+    -r*Math.sin(phi)*Math.cos(theta),
+     r*Math.cos(phi),
+     r*Math.sin(phi)*Math.sin(theta)
+  );
 }
 
-// add click listeners to cards
-document.querySelectorAll('.talk-card').forEach(card => {
-  card.addEventListener('click', e => {
-    if(e.target.closest('a')) return; // don't intercept link clicks
-    const id = card.dataset.id;
-    flyToTalk(id);
-    document.querySelectorAll('.talk-card').forEach(c => c.classList.remove('highlighted'));
-    card.classList.add('highlighted');
+/* --- coarse land mask (banded lon ranges per lat) --- */
+const LAND=[
+ [-90,-72,[[-180,180]]],
+ [-56,-40,[[-75,-62]]],[-40,-30,[[-74,-48]]],[-30,-20,[[-72,-40]]],
+ [-20,-10,[[-72,-34]]],[-10,0,[[-81,-34]]],[0,10,[[-80,-50]]],[10,13,[[-75,-60]]],
+ [-35,-30,[[16,29]]],[-30,-15,[[11,37]]],[-15,0,[[8,42]]],[0,15,[[-17,47]]],
+ [15,30,[[-17,37],[34,60]]],[30,37,[[-10,33]]],
+ [-26,-12,[[43,51]]],
+ [36,44,[[-10,29]]],[44,50,[[-9,40]]],[50,58,[[-10,40]]],[58,71,[[4,30]]],
+ [50,59,[[-11,2]]],
+ [60,83,[[-55,-18]]],
+ [8,15,[[-92,-82]]],[15,25,[[-112,-86]]],[25,30,[[-116,-80]]],[30,40,[[-123,-75]]],
+ [40,50,[[-128,-52]]],[50,60,[[-168,-55]]],[60,71,[[-165,-62]]],[71,78,[[-125,-70]]],
+ [6,15,[[76,110]]],[15,25,[[42,122]]],[25,35,[[45,122]]],[35,45,[[26,146]]],
+ [45,55,[[28,145]]],[55,72,[[30,180]]],
+ [31,46,[[129,146]]],
+ [-10,8,[[95,141]]],[5,19,[[117,127]]],
+ [-39,-30,[[114,151]]],[-30,-20,[[113,153]]],[-20,-11,[[122,144]]],
+ [-47,-34,[[166,179]]]
+];
+function isLand(lat,lng){
+  for(const b of LAND){ if(lat>=b[0]&&lat<b[1]){ for(const r of b[2]){ if(lng>=r[0]&&lng<=r[1]) return true; } } }
+  return false;
+}
+/* build land dots (fallback base layer; hidden once real boundaries load) */
+let landDots;
+(function(){
+  const pos=[];
+  for(let lat=-84;lat<=84;lat+=2){
+    const step=2/Math.max(0.15,Math.cos(lat*Math.PI/180));
+    for(let lng=-180;lng<180;lng+=step){
+      if(isLand(lat,lng)){ const v=toVec3(lat,lng,R*1.004); pos.push(v.x,v.y,v.z); }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+  const mat=new THREE.PointsMaterial({size:0.02,map:DOT,transparent:true,opacity:0.92,
+    color:0x6fa6c9,depthWrite:false,sizeAttenuation:true,alphaTest:0.02});
+  landDots=new THREE.Points(geo,mat);
+  globe.add(landDots);
+})();
+
+/* --- real country boundaries (Natural Earth 110m via CDN) --- */
+/* Draws coastlines + internal borders as lines on the sphere.       */
+/* Falls back silently to the dot-land layer above if it can't load. */
+(function loadBoundaries(){
+  if(typeof topojson==="undefined") return;
+  const SOURCES=[
+    "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+    "https://unpkg.com/world-atlas@2/countries-110m.json"
+  ];
+  function segsFromMesh(mesh,r){
+    const arr=[];
+    for(const line of mesh.coordinates){
+      for(let i=0;i<line.length-1;i++){
+        const a=toVec3(line[i][1],line[i][0],r), b=toVec3(line[i+1][1],line[i+1][0],r);
+        arr.push(a.x,a.y,a.z,b.x,b.y,b.z);
+      }
+    }
+    const g=new THREE.BufferGeometry();
+    g.setAttribute("position",new THREE.Float32BufferAttribute(arr,3));
+    return g;
+  }
+  function build(topo){
+    const obj=topo.objects.countries;
+    const coast  =topojson.mesh(topo,obj,(a,b)=>a===b);   // exterior coastlines
+    const borders=topojson.mesh(topo,obj,(a,b)=>a!==b);   // internal country borders
+    const cLine=new THREE.LineSegments(segsFromMesh(coast,R*1.004),
+      new THREE.LineBasicMaterial({color:0x8fbadd,transparent:true,opacity:0.85}));
+    const bLine=new THREE.LineSegments(segsFromMesh(borders,R*1.003),
+      new THREE.LineBasicMaterial({color:0x4a7ea3,transparent:true,opacity:0.42}));
+    globe.add(cLine,bLine);
+    if(landDots) landDots.visible=false;   // swap fallback for the real thing
+  }
+  (function tryNext(i){
+    if(i>=SOURCES.length) return;           // keep dot-land fallback
+    fetch(SOURCES[i]).then(r=>{if(!r.ok)throw 0;return r.json();})
+      .then(build).catch(()=>tryNext(i+1));
+  })(0);
+})();
+
+/* --- graticule --- */
+(function(){
+  const mat=new THREE.LineBasicMaterial({color:0x2a5169,transparent:true,opacity:0.45});
+  for(let lat=-60;lat<=60;lat+=30){
+    const pts=[]; for(let a=0;a<=360;a+=4) pts.push(toVec3(lat,a-180,R*1.002));
+    globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),mat));
+  }
+  for(let lng=-180;lng<180;lng+=30){
+    const pts=[]; for(let a=-90;a<=90;a+=4) pts.push(toVec3(a,lng,R*1.002));
+    globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),mat));
+  }
+})();
+
+/* --- starfield --- */
+(function(){
+  const pos=[]; for(let i=0;i<650;i++){
+    const u=Math.random()*2-1, th=Math.random()*Math.PI*2, s=Math.sqrt(1-u*u), rad=18+Math.random()*22;
+    pos.push(s*Math.cos(th)*rad, s*Math.sin(th)*rad, u*rad);
+  }
+  const g=new THREE.BufferGeometry(); g.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x9fc0d8,size:0.06,transparent:true,opacity:0.55,map:DOT,depthWrite:false})));
+})();
+
+/* --- journey arcs (chronological) --- */
+const arcsGroup = new THREE.Group(); globe.add(arcsGroup);
+const arcLines=[];
+(function(){
+  const seq=[...TALKS].sort((a,b)=>a.ym-b.ym);
+  for(let i=0;i<seq.length-1;i++){
+    const a=toVec3(seq[i].lat,seq[i].lng,R).normalize();
+    const b=toVec3(seq[i+1].lat,seq[i+1].lng,R).normalize();
+    const omega=Math.acos(THREE.MathUtils.clamp(a.dot(b),-1,1));
+    if(omega<1e-4) continue;
+    const pts=[],N=48;
+    for(let j=0;j<=N;j++){
+      const t=j/N, s1=Math.sin((1-t)*omega)/Math.sin(omega), s2=Math.sin(t*omega)/Math.sin(omega);
+      const p=a.clone().multiplyScalar(s1).add(b.clone().multiplyScalar(s2));
+      p.multiplyScalar(R*(1+0.17*Math.sin(Math.PI*t)));
+      pts.push(p);
+    }
+    const geo=new THREE.BufferGeometry().setFromPoints(pts);
+    const line=new THREE.Line(geo,new THREE.LineBasicMaterial({color:0xffc24b,transparent:true,opacity:0.0,blending:THREE.AdditiveBlending,depthWrite:false}));
+    line.userData.total=pts.length; line.userData.pts=pts;
+    if(!reduceMotion) geo.setDrawRange(0,0);
+    arcsGroup.add(line); arcLines.push(line);
+  }
+})();
+
+/* --- traveling comet that flies the whole journey path (chronological) --- */
+const journeyPath=[];
+arcLines.forEach(l=>l.userData.pts.forEach(p=>journeyPath.push(p.clone())));
+let cometHead=null, cometGlow=null, cometTrail=null, cursor=0;
+const TRAILN=18, cometSpeed=0.75;
+(function(){
+  if(!journeyPath.length) return;
+  cometHead=new THREE.Mesh(new THREE.SphereGeometry(0.018,12,12),
+    new THREE.MeshBasicMaterial({color:0xfff2cf}));
+  cometGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:DOT,color:0xffd06a,
+    transparent:true,opacity:0.9,blending:THREE.AdditiveBlending,depthWrite:false}));
+  cometGlow.scale.setScalar(0.14);
+  cometTrail=new THREE.Line(new THREE.BufferGeometry(),
+    new THREE.LineBasicMaterial({color:0xffc24b,transparent:true,opacity:0.55,blending:THREE.AdditiveBlending,depthWrite:false}));
+  arcsGroup.add(cometTrail,cometHead,cometGlow);
+})();
+
+/* --- markers (cluster-aware: co-located talks collapse into one head) --- */
+let filter="all";
+function visibleTalk(t){return filter==="all"||t.type===filter;}
+const markerGroup=new THREE.Group(); globe.add(markerGroup);
+const pingGroup=new THREE.Group(); globe.add(pingGroup);
+const spokeGroup=new THREE.Group(); globe.add(spokeGroup);
+const cores=[];              // raycast targets
+const clusters=[];           // one per distinct location
+const talkToCluster={};      // talk id -> cluster
+const worldUp=new THREE.Vector3(0,1,0);
+const ZAX=new THREE.Vector3(0,0,1);
+
+function makeCore(col,r=0.016){return new THREE.Mesh(new THREE.SphereGeometry(r,16,16),new THREE.MeshBasicMaterial({color:col,transparent:true}));}
+function makeHalo(col){return new THREE.Mesh(new THREE.SphereGeometry(0.032,16,16),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0.28,depthWrite:false}));}
+function makePulse(col){return new THREE.Mesh(new THREE.SphereGeometry(0.032,16,16),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0.5,depthWrite:false,blending:THREE.AdditiveBlending}));}
+function badgeSprite(n){
+  const c=document.createElement("canvas");c.width=c.height=72;const x=c.getContext("2d");
+  x.fillStyle="rgba(9,20,32,0.92)";x.strokeStyle="#eaf2f7";x.lineWidth=5;
+  x.beginPath();x.arc(36,36,29,0,7);x.fill();x.stroke();
+  x.fillStyle="#eaf2f7";x.font="bold 38px 'IBM Plex Mono',ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  x.fillText(String(n),36,38);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));
+  s.scale.setScalar(0.07);return s;
+}
+
+/* group talks by exact location */
+const groups=new Map();
+TALKS.forEach(t=>{const k=t.lat.toFixed(2)+","+t.lng.toFixed(2); if(!groups.has(k))groups.set(k,[]); groups.get(k).push(t);});
+
+groups.forEach(talks=>{
+  const anchor=toVec3(talks[0].lat,talks[0].lng,1).normalize();
+  let east=new THREE.Vector3().crossVectors(worldUp,anchor); if(east.lengthSq()<1e-6)east.set(1,0,0); east.normalize();
+  const north=new THREE.Vector3().crossVectors(anchor,east).normalize();
+  const anchorPos=anchor.clone().multiplyScalar(R*1.02);
+  const cl={talks,anchor,east,north,anchorPos,expanded:false,members:[],presentMembers:[],
+            head:null,headGroup:null,badge:null,ping:null,
+            headOp:0,badgeOp:0,spokeOp:0};
+
+  talks.forEach(t=>{
+    const col=COLORS[t.type];
+    const grp=new THREE.Group(); grp.position.copy(anchorPos);
+    const core=makeCore(col),halo=makeHalo(col),pulse=makePulse(col);
+    grp.add(halo,pulse,core); markerGroup.add(grp);
+    core.userData={talk:t,cluster:cl}; core.visible=true;
+    const spoke=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),
+      new THREE.LineBasicMaterial({color:0x7f9bb0,transparent:true,opacity:0,depthWrite:false}));
+    spokeGroup.add(spoke);
+    const m={talk:t,grp,core,halo,pulse,spoke,present:true,active:true,targetPos:anchorPos.clone(),targetScale:1,curScale:1};
+    cl.members.push(m); talkToCluster[t.id]=cl; cores.push(core);
   });
+
+  if(talks.length>1){
+    const hg=new THREE.Group(); hg.position.copy(anchorPos);
+    const head=makeCore(0xe6eef5,0.02), halo=makeHalo(0xbcd6e6);
+    hg.add(halo,head); markerGroup.add(hg);
+    head.userData={cluster:cl,head:true};
+    cl.head=head; cl.headGroup=hg; cl.headHalo=halo; cores.push(head);
+    cl.badge=badgeSprite(talks.length); cl.badge.position.copy(anchor.clone().multiplyScalar(R*1.055)); markerGroup.add(cl.badge);
+  }
+
+  const ring=new THREE.Mesh(new THREE.RingGeometry(0.72,0.9,44),
+    new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+  ring.position.copy(anchor.clone().multiplyScalar(R*1.006)); ring.quaternion.setFromUnitVectors(ZAX,anchor.clone());
+  pingGroup.add(ring); cl.ping=ring; cl.pingOffset=Math.random();
+  clusters.push(cl);
 });
 
-// ── FILTERING ──
-function applyFilter(filter, btn){
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  document.querySelectorAll('.talk-card').forEach(card => {
-    const type = card.dataset.type;
-    const region = card.dataset.region;
-    let show = true;
-    if(filter === 'conference') show = type === 'conference';
-    else if(filter === 'symposium') show = type === 'symposium';
-    else if(filter === 'talk') show = type === 'talk';
-    else if(filter === 'intl') show = region === 'intl';
-    else if(filter === 'usa') show = region === 'usa';
-    card.classList.toggle('hidden', !show);
+/* recompute what each cluster shows, given filter + expanded state */
+function refreshCluster(cl){
+  const present=cl.members.filter(m=>filter==="all"||m.talk.type===filter);
+  cl.presentMembers=present;
+  const multi=present.length>1;
+  const expanded=cl.expanded&&multi;
+  const n=present.length, spread=0.05+0.013*n;
+  present.forEach((m,i)=>{
+    const ang=(i/n)*Math.PI*2+Math.PI/2;
+    m.fanPos=cl.anchor.clone()
+      .add(cl.east.clone().multiplyScalar(Math.cos(ang)*spread))
+      .add(cl.north.clone().multiplyScalar(Math.sin(ang)*spread))
+      .normalize().multiplyScalar(R*1.02);
   });
-
-  // hide empty year groups
-  document.querySelectorAll('.year-group').forEach(grp => {
-    const visible = [...grp.querySelectorAll('.talk-card')].some(c => !c.classList.contains('hidden'));
-    grp.classList.toggle('empty', !visible);
+  cl.members.forEach(m=>{
+    m.present=present.includes(m);
+    if(!m.present){m.targetScale=0;m.targetPos=cl.anchorPos;m.active=false;}
+    else if(!multi){m.targetPos=cl.anchorPos;m.targetScale=1;m.active=true;}
+    else if(expanded){m.targetPos=m.fanPos;m.targetScale=1;m.active=true;}
+    else {m.targetPos=cl.anchorPos;m.targetScale=0;m.active=false;}
+    m.core.userData.active=m.active;
   });
-
-  const totalVisible = [...document.querySelectorAll('.talk-card:not(.hidden)')].length;
-  document.getElementById('no-results').style.display = totalVisible === 0 ? 'block' : 'none';
+  const showHead=multi&&!expanded;
+  cl._headTarget=showHead?1:(multi&&expanded?0.45:0);
+  cl._badgeTarget=showHead?1:0;
+  cl._spokeTarget=expanded?0.5:0;
+  if(cl.head) cl.head.userData.active=multi;
+  const pc=present.length===1?COLORS[present[0].talk.type]:0xbcd6e6;
+  if(cl.ping) cl.ping.material.color.set(pc);
+  cl._pingOn=present.length>0;
 }
+function collapseAllExcept(keep){clusters.forEach(c=>{if(c!==keep)c.expanded=false;});}
+function refreshAll(){clusters.forEach(refreshCluster);}
+refreshAll();
+// snap to initial state (no intro flash)
+clusters.forEach(cl=>{
+  cl.headOp=cl._headTarget||0; cl.badgeOp=cl._badgeTarget||0; cl.spokeOp=0;
+  cl.members.forEach(m=>{m.curScale=m.targetScale; m.grp.position.copy(m.targetPos);
+    m.grp.scale.setScalar(Math.max(m.curScale,0.0001)); m.grp.visible=m.curScale>0.02;});
+});
+
+/* ============================================================
+   CONTROLS  (yaw/pitch state; custom drag + zoom)
+   ============================================================ */
+let yaw=-1.4, pitch=0.32, tYaw=yaw, tPitch=pitch, focusing=false;
+let dragging=false, hovering=false, autoPauseUntil=0, lastX=0,lastY=0;
+const qy=new THREE.Quaternion(), qx=new THREE.Quaternion();
+const AXY=new THREE.Vector3(0,1,0), AXX=new THREE.Vector3(1,0,0);
+
+canvas.addEventListener("pointerdown",e=>{dragging=true;focusing=false;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener("pointerup",()=>{dragging=false;autoPauseUntil=performance.now()+2500;});
+canvas.addEventListener("pointermove",e=>{
+  if(dragging){
+    yaw+=(e.clientX-lastX)*0.006; pitch+=(e.clientY-lastY)*0.006;
+    pitch=THREE.MathUtils.clamp(pitch,-1.2,1.2);
+    tYaw=yaw;tPitch=pitch;lastX=e.clientX;lastY=e.clientY;
+  } else { handleHover(e); }
+});
+canvas.addEventListener("pointerleave",()=>{hovering=false;tooltip.style.opacity=0;});
+canvas.addEventListener("wheel",e=>{e.preventDefault();camZ=THREE.MathUtils.clamp(camZ+e.deltaY*0.0016,1.75,4.2);},{passive:false});
+
+/* raycast hover */
+const ray=new THREE.Raycaster(); const mouse=new THREE.Vector2(); const tooltip=document.getElementById("tooltip");
+function hittableCores(){return cores.filter(c=>c.userData.active);}
+function frontHit(e){
+  const r=canvas.getBoundingClientRect();
+  mouse.x=((e.clientX-r.left)/r.width)*2-1; mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+  ray.setFromCamera(mouse,camera);
+  const hits=ray.intersectObjects(hittableCores());
+  for(const h of hits){ const wp=new THREE.Vector3();h.object.getWorldPosition(wp); if(wp.z>-0.15) return h.object; }
+  return null;
+}
+function handleHover(e){
+  const r=canvas.getBoundingClientRect();
+  const obj=frontHit(e);
+  if(obj){
+    hovering=true; canvas.style.cursor="pointer";
+    tooltip.style.opacity=1; tooltip.style.left=(e.clientX-r.left)+"px"; tooltip.style.top=(e.clientY-r.top)+"px";
+    if(obj.userData.head){
+      const cl=obj.userData.cluster; const t0=cl.talks[0];
+      tooltip.innerHTML=`<div class="tt-type" style="color:var(--muted)">${cl.presentMembers.length} talks</div>
+        <div class="tt-title">${t0.place}</div>
+        <div class="tt-place">click to expand</div>`;
+    } else {
+      const t=obj.userData.talk;
+      tooltip.innerHTML=`<div class="tt-type" style="color:${CSSCOL[t.type]}">${t.type} · ${t.date}</div>
+        <div class="tt-title">${t.title.length>64?t.title.slice(0,62)+"…":t.title}</div>
+        <div class="tt-place">${t.place}</div>`;
+    }
+  } else { hovering=false; canvas.style.cursor="grab"; tooltip.style.opacity=0; }
+}
+canvas.addEventListener("pointerup",e=>{
+  const obj=frontHit(e); if(!obj) return;
+  if(obj.userData.head){
+    const cl=obj.userData.cluster; cl.expanded=!cl.expanded; collapseAllExcept(cl.expanded?cl:null); refreshAll();
+    focusDir(cl.anchor); autoPauseUntil=performance.now()+4500;
+  } else {
+    focusTalk(obj.userData.talk.id,false);
+  }
+});
+
+/* ============================================================
+   FOCUS
+   ============================================================ */
+let activeMember=null, pulseT=0;
+function focusDir(v){ // v = unit vector on globe
+  tPitch=THREE.MathUtils.clamp(Math.atan2(v.y,Math.hypot(v.x,v.z)),-1.15,1.15);
+  let ty=Math.atan2(-v.x,v.z);
+  while(ty-yaw>Math.PI)ty-=2*Math.PI; while(ty-yaw<-Math.PI)ty+=2*Math.PI;
+  tYaw=ty; focusing=true; camZ=Math.min(camZ,2.5);
+}
+function focusTalk(id,fromList){
+  const t=TALKS.find(x=>x.id===id); if(!t) return;
+  if(filter!=="all" && t.type!==filter) setFilter("all");
+  const cl=talkToCluster[id];
+  collapseAllExcept(cl); if(cl.members.length>1) cl.expanded=true; refreshAll();
+  focusDir(cl.anchor); autoPauseUntil=performance.now()+4500;
+  const la=Math.abs(t.lat).toFixed(2)+"°"+(t.lat>=0?"N":"S");
+  const lo=Math.abs(t.lng).toFixed(2)+"°"+(t.lng>=0?"E":"W");
+  document.getElementById("ro-val").innerHTML=`${la} · ${lo} <span style="color:var(--muted)">— ${t.place.toUpperCase()}</span>`;
+  cardEls.forEach(c=>c.classList.toggle("active",+c.dataset.id===id));
+  if(!fromList){ const card=cardEls.find(c=>+c.dataset.id===id); if(card) card.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"}); }
+  activeMember=cl.members.find(m=>m.talk.id===id); pulseT=0;
+}
+
+/* ============================================================
+   FILTER
+   ============================================================ */
+const chips=[...document.querySelectorAll(".chip")];
+chips.forEach(c=>c.addEventListener("click",()=>setFilter(c.dataset.t)));
+function setFilter(f){
+  filter=f;
+  chips.forEach(c=>{
+    const isTarget = c.dataset.t===f;
+    if(f==="all"){ c.classList.toggle("on",true); c.classList.remove("off"); }
+    else { c.classList.toggle("on",isTarget || c.dataset.t==="all"?false:false); }
+  });
+  // simpler chip visuals
+  chips.forEach(c=>{
+    c.classList.remove("on","off");
+    if(c.dataset.t===f) c.classList.add("on");
+    else c.classList.add("off");
+  });
+  // markers → recompute clusters for the new filter
+  clusters.forEach(c=>c.expanded=false);
+  refreshAll();
+  // list
+  cardEls.forEach(c=>c.classList.toggle("hidden", f!=="all" && c.dataset.type!==f));
+  document.querySelectorAll(".yeargroup").forEach(g=>{
+    const any=[...g.querySelectorAll(".talk")].some(c=>!c.classList.contains("hidden"));
+    g.style.display=any?"":"none";
+  });
+  // arcs dim when filtered
+  arcLines.forEach(l=>l.userData.dim=(f!=="all"));
+  const n = f==="all"?11:TALKS.filter(t=>t.type===f).length;
+  document.getElementById("showing").textContent = f==="all"?`showing all 11`:`showing ${n} · ${f}`;
+}
+
+/* journey toggle */
+const jToggle=document.getElementById("journeyToggle");
+let journeyOn=true;
+jToggle.addEventListener("click",()=>{journeyOn=!journeyOn;jToggle.classList.toggle("on",journeyOn);arcsGroup.visible=journeyOn;});
+
+/* ============================================================
+   RESIZE + LOOP
+   ============================================================ */
+/* bloom composer — falls back to direct render if libs didn't load */
+let composer=null, bloomPass=null;
+(function initBloom(){
+  if(!THREE.EffectComposer||!THREE.RenderPass||!THREE.UnrealBloomPass) return;
+  composer=new THREE.EffectComposer(renderer);
+  if(composer.setPixelRatio) composer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  composer.addPass(new THREE.RenderPass(scene,camera));
+  bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(1,1), 0.9, 0.6, 0.5);
+  composer.addPass(bloomPass);
+})();
+
+function resize(){
+  const r=canvas.getBoundingClientRect();
+  renderer.setSize(r.width,r.height,false);
+  camera.aspect=r.width/r.height; camera.updateProjectionMatrix();
+  if(composer) composer.setSize(r.width,r.height);
+}
+window.addEventListener("resize",resize); resize();
+
+let start=performance.now();
+function animate(now){
+  requestAnimationFrame(animate);
+  const dt=now-start; 
+  // auto-rotate
+  const idle = !dragging && !hovering && !focusing && now>autoPauseUntil;
+  if(idle && !reduceMotion){ yaw+=0.0013; tYaw=yaw; tPitch=pitch; }
+  // ease when focusing
+  if(focusing){
+    yaw+=(tYaw-yaw)*0.09; pitch+=(tPitch-pitch)*0.09;
+    if(Math.abs(tYaw-yaw)<0.002&&Math.abs(tPitch-pitch)<0.002){focusing=false;}
+  }
+  qy.setFromAxisAngle(AXY,yaw); qx.setFromAxisAngle(AXX,pitch);
+  globe.quaternion.copy(qx).multiply(qy);
+  camera.position.z += (camZ-camera.position.z)*0.12;
+
+  // markers: ease positions & scales, fade by facing, expand/collapse clusters
+  const camDir=new THREE.Vector3(0,0,1);
+  const tmp=new THREE.Vector3();
+  clusters.forEach(cl=>{
+    cl.headOp += ((cl._headTarget||0)-cl.headOp)*0.15;
+    cl.badgeOp += ((cl._badgeTarget||0)-cl.badgeOp)*0.15;
+    cl.spokeOp += ((cl._spokeTarget||0)-cl.spokeOp)*0.15;
+    if(cl.head){
+      cl.headGroup.getWorldPosition(tmp);
+      const hf=THREE.MathUtils.smoothstep(tmp.clone().normalize().dot(camDir),-0.2,0.15);
+      cl.headGroup.visible=cl.headOp>0.01;
+      cl.head.material.opacity=cl.headOp*Math.max(hf,0.05);
+      cl.headHalo.material.opacity=0.26*cl.headOp*hf;
+      cl.badge.visible=cl.badgeOp>0.01;
+      cl.badge.material.opacity=cl.badgeOp*hf;
+    }
+    cl.members.forEach(m=>{
+      m.grp.position.lerp(m.targetPos,0.18);
+      m.curScale += (m.targetScale-m.curScale)*0.18;
+      m.grp.visible=m.curScale>0.02;
+      m.grp.scale.setScalar(Math.max(m.curScale,0.0001));
+      m.grp.getWorldPosition(tmp);
+      const front=THREE.MathUtils.smoothstep(tmp.clone().normalize().dot(camDir),-0.25,0.15);
+      m.core.material.opacity=m.curScale*Math.max(front,0.06);
+      m.halo.material.opacity=0.28*m.curScale*front;
+      const ph=(Math.sin(dt*0.0025+m.talk.id)*0.5+0.5);
+      m.pulse.material.opacity=0.35*m.curScale*front*(0.4+0.6*(1-ph));
+      m.pulse.scale.setScalar(1+ph*0.9);
+      const sp=m.spoke;
+      if(cl.spokeOp>0.01 && m.present){
+        const aPos=cl.anchor.clone().multiplyScalar(R*1.012);
+        const arr=sp.geometry.attributes.position.array;
+        arr[0]=aPos.x;arr[1]=aPos.y;arr[2]=aPos.z;
+        arr[3]=m.grp.position.x;arr[4]=m.grp.position.y;arr[5]=m.grp.position.z;
+        sp.geometry.attributes.position.needsUpdate=true;
+        sp.material.opacity=cl.spokeOp*front; sp.visible=true;
+      } else sp.visible=false;
+    });
+  });
+  // active member flash
+  if(activeMember){ pulseT+=0.04; activeMember.pulse.scale.setScalar(1+(pulseT<3?2.2*Math.exp(-pulseT):0)); if(pulseT>3)activeMember=null; }
+
+  // arcs draw-in + shimmer + dim
+  arcLines.forEach((l,i)=>{
+    if(!reduceMotion){
+      const g=l.geometry; const total=l.userData.total; const cur=g.drawRange.count;
+      const target=total; const delay=i*90;
+      if(dt>delay && cur<target) g.setDrawRange(0,Math.min(target,cur+2));
+    }
+    const base=l.userData.dim?0.12:0.5;
+    l.material.opacity=base*(0.7+0.3*Math.sin(dt*0.0018+i));
+  });
+
+  // traveling journey comet
+  if(cometHead){
+    const on = arcsGroup.visible && !reduceMotion;
+    cometHead.visible=cometGlow.visible=cometTrail.visible=on;
+    if(on){
+      cursor=(cursor+cometSpeed)%journeyPath.length;
+      const head=Math.floor(cursor);
+      const p=journeyPath[head];
+      cometHead.position.copy(p); cometGlow.position.copy(p);
+      const tp=[]; for(let k=0;k<TRAILN;k++){ const idx=head-k; if(idx<0) break; tp.push(journeyPath[idx]); }
+      cometTrail.geometry.setFromPoints(tp);
+      cometGlow.material.opacity=0.55+0.35*Math.sin(dt*0.02);
+    }
+  }
+
+  // radar ping rings (one per location)
+  clusters.forEach(cl=>{
+    if(!cl.ping) return;
+    cl.ping.getWorldPosition(tmp);
+    const front=THREE.MathUtils.smoothstep(tmp.clone().normalize().dot(camDir),-0.05,0.3);
+    const phase=((now*0.00045)+cl.pingOffset)%1;
+    cl.ping.scale.setScalar(0.05+phase*0.17);
+    cl.ping.material.opacity=(cl._pingOn?0.5:0)*front*Math.pow(1-phase,1.6);
+  });
+
+  if(composer) composer.render(); else renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+// intro pose
+setTimeout(()=>{ if(!reduceMotion){focusTalk(1,false);} },700);
 </script>
-
-<!-- AI Assistant Chatbot -->
-<script src="chatbot.js"></script>
-
 </body>
 </html>
