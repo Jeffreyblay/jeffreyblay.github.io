@@ -202,8 +202,8 @@ h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
 
   var scene = new THREE.Scene();
   var camera = new THREE.OrthographicCamera(-10, 10, 7, -7, .1, 200);
-  camera.position.set(17, 13, 17);
-  camera.lookAt(0, 1.6, 0);
+  camera.position.set(17, 15.9, 17);
+  camera.lookAt(0, 4.5, 0);
 
   var world = new THREE.Group(); scene.add(world);
 
@@ -320,7 +320,7 @@ h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
   });
 
   /* ── sizing ── */
-  var VIEW = 11;
+  var VIEW = 16;
   function resize(){
     var w = draw.clientWidth, h = draw.clientHeight;
     if(!w||!h) return;
