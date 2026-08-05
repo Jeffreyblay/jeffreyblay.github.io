@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#F1EFE9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@300;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F1EFE9;
@@ -18,12 +18,13 @@
   --faint:#A9B0B4;
   --hair:#D5D1C7;
   --data:#BF4029;      /* the moving data */
-  --cond:'IBM Plex Sans Condensed',system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --ff-body:'Lora',serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
-body{background:var(--bg);color:var(--ink);font-family:var(--cond);font-weight:300;
+body{background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-weight:300;
   -webkit-font-smoothing:antialiased;overflow:hidden;}
 a{color:inherit;}
 :focus-visible{outline:1px solid var(--data);outline-offset:4px;}
@@ -32,9 +33,9 @@ a{color:inherit;}
   display:grid;grid-template-rows:auto 1fr auto;}
 
 .top{display:flex;align-items:center;justify-content:space-between;padding:20px 0;}
-.mark{font-weight:600;font-size:15px;letter-spacing:.01em;text-decoration:none;text-transform:uppercase;}
+.mark{font-family:var(--ff-display);font-weight:600;font-size:15px;letter-spacing:.01em;text-decoration:none;text-transform:uppercase;}
 .top nav{display:flex;gap:22px;}
-.top nav a{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+.top nav a{font-family:var(--ff-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--dim);text-decoration:none;transition:color .25s;}
 .top nav a:hover,.top nav a.here{color:var(--ink);}
 @media(max-width:680px){.top nav{display:none;}}
@@ -43,22 +44,22 @@ a{color:inherit;}
   align-items:center;min-height:0;padding-bottom:8px;}
 
 .plate{padding-right:8px;}
-.eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+.eyebrow{font-family:var(--ff-mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--dim);margin-bottom:18px;}
-h1{font-weight:600;font-size:clamp(2.8rem,6.2vw,4.9rem);line-height:.94;letter-spacing:-.022em;
+h1{font-family:var(--ff-display);font-weight:700;font-size:clamp(2.8rem,6.2vw,4.9rem);line-height:.94;letter-spacing:-.022em;
   text-transform:uppercase;margin-bottom:18px;}
 h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
 .lede{font-size:clamp(15px,1.35vw,17.5px);line-height:1.6;color:var(--ink-2);max-width:34ch;
   margin-bottom:28px;}
 .lede b{font-weight:500;color:var(--ink);}
 .links{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px;}
-.dl{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-decoration:none;
+.dl{font-family:var(--ff-mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-decoration:none;
   padding:12px 20px;border:1px solid var(--ink);transition:all .22s;}
 .dl:hover{background:var(--ink);color:var(--sheet);}
 .dl.lead{background:var(--ink);color:var(--sheet);}
 .dl.lead:hover{background:var(--data);border-color:var(--data);}
 .facts{display:flex;flex-direction:column;gap:5px;padding-top:16px;border-top:1px solid var(--hair);
-  font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--dim);}
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.07em;color:var(--dim);}
 
 /* ── the drawing sheet ── */
 .sheet{position:relative;background:var(--sheet);border:1px solid var(--hair);
@@ -66,21 +67,21 @@ h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
 .sheet::before,.sheet::after{content:'';position:absolute;pointer-events:none;z-index:3;}
 .sheet::before{inset:9px;border:1px solid var(--hair);}
 .frame-hd{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;
-  padding:16px 20px;font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;
+  padding:16px 20px;font-family:var(--ff-mono);font-size:8.5px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--faint);z-index:3;pointer-events:none;}
 .draw{position:relative;flex:1;min-height:0;}
 #sheetview{position:absolute;inset:0;width:100%;height:100%;display:block;}
 .tags{position:absolute;inset:0;pointer-events:none;}
 .tag{position:absolute;top:0;left:0;transform:translate(-50%,-50%);
   display:flex;align-items:center;gap:7px;white-space:nowrap;
-  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);}
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);}
 .tag i{width:5px;height:5px;background:var(--ink);font-style:normal;flex:none;}
 .tag u{text-decoration:none;color:var(--data);}
 
 /* title block, bottom-right of the sheet */
 .block{position:absolute;right:9px;bottom:9px;z-index:3;border-left:1px solid var(--hair);
   border-top:1px solid var(--hair);background:var(--sheet);
-  display:grid;grid-template-columns:auto auto;font-family:var(--mono);font-size:8.5px;
+  display:grid;grid-template-columns:auto auto;font-family:var(--ff-mono);font-size:8.5px;
   letter-spacing:.12em;text-transform:uppercase;}
 .block div{padding:7px 12px;border-bottom:1px solid var(--hair);color:var(--faint);}
 .block div:nth-child(even){border-left:1px solid var(--hair);color:var(--ink-2);}
@@ -88,7 +89,7 @@ h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
 @media(max-width:720px){.block{display:none;}}
 
 .bot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0 18px;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);}
+  font-family:var(--ff-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);}
 .bot a{text-decoration:none;transition:color .2s;}
 .bot a:hover{color:var(--ink);}
 .bot .set{display:flex;gap:18px;}

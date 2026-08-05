@@ -6,7 +6,7 @@
 <title>Presentations — Jeffrey Blay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Lora:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-0:#060f18;
@@ -20,9 +20,9 @@
     --cyan:#4fd1e0;    /* Symposium */
     --coral:#ff8a6b;   /* Talk */
     --atmos:#2e7bb0;
-    --display:"Space Grotesk", system-ui, sans-serif;
-    --body:"IBM Plex Sans", system-ui, sans-serif;
-    --mono:"IBM Plex Mono", ui-monospace, monospace;
+    --display:'Cormorant Garamond', serif;
+    --body:'Lora', serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -187,7 +187,7 @@
   .tag.Talk{color:var(--coral);}
   .talk .date{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em;}
   .talk .org{font-size:12.5px;color:var(--muted);margin-bottom:3px;}
-  .talk .title{font-family:var(--display);font-weight:500;font-size:16px;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em;}
+  .talk .title{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em;}
   .talk .venue{font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;}
   .talk .venue .pin{color:var(--faint);flex:none;margin-top:1px;}
   .talk .link{
@@ -660,7 +660,7 @@ function badgeSprite(n){
   const c=document.createElement("canvas");c.width=c.height=72;const x=c.getContext("2d");
   x.fillStyle="rgba(9,20,32,0.92)";x.strokeStyle="#eaf2f7";x.lineWidth=5;
   x.beginPath();x.arc(36,36,29,0,7);x.fill();x.stroke();
-  x.fillStyle="#eaf2f7";x.font="bold 38px 'IBM Plex Mono',ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
+  x.fillStyle="#eaf2f7";x.font="bold 38px 'JetBrains Mono',ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";
   x.fillText(String(n),36,38);
   const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));
   s.scale.setScalar(0.07);return s;
