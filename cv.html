@@ -29,16 +29,25 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ff-body);font-weigh
 a{color:inherit;}
 :focus-visible{outline:1px solid var(--data);outline-offset:4px;}
 
-.page{height:100%;max-width:1480px;margin:0 auto;padding:0 clamp(18px,3.5vw,44px);
-  display:grid;grid-template-rows:auto 1fr auto;}
+/* ── SITE NAV (matches index.html / publications.html / projects.html) ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,11,15,0.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 40px;
+}
+.nav-logo{font-family:var(--ff-display);font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.01em;text-decoration:none;justify-self:start;}
+.nav-logo span{color:#f59e0b;}
+.nav-links{display:flex;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:#f59e0b;}
+.nav-cta{font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;padding:8px 18px;border-radius:3px;background:#d97706;color:var(--ink);text-decoration:none;transition:background .2s;justify-self:end;}
+.nav-cta:hover{background:#f59e0b;}
+@media(max-width:680px){.nav-links{display:none;}}
 
-.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0;}
-.mark{font-family:var(--ff-display);font-weight:600;font-size:15px;letter-spacing:.01em;text-decoration:none;text-transform:uppercase;}
-.top nav{display:flex;gap:22px;}
-.top nav a{font-family:var(--ff-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dim);text-decoration:none;transition:color .25s;}
-.top nav a:hover,.top nav a.here{color:var(--ink);}
-@media(max-width:680px){.top nav{display:none;}}
+.page{height:100%;max-width:1480px;margin:0 auto;padding:56px clamp(18px,3.5vw,44px) 0;
+  display:grid;grid-template-rows:1fr auto;}
 
 .stage{display:grid;grid-template-columns:minmax(280px,.72fr) 1.28fr;gap:clamp(20px,3vw,44px);
   align-items:center;min-height:0;padding-bottom:8px;}
@@ -106,18 +115,19 @@ h1 em{display:block;font-style:normal;font-weight:300;color:var(--ink-2);}
 </head>
 <body>
 
-<div class="page">
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Jeffrey <span>Blay</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="cv.html" class="active">CV</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
+</nav>
 
-  <header class="top">
-    <a class="mark" href="index.html">Jeffrey Blay</a>
-    <nav>
-      <a href="index.html#about">About</a>
-      <a href="publications.html">Publications</a>
-      <a href="projects.html">Projects</a>
-      <a href="talks.html">Talks</a>
-      <a href="cv.html" class="here">CV</a>
-    </nav>
-  </header>
+<div class="page">
 
   <div class="stage">
 
