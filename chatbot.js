@@ -3,14 +3,14 @@
    Usage: Add before </body> on every HTML page:
    <script src="chatbot.js"></script>
 
-   Replace YOUR_NEW_GROQ_KEY_HERE with your Groq API key
-   from console.groq.com
+   Requests go through a Cloudflare Worker (see /worker) that
+   holds the Groq API key server-side, so no key ships to the
+   browser. Set WORKER_URL below to your deployed Worker's URL.
    ============================================================= */
 
 (function () {
 
-  const GROQ_API_KEY = "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";
-  const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+  const WORKER_URL = "https://groq-proxy.blaystudies.workers.dev/";
 
   const SYSTEM_PROMPT = `You are Jeffrey Blay's professional AI assistant, embedded on his personal portfolio website. Answer questions about Jeffrey accurately, concisely, and professionally. Only answer questions about Jeffrey Blay. If asked anything unrelated, politely redirect back to his work. Keep answers to 1-3 sentences unless a list is needed.
 
@@ -355,17 +355,11 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 30000);
 
-      const res = await fetch(GROQ_URL, {
+      const res = await fetch(WORKER_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${GROQ_API_KEY}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
           messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
-          max_tokens: 400,
-          temperature: 0.5,
         }),
         signal: ctrl.signal,
       });

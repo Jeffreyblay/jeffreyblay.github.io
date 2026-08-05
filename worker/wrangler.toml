@@ -1,0 +1,6 @@
+name = "jblay-groq-proxy"
+main = "groq-proxy.js"
+compatibility_date = "2024-01-01"
+
+# Set the secret after first deploy:
+#   wrangler secret put GROQ_API_KEY
