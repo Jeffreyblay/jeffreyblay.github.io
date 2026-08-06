@@ -538,7 +538,7 @@ function renderStrip(cat){
   const items = cat === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === cat);
   countEl.textContent = `Showing ${items.length} project${items.length===1?'':'s'}`;
   track.innerHTML = items.map(p => `
-    <div class="strip-card" style="--accent:${ACCENT[p.cat]}" onclick="openModal('${p.id}')">
+    <div class="strip-card" style="--accent:${ACCENT[p.cat]}" data-id="${p.id}" tabindex="0" role="button" aria-label="View details — ${p.title}">
       <div class="strip-num-bg">${p.num.split('—')[1].trim()}</div>
       <svg class="strip-icon" viewBox="0 0 24 24">${ICONS[p.cat]}</svg>
       <div class="strip-top-row">
@@ -559,26 +559,36 @@ function filterProjects(cat, btn){
   renderStrip(cat);
 }
 
-/* ── STRIP DRAG-TO-SCROLL ── */
+/* ── STRIP DRAG-TO-SCROLL + CLICK-TO-OPEN (driven by the same pointer sequence,
+   so a drag never accidentally opens a card and a plain click always does) ── */
 (function(){
   const wrap = document.getElementById('stripWrap');
-  let down=false, startX=0, startScroll=0, moved=false;
+  let down=false, startX=0, startScroll=0, moved=false, downTarget=null;
+
   wrap.addEventListener('pointerdown', e=>{
     down=true; moved=false; startX=e.clientX; startScroll=wrap.scrollLeft;
+    downTarget = e.target.closest('.strip-card');
     wrap.classList.add('dragging'); wrap.setPointerCapture(e.pointerId);
   });
   wrap.addEventListener('pointermove', e=>{
     if(!down) return;
     const dx = e.clientX - startX;
-    if(Math.abs(dx) > 4) moved = true;
+    if(Math.abs(dx) > 6) moved = true;
     wrap.scrollLeft = startScroll - dx;
   });
-  function up(){ down=false; wrap.classList.remove('dragging'); }
-  wrap.addEventListener('pointerup', up);
-  wrap.addEventListener('pointerleave', up);
-  wrap.addEventListener('click', e=>{
-    if(moved){ e.stopPropagation(); e.preventDefault(); }
-  }, true);
+  wrap.addEventListener('pointerup', ()=>{
+    down=false; wrap.classList.remove('dragging');
+    if(!moved && downTarget){ openModal(downTarget.dataset.id); }
+    downTarget = null;
+  });
+  wrap.addEventListener('pointerleave', ()=>{ down=false; wrap.classList.remove('dragging'); });
+
+  wrap.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      const card = e.target.closest('.strip-card');
+      if(card){ e.preventDefault(); openModal(card.dataset.id); }
+    }
+  });
 })();
 function scrollStrip(dir){
   document.getElementById('stripWrap').scrollBy({left: dir*300, behavior:'smooth'});
