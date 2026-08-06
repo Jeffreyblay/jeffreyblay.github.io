@@ -306,10 +306,15 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
 
 /* ── ABOUT / TIMELINE ── */
 .about{background:rgba(255,255,255,0.97);padding:96px 40px;}
-.about-inner{
-  max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
-}
+.about-inner{max-width:720px;margin:0 auto;}
+
+/* about stat strip */
+.about-stats{display:flex;gap:0;margin-top:36px;border-top:1px solid var(--surf2);padding-top:28px;flex-wrap:wrap;}
+.astat{flex:1;min-width:110px;padding-right:24px;margin-right:24px;border-right:1px solid var(--surf2);}
+.astat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.astat-num{font-family:var(--ff-display);font-size:2rem;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px;}
+.astat-num span{color:var(--amber);}
+.astat-lbl{font-family:var(--ff-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--lmuted2);}
 .about-left h2{
   font-family:var(--ff-display);
   font-size:clamp(2rem,3.5vw,2.8rem);
@@ -343,34 +348,6 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
 .edu-details{}
 .edu-deg{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:1px;}
 .edu-inst{font-family:var(--ff-mono);font-size:11px;color:var(--lmuted2);letter-spacing:0.04em;}
-
-/* timeline */
-.tl{display:flex;flex-direction:column;position:relative;}
-.tl::before{
-  content:'';position:absolute;left:8px;top:14px;bottom:0;
-  width:1px;background:var(--surf2);
-}
-.tl-item{display:flex;gap:22px;padding-bottom:32px;position:relative;}
-.tl-dot{
-  flex-shrink:0;width:17px;height:17px;border-radius:50%;
-  background:var(--white);border:2px solid var(--surf2);
-  margin-top:2px;z-index:1;transition:border-color .2s;
-}
-.tl-item:hover .tl-dot{border-color:var(--amber);}
-.tl-dot.active{background:var(--amber);border-color:var(--amber);}
-.tl-year{
-  font-family:var(--ff-mono);font-size:10px;font-weight:500;
-  color:var(--amber);letter-spacing:0.1em;margin-bottom:4px;
-}
-.tl-role{
-  font-family:var(--ff-display);font-size:.97rem;font-weight:700;
-  color:var(--ink);margin-bottom:2px;
-}
-.tl-org{
-  font-family:var(--ff-mono);font-size:11px;
-  color:var(--lmuted2);margin-bottom:8px;letter-spacing:0.04em;
-}
-.tl-desc{font-size:13px;line-height:1.68;color:var(--lmuted);}
 
 /* ── PUBLICATIONS ── */
 .pubs{background:rgba(242,244,247,0.97);padding:96px 40px;}
@@ -593,7 +570,6 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:48px;}
   .hero-card{display:none;}
-  .about-inner{grid-template-columns:1fr;gap:48px;}
   .skill-grid{grid-template-columns:repeat(2,1fr);}
   .talks-grid-cards{grid-template-columns:repeat(2,1fr);}
   .proj-cards{grid-template-columns:repeat(2,1fr);}
@@ -604,6 +580,8 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
   .hero{padding:90px 20px 60px;}
   .hero-stats{flex-wrap:wrap;gap:20px;}
   .hstat{flex:0 0 calc(50% - 10px);border-right:none;margin-right:0;padding-right:0;}
+  .about-stats{flex-wrap:wrap;gap:20px;}
+  .astat{flex:0 0 calc(50% - 10px);border-right:none;margin-right:0;padding-right:0;}
   .skill-grid{grid-template-columns:1fr;}
   .talks-grid-cards{grid-template-columns:1fr;}
   .proj-cards{grid-template-columns:1fr;}
@@ -634,7 +612,7 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
     <li><a href="talks.html">Talks</a></li>
     <li><a href="cv.html">CV</a></li>
   </ul>
-  <a class="nav-cta" href="/cdn-cgi/l/email-protection#09636c6f6f7b6c706b6568703e496e64686065276a6664">Contact</a>
+  <a class="nav-cta" href="mailto:jeffreyblay7@gmail.com">Contact</a>
 </nav>
 
 <!-- HERO -->
@@ -803,16 +781,10 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
       <div class="section-label dark-amber">About Me</div>
       <h2>Turning pixels into <em>operational intelligence.</em></h2>
       <p>
-        I'm a <strong>PhD candidate at NC A&T State University</strong>,in Applied Science and Technology (expected December 2026). I hold an MS in Environmental Data Science from <strong>Yale School of the Environment</strong> and a BS in Geography from the <strong>University of Ghana</strong>.
+        I'm a <strong>PhD candidate at NC A&T State University</strong> in Applied Science and Technology (expected December 2026), with an MS from <strong>Yale School of the Environment</strong> and a BS from the <strong>University of Ghana</strong>.
       </p>
       <p>
-        I build geospatial AI systems that turn raw Earth data into real-world decisions. Over the past 6+ years, I have developed scalable machine learning frameworks using satellite/UAV imagery and other spatial data. My PhD research work focuses on urban flood prediction, where I design physics-informed deep learning frameworks to improve how flood depth risk is quantified and acted on.  
-      </p>
-      <p>
-        I am comfortable across the full stack- data engineering, modeling, and deployment, and have experience translating research into production-ready pipelines and scalable analytics platforms.
-      </p>
-      <p>
-        My broader goal is to advance reliable, scalable methods that bridge geospatial AI research and real-world applications.
+        I build geospatial AI systems that turn raw Earth data into real-world decisions — over 6+ years developing machine learning frameworks on satellite and UAV imagery, with my PhD research focused on physics-informed deep learning for urban flood prediction.
       </p>
 
       <div class="edu-block">
@@ -839,65 +811,12 @@ body{font-family:var(--ff-body);background:transparent;color:var(--ink);overflow
           </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <div class="section-label dark-amber">Experience</div>
-      <div class="tl">
-        <div class="tl-item">
-          <div class="tl-dot active"></div>
-          <div>
-            <div class="tl-year">Fall 2025 – Spring 2026</div>
-            <div class="tl-role">Graduate Research Assistant</div>
-            <div class="tl-org">NC A&T — Remote Sensing &amp; Geospatial Lab</div>
-            <div class="tl-desc">Implementing physics-informed CNN and transformer models for urban floodwater depth prediction. PI: Dr. Leila Hashemi-Beni.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot active"></div>
-          <div>
-            <div class="tl-year">Summer 2025</div>
-            <div class="tl-role">NASA DEAP Data Science Fellow</div>
-            <div class="tl-org">NASA DEAP Institute · NC A&T</div>
-            <div class="tl-desc">Led 3-person team creating the Inundation2Depth benchmark dataset. Created and deployed <em>ezprocess</em>, a Python library for geospatial ML/DL preprocessing.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div>
-            <div class="tl-year">Fall 2024 – Spring 2025</div>
-            <div class="tl-role">Graduate Research Assistant</div>
-            <div class="tl-org">NC A&T — Remote Sensing &amp; Geospatial Lab</div>
-            <div class="tl-desc">Developed Python ETL pipelines with NumPy, Rasterio &amp; ArcPy. Trained U-Net variants and pix2pix cGAN for flood depth prediction from 2D imagery and LiDAR.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div>
-            <div class="tl-year">Summer 2024</div>
-            <div class="tl-role">NASA DEAP Data Science Fellow</div>
-            <div class="tl-org">NASA DEAP Institute · NC A&T</div>
-            <div class="tl-desc">Developed the DeepFlood multi-source dataset for inundated vegetation ML modeling. Processed 700k+ flood data points with NumPy &amp; scikit-learn for Random Forest flood-depth models.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div>
-            <div class="tl-year">Fall 2022 – Spring 2023</div>
-            <div class="tl-role">Graduate Research Assistant</div>
-            <div class="tl-org">Yale — Hixon Center for Urban Ecology</div>
-            <div class="tl-desc">Block-level surface temperature analysis with ArcPy. Time-series UHI &amp; tree cover analysis with R (sp, dplyr, ggplot2) in Connecticut. PI: Dr. Karen Seto.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div>
-            <div class="tl-year">Summer 2022</div>
-            <div class="tl-role">TRI Fellow</div>
-            <div class="tl-org">Yale Tropical Resources Institute</div>
-            <div class="tl-desc">Deployed ArcGIS Field Maps pipeline collecting 300+ ground-truth building records in Ghana. Improved data accuracy by 70%. PI: Dr. Karen Seto.</div>
-          </div>
-        </div>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-num">3</div><div class="astat-lbl">Degrees</div></div>
+        <div class="astat"><div class="astat-num">3</div><div class="astat-lbl">Institutions</div></div>
+        <div class="astat"><div class="astat-num">6<span>+</span></div><div class="astat-lbl">Research Positions</div></div>
+        <div class="astat"><div class="astat-num">2</div><div class="astat-lbl">Countries</div></div>
       </div>
     </div>
   </div>
