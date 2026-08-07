@@ -108,6 +108,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .cat-tab[data-cat="gis"].active{color:#2dd4bf;border-bottom-color:#2dd4bf;}
 .cat-tab[data-cat="analytics"].active{color:#60a5fa;border-bottom-color:#60a5fa;}
 .cat-tab[data-cat="apps"].active{color:#f472b6;border-bottom-color:#f472b6;}
+.cat-tab[data-cat="mlops"].active{color:#8b5cf6;border-bottom-color:#8b5cf6;}
 
 /* ── STRIP ── */
 .strip-section{padding:56px 0 110px;}
@@ -210,6 +211,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .badge-gis{background:var(--teal-dim);color:var(--teal);}
 .badge-analytics{background:var(--blue-dim);color:var(--blue);}
 .badge-apps{background:var(--rose-dim);color:var(--rose);}
+.badge-mlops{background:rgba(139,92,246,0.1);color:#8b5cf6;}
 
 .proj-title{
   font-family:var(--ff-display);font-size:1.6rem;font-weight:700;
@@ -226,6 +228,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .outcome-box-gis{border-color:var(--teal);}
 .outcome-box-analytics{border-color:var(--blue);}
 .outcome-box-apps{border-color:var(--rose);}
+.outcome-box-mlops{border-color:#8b5cf6;}
 .outcome-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--lmuted2);margin-bottom:4px;}
 .outcome-val{font-size:13px;line-height:1.6;color:var(--ink3);}
 
@@ -245,6 +248,8 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 .proj-link-primary-analytics:hover{background:rgba(29,78,216,0.16);}
 .proj-link-primary-apps{color:var(--rose);border-color:rgba(190,18,60,0.28);background:var(--rose-dim);}
 .proj-link-primary-apps:hover{background:rgba(190,18,60,0.14);}
+.proj-link-primary-mlops{color:#8b5cf6;border-color:rgba(139,92,246,0.28);background:rgba(139,92,246,0.1);}
+.proj-link-primary-mlops:hover{background:rgba(139,92,246,0.18);}
 .proj-link-ghost{color:var(--lmuted);border-color:var(--surf2);background:transparent;}
 .proj-link-ghost:hover{color:var(--ink);border-color:var(--surf);}
 .proj-link::after{content:'→';}
@@ -303,8 +308,8 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <h1>Projects &amp;<br>Applications</h1>
     <p class="hero-desc">Research prototypes, open-source tools, and production systems at the intersection of spatial data and AI.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">15<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
-      <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Categories</div></div>
+      <div class="hstat"><div class="hstat-num">16<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
+      <div class="hstat"><div class="hstat-num">5</div><div class="hstat-lbl">Categories</div></div>
       <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Open-Source Tools</div></div>
     </div>
   </div>
@@ -318,6 +323,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <button class="cat-tab" data-cat="gis" onclick="filterProjects('gis',this)">Remote Sensing / GIS</button>
     <button class="cat-tab" data-cat="analytics" onclick="filterProjects('analytics',this)">Data Analytics</button>
     <button class="cat-tab" data-cat="apps" onclick="filterProjects('apps',this)">Applications</button>
+    <button class="cat-tab" data-cat="mlops" onclick="filterProjects('mlops',this)">MLOps / Data Engineering</button>
   </div>
 </div>
 
@@ -370,10 +376,11 @@ const ICONS = {
   cv: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/>',
   gis: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/>',
   analytics: '<rect x="4" y="12" width="3.4" height="8"/><rect x="10.3" y="6" width="3.4" height="14"/><rect x="16.6" y="9" width="3.4" height="11"/>',
-  apps: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
+  apps: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  mlops: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 7.5l7.6 9M15.8 7.5l-7.6 9M8.5 6h7M8.5 18h7"/>'
 };
-const ACCENT = {cv:'#d97706', gis:'#0d9488', analytics:'#1d4ed8', apps:'#be123c'};
-const CATLABEL = {cv:'Computer Vision', gis:'Remote Sensing / GIS', analytics:'Data Analytics', apps:'Applications'};
+const ACCENT = {cv:'#d97706', gis:'#0d9488', analytics:'#1d4ed8', apps:'#be123c', mlops:'#8b5cf6'};
+const CATLABEL = {cv:'Computer Vision', gis:'Remote Sensing / GIS', analytics:'Data Analytics', apps:'Applications', mlops:'MLOps / Data Engineering'};
 
 /* ── DATA ── */
 const PROJECTS = [
@@ -395,7 +402,7 @@ const PROJECTS = [
    tags:['Swin Transformer','SegFormer','PyTorch','Flood Depth','Geospatial data'],
    links:[{label:'Publication Under Review', url:'publications.html', primary:true}]},
 
-  {id:'cv3', num:'CV — 03', cat:'cv', badge:'Open Source · Published',
+  {id:'cv3', num:'MLE — 01', cat:'mlops', badge:'Open Source · Published',
    title:'EzProcess: Geospatial Data Prep Library for ML/DL',
    tagline:'Open-source Python library that speeds up geospatial ML data prep.',
    summary:'A Python library that streamlines raster/mask handling, normalization, stacking, and pipeline automation for geospatial AI workflows — created and deployed during the NASA DEAP fellowship to accelerate team productivity.',
@@ -517,6 +524,17 @@ const PROJECTS = [
    links:[{label:'View Project Page', url:'compliance_log_management_system.html', primary:true},
           {label:'Download', url:'https://github.com/Jeffreyblay/compliance_log_management/releases/latest/download/compliance_log.zip', external:true},
           {label:'GitHub', url:'https://github.com/Jeffreyblay/compliance_log_management', external:true}]},
+
+  {id:'apps4', num:'MLE — 02', cat:'mlops', badge:'Live · MLOps',
+   title:'GridVision — US Electricity Demand Forecasting MLOps System',
+   tagline:'End-to-end MLOps pipeline forecasting grid demand with automated model promotion.',
+   summary:'An end-to-end MLOps system that forecasts US electricity demand: it pulls live grid + weather data daily, retrains a LightGBM quantile model, gates any new candidate against both the current production model and a naive baseline before promoting it, and serves the result to a 3D geospatial dashboard. GitHub Actions cron stands in for a 24/7 orchestrator, and the git repo itself acts as the model registry — promoted model weights are committed straight into the codebase.',
+   meta:[['Regions','9 US balancing authorities'],['Model','LightGBM quantile (P10/P50/P90)'],['Orchestration','GitHub Actions cron (daily)'],['Database','Postgres + PostGIS (Supabase)']],
+   outcome:'Double promotion gate ensures a candidate model is only promoted if it beats both current production and a seasonal-naive baseline on a rolling 7-day holdout · Git-committed model registry removes the need for an always-on MLflow server · PostGIS powers spatial coverage & nearest-grid queries · React + MapLibre + deck.gl 3D dashboard with live forecasts across 9 US grids.',
+   tags:['Python','LightGBM','FastAPI','PostGIS','Supabase','GitHub Actions','Airflow','React','TypeScript','MapLibre GL JS','deck.gl','MLOps','Render'],
+   links:[{label:'Live Dashboard', url:'https://jeffreyblay.github.io/energy_demand_mlops/', primary:true, external:true},
+          {label:'GitHub', url:'https://github.com/Jeffreyblay/energy_demand_mlops', external:true},
+          {label:'API Health', url:'https://gridvision-api.onrender.com/health', external:true}]},
 
   {id:'apps3', num:'APP — 03', cat:'apps', badge:'Live · Free',
    title:'Quickview Geodata Portal',
