@@ -308,7 +308,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <h1>Projects &amp;<br>Applications</h1>
     <p class="hero-desc">Research prototypes, open-source tools, and production systems at the intersection of spatial data and AI.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">16<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
+      <div class="hstat"><div class="hstat-num">18<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
       <div class="hstat"><div class="hstat-num">5</div><div class="hstat-lbl">Categories</div></div>
       <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Open-Source Tools</div></div>
     </div>
@@ -389,7 +389,7 @@ const PROJECTS = [
    tagline:'Terrain-aware loss functions that keep flood-depth predictions physically consistent.',
    summary:'A physics-informed framework for CNNs and transformer-based models, that encodes hydrostatic terrain constraints directly into the loss function — ensuring predictions respect the physical principle that water flows downhill and depth correlates with terrain elevation.',
    meta:[['Method','Physics-Informed loss function framework with terrain penalty loss'],['Data','Aerial imagery + LiDAR DTM'],['Framework','PyTorch'],['Status','Active — PhD research']],
-   outcome:'Preliminary experiments show 0.67 ft RMSE · 0.23 ft MAE on held-out test set. Custom terrain penalty weights enforce physically consistent predictions under hydrostatic conditions.',
+   outcome:'~0.19 ft average MAE across CNN and transformer architectures, with physical consistency of flood-depth predictions improved by ~84% over conventional deep learning models. Custom terrain penalty weights enforce physically consistent predictions under hydrostatic conditions.',
    tags:['PyTorch','U-Net','Attention U-Net','Swin U-Net','SegFormer','Aerial Imagery','LiDAR','Hydrostatic Principle','Flood Depth'],
    links:[{label:'Publication Under Review', url:'publications.html', primary:true}]},
 
@@ -405,9 +405,9 @@ const PROJECTS = [
   {id:'cv3', num:'MLE — 01', cat:'mlops', badge:'Open Source · Published',
    title:'EzProcess: Geospatial Data Prep Library for ML/DL',
    tagline:'Open-source Python library that speeds up geospatial ML data prep.',
-   summary:'A Python library that streamlines raster/mask handling, normalization, stacking, and pipeline automation for geospatial AI workflows — created and deployed during the NASA DEAP fellowship to accelerate team productivity.',
+   summary:'A Python library that streamlines raster/mask handling, normalization, stacking, and pipeline automation for geospatial AI workflows — created and deployed during NASA-funded research to accelerate team productivity.',
    meta:[],
-   outcome:'Published open-source library on GitHub. Accelerates geospatial ML/DL data prep with modular, reusable functions. Covered in a published Medium article.',
+   outcome:'Published open-source library on PyPI and GitHub. Cuts geospatial ML/DL data-prep time by ~85% with modular, reusable functions. Covered in a published Medium article.',
    tags:['Python','Rasterio','Python Packaging','NumPy','Open Source','PyPI','Unit Testing'],
    links:[{label:'GitHub', url:'https://github.com/Jeffreyblay/ezprocess_library', primary:true, external:true},
           {label:'Read Article', url:'https://medium.com/@jeffreyblay7/ezprocess-a-lightweight-python-library-for-geospatial-data-engineering-bb0f90e2b0c3', external:true}]},
@@ -463,7 +463,7 @@ const PROJECTS = [
    tagline:'Real-time field data collection for 600+ buildings in Ghana.',
    summary:'Built and deployed an integrated ArcGIS Field Maps + Dashboards workflow to capture ground-truth data for 600+ buildings in Ghana in real time, enabling quality control and preliminary spatial analysis during active field surveys.',
    meta:[],
-   outcome:'300+ ground-truth records collected. 70% improvement in data collection efficiency and accuracy. Real-time monitoring dashboard enabled immediate quality control during field operations.',
+   outcome:'300+ ground-truth building observations collected, monitored, and analyzed. 90% improvement in data collection accuracy. Real-time monitoring dashboard enabled immediate quality control during field operations.',
    tags:['ArcGIS Field Maps','ArcGIS Online','Dashboards','Ghana','Data Synchronization'],
    links:[{label:'View Details', url:'projects-gis.html'}]},
 
@@ -504,7 +504,7 @@ const PROJECTS = [
    links:[{label:'View Details', url:'projects-analytics.html'}]},
 
   {id:'apps', num:'APP — 01', cat:'apps', badge:'Live · Production',
-   title:'Climate & Extreme Weather Alert Dashboard',
+   title:'Weather Alert Dashboard',
    tagline:'Live NWS alert monitoring with a custom risk-scoring API.',
    summary:'A full-stack web application providing real-time weather monitoring and risk assessment by ingesting live National Weather Service alerts, processing them through a custom ETL pipeline, and delivering actionable insights via an interactive analytics dashboard. Built with FastAPI backend, custom risk-scoring algorithms, and CI/CD deployment via Render and GitHub Actions.',
    meta:[['Alerts Processed','1,000+ active'],['Coverage','50 U.S. states'],['API Response','<500ms'],['Uptime','99%']],
@@ -535,6 +535,15 @@ const PROJECTS = [
    links:[{label:'Live Dashboard', url:'https://jeffreyblay.github.io/energy_demand_mlops/', primary:true, external:true},
           {label:'GitHub', url:'https://github.com/Jeffreyblay/energy_demand_mlops', external:true},
           {label:'API Health', url:'https://gridvision-api.onrender.com/health', external:true}]},
+
+  {id:'apps5', num:'APP — 04', cat:'apps', badge:'AI · RAG',
+   title:'PawPal+: RAG-Powered Pet-Care Scheduling Assistant',
+   tagline:'Gemini-backed assistant that builds conflict-aware daily pet-care plans.',
+   summary:'A pet-care scheduling and retrieval-augmented generation (RAG) assistant that generates priority-based, conflict-aware daily plans for pet owners. Combines a time-budget optimization engine with a Gemini-powered RAG layer to deliver reminders and personalized pet-care Q&A grounded in a curated knowledge base, built in Python with a Streamlit interface and Pytest-backed test coverage.',
+   meta:[['Interface','Streamlit'],['LLM','Google Gemini API'],['Approach','Retrieval-Augmented Generation'],['Testing','Pytest']],
+   outcome:'Priority-based scheduling engine resolving conflicting care tasks · Time-budget optimization across a daily plan · Automated reminders · Personalized pet-care Q&A grounded in retrieved context rather than raw model output · JSON-backed data layer with unit-tested scheduling logic.',
+   tags:['Python','Streamlit','Gemini API','RAG','Pytest','JSON','Prompt Engineering','LLM Applications'],
+   links:[{label:'GitHub', url:'https://github.com/Jeffreyblay/applied-ai-system-final-project', primary:true, external:true}]},
 
   {id:'apps3', num:'APP — 03', cat:'apps', badge:'Live · Free',
    title:'Quickview Geodata Portal',

@@ -23,25 +23,23 @@ EDUCATION
 - BA Geography with Political Science — University of Ghana (May 2019). GPA: 3.81/4.0.
 
 CERTIFICATIONS
-- IBM Professional Data Engineering — Coursera (In Progress, expected Summer 2026)
+- IBM Professional Data Engineering — Coursera (In Progress, expected September 2026)
 - Foundations of AI Engineering — CodePath (2026)
 
 RESEARCH FOCUS
 Physics-informed deep learning framework for urban flood depth prediction; multi-source remote sensing data fusion (SAR + optical + LiDAR); geospatial data engineering and benchmark dataset creation; urban analytics in African cities.
 
 EXPERIENCE
-- Geospatial Research Engineer, Remote Sensing & GIS Lab — NC A&T (Jun 2026-Present): Building an open-source QGIS plugin deploying CNN/transformer flood-depth models for on-demand inference; assessing disaster impacts on crop-specific land cover using federal datasets and Google Earth Engine; leading a publication on physics-informed AI for flood prediction.
-- Graduate Research Assistant, NASA Flood Project — NC A&T (Sep 2025-May 2026): Built and optimized transformer segmentation architectures (Swin-UNet, SegFormer) in PyTorch for urban flood-depth prediction; developed physics-informed AI framework with terrain-aware hydrostatic constraints; benchmarked physics-informed vs. conventional DL across 4 architectures, reducing surface-gradient violations by ~53%.
-- Geospatial Data Science Research Assistant, NASA DEAP — NC A&T (Jun-Aug 2025): Developed/evaluated CNN models (UNet, Attention UNet, UNet++) for flood-depth modeling; published ezprocess, an open-source geospatial preprocessing library (PyPI/GitHub) cutting data-prep time by ~70%.
-- Graduate Research Assistant, NASA Data Project — NC A&T (Sep 2024-May 2025): Built geospatial ETL pipelines (rasterio, GDAL) processing ~347M pixel-level records; led a 3-person team to publish a novel flood-depth benchmark dataset; implemented U-Net and pix2pix cGAN workflows on UAV imagery and LiDAR.
-- Data Science Research Assistant, NSF Multimodal Data Fusion — GEMS Institute, NC A&T (Jun-Aug 2024): Built ETL workflows (NumPy, scikit-learn) preparing 700k+ geospatial records for Random Forest/XGBoost flood models; co-published a multi-source flood inundation dataset with a 5-member team.
-- Graduate Research Assistant, NOAA Flood Project — NC A&T (Sep 2023-May 2024): Python web-scraping pipelines (Beautiful Soup, SQLite) for image classification datasets; PyTorch flood classification models (GoogleNet, ResNet18); led a GAN-based flood mapping technical assessment.
-- Community Group Manager — Urban Resources Initiative (May-Aug 2023): Supervised 7 community greenspace groups; used ArcGIS Pro/QGIS to visualize community project ideas.
-- Teaching Fellow, Real-world Environmental Data Science — Yale (Jan-May 2023): Assisted 12 students with Python programming and GitHub Classroom workflows.
-- Research Assistant, NASA Environmental Justice Project — Hixon Center for Urban Ecology, Yale (Sep 2022-May 2023): Census block-level UHI-vulnerability analysis using multispectral imagery, ArcPy, and R (sp, dplyr, ggplot2).
-- Research Fellow — TRI, Yale (May 2022-May 2023): UNet regression for building composition in Ghana; GEE VIIRS nighttime-light analysis for electricity-gap mapping; ArcGIS Field Maps pipeline with 300+ ground-truth records, 70% accuracy improvement.
-- Geospatial Research Assistant, Urban Africa Project — Seto Lab, Yale (Sep 2021-May 2022): GEE workflows for large-scale satellite acquisition/preprocessing; trained segmentation models on an HPC Linux cluster.
-- GIS Data Officer — Ghana Statistical Service (Sep 2020-Jun 2021): Census geospatial QA on SA boundary maps; near real-time spatial coverage analytics with a 15-member team during national census.
+- Geospatial Research Engineer, Remote Sensing & GIS Lab — NC A&T (Jun 2026-Present): Building a QGIS plugin that deploys CNN and transformer-based flood-depth models for on-demand inference by end users; assessing disaster impacts on crop-specific land cover and vulnerable communities using federal datasets and Google Earth Engine; leading a peer-reviewed journal publication on a physics-informed AI framework for urban flood modeling and infrastructure vulnerability assessment.
+- Geospatial Data Science Research Assistant, NASA Environmental Data Project — GEMS Institute, NC A&T (Sep 2024-May 2026): Developed and optimized CNN and transformer models (Swin-UNet, SegFormer, UNet, Attention UNet, UNet++) in PyTorch for urban flood-depth prediction, achieving ~0.19 ft average MAE; built a physics-informed deep learning framework with domain-knowledge constraints improving physical consistency by ~84% over conventional DL; built geospatial ETL pipelines (rasterio, GDAL, pandas) processing ~347M pixel-level records; published ezprocess (PyPI/GitHub) cutting data-prep time by ~85%; led a 4-person team publishing a novel flood-depth benchmark dataset.
+- Data Science Research Assistant, NSF Multimodal Data Fusion Project — Remote Sensing & GIS Lab, NC A&T (Jun-Aug 2024): Built ETL workflows (NumPy, pandas) preparing ~700K geospatial point records, cutting data-prep time by 60%; evaluated Random Forest and XGBoost flood prediction models with cross-validation; co-published a multi-source inundated-vegetation dataset with a 5-member team; developed automated geospatial QA/QC and validation tests.
+- Graduate Research Assistant — Remote Sensing & GIS Lab, NC A&T (Sep 2023-May 2024): Python web-scraping workflows (Beautiful Soup, SQLite) curating ~1,000 web images; PyTorch framework for flood image classification (GoogLeNet, ResNet18); technical assessment of GAN-based approaches for flood mapping.
+- GIS & Community Engagement Manager — Urban Resources Initiative (May-Aug 2023): Managed 7 community greenspace groups, translating neighborhood priorities into weekly project plans; delivered ArcGIS Pro/QGIS analyses and visualizations supporting stakeholder decision-making.
+- Teaching Fellow, Real-world Environmental Data Science — Yale (Jan-May 2023): Mentored 12 students in Python-based environmental data science; supported reproducible workflows with Google Colab, GitHub, and GitHub Classroom.
+- Research Assistant, NASA Environmental Justice Project — Hixon Center for Urban Ecology, Yale (Sep 2022-May 2023): Census block-level analysis of multispectral imagery to identify urban heat island (UHI) vulnerable communities; ArcPy/SQL workflows for land surface temperature; time-series analysis of heat and tree-cover disparities in R (sp, dplyr, ggplot2).
+- Research Fellow, TRI Research Fellowship — Yale (May 2022-May 2023): Trained a U-Net regression model predicting building composition across metropolitan Ghana from Landsat imagery (R² ~75%); processed VIIRS nighttime light data in Google Earth Engine to map electricity infrastructure gaps; deployed an Integrated Field Mapping & Real-Time Monitoring System (ArcGIS Pro/Online, Field Maps, Dashboards) collecting 300+ ground-truth building observations and improving data collection accuracy by 90%.
+- Geospatial Research Assistant, Urban Africa Project — Seto Lab, Yale (Sep 2021-May 2022): Google Earth Engine workflows preprocessing millions of satellite pixels; trained segmentation models across 800+ image tiles on an HPC Linux cluster with scalable batch-processing pipelines.
+- Geospatial Data Analyst — National Census Secretariat, Ghana Statistical Service (Sep 2020-Jun 2021): Geospatial QA/QC on national census datasets (CRS, geometry, attribute integrity); restructured and corrected Supervisory Area boundary datasets; spatial analysis identifying difficult-to-enumerate areas and near-real-time coverage analytics with a 15-member team.
 - Teaching/Research Assistant, Remote Sensing/GIS Lab — University of Ghana (Sep 2019-Aug 2020): Ran tutorial sessions for 150 undergraduates; graded GIS projects.
 - Physical Planning Intern — Awutu Senya East Municipal Authority, Ghana (May-Aug 2018): Land-use analysis with GIS and aerial imagery.
 
@@ -57,12 +55,14 @@ PUBLICATIONS (10 total)
 9. Urban Growth and Land Surface Temperature Dynamics: Lessons from Ghana — Theoretical and Empirical Research in Urban Management (2023). (co-author)
 10. Real-Time Traffic Insights With Physics-Informed Neural Networks — IEEE Access (2025). (co-author)
 
-OPEN SOURCE / MLOPS PROJECTS
-- GridVision: jeffreyblay.github.io/energy_demand_mlops — end-to-end MLOps system forecasting US electricity demand for 9 balancing authorities. Daily GitHub Actions cron retrains a LightGBM quantile model (P10/P50/P90), gates candidates against production + a naive baseline before auto-promotion, serves via FastAPI + Postgres/PostGIS (Supabase) to a React/MapLibre/deck.gl 3D dashboard. Git repo itself acts as the model registry.
-- EzProcess Library: github.com/Jeffreyblay/ezprocess_library — 70% faster geospatial ML data prep.
+PROJECTS (open source / applied)
+- GridVision MLOps (2026): jeffreyblay.github.io/energy_demand_mlops — end-to-end MLOps system forecasting US electricity demand for 9 balancing authorities. Daily GitHub Actions cron retrains a LightGBM quantile model (P10/P50/P90), gates candidates against production + a naive baseline before auto-promotion, serves via FastAPI + Postgres/PostGIS (Supabase) to a React/MapLibre/deck.gl 3D dashboard. Git repo itself acts as the model registry.
+- PawPal+ (2026): github.com/Jeffreyblay/applied-ai-system-final-project — pet-care scheduling and RAG assistant (Python, Streamlit, Gemini API, Pytest) generating priority-based, conflict-aware daily plans with time-budget optimization, reminders, and personalized pet-care Q&A.
+- Quickview Geodata Portal (2026): jeffreyblay.github.io/quickview-geodata-portal — open-source geospatial platform for interactive spatial data exploration across 5 file formats with 5 spatial analysis tools (FastAPI, GeoPandas, Leaflet.js, Railway).
+- Weather Alert Dashboard (2026): jeffreyblay.github.io/climate-alert-dashboard — real-time NWS alert monitoring with REST API filtering, analytics, and risk scoring across all 50 US states (FastAPI, Docker, CI/CD).
+- EzProcess Library (2025): github.com/Jeffreyblay/ezprocess_library — open-source geospatial preprocessing library on PyPI/GitHub; cuts ML data-prep time by ~85%.
 - Inundation2Depth Dataset: zenodo.org/records/17308287
-- Climate Alert Dashboard: jeffreyblay.github.io/climate-alert-dashboard — FastAPI, 1000+ live NWS alerts.
-- Compliance Log Management System: https://github.com/Jeffreyblay/compliance_log_management
+- Compliance Log Management System: github.com/Jeffreyblay/compliance_log_management
 
 CONFERENCES (11 talks, 4 continents)
 2025: IEEE IGARSS Brisbane Australia, ISPRS Dubai UAE, ASPRS Denver CO
@@ -70,16 +70,18 @@ CONFERENCES (11 talks, 4 continents)
 2023: AGU San Francisco, TRI Symposium Yale, YSE Research Day Yale, YSE Confluence Talk Yale
 
 AWARDS
-Outstanding Doctoral Graduate Research Assistant Award — College of Science and Technology, NC A&T (2026); LiDAR Leader Award — Best Poster, ASPRS & Geo Week 2024; NASA DEAP Fellow x2 (2024 & 2025); Graduate Research Assistant Fellowship NC A&T (2023-2026); Teaching Fellowship Yale (2023); TRI Research Endowment Fellowship Yale (2022); YSE Need-Based & Merit Scholarship (2021-2023).
+Outstanding Doctoral Graduate Research Assistant Award — College of Science and Technology, NC A&T (2026); LiDAR Leader Award — Best Poster, ASPRS & Geo Week 2024; Graduate Research Assistant Fellowship NC A&T (2023-2026); Teaching Fellowship Yale (2023); TRI Research Endowment Fellowship Yale (2022); YSE Need-Based & Merit Scholarship (2021-2023).
 
 SKILLS
 Programming: Python, R, SQL, JavaScript
-Geospatial: ArcGIS Suite, QGIS, Google Earth Engine, ArcPy, GDAL, ENVI, SNAP
-ML/DL: PyTorch, TensorFlow, scikit-learn, LightGBM, Physics-Informed NNs, U-Net variants, Swin Transformer, SegFormer
-Data Engineering / MLOps: ETL Pipelines, Pandas, Web Scraping, Geospatial Processing, Model Promotion Gating, FastAPI, Airflow
-Cloud/DevOps: AWS S3, Docker, CI/CD, Git/GitHub, HPC, GitHub Pages, GitHub Actions (cron orchestration), Render
-Databases: PostgreSQL, PostGIS, Supabase, MySQL, IBM DB2
-Visualization: Matplotlib, Seaborn, Power BI, Tableau, R Shiny, ArcGIS StoryMaps
+Machine Learning & Deep Learning: PyTorch, TensorFlow, scikit-learn; supervised learning (Logistic Regression, Random Forest, XGBoost, LightGBM, UNet, Attention-UNet, Swin-UNet, SegFormer, Physics-Informed Neural Networks); model evaluation (Huber Loss, RMSE, MAE, SSIM, Precision, Recall, AUC-ROC, Physics-Informed Loss); unsupervised learning (K-means)
+Geospatial & Remote Sensing: ArcGIS Pro, ArcGIS Online, ArcPy, QGIS, Google Earth Engine, GDAL, ENVI, SNAP, Spatial Analysis, Remote Sensing, Geospatial Data QA/QC, PostGIS, MapLibre GL
+Data Engineering: ETL Pipelines, Data Preprocessing, Web Scraping, Apache Airflow, RDBMS
+Statistics & Analytics: Spatial Statistics, Geostatistics, Time-Series Analysis, Statistical Modeling, Multivariate Analysis, Hypothesis Testing
+Cloud, DevOps & Infrastructure: AWS (S3, EC2), Docker, CI/CD, Git, GitHub, GitHub Actions, HPC, Render, Railway
+Web & APIs: FastAPI, RESTful APIs, Streamlit, Vercel, HTML/CSS
+Databases: PostgreSQL, MySQL, IBM DB2, Supabase
+Visualization: Matplotlib, Seaborn, Power BI, Tableau, R Shiny, ArcGIS Dashboards, ArcGIS StoryMaps, Google Data Studio
 
 SERVICE
 - Secretary & Social Media Manager — ASPRS Student Chapter NC A&T (2024-2026)
