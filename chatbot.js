@@ -58,7 +58,7 @@ PUBLICATIONS (10 total)
 PROJECTS (open source / applied)
 - GridVision MLOps (2026): jeffreyblay.github.io/energy_demand_mlops — end-to-end MLOps system forecasting US electricity demand for 9 balancing authorities. Daily GitHub Actions cron retrains a LightGBM quantile model (P10/P50/P90), gates candidates against production + a naive baseline before auto-promotion, serves via FastAPI + Postgres/PostGIS (Supabase) to a React/MapLibre/deck.gl 3D dashboard. Git repo itself acts as the model registry.
 - PawPal+ (2026): github.com/Jeffreyblay/applied-ai-system-final-project — pet-care scheduling and RAG assistant (Python, Streamlit, Gemini API, Pytest) generating priority-based, conflict-aware daily plans with time-budget optimization, reminders, and personalized pet-care Q&A.
-- Quickview Geodata Portal (2026): jeffreyblay.github.io/quickview-geodata-portal — open-source geospatial platform for interactive spatial data exploration across 5 file formats with 5 spatial analysis tools (FastAPI, GeoPandas, Leaflet.js, Railway).
+- Quickview Geodata Portal (2026): jeffreyblay.github.io/quickview-geodata-portal — open-source geospatial platform to upload (CSV, GeoJSON, JSON, XML, zipped Shapefile, or by URL), filter, style (graduated/categorized symbology), analyze (Buffer, KDE Hotspot, DBSCAN, Nearest Neighbor, Attribute Stats), and view vector data in 2D or 3D (deck.gl); exports to GeoJSON, CSV, JSON, GeoParquet, and GML. Stack: FastAPI, GeoPandas, scikit-learn, Leaflet.js, deck.gl, Docker; deployed on GitHub Pages + Render. Code: github.com/Jeffreyblay/quickview-geodata-portal
 - Weather Alert Dashboard (2026): jeffreyblay.github.io/climate-alert-dashboard — real-time NWS alert monitoring with REST API filtering, analytics, and risk scoring across all 50 US states (FastAPI, Docker, CI/CD).
 - EzProcess Library (2025): github.com/Jeffreyblay/ezprocess_library — open-source geospatial preprocessing library on PyPI/GitHub; cuts ML data-prep time by ~85%.
 - Inundation2Depth Dataset: zenodo.org/records/17308287
@@ -78,7 +78,7 @@ Machine Learning & Deep Learning: PyTorch, TensorFlow, scikit-learn; supervised 
 Geospatial & Remote Sensing: ArcGIS Pro, ArcGIS Online, ArcPy, QGIS, Google Earth Engine, GDAL, ENVI, SNAP, Spatial Analysis, Remote Sensing, Geospatial Data QA/QC, PostGIS, MapLibre GL
 Data Engineering: ETL Pipelines, Data Preprocessing, Web Scraping, Apache Airflow, RDBMS
 Statistics & Analytics: Spatial Statistics, Geostatistics, Time-Series Analysis, Statistical Modeling, Multivariate Analysis, Hypothesis Testing
-Cloud, DevOps & Infrastructure: AWS (S3, EC2), Docker, CI/CD, Git, GitHub, GitHub Actions, HPC, Render, Railway
+Cloud, DevOps & Infrastructure: AWS (S3, EC2), Docker, CI/CD, Git, GitHub, GitHub Actions, HPC, Render
 Web & APIs: FastAPI, RESTful APIs, Streamlit, Vercel, HTML/CSS
 Databases: PostgreSQL, MySQL, IBM DB2, Supabase
 Visualization: Matplotlib, Seaborn, Power BI, Tableau, R Shiny, ArcGIS Dashboards, ArcGIS StoryMaps, Google Data Studio

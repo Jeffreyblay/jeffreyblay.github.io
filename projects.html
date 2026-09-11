@@ -547,14 +547,14 @@ const PROJECTS = [
 
   {id:'apps3', num:'APP — 03', cat:'apps', badge:'Live · Free',
    title:'Quickview Geodata Portal',
-   tagline:'Upload-and-analyze geospatial platform with 5 spatial tools.',
-   summary:'An open-source full-stack geospatial data platform for uploading, extracting, analyzing and visualizing spatial data interactively. Built with a Python FastAPI backend, serving a Leaflet.js frontend UI. Supports multiple spatial file formats, 5 spatial analysis tools, and a fully interactive attribute table. Deployed end-to-end with automated CI/CD via GitHub Actions and Railway cloud service.',
-   meta:[['File Formats','5 supported'],['Analysis','5 spatial tools'],['Map Layers','4 basemaps'],['Export Formats','3 formats']],
-   outcome:'Spatial ETL pipeline supporting CSV, GeoJSON, JSON, XML & ZIP Shapefiles · 5 spatial analyses: Buffer, KDE Hotspot, DBSCAN Clustering, Nearest Neighbor & Attribute Stats · Interactive Leaflet map with basemap switcher & analysis layer legend · Attribute table with search, sort & row-to-map zoom · URL-based remote data fetching · Multi-format export',
-   tags:['Python','FastAPI','GeoPandas','Scikit-learn','JavaScript','Leaflet.js','HTML/CSS','CI/CD','GitHub Actions','REST API','Railway Cloud'],
-   links:[{label:'Live Portal', url:'https://jeffreyblay.github.io/quickview-geodata-portal', primary:true, external:true},
+   tagline:'Upload, filter, style, analyze and view geospatial data in 2D & 3D.',
+   summary:'An open-source geospatial data platform for uploading, exploring, and analyzing vector data (points, lines, and polygons) interactively in the browser. A Python FastAPI + GeoPandas backend handles ingest, CRS normalization to WGS 84, spatial analysis, and export, serving a Leaflet.js + deck.gl frontend with attribute filtering, graduated/categorized symbology, and an extruded 3D view. Containerized with Docker and deployed via GitHub Pages (frontend) and Render (backend).',
+   meta:[['File Formats','5 in · 5 out'],['Analysis','5 spatial tools'],['Map Layers','9 basemaps'],['Views','2D map + 3D (deck.gl)']],
+   outcome:'Ingest CSV, GeoJSON, JSON, XML & zipped Shapefiles (or fetch by URL), auto-reprojected to EPSG:4326 · Attribute filter builder with AND/OR conditions and autocomplete · Graduated (quantile, equal interval, Jenks) and categorized symbology with legend · 5 spatial analyses: Buffer, KDE Hotspot, DBSCAN Clustering, Nearest Neighbor (Clark-Evans R) & Attribute Stats, with charts · deck.gl 3D columns & extruded polygons driven by any numeric field · Export to GeoJSON, CSV, JSON, GeoParquet & GML',
+   tags:['Python','FastAPI','GeoPandas','Scikit-learn','SciPy','PyArrow','JavaScript','Leaflet.js','deck.gl','Chart.js','Docker','GitHub Actions','REST API','Render'],
+   links:[{label:'Live Portal', url:'https://jeffreyblay.github.io/quickview-geodata-portal/', primary:true, external:true},
           {label:'GitHub', url:'https://github.com/Jeffreyblay/quickview-geodata-portal', external:true},
-          {label:'API Docs', url:'https://quickview-geodata-portal-production.up.railway.app/docs', external:true}]}
+          {label:'API Docs', url:'https://quickview-geodata-portal.onrender.com/docs', external:true}]}
 ];
 
 /* ── RENDER STRIP ── */

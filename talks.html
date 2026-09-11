@@ -304,7 +304,6 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson-client/3.1.0/topojson-client.min.js"></script>
 <script>
 /* ============================================================
    DATA  — single source of truth for globe + list
@@ -418,13 +417,13 @@ const R = 1;
 (function(){
   const c=document.createElement("canvas");c.width=16;c.height=256;
   const x=c.getContext("2d");const g=x.createLinearGradient(0,0,0,256);
-  g.addColorStop(0,"#0c2138");g.addColorStop(.5,"#070f19");g.addColorStop(1,"#03070d");
+  g.addColorStop(0,"#07131f");g.addColorStop(.5,"#03080e");g.addColorStop(1,"#010306");
   x.fillStyle=g;x.fillRect(0,0,16,256);
   scene.background=new THREE.CanvasTexture(c);
 })();
 
 /* --- day/night ocean (real terminator) --- */
-const SUN=new THREE.Vector3(0.6,0.3,0.7).normalize();
+const SUN=new THREE.Vector3(0.9,0.28,0.38).normalize();   // side-lit so the night side + city lights show
 const ocean = new THREE.Mesh(
   new THREE.SphereGeometry(R,96,96),
   new THREE.ShaderMaterial({
@@ -533,66 +532,100 @@ let landDots;
   globe.add(landDots);
 })();
 
-/* --- real country boundaries (Natural Earth 110m via CDN) --- */
-/* Draws coastlines + internal borders as lines on the sphere.       */
-/* Falls back silently to the dot-land layer above if it can't load. */
-(function loadBoundaries(){
-  if(typeof topojson==="undefined") return;
-  const SOURCES=[
-    "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
-    "https://unpkg.com/world-atlas@2/countries-110m.json"
-  ];
-  function segsFromMesh(mesh,r){
-    const arr=[];
-    for(const line of mesh.coordinates){
-      for(let i=0;i<line.length-1;i++){
-        const a=toVec3(line[i][1],line[i][0],r), b=toVec3(line[i+1][1],line[i+1][0],r);
-        arr.push(a.x,a.y,a.z,b.x,b.y,b.z);
-      }
+/* --- realistic Earth: NASA Blue Marble (day) + Black Marble (night lights) --- */
+/* Textures live in images/earth/. SphereGeometry's UVs line up with toVec3(),  */
+/* so markers sit on the right spot. Until the imagery loads (or if it fails),  */
+/* the stylized ocean + dot-land layers above stay visible as a fallback.       */
+let clouds=null;
+(function loadEarth(){
+  const FILES={day:"earth-blue-marble.jpg",night:"earth-night.jpg",water:"earth-water.jpg",
+               topo:"earth-topology.jpg",clouds:"clouds.jpg"};
+  const loader=new THREE.TextureLoader(), tex={}, aniso=renderer.capabilities.getMaxAnisotropy();
+  let pending=Object.keys(FILES).length;
+  Object.entries(FILES).forEach(([k,f])=>loader.load("images/earth/"+f,
+    t=>{t.anisotropy=aniso; tex[k]=t; if(--pending===0) build();},
+    undefined, ()=>{if(--pending===0) build();}));
+  function solid(v){ // 1x1 stand-in for an optional texture that failed to load
+    const t=new THREE.DataTexture(new Uint8Array([v,v,v,255]),1,1,THREE.RGBAFormat); t.needsUpdate=true; return t;
+  }
+  function build(){
+    if(!tex.day) return;                 // keep the stylized fallback
+    ocean.material.dispose();
+    ocean.material=new THREE.ShaderMaterial({
+      uniforms:{
+        dayMap:{value:tex.day}, nightMap:{value:tex.night||solid(0)},
+        waterMap:{value:tex.water||solid(0)}, topoMap:{value:tex.topo||solid(128)},
+        sun:{value:SUN}, texel:{value:new THREE.Vector2(1.5/2048,1.5/1024)}, bump:{value:3.2}
+      },
+      vertexShader:`
+        varying vec2 vUv; varying vec3 vN,vT,vB,vW;
+        void main(){
+          vUv=uv;
+          vec3 P=normalize(position);
+          vec3 T=vec3(P.z,0.0,-P.x); T=length(T)>1e-4?normalize(T):vec3(1.0,0.0,0.0); // east
+          mat3 M=mat3(modelMatrix);
+          vN=M*P; vT=M*T; vB=M*cross(P,T);                                        // north
+          vW=(modelMatrix*vec4(position,1.0)).xyz;
+          gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);
+        }`,
+      fragmentShader:`
+        uniform sampler2D dayMap,nightMap,waterMap,topoMap; uniform vec3 sun; uniform vec2 texel; uniform float bump;
+        varying vec2 vUv; varying vec3 vN,vT,vB,vW;
+        void main(){
+          vec3 Ng=normalize(vN), S=normalize(sun), V=normalize(cameraPosition-vW);
+          // terrain relief from the elevation map (finite differences)
+          float hx=texture2D(topoMap,vUv+vec2(texel.x,0.0)).r-texture2D(topoMap,vUv-vec2(texel.x,0.0)).r;
+          float hy=texture2D(topoMap,vUv+vec2(0.0,texel.y)).r-texture2D(topoMap,vUv-vec2(0.0,texel.y)).r;
+          vec3 N=normalize(Ng-bump*(hx*normalize(vT)+hy*normalize(vB)));
+          float dG=dot(Ng,S), lit=smoothstep(-0.10,0.22,dG);
+          vec3 col=texture2D(dayMap,vUv).rgb*(0.025+1.05*clamp(dot(N,S),0.0,1.0));
+          // city lights on the night side
+          col+=texture2D(nightMap,vUv).rgb*vec3(1.0,0.82,0.55)*1.35*(1.0-lit);
+          // sun glint on oceans only
+          float water=texture2D(waterMap,vUv).r;
+          col+=vec3(0.75,0.85,1.0)*pow(max(dot(reflect(-S,Ng),V),0.0),38.0)*water*0.55*lit;
+          // warm terminator band
+          col+=vec3(0.55,0.28,0.12)*smoothstep(-0.08,0.04,dG)*(1.0-smoothstep(0.04,0.26,dG))*0.18;
+          // atmospheric haze toward the limb
+          float fr=pow(1.0-max(dot(Ng,V),0.0),3.0);
+          col=mix(col,vec3(0.35,0.6,1.0)*(0.25+0.9*lit),fr*0.55*(0.12+0.88*lit));
+          gl_FragColor=vec4(col*0.95,1.0);
+        }`
+    });
+    if(landDots) landDots.visible=false;
+    if(tex.clouds){
+      clouds=new THREE.Mesh(new THREE.SphereGeometry(R*1.007,96,96),new THREE.ShaderMaterial({
+        transparent:true, depthWrite:false,
+        uniforms:{map:{value:tex.clouds}, sun:{value:SUN}},
+        vertexShader:`varying vec2 vUv; varying vec3 vN;
+          void main(){vUv=uv; vN=mat3(modelMatrix)*normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+        fragmentShader:`uniform sampler2D map; uniform vec3 sun; varying vec2 vUv; varying vec3 vN;
+          void main(){
+            float a=texture2D(map,vUv).r, l=smoothstep(-0.15,0.35,dot(normalize(vN),normalize(sun)));
+            gl_FragColor=vec4(vec3(0.9)*(0.05+0.95*l),a*0.78*(0.2+0.8*l));
+          }`
+      }));
+      globe.add(clouds);
+    }
+  }
+})();
+
+/* --- starfield (faint field + a few bright, slightly tinted stars) --- */
+(function(){
+  function layer(n,size,opacity){
+    const pos=[],col=[],tint=new THREE.Color();
+    for(let i=0;i<n;i++){
+      const u=Math.random()*2-1, th=Math.random()*Math.PI*2, s=Math.sqrt(1-u*u), rad=18+Math.random()*22;
+      pos.push(s*Math.cos(th)*rad, s*Math.sin(th)*rad, u*rad);
+      tint.setHSL(Math.random()<0.5?0.6:0.1, 0.35, 0.72+Math.random()*0.25); col.push(tint.r,tint.g,tint.b);
     }
     const g=new THREE.BufferGeometry();
-    g.setAttribute("position",new THREE.Float32BufferAttribute(arr,3));
-    return g;
+    g.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+    g.setAttribute("color",new THREE.Float32BufferAttribute(col,3));
+    scene.add(new THREE.Points(g,new THREE.PointsMaterial({size,vertexColors:true,transparent:true,opacity,map:DOT,depthWrite:false})));
   }
-  function build(topo){
-    const obj=topo.objects.countries;
-    const coast  =topojson.mesh(topo,obj,(a,b)=>a===b);   // exterior coastlines
-    const borders=topojson.mesh(topo,obj,(a,b)=>a!==b);   // internal country borders
-    const cLine=new THREE.LineSegments(segsFromMesh(coast,R*1.004),
-      new THREE.LineBasicMaterial({color:0x8fbadd,transparent:true,opacity:0.85}));
-    const bLine=new THREE.LineSegments(segsFromMesh(borders,R*1.003),
-      new THREE.LineBasicMaterial({color:0x4a7ea3,transparent:true,opacity:0.42}));
-    globe.add(cLine,bLine);
-    if(landDots) landDots.visible=false;   // swap fallback for the real thing
-  }
-  (function tryNext(i){
-    if(i>=SOURCES.length) return;           // keep dot-land fallback
-    fetch(SOURCES[i]).then(r=>{if(!r.ok)throw 0;return r.json();})
-      .then(build).catch(()=>tryNext(i+1));
-  })(0);
-})();
-
-/* --- graticule --- */
-(function(){
-  const mat=new THREE.LineBasicMaterial({color:0x2a5169,transparent:true,opacity:0.45});
-  for(let lat=-60;lat<=60;lat+=30){
-    const pts=[]; for(let a=0;a<=360;a+=4) pts.push(toVec3(lat,a-180,R*1.002));
-    globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),mat));
-  }
-  for(let lng=-180;lng<180;lng+=30){
-    const pts=[]; for(let a=-90;a<=90;a+=4) pts.push(toVec3(a,lng,R*1.002));
-    globe.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),mat));
-  }
-})();
-
-/* --- starfield --- */
-(function(){
-  const pos=[]; for(let i=0;i<650;i++){
-    const u=Math.random()*2-1, th=Math.random()*Math.PI*2, s=Math.sqrt(1-u*u), rad=18+Math.random()*22;
-    pos.push(s*Math.cos(th)*rad, s*Math.sin(th)*rad, u*rad);
-  }
-  const g=new THREE.BufferGeometry(); g.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
-  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x9fc0d8,size:0.06,transparent:true,opacity:0.55,map:DOT,depthWrite:false})));
+  layer(1600,0.045,0.5);
+  layer(140,0.11,0.85);
 })();
 
 /* --- journey arcs (chronological) --- */
@@ -877,7 +910,8 @@ let composer=null, bloomPass=null;
   composer=new THREE.EffectComposer(renderer);
   if(composer.setPixelRatio) composer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   composer.addPass(new THREE.RenderPass(scene,camera));
-  bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(1,1), 0.9, 0.6, 0.5);
+  // high threshold: only city lights, markers and the comet glow, not sunlit land/clouds
+  bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(1,1), 0.6, 0.5, 0.82);
   composer.addPass(bloomPass);
 })();
 
@@ -903,6 +937,7 @@ function animate(now){
   }
   qy.setFromAxisAngle(AXY,yaw); qx.setFromAxisAngle(AXX,pitch);
   globe.quaternion.copy(qx).multiply(qy);
+  if(clouds && !reduceMotion) clouds.rotation.y += 0.00018;   // clouds drift slowly over the surface
   camera.position.z += (camZ-camera.position.z)*0.12;
 
   // markers: ease positions & scales, fade by facing, expand/collapse clusters
