@@ -15,7 +15,13 @@
 
 const ALLOWED_ORIGIN = "https://jeffreyblay.github.io";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile";
+// Tried in order. If Groq retires one (404 model_not_found), the next is used,
+// so the chat keeps working instead of returning an error to the browser.
+const MODELS = [
+  "llama-3.1-8b-instant",
+  "openai/gpt-oss-20b",
+  "openai/gpt-oss-120b",
+];
 const MAX_MESSAGES = 20; // caps history size the client can send
 
 function corsHeaders(origin) {
@@ -70,21 +76,27 @@ export default {
 
     const groqKey = await env.GROQ_API_KEY.get();
 
-    const groqRes = await fetch(GROQ_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${groqKey}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages,
-        max_tokens: 400,
-        temperature: 0.5,
-      }),
-    });
+    let groqRes, data;
+    for (const model of MODELS) {
+      groqRes = await fetch(GROQ_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${groqKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          max_tokens: 400,
+          temperature: 0.5,
+        }),
+      });
+      data = await groqRes.text();
+      if (groqRes.ok) break;
+      // Only a retired/unavailable model is worth retrying; other errors are real.
+      if (!(groqRes.status === 404 && data.includes("model_not_found"))) break;
+    }
 
-    const data = await groqRes.text();
     return new Response(data, {
       status: groqRes.status,
       headers: { ...headers, "Content-Type": "application/json" },

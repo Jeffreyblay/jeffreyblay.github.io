@@ -56,6 +56,7 @@ PUBLICATIONS (10 total)
 
 PROJECTS (open source / applied)
 - GridVision MLOps (2026): jeffreyblay.github.io/energy_demand_mlops — end-to-end MLOps system forecasting US electricity demand for 9 balancing authorities. Daily GitHub Actions cron retrains a LightGBM quantile model (P10/P50/P90), gates candidates against production + a naive baseline before auto-promotion, serves via FastAPI + Postgres/PostGIS (Supabase) to a React/MapLibre/deck.gl 3D dashboard. Git repo itself acts as the model registry.
+- Streetscape (2026): streetscape-topaz.vercel.app — 3D immersive floodwater depth dashboard. Renders a modeled flood-depth raster and 200 building footprints as a georeferenced CesiumJS scene over world terrain, with an animated depth-coloured water mesh, street-level view (walk, look around, 0.5-30 m eye height), a banded flood staff and water marks for reading depth in-scene, a flood replay, and a bird's-eye fly-through along a channel path derived from the deepest raster cells. Study area: Hanchey Store, eastern NC (~322 acres inundated). Stack: CesiumJS, React, Vite, Python (rasterio, GeoPandas); deployed on Vercel.
 - PawPal+ (2026): github.com/Jeffreyblay/applied-ai-system-final-project — pet-care scheduling and RAG assistant (Python, Streamlit, Gemini API, Pytest) generating priority-based, conflict-aware daily plans with time-budget optimization, reminders, and personalized pet-care Q&A.
 - Quickview Geodata Portal (2026): jeffreyblay.github.io/quickview-geodata-portal — open-source geospatial platform to upload (CSV, GeoJSON, JSON, XML, zipped Shapefile, or by URL), filter, style (graduated/categorized symbology), analyze (Buffer, KDE Hotspot, DBSCAN, Nearest Neighbor, Attribute Stats), and view vector data in 2D or 3D (deck.gl); exports to GeoJSON, CSV, JSON, GeoParquet, and GML. Stack: FastAPI, GeoPandas, scikit-learn, Leaflet.js, deck.gl, Docker; deployed on GitHub Pages + Render. Code: github.com/Jeffreyblay/quickview-geodata-portal
 - Weather Alert Dashboard (2026): jeffreyblay.github.io/climate-alert-dashboard — real-time NWS alert monitoring with REST API filtering, analytics, and risk scoring across all 50 US states (FastAPI, Docker, CI/CD).
@@ -324,7 +325,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
   function boot() {
     output.innerHTML = "";
     line(`<span class="jbt-comment"># JBlay's AI Assistant v1.0</span>`);
-    line(`<span class="jbt-comment"># Powered by Groq · llama-3.3-70b-versatile</span>`);
+    line(`<span class="jbt-comment"># Powered by Groq</span>`);
     line(`<span class="jbt-comment"># Ask me anything about Jeffrey below</span>`);
     line(`&nbsp;`);
     line(`<span class="jbt-res">→ Hi! I'm Jeffrey's AI assistant. Ask me about his research, publications, skills, or experience.</span>`);
@@ -370,13 +371,24 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
+          // only the last few turns: the system prompt is large and Groq's
+          // free tier caps tokens per minute, so history is kept short
+          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-4)],
         }),
         signal: ctrl.signal,
       });
 
       clearTimeout(t);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        const msg = res.status === 429
+          ? "busy right now — please wait a few seconds and ask again."
+          : res.status === 403
+            ? "chat runs on the live site only (jeffreyblay.github.io)."
+            : res.status >= 500
+              ? "assistant is temporarily unavailable. please try again."
+              : `request failed (HTTP ${res.status}). please try again.`;
+        throw new Error(msg);
+      }
       const data = await res.json();
       const reply = data.choices?.[0]?.message?.content || "No response. Please try again.";
       history.push({ role: "assistant", content: reply });

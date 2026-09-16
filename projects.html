@@ -308,7 +308,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
     <h1>Projects &amp;<br>Applications</h1>
     <p class="hero-desc">Research prototypes, open-source tools, and production systems at the intersection of spatial data and AI.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">18<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
+      <div class="hstat"><div class="hstat-num">19<span>+</span></div><div class="hstat-lbl">Total Projects</div></div>
       <div class="hstat"><div class="hstat-num">5</div><div class="hstat-lbl">Categories</div></div>
       <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">Open-Source Tools</div></div>
     </div>
@@ -331,7 +331,7 @@ body{font-family:var(--ff-body);background:var(--white);color:var(--ink);overflo
 <section class="strip-section">
   <div class="strip-outer">
     <div class="strip-count">
-      <span id="stripCount">Showing 15 projects</span>
+      <span id="stripCount">Showing 19 projects</span>
       <span class="strip-nav">
         <span class="strip-hint" style="margin-right:10px;">drag or scroll →</span>
         <button class="strip-arrow" onclick="scrollStrip(-1)" aria-label="Scroll left">
@@ -544,6 +544,15 @@ const PROJECTS = [
    outcome:'Priority-based scheduling engine resolving conflicting care tasks · Time-budget optimization across a daily plan · Automated reminders · Personalized pet-care Q&A grounded in retrieved context rather than raw model output · JSON-backed data layer with unit-tested scheduling logic.',
    tags:['Python','Streamlit','Gemini API','RAG','Pytest','JSON','Prompt Engineering','LLM Applications'],
    links:[{label:'GitHub', url:'https://github.com/Jeffreyblay/applied-ai-system-final-project', primary:true, external:true}]},
+
+  {id:'apps6', num:'APP — 05', cat:'apps', badge:'Live · 3D Geospatial',
+   title:'Streetscape: 3D Immersive Floodwater Depth Dashboard',
+   tagline:'Stand inside a modeled flood and read its depth at eye level.',
+   summary:'A browser-based 3D flood visualization that shows what a modeled flood looks like from where you stand. A predicted flood-depth raster and 200 building footprints are rendered as a georeferenced CesiumJS scene over world terrain, then explored from the air or from street level — drop into any spot at eye level, look around 360°, walk, and raise your viewpoint from a child’s height to a rooftop. Built with a Python (rasterio/GeoPandas) preparation pipeline feeding a static React + Vite app, with no backend required.',
+   meta:[['Study Area','Hanchey Store, eastern NC'],['Extent','~322 acres inundated'],['Buildings','200 footprints in 3D'],['Depth Range','0.01–23.6 ft']],
+   outcome:'Animated water mesh built at ground + depth so buildings rise out of the water, coloured by a depth texture sampled in a custom Cesium water shader · Street view with drag-to-look, click-to-walk and a 0.5–30 m eye height · Surveyor’s flood staff in 1 ft bands that follows your heading, plus water marks at each building’s own flood line · Four-second flood replay and a water-line gauge (knee-deep, chest-deep, underwater) · Bird’s-eye fly-through along a channel centreline derived from the deepest raster cells · Summary statistics with a flooded-area-by-depth histogram.',
+   tags:['CesiumJS','React','Vite','JavaScript','Python','rasterio','GeoPandas','3D Visualization','Flood Depth','Zonal Statistics','Cesium World Terrain','Vercel'],
+   links:[{label:'Live App', url:'https://streetscape-topaz.vercel.app/', primary:true, external:true}]},
 
   {id:'apps3', num:'APP — 03', cat:'apps', badge:'Live · Free',
    title:'Quickview Geodata Portal',
