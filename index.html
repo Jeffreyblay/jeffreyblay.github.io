@@ -35,24 +35,6 @@
 .hero .stat{border-right-color:rgba(255,255,255,.22);}
 .hero .stat-lbl{color:rgba(255,255,255,.64);}
 
-/* ── research focus ── */
-.focus{padding:18px 0;border-top:1px solid var(--line);}
-.focus:first-child{border-top:none;padding-top:0;}
-.focus h3{margin-bottom:4px;}
-.focus p{color:var(--ink-2);font-size:15.5px;}
-
-/* ── publication + talk rows ── */
-.row{
-  display:flex;align-items:baseline;gap:16px;
-  padding:16px 0;border-top:1px solid var(--line);text-decoration:none;
-}
-.row:first-of-type{border-top:none;}
-a.row:hover .row-title{text-decoration:underline;}
-.row-year{font-size:13.5px;color:var(--muted);min-width:78px;flex-shrink:0;}
-.row-title{font-weight:600;font-size:16px;display:block;}
-.row-sub{font-size:14.5px;color:var(--ink-2);margin-top:3px;display:block;}
-.row-sub em{color:var(--muted);}
-
 /* ── education ── */
 .edu{display:flex;gap:18px;padding:12px 0;border-top:1px solid var(--line);}
 .edu:first-of-type{border-top:none;}
@@ -135,81 +117,6 @@ a.row:hover .row-title{text-decoration:underline;}
   </div>
 </section>
 
-<!-- RESEARCH -->
-<section class="section" id="research">
-  <div class="wrap">
-    <div class="eyebrow">Research</div>
-    <h2>What I work on</h2>
-    <div style="margin-top:26px;max-width:720px;">
-      <div class="focus">
-        <h3>Reading images with deep learning</h3>
-        <p>Teaching models to estimate flood depth, land cover and disaster damage from aerial, satellite and LiDAR images, with the physics of how water behaves built into the model.</p>
-      </div>
-      <div class="focus">
-        <h3>Combining different sensors</h3>
-        <p>Merging radar and optical satellite images so floods can be mapped accurately even through cloud and at night.</p>
-      </div>
-      <div class="focus">
-        <h3>Building the data pipelines</h3>
-        <p>Python pipelines that clean and prepare very large map and satellite datasets, plus open datasets other researchers can use.</p>
-      </div>
-      <div class="focus">
-        <h3>Measuring risk to infrastructure</h3>
-        <p>Mapping buildings, urban heat and electricity access across African cities to show which communities are underserved.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section class="section" id="publications">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <div class="eyebrow">Research</div>
-        <h2>Selected publications</h2>
-      </div>
-      <a class="link-more" href="publications.html">All 10 publications</a>
-    </div>
-
-    <a class="row" href="https://doi.org/10.3390/rs18010060" target="_blank" rel="noopener">
-      <span class="row-year">2025</span>
-      <span>
-        <span class="row-title">Geospatial and Deep Learning Approaches for Modeling Floodwater Depth in Urbanized Areas</span>
-        <span class="row-sub"><em>Remote Sensing</em> — predicts flood depth with 94% accuracy.</span>
-      </span>
-    </a>
-    <a class="row" href="https://doi.org/10.1016/j.dib.2025.112347" target="_blank" rel="noopener">
-      <span class="row-year">2025</span>
-      <span>
-        <span class="row-title">Inundation2Depth: A Multi-Source Dataset for Floodwater Depth Estimation</span>
-        <span class="row-sub"><em>Data in Brief</em> — an open dataset of 5,925 flood images from the Carolinas.</span>
-      </span>
-    </a>
-    <a class="row" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11267202" target="_blank" rel="noopener">
-      <span class="row-year">2025</span>
-      <span>
-        <span class="row-title">Multi-Resolution Data Fusion for Resilient Flood Mapping</span>
-        <span class="row-sub"><em>IEEE Access</em> — combining drone photos with radar beats either one alone.</span>
-      </span>
-    </a>
-    <a class="row" href="https://doi.org/10.1016/j.rsase.2025.101619" target="_blank" rel="noopener">
-      <span class="row-year">2025</span>
-      <span>
-        <span class="row-title">Dark Development: Building Density and Electricity Provision in Ghana's Urban Areas</span>
-        <span class="row-sub"><em>Remote Sensing Applications</em> — 21% of Kumasi is densely built but poorly served with power.</span>
-      </span>
-    </a>
-    <a class="row" href="https://ieeexplore.ieee.org/document/11242913" target="_blank" rel="noopener">
-      <span class="row-year">2025</span>
-      <span>
-        <span class="row-title">Pixels to Insights: Deep Learning for Floodwater Depth Mapping</span>
-        <span class="row-sub"><em>IEEE IGARSS</em> — mapping depths up to 4.8 ft after Hurricane Matthew.</span>
-      </span>
-    </a>
-  </div>
-</section>
-
 <!-- PROJECTS -->
 <section class="section" id="projects">
   <div class="wrap">
@@ -265,26 +172,6 @@ a.row:hover .row-title{text-decoration:underline;}
       </a>
 
     </div>
-  </div>
-</section>
-
-<!-- TALKS -->
-<section class="section" id="talks">
-  <div class="wrap">
-    <div class="head">
-      <div>
-        <div class="eyebrow">Talks</div>
-        <h2>Where I have presented</h2>
-      </div>
-      <a class="link-more" href="talks.html">All 11 talks</a>
-    </div>
-
-    <div class="row"><span class="row-year">Aug 2025</span><span><span class="row-title">IEEE IGARSS</span><span class="row-sub">Brisbane, Australia — <em>Deep learning for floodwater depth mapping</em></span></span></div>
-    <div class="row"><span class="row-year">Apr 2025</span><span><span class="row-title">ISPRS Geospatial Week</span><span class="row-sub">Dubai, UAE — <em>AI for 3D flood mapping</em></span></span></div>
-    <div class="row"><span class="row-year">Feb 2025</span><span><span class="row-title">ASPRS &amp; GeoWeek</span><span class="row-sub">Denver, USA — <em>3D floodwater depth analytics</em></span></span></div>
-    <div class="row"><span class="row-year">Dec 2024</span><span><span class="row-title">AGU Annual Meeting</span><span class="row-sub">Washington DC, USA — <em>Simulating flood depth in 3D</em></span></span></div>
-    <div class="row"><span class="row-year">Jul 2024</span><span><span class="row-title">IEEE IGARSS</span><span class="row-sub">Athens, Greece — <em>Flood risk after Hurricane Matthew</em></span></span></div>
-    <div class="row"><span class="row-year">Dec 2023</span><span><span class="row-title">AGU Annual Meeting</span><span class="row-sub">San Francisco, USA — <em>Deep learning for flood detection</em></span></span></div>
   </div>
 </section>
 
