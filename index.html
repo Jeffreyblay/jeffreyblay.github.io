@@ -42,6 +42,12 @@
 .edu-deg{font-weight:600;font-size:15.5px;}
 .edu-inst{font-size:14.5px;color:var(--ink-2);}
 
+/* ── organisations ── */
+.orgs{display:grid;grid-template-columns:repeat(2,1fr);gap:0 34px;margin-top:26px;}
+.org{padding:13px 0;border-top:1px solid var(--line);}
+.org-name{display:block;font-weight:650;font-size:15.5px;}
+.org-role{display:block;font-size:14px;color:var(--ink-2);}
+
 /* ── project cards ── */
 .proj h3{margin-bottom:6px;}
 .proj p{font-size:14.5px;color:var(--ink-2);margin-bottom:12px;}
@@ -54,6 +60,7 @@
 
 @media(max-width:620px){
   .hero{padding:64px 0 56px;}
+  .orgs{grid-template-columns:1fr;}
   .row{flex-direction:column;gap:2px;}
   .row-year{min-width:0;}
 }
@@ -89,10 +96,10 @@
       <a class="btn btn-outline" href="files/CV.pdf" target="_blank" rel="noopener">Download CV</a>
     </div>
     <div class="stats">
+      <div class="stat"><div class="stat-num">7+</div><div class="stat-lbl">Years of work experience</div></div>
+      <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Organizations</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">NASA, NSF &amp; NOAA projects</div></div>
       <div class="stat"><div class="stat-num">10+</div><div class="stat-lbl">Publications</div></div>
-      <div class="stat"><div class="stat-num">11</div><div class="stat-lbl">Conference talks</div></div>
-      <div class="stat"><div class="stat-num">5+</div><div class="stat-lbl">Years of research</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">NASA &amp; NSF projects</div></div>
     </div>
   </div>
 </header>
@@ -114,6 +121,27 @@
       <div class="edu"><div class="edu-year">2023</div><div><div class="edu-deg">MS, Environmental Science</div><div class="edu-inst">Yale School of the Environment</div></div></div>
       <div class="edu"><div class="edu-year">2019</div><div><div class="edu-deg">BA, Geography</div><div class="edu-inst">University of Ghana</div></div></div>
     </div>
+  </div>
+</section>
+
+<!-- WHERE I HAVE WORKED -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Experience</div>
+    <h2>Where I have worked</h2>
+    <p class="lede">Seven years across research labs, a national statistics office and community organisations, in the United States and Ghana.</p>
+    <div class="orgs">
+      <div class="org"><span class="org-name">NC A&amp;T State University</span><span class="org-role">Geospatial research engineer · research assistant</span></div>
+      <div class="org"><span class="org-name">NASA projects</span><span class="org-role">Flood and environmental data research</span></div>
+      <div class="org"><span class="org-name">NSF project</span><span class="org-role">Multimodal data fusion</span></div>
+      <div class="org"><span class="org-name">NOAA project</span><span class="org-role">Flood detection from crowdsourced images</span></div>
+      <div class="org"><span class="org-name">Yale University</span><span class="org-role">Research fellow · teaching fellow</span></div>
+      <div class="org"><span class="org-name">Ghana Statistical Service</span><span class="org-role">Geospatial data analyst, national census</span></div>
+      <div class="org"><span class="org-name">Urban Resources Initiative</span><span class="org-role">GIS and community engagement manager</span></div>
+      <div class="org"><span class="org-name">University of Ghana</span><span class="org-role">Teaching and research assistant</span></div>
+      <div class="org"><span class="org-name">Awutu Senya East Municipal Authority</span><span class="org-role">Physical planning intern</span></div>
+    </div>
+    <a class="link-more" href="cv.html" style="margin-top:26px;">See the full CV</a>
   </div>
 </section>
 
@@ -222,8 +250,10 @@
       <div class="card">
         <h3>Research</h3>
         <div class="tags" style="margin-top:10px;">
-          <span class="tag">Flood risk modelling</span><span class="tag">Benchmark datasets</span>
-          <span class="tag">Model evaluation</span><span class="tag">Field data collection</span>
+          <span class="tag">Spatial vulnerability assessment</span><span class="tag">Spatial analytics</span>
+          <span class="tag">Infrastructure mapping</span><span class="tag">Flood risk modelling</span>
+          <span class="tag">Benchmark datasets</span><span class="tag">Model evaluation</span>
+          <span class="tag">Field data collection</span>
         </div>
       </div>
     </div>
