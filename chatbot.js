@@ -96,7 +96,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     const l = document.createElement("link");
     l.id = "jb-mono-font";
     l.rel = "stylesheet";
-    l.href = "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap";
+    l.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap";
     document.head.appendChild(l);
   }
 
@@ -106,141 +106,114 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     #jb-term-wrap,#jb-term-wrap *{box-sizing:border-box;margin:0;padding:0;}
 
     #jb-term-wrap{
-      position:fixed;bottom:16px;right:16px;z-index:9999;
-      width:min(420px, calc(100vw - 32px));font-family:'JetBrains Mono',monospace;
+      position:fixed;bottom:18px;right:18px;z-index:9999;
+      width:min(380px, calc(100vw - 36px));
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
     }
 
-    /* ── 1. TOOLTIP ── */
-    #jb-tooltip{
-      text-align:center;margin-bottom:8px;
-      animation:jbTipBob 3s ease-in-out infinite;
-    }
+    /* ── prompt bubble ── */
+    #jb-tooltip{text-align:right;margin-bottom:8px;}
     #jb-tip-inner{
       display:inline-flex;align-items:center;gap:7px;
-      background:rgba(217,119,6,0.12);
-      border:1px solid rgba(217,119,6,0.32);
-      border-radius:20px;padding:5px 16px;
-      font-size:11px;color:#f59e0b;letter-spacing:0.06em;
+      background:#fff;border:1px solid #e4e4e2;border-radius:999px;
+      padding:6px 14px;font-size:12.5px;color:#3d3d3d;
+      box-shadow:0 2px 10px rgba(0,0,0,.06);
     }
     #jb-tip-dot{
-      width:7px;height:7px;border-radius:50%;
-      background:#f59e0b;flex-shrink:0;
-      animation:jbDotPulse 1.5s ease-in-out infinite;
+      width:6px;height:6px;border-radius:50%;background:#111;flex-shrink:0;
+      animation:jbDotPulse 1.8s ease-in-out infinite;
     }
-    @keyframes jbTipBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-    @keyframes jbDotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.7)}}
+    @keyframes jbDotPulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
-    /* ── 2. LABELED BORDER ── */
-    #jb-outer{
-      border:1px solid rgba(217,119,6,0.28);
-      border-radius:6px;padding:3px;
-      position:relative;
-      background:rgba(217,119,6,0.03);
-    }
-    #jb-outer-lbl{
-      position:absolute;top:-9px;left:14px;
-      background:var(--page-bg, #080b0f);
-      padding:0 7px;
-      font-size:9px;color:rgba(217,119,6,0.8);
-      letter-spacing:0.14em;text-transform:uppercase;
-    }
+    #jb-outer{position:relative;}
+    #jb-outer-lbl{display:none;}
 
-    /* ── 3. TRIGGER BAR ── */
+    /* ── closed button ── */
     #jb-trigger{
-      display:flex;align-items:center;gap:8px;
-      background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;
-      padding:10px 14px;cursor:pointer;width:100%;
-      transition:border-color .2s,background .2s;
+      display:flex;align-items:center;gap:10px;width:100%;
+      background:#111;border:1px solid #111;border-radius:6px;
+      padding:12px 16px;cursor:pointer;transition:opacity .15s;
       position:relative;
     }
-    #jb-trigger:hover{border-color:#f59e0b;background:#0d0d0d;}
-    .jb-tdots{display:flex;gap:5px;}
-    .jb-tdot{width:11px;height:11px;border-radius:50%;}
-    #jb-tlabel{font-size:11px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
-    #jb-tcursor{font-size:12px;color:#f59e0b;animation:jbBlink 1s step-end infinite;}
-    @keyframes jbBlink{0%,100%{opacity:1}50%{opacity:0}}
+    #jb-trigger:hover{opacity:.88;}
+    .jb-tdots{display:none;}
+    #jb-tlabel{font-size:14px;font-weight:600;color:#fff;flex:1;text-align:left;}
+    #jb-tcursor{font-size:13px;color:rgba(255,255,255,.6);}
+    #jb-badge{display:none;}
 
-    /* ── 4. AI BADGE ── */
-    #jb-badge{
-      position:absolute;top:-10px;right:-10px;
-      width:26px;height:26px;border-radius:50%;
-      background:#d97706;border:2px solid #080b0f;
-      display:flex;align-items:center;justify-content:center;
-      font-size:9px;font-weight:500;color:#080b0f;letter-spacing:0.04em;
-    }
-    #jb-badge::after{
-      content:'';position:absolute;inset:-3px;border-radius:50%;
-      border:2px solid rgba(217,119,6,0.5);
-      animation:jbRing 1.8s ease-out infinite;
-    }
-    @keyframes jbRing{0%{transform:scale(1);opacity:0.9}100%{transform:scale(1.85);opacity:0}}
-
-    /* ── TERMINAL PANEL ── */
+    /* ── panel ── */
     #jb-panel{
       display:none;flex-direction:column;
-      background:#0a0a0a;border:1px solid #2a2a2a;border-radius:6px;
-      overflow:hidden;margin-bottom:10px;
+      background:#fff;border:1px solid #e4e4e2;border-radius:8px;
+      overflow:hidden;margin-bottom:10px;box-shadow:0 8px 30px rgba(0,0,0,.1);
     }
-    #jb-panel.open{display:flex;animation:jbUp .22s ease;}
-    @keyframes jbUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    #jb-panel.open{display:flex;animation:jbUp .2s ease;}
+    @keyframes jbUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    /* title bar */
     #jb-titlebar{
-      background:#1a1a1a;padding:8px 12px;
-      display:flex;align-items:center;gap:6px;
-      border-bottom:1px solid #2a2a2a;flex-shrink:0;user-select:none;
+      background:#fff;padding:12px 14px;
+      display:flex;align-items:center;gap:8px;
+      border-bottom:1px solid #e4e4e2;flex-shrink:0;user-select:none;
     }
-    .jb-wdot{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:opacity .15s;}
-    .jb-wdot:hover{opacity:.7;}
-    #jb-winname{font-size:10px;color:#555;letter-spacing:.08em;flex:1;text-align:center;}
+    .jb-wdot{display:none;}
+    .jb-wdot:first-child{
+      display:block;width:22px;height:22px;border-radius:4px;background:none !important;
+      cursor:pointer;position:relative;order:2;margin-left:auto;
+    }
+    .jb-wdot:first-child::before,.jb-wdot:first-child::after{
+      content:'';position:absolute;left:5px;top:10px;width:12px;height:1.5px;background:#707070;
+    }
+    .jb-wdot:first-child::before{transform:rotate(45deg);}
+    .jb-wdot:first-child::after{transform:rotate(-45deg);}
+    .jb-wdot:first-child:hover::before,.jb-wdot:first-child:hover::after{background:#111;}
+    #jb-winname{font-size:13.5px;font-weight:600;color:#111;flex:0;white-space:nowrap;order:1;}
 
-    /* output */
+    /* ── messages ── */
     #jb-output{
-      padding:12px;display:flex;flex-direction:column;gap:2px;
-      max-height:320px;overflow-y:auto;flex:1;
+      padding:14px;display:flex;flex-direction:column;gap:3px;
+      max-height:320px;overflow-y:auto;flex:1;background:#fff;
     }
-    #jb-output::-webkit-scrollbar{width:3px;}
-    #jb-output::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:2px;}
+    #jb-output::-webkit-scrollbar{width:4px;}
+    #jb-output::-webkit-scrollbar-thumb{background:#e4e4e2;border-radius:2px;}
 
-    .jbt{font-size:11px;line-height:1.72;word-break:break-word;}
-    .jbt-prompt{color:#f59e0b;}
-    .jbt-cmd{color:#fff;}
-    .jbt-res{color:#4ade80;padding-left:16px;display:block;margin-top:1px;}
-    .jbt-err{color:#f87171;padding-left:16px;display:block;}
-    .jbt-comment{color:#3a3a3a;}
-    .jbt-proc{color:#4ade80;opacity:.6;padding-left:16px;display:block;animation:jbFade .9s ease-in-out infinite alternate;}
-    @keyframes jbFade{from{opacity:.2}to{opacity:.75}}
+    .jbt{font-size:14px;line-height:1.6;word-break:break-word;}
+    .jbt-prompt{display:none;}
+    .jbt-cmd{color:#111;font-weight:600;}
+    .jbt-res{color:#3d3d3d;display:block;margin-top:2px;}
+    .jbt-err{color:#a11;display:block;}
+    .jbt-comment{color:#9a9a9a;font-size:12.5px;}
+    .jbt-proc{color:#9a9a9a;display:block;animation:jbFade 1s ease-in-out infinite alternate;}
+    @keyframes jbFade{from{opacity:.35}to{opacity:.9}}
 
-    /* chips */
+    /* ── suggestion chips ── */
     #jb-chips{
-      padding:6px 12px 8px;display:flex;flex-wrap:wrap;gap:5px;
-      border-top:1px solid #1a1a1a;
+      padding:8px 14px 10px;display:flex;flex-wrap:wrap;gap:6px;
+      border-top:1px solid #f0f0ee;background:#fff;
     }
     .jb-chip{
-      font-size:10px;letter-spacing:.04em;padding:4px 10px;border-radius:2px;
-      border:1px solid #2a2a2a;background:transparent;color:#555;
-      cursor:pointer;transition:all .15s;font-family:'JetBrains Mono',monospace;
+      font-size:12.5px;padding:5px 11px;border-radius:999px;
+      border:1px solid #e4e4e2;background:#fff;color:#3d3d3d;
+      cursor:pointer;transition:all .15s;font-family:inherit;
     }
-    .jb-chip:hover{border-color:#f59e0b;color:#f59e0b;background:rgba(245,158,11,.07);}
+    .jb-chip:hover{border-color:#111;color:#111;}
 
-    /* input */
+    /* ── input ── */
     #jb-inputbar{
-      padding:9px 12px;border-top:1px solid #1a1a1a;
-      display:flex;align-items:center;gap:8px;
-      background:#0d0d0d;flex-shrink:0;
+      padding:10px 14px;border-top:1px solid #e4e4e2;
+      display:flex;align-items:center;gap:8px;background:#fff;flex-shrink:0;
     }
-    #jb-iprompt{font-size:11px;color:#f59e0b;flex-shrink:0;white-space:nowrap;}
+    #jb-iprompt{display:none;}
     #jb-input{
       flex:1;background:transparent;border:none;outline:none;
-      font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;min-width:0;
+      font-family:inherit;font-size:14px;color:#111;min-width:0;
     }
-    #jb-input::placeholder{color:#333;}
+    #jb-input::placeholder{color:#9a9a9a;}
     #jb-run{
-      font-size:10px;color:#f59e0b;background:none;border:none;
-      cursor:pointer;font-family:'JetBrains Mono',monospace;
-      letter-spacing:.06em;flex-shrink:0;padding:0;transition:color .15s;
+      font-size:13px;font-weight:600;color:#fff;background:#111;
+      border:none;border-radius:4px;padding:7px 13px;
+      cursor:pointer;font-family:inherit;flex-shrink:0;transition:opacity .15s;
     }
-    #jb-run:hover{color:#fff;}
+    #jb-run:hover{opacity:.85;}
   `;
   document.head.appendChild(style);
 
@@ -253,27 +226,27 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
         <div class="jb-wdot" style="background:#ff5f57" title="Close" onclick="jbClose()"></div>
         <div class="jb-wdot" style="background:#febc2e"></div>
         <div class="jb-wdot" style="background:#28c840"></div>
-        <div id="jb-winname">jeffrey-blay — ask.sh</div>
+        <div id="jb-winname">Ask about my work</div>
       </div>
       <div id="jb-output"></div>
       <div id="jb-chips">
-        <span class="jb-chip" data-q="What is Jeffrey's PhD research about?">phd_research</span>
-        <span class="jb-chip" data-q="What are Jeffrey's top publications?">publications</span>
-        <span class="jb-chip" data-q="What tools and skills does Jeffrey have?">skills_stack</span>
-        <span class="jb-chip" data-q="What awards and fellowships has Jeffrey received?">awards</span>
-        <span class="jb-chip" data-q="Is Jeffrey open to new opportunities?">open_to_work</span>
+        <span class="jb-chip" data-q="What is Jeffrey's PhD research about?">Research</span>
+        <span class="jb-chip" data-q="What are Jeffrey's top publications?">Publications</span>
+        <span class="jb-chip" data-q="What tools and skills does Jeffrey have?">Skills</span>
+        <span class="jb-chip" data-q="What awards and fellowships has Jeffrey received?">Awards</span>
+        <span class="jb-chip" data-q="Is Jeffrey open to new opportunities?">Availability</span>
       </div>
       <div id="jb-inputbar">
         <span id="jb-iprompt">visitor@jblay:~$</span>
-        <input id="jb-input" type="text" placeholder='ask "your question here"' autocomplete="off">
-        <button id="jb-run">run ↵</button>
+        <input id="jb-input" type="text" placeholder='Ask a question...' autocomplete="off">
+        <button id="jb-run">Send</button>
       </div>
     </div>
 
     <div id="jb-tooltip">
       <div id="jb-tip-inner">
         <div id="jb-tip-dot"></div>
-        Ask AI about Jeffrey
+        Questions? Ask my assistant
       </div>
     </div>
 
@@ -285,7 +258,7 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
           <div class="jb-tdot" style="background:#febc2e"></div>
           <div class="jb-tdot" style="background:#28c840"></div>
         </div>
-        <div id="jb-tlabel">jeffrey-blay — ask.sh</div>
+        <div id="jb-tlabel">Ask about my work</div>
         <div id="jb-tcursor">▋</div>
         <div id="jb-badge">AI</div>
       </div>
@@ -320,15 +293,14 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
     if (all.length) all[all.length - 1].remove();
   }
   function idleCursor() {
-    line(`<span class="jbt-prompt">visitor@jblay:~$ </span><span style="display:inline-block;width:7px;height:11px;background:#f59e0b;vertical-align:middle;animation:jbBlink 1s step-end infinite;"></span>`);
+    /* no idle cursor in the plain style */
   }
   function boot() {
     output.innerHTML = "";
-    line(`<span class="jbt-comment"># JBlay's AI Assistant v1.0</span>`);
-    line(`<span class="jbt-comment"># Powered by Groq</span>`);
-    line(`<span class="jbt-comment"># Ask me anything about Jeffrey below</span>`);
+    line(`<span class="jbt-comment">Assistant</span>`);
+    line(`<span class="jbt-comment">Answers come from Jeffrey’s CV and projects.</span>`);
     line(`&nbsp;`);
-    line(`<span class="jbt-res">→ Hi! I'm Jeffrey's AI assistant. Ask me about his research, publications, skills, or experience.</span>`);
+    line(`<span class="jbt-res">Hi — ask me about Jeffrey’s research, publications, projects or experience.</span>`);
     line(`&nbsp;`);
     idleCursor();
   }
@@ -358,8 +330,8 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
 
     removeLast();
     const shortQ = q.length > 44 ? q.slice(0, 41) + "..." : q;
-    line(`<span class="jbt-prompt">visitor@jblay:~$ </span><span class="jbt-cmd">ask "${shortQ}"</span>`);
-    const proc = line(`<span class="jbt-proc">▋ querying knowledge base...</span>`);
+    line(`<span class="jbt-cmd">${shortQ}</span>`);
+    const proc = line(`<span class="jbt-proc">Thinking…</span>`);
 
     history.push({ role: "user", content: q });
 
@@ -395,16 +367,16 @@ RULES: Only use info above. Never invent details. For hiring questions mention j
 
       proc.remove();
       reply.split("\n").forEach(l => {
-        if (l.trim()) line(`<span class="jbt-res">→ ${l.trim()}</span>`);
+        if (l.trim()) line(`<span class="jbt-res">${l.trim()}</span>`);
       });
 
     } catch (err) {
       proc.remove();
       history.pop();
       if (err.name === "AbortError") {
-        line(`<span class="jbt-err">✗ request timed out. please try again.</span>`);
+        line(`<span class="jbt-err">request timed out. please try again.</span>`);
       } else {
-        line(`<span class="jbt-err">✗ ${err.message}</span>`);
+        line(`<span class="jbt-err">${err.message}</span>`);
       }
     } finally {
       busy = false;
